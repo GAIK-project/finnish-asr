@@ -132,7 +132,7 @@ Each judge is stricter or milder, but all four put our models far ahead of base 
   get worse (FLEURS 7.4 → 7.6 %, VoxPopuli 12.7 → 10.8 %).
 - ✍️ **It writes sentences.** With punctuation added to the training text, its output reads like text.
 - ➕ **More dialect speech helps further.** The internal version with 56 more hours
-  ([counts](results/labels/lamurre_train.summary.json)) gets 19.7 %.
+  ([counts](results/labels/lamurre_train.hours.stats.json)) gets 19.7 %.
 - 🏷️ **What got worse: rare names.** The interviews have no brand names or dental terms, and the
   fine-tuned model spells them worse than base Whisper does; for those, use a general model.
 

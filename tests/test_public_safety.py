@@ -77,7 +77,7 @@ def test_lamurre_results_are_numbers_and_metadata_only() -> None:
         assert (
             name == "scores.json"
             or name.endswith((".meta.json", ".stats.json"))
-            or name.startswith(("summary", "agreement", "_run_metadata"))
+            or name.startswith(("summary", "agreement", "_run_metadata", "_score_run_metadata"))
         ), f
 
 
