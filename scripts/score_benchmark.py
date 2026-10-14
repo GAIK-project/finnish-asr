@@ -4,7 +4,8 @@ WER and CER are corpus-level (summed errors over summed reference words or chara
 after the usual model-card normalisation: lower-case, punctuation removed, whitespace
 collapsed. That is what the RASMUS model card and most Finnish model cards use, so the
 numbers are comparable in kind; small differences in normalisation still move them.
-Seconds per utterance are GPU wall time in batches of 16, model loading excluded.
+Seconds per utterance are GPU wall time in batches of 16, model loading excluded; for the API
+arms (run_api_benchmark.py) they are request wall time with 4 parallel workers, retries included.
 
 LA-murre's per-utterance files (lamurre_fi/*.jsonl) hold the corpus's texts, which its licence
 (CC BY-ND 4.0) does not let this repository share, so they are not committed: a benchmark without
@@ -62,7 +63,7 @@ LABELS = {
     "nemo_canary-1b-v2": "NVIDIA Canary 1B v2",
     "nemo_rasmus-canary-fi-v2": "RASMUS Finnish-ASR-Canary-v2, greedy †‡",
     "nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Finnish-ASR-Canary-v2 + KenLM †‡",
-    "vertex_gemini-3.5-flash": "Gemini 3.5 Flash (API, the clip's prompt)",
+    "vertex_gemini-3.5-flash": "Gemini 3.5 Flash (API, asked to write as spoken)",
     "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash (API, asked for standard Finnish)",
     "google_chirp-3": "Google Chirp 3 (API)",
     "openai_gpt-transcribe": "OpenAI gpt-transcribe (API)",
@@ -103,11 +104,11 @@ def score_rows(bench: str) -> list[dict]:
                 "arm_id": path.stem,
                 "label": LABELS.get(path.stem, path.stem),
                 "utterances": len(recs),
-                "WER": round((w.substitutions + w.deletions + w.insertions) / ref_words * 100, 2),
-                "CER": round((c.substitutions + c.deletions + c.insertions) / ref_chars * 100, 2),
-                "SUB": round(w.substitutions / ref_words * 100, 2),
-                "DEL": round(w.deletions / ref_words * 100, 2),
-                "INS": round(w.insertions / ref_words * 100, 2),
+                "WER": round((w.substitutions + w.deletions + w.insertions) / ref_words * 100, 4),
+                "CER": round((c.substitutions + c.deletions + c.insertions) / ref_chars * 100, 4),
+                "SUB": round(w.substitutions / ref_words * 100, 4),
+                "DEL": round(w.deletions / ref_words * 100, 4),
+                "INS": round(w.insertions / ref_words * 100, 4),
                 "ref_words": ref_words,
                 "empty_hyps": sum(1 for r in recs if not r["hyp"].strip()),
                 "seconds_per_utterance": round(sum(r["seconds"] for r in recs) / len(recs), 3),

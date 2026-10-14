@@ -64,5 +64,5 @@
 <rect x="24" y="270" width="952" height="66" rx="10" fill="#f6f8fa" stroke="#d8dee4"/>
 <g transform="translate(40.0 291.0) scale(1.000)" fill="none" stroke="#1f2328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g>
 <text x="76.0" y="298.0" font-size="16" font-weight="700" fill="#1f2328" text-anchor="start">A second check: LA-murre, another dialect corpus</text>
-<text x="76.0" y="320.0" font-size="14" font-weight="400" fill="#59636e" text-anchor="start">10 other localities, 583 segments, test only. Scored by the blind LLM judge.</text>
+<text x="76.0" y="320.0" font-size="14" font-weight="400" fill="#59636e" text-anchor="start">10 localities not in SKN, 583 segments, kept out of all training. Scored by the blind LLM judge.</text>
 </svg>

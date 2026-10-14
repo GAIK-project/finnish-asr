@@ -18,7 +18,8 @@ Writes to docs/img/:
 
 The numbers in the explainer figures are this README's own; the two rankings read the results.
 Icons are Lucide (ISC), from docs/story/src/assets/icons; logos are their owners' trademarks, from
-svgl (docs/img/logos), used only to name the data sources and tools. No keys, no network.
+svgl and Iconify (docs/img/logos, see NOTICE.md), used only to name the data sources and tools. No keys,
+no network.
 """
 
 from __future__ import annotations
@@ -167,14 +168,14 @@ def punctuation() -> str:
     W, H = 1000, 372
     body = [ARROW_DEF, text(24, 38, "What the language model did to the training text: punctuation, nothing else", 19, 700)]
     body.append(f'<rect x="24" y="58" width="{W - 48}" height="70" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
-    body.append(text(42, 82, "Before: a person's transcript from SKN (Pälkäne)", 14, 700, MUTED))
+    body.append(text(42, 82, "Before: a person's transcript from SKN (Pälkäne, a validation segment)", 14, 700, MUTED))
     body.append(text(42, 112, "vieläkö osaisitte kyllä minä niin kauan osaan kun minä elän", 17, 400))
     mark, w = logo("claude", 42, 146, 26, "pu")
     body.append(mark)
     body.append(text(42 + w + 10, 165, "Claude Opus 5.5 adds full stops, question marks, commas and capitals", 15, 700, LLM))
     body.append(arrow(W - 60, 134, W - 60, 190))
     body.append(f'<rect x="24" y="196" width="{W - 48}" height="70" rx="10" fill="{LLM_SOFT}" stroke="{LLM}" stroke-width="1.5"/>')
-    body.append(text(42, 220, "After: the training target", 14, 700, LLM))
+    body.append(text(42, 220, "After: the target text the model learns from", 14, 700, LLM))
     body.append(words(42, 250, [("Vieläkö osaisitte", False), ("?", True), (" ", False), ("K", True),
                                 ("yllä minä niin kauan osaan kun minä elän", False), (".", True)], 17, LLM))
     body.append(icon("shield-check", 24, 284, 24, OPEN))
@@ -192,7 +193,7 @@ def data_sources() -> str:
         ("database", "SKN", ["Dialect interviews, 1960s–70s", "Kotus, Kielipankki · CC BY 4.0"], "training + test", OURS),
         ("logo:google", "FLEURS", ["Read sentences", "Google · CC BY 4.0"], "training + test", OURS),
         ("logo:meta", "VoxPopuli", ["Parliament speech", "Meta · CC0"], "training + test", OURS),
-        ("map-pin", "LA-murre", ["Dialect interviews, 10 places", "Univ. of Turku · CC BY-ND"], "test only", INK),
+        ("map-pin", "LA-murre", ["Dialect interviews, 132 places", "Univ. of Turku · CC BY-ND"], "test + internal", INK),
     ]
     CW, gap, y = 180, 9, 60
     for i, (ic, name, lines, role, color) in enumerate(cards):
@@ -254,6 +255,9 @@ def dialect_ranking() -> str:
         body.extend(label_with_logo(arm, label, LX, y + 22, group == "ours", f"d{i}"))
         body.append(f'<rect x="{BX}" y="{y + 7}" width="{BW * v / vmax:.1f}" height="{ROW - 14}" rx="3" fill="{colors[group]}"/>')
         body.append(text(BX + BW * v / vmax + 8, y + 22, f"{v:.1f}", 13, 700, INK))
+    if "google_chirp-3" in wer:  # README footnote under the benchmark table
+        body.append(text(24, bottom + 40, "Google Chirp 3 repeated “se on” 1 262 times in one 50-word segment; without that segment it scores 35.0 %.", 12.5, 400, MUTED))
+        bottom += 26
     best_other = min(r for r in rows if r[2] != "ours")
     alt = f"Dialect test word error rate: our model {rows[0][0]:.1f} %, the best other model {best_other[1]} {best_other[0]:.1f} %"
     return svg(W, bottom + 30, alt, body)
@@ -286,7 +290,7 @@ def data_split() -> str:
     body.append(f'<rect x="24" y="{yb}" width="{W - 48}" height="66" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
     body.append(icon("map-pin", 40, yb + 21, 24, INK))
     body.append(text(76, yb + 28, "A second check: LA-murre, another dialect corpus", 16, 700))
-    body.append(text(76, yb + 50, "10 other localities, 583 segments, test only. Scored by the blind LLM judge.", 14, 400, MUTED))
+    body.append(text(76, yb + 50, "10 localities not in SKN, 583 segments, kept out of all training. Scored by the blind LLM judge.", 14, 400, MUTED))
     return svg(W, H, "SKN's 50 municipalities split into 38 for training, 2 for validation and 10 for the test; LA-murre as a second test corpus", body)
 
 
@@ -454,9 +458,9 @@ def journey() -> str:
     top = [
         ("Start", "openai", BASE, "#f3f4f6", ["Whisper large-v3 by OpenAI,", "as it is"], None, "40.4 %", "dialect test", ""),
         ("Pilot", "audio-lines", BASE, "#f3f4f6", ["+ read sentences (FLEURS)", "+ parliament speech", "   (VoxPopuli)"], "51 min",
-         "no gain", "on spontaneous speech", "Lesson: read speech is not enough"),
+         "–", "not run on the dialect test", "Read speech is not enough"),
         ("Round 1", "map-pin", R1_SOFT, OURS_SOFT, ["+ 62 h of dialect", "   interviews (SKN)"], "2 h 2 min", "22.2 %", "dialect test",
-         "Errors almost halved; no full stops"),
+         "Almost halved; no full stops"),
         ("Round 2", "logo:claude", OURS, OURS_SOFT, ["+ Opus adds punctuation", "+ bigger LoRA, best of", "   3 epochs"], "3 h 8 min",
          "21.1 %", "dialect test", "Published as v1.0"),
     ]
@@ -486,7 +490,7 @@ def journey() -> str:
     branches = [
         ("Internal version", DEEP, "#e9eef6", ["+ 56 h more dialect interviews (LA-murre);", "Opus rewrote their dialect spelling", "into standard Finnish"],
          "4 h 57 min", "19.7 %", "the best, but kept internal:", "LA-murre's licence (CC BY-ND) forbids sharing changed texts"),
-        ("Timestamps version", LLM, LLM_SOFT, ["+ Whisper's timestamp tokens on half", "of the training segments"],
+        ("Timestamps version", LLM, LLM_SOFT, ["+ Whisper's timestamp tokens on half", "of the SKN training segments"],
          "3 h 6 min", "21.4 %", "and sentence times that work:", "published as the timestamps branch"),
     ]
     cx3 = xs[3] + CW / 2
@@ -591,7 +595,7 @@ def label_with_logo(arm_id: str, label: str, x: float, y: float, bold: bool, uid
 
 
 WEBINAR_LABELS = {**SHORT, "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, published (in pieces)",
-                  "hh_whisperx_fi": "WhisperX + Finnish-NLP model", "hf_whisper-large-finnish-v3": "Finnish-NLP whisper-large-v3"}
+                  "hh_whisperx_fi": "WhisperX + Finnish-NLP model", "hf_whisper-large-finnish-v3": "Finnish-NLP whisper-large-finnish-v3"}
 
 
 def webinar() -> str:
@@ -614,7 +618,7 @@ def webinar() -> str:
     P1, P1W, P2, P2W = 370, 250, 690, 220
     body = [text(24, 36, "Standard spoken Finnish: two scores, two different winners", 19, 700)]
     body.append(text(24, 60, f"A 180 s dental webinar with many brand names (the Ajokortti clip), {len(rows)} set-ups. Lower is better in both.", 14, 400, MUTED))
-    body.append(text(P1, 98, "Meaning errors per 100 words", 14, 700, LLM))
+    body.append(text(P1, 98, "Meaning-error points per 100 words", 14, 700, LLM))
     body.append(text(P1, 115, "two blind LLM judges (Claude, Gemini)", 12, 400, MUTED))
     body.append(text(P2, 98, "Word error rate %", 14, 700, OURS))
     body.append(text(P2, 115, "every differing word counts", 12, 400, MUTED))
@@ -667,7 +671,7 @@ def bench_row(arm: str, seg: str) -> dict | None:
 EXAMPLE_SEG = "SKN45a_Heinola_0097.wav"
 EXAMPLE_ARMS = [  # arm, label, maker logo, colour
     ("hf_whisper-large-v3", "Whisper large-v3 (OpenAI), as it is", "openai", BASE),
-    ("vertex_gemini-3.5-flash", "Gemini 3.5 Flash (Google)", "gemini", LLM),
+    ("vertex_gemini-3.5-flash-std", "Gemini 3.5 Flash (Google), asked for standard Finnish", "gemini", LLM),
     ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "", OURS),
 ]
 
@@ -744,8 +748,8 @@ def judge_example() -> str:
             body.append(text(cx + 11, y + 76, label, 12, 700, "#ffffff"))
             cx += w + 8
         y += 98
-    body.append(text(24, y + 10, "Verdicts of the main judge, Claude Opus 5.5; the second judge, Gemini 3.1 Pro, also rates “Nobelbayer” major. Red words differ", 13, 400, INK))
-    body.append(text(24, y + 28, "from the reference: WER counts each of them, the judge only the ones that matter. Hear it on the listening page.", 13, 400, INK))
+    body.append(text(24, y + 10, "Verdicts of the main judge, Claude Opus 5.5; the second judge, Gemini 3.1 Pro, also rates “Nobelbayer” major.", 13, 400, INK))
+    body.append(text(24, y + 28, "Red: the brand names the judge looked at. Hear the sentence on the listening page.", 13, 400, INK))
     return svg(W, y + 42, "A brand-name sentence from the webinar: Gemini 3.5 Flash, our model and Whisper large-v3 with the judge's verdicts", body)
 
 
@@ -769,7 +773,7 @@ def leaderboard() -> str:
     body = [text(24, 36, "Results at a glance", 19, 700)]
     panels = [
         (24, "Dialect speech", "words wrong, %: 600 interview segments", left[:N], 45.0, "{:.1f} %", None),
-        (24 + PW + 20, "Standard spoken Finnish", "meaning errors per 100 words: a 180 s webinar", right, 10.0, "{:.1f}", ours_rank),
+        (24 + PW + 20, "Standard spoken Finnish", "meaning-error points per 100 words: a 180 s webinar", right, 10.0, "{:.1f}", ours_rank),
     ]
     for px, title, sub, rows, vmax, fmt, orank in panels:
         body.append(f'<rect x="{px}" y="52" width="{PW}" height="{TOP - 52 + N * ROW + 26}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')

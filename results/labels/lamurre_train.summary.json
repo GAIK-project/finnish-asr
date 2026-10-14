@@ -1,0 +1,8 @@
+{
+  "what": "LA-murre training segments of the internal model (prepare_lamurre.py, train split): counts and hours only; the texts stay unpublished (CC BY-ND 4.0)",
+  "segments": 15532,
+  "hours": 56.46,
+  "localities": 124,
+  "segments_used_in_training": 15529,
+  "hours_used_in_training": 56.45
+}

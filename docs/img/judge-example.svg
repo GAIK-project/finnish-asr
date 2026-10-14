@@ -27,6 +27,6 @@
 <text x="42.0" y="424.0" font-size="16" fill="#1f2328"><tspan font-weight="700" fill="#b3402e">Straumanni, </tspan>Dentsply Sirona, <tspan font-weight="700" fill="#b3402e">Noble </tspan>Biocare ja <tspan font-weight="700" fill="#b3402e">Camlock </tspan>Conelog, eli <tspan font-weight="700" fill="#b3402e">implanttoona </tspan>OY.</text>
 <rect x="42" y="434" width="351" height="20" rx="10" fill="#b7791f"/>
 <text x="53.0" y="448.0" font-size="12" font-weight="700" fill="#ffffff" text-anchor="start">1 × minor: names misspelled, still recognisable</text>
-<text x="24.0" y="480.0" font-size="13" font-weight="400" fill="#1f2328" text-anchor="start">Verdicts of the main judge, Claude Opus 5.5; the second judge, Gemini 3.1 Pro, also rates “Nobelbayer” major. Red words differ</text>
-<text x="24.0" y="498.0" font-size="13" font-weight="400" fill="#1f2328" text-anchor="start">from the reference: WER counts each of them, the judge only the ones that matter. Hear it on the listening page.</text>
+<text x="24.0" y="480.0" font-size="13" font-weight="400" fill="#1f2328" text-anchor="start">Verdicts of the main judge, Claude Opus 5.5; the second judge, Gemini 3.1 Pro, also rates “Nobelbayer” major.</text>
+<text x="24.0" y="498.0" font-size="13" font-weight="400" fill="#1f2328" text-anchor="start">Red: the brand names the judge looked at. Hear the sentence on the listening page.</text>
 </svg>

@@ -15,7 +15,7 @@ runs' models and settings (gaik-evals run_asr.py, scripts/run_api_asr.py), one r
 The audio is the test split of the published dataset GAIK-project/skn-finnish-dialects-asr (pinned
 revision), the reference its human standard-Finnish text. Each arm writes
 results/benchmarks/skn_fi/<arm>.jsonl ({"id", "ref", "hyp", "seconds"}: seconds is the request's
-latency) and <arm>.meta.json; scripts/score_benchmark.py scores them with the open models. A segment
+wall time, retries included) and <arm>.meta.json; scripts/score_benchmark.py scores them with the open models. A segment
 whose request fails is logged and left out, so a rerun picks it up. A call that succeeds without any
 words (Chirp hearing no speech) is written with an empty transcript, which the scorer counts as deletions.
 

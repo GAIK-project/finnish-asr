@@ -34,8 +34,8 @@
 <rect x="780" y="60" width="180" height="186" rx="10" fill="#ffffff" stroke="#d8dee4" stroke-width="1.5"/>
 <g transform="translate(855.0 78.0) scale(1.250)" fill="none" stroke="#1f2328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g>
 <text x="870.0" y="136.0" font-size="17" font-weight="700" fill="#1f2328" text-anchor="middle">LA-murre</text>
-<text x="870.0" y="162.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="middle">Dialect interviews, 10 places</text>
+<text x="870.0" y="162.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="middle">Dialect interviews, 132 places</text>
 <text x="870.0" y="182.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="middle">Univ. of Turku · CC BY-ND</text>
 <rect x="810" y="206" width="120" height="24" rx="12" fill="#1f2328"/>
-<text x="870.0" y="222.5" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">test only</text>
+<text x="870.0" y="222.5" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">test + internal</text>
 </svg>

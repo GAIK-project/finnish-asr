@@ -75,7 +75,7 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 | A 180 s Finnish dental webinar, WER % (both decoded in chunks) | 15.7 | 13.9 |
 
 WER after lower-casing and removing punctuation. The ready-made Finnish fine-tunes trained on
-read speech score 48–57 % on the same dialect test, and the paid Gemini 3.5 Flash 34.6 % when asked
+read speech score 48–57 % on the same dialect test, and the paid Gemini 3.5 Flash 34.7 % when asked
 for standard Finnish ([listen and compare](https://gaik-project.github.io/finnish-asr/listen.html)).
 
 ## Variants

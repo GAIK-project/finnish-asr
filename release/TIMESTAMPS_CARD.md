@@ -83,7 +83,7 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 | FLEURS Finnish, read sentences, WER % | 7.4 | 7.6 | 7.4 |
 | VoxPopuli Finnish, parliament speech, WER % | 12.7 | **10.8** | 11.2 |
 | LA-murre dialect interviews, meaning-error points per 100 words (blind LLM judge, the three judged together on 577 segments) | 24.2 | 13.7 | 13.7 |
-| SKN sentence starts with a timestamp within 1 s (600 test segments) | 60.8 % | 0.8 % | **57.8 %** |
+| SKN sentence starts with a timestamp within 1 s (600 test segments) | 60.8 % | 0.8 % | 57.8 % |
 | Ten 4-minute dialect interviews in one go, with the fallback settings, WER % | 37.5 | 19.8 | **18.1** |
 | Sentence starts within 1 s in those interviews, with the fallback settings | 62.6 % | 18.9 % | 49.0 % |
 | A 180 s Finnish dental webinar in one go with timestamps, WER % | 14.7 | 62.7 (repeats itself) | 16.7 |
@@ -94,7 +94,8 @@ SKN's own annotation; when the variant finds a sentence start, the median distan
 webinar, against the reference a listener checked at its 42 disputed spans, the variant gives 16.2 %
 in one go and 14.5 % in pieces (main model 14.0 % in pieces). The judge's points here come from a third
 judging round with these three models; the main model's card quotes the second round (base Whisper 25.9,
-main model 13.6, 583 segments), which judged four other models together, so compare points only within one round.
+main model 13.6, 583 segments), which judged four models together (base Whisper, round 1, the main model and
+an internal model), so compare points only within one round.
 
 The variant did not replace the main model. The rule set before the run allowed SKN to get at most
 about 0.5 points worse and FLEURS and VoxPopuli no worse; VoxPopuli got 0.4 points worse, and the
@@ -175,7 +176,7 @@ The main model's recipe, with one change:
 3. ⚙️ **Fine-tuning.** LoRA rank 64, alpha 128, dropout 0.05, on the attention `q_proj` and `v_proj`;
    AdamW, learning rate 1e-4 with 5 % warm-up and linear decay, batch 8, bf16. Three epochs, keeping
    the one with the lowest validation loss (epoch 2: 0.2158; not comparable with the main model's
-   0.206, because half of the validation segments carry timestamp tokens). The adapter is merged
+   0.206, because about half of the SKN validation segments carry timestamp tokens). The adapter is merged
    into the weights published here.
 4. 🖥️ **Compute.** 3 h 6 min of training with per-epoch validation on one AMD MI250X GPU on the
    [LUMI](https://www.lumi-supercomputer.eu/) supercomputer.
