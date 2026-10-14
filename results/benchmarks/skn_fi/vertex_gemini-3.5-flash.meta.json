@@ -1,0 +1,23 @@
+{
+  "arm_id": "vertex_gemini-3.5-flash",
+  "model": "gemini-3.5-flash",
+  "provider": "google-vertex",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech exactly as spoken, in Finnish. Do not translate, summarise or correct the speakers. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "benchmark": "SKN dialect test, 10 held-out municipalities, human standard-Finnish reference",
+  "dataset": "GAIK-project/skn-finnish-dialects-asr",
+  "revision": "ee98f5e16dcb0986a5514b787bee100962be3bf6",
+  "utterances": 600,
+  "failed_this_run": 0,
+  "workers": 4,
+  "transcribe_s": 348.4,
+  "usage": {
+    "candidates_token_count": 38644,
+    "prompt_token_count": 245836,
+    "total_token_count": 288730,
+    "thoughts_token_count": 4250
+  },
+  "gpu": null
+}

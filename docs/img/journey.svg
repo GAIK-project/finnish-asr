@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Training rounds: pilot, round 1 with dialect interviews, round 2 published, an internal version and a timestamps version">
+<rect width="1000" height="640" rx="12" fill="#ffffff"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#59636e"/></marker></defs>
+<text x="24.0" y="38.0" font-size="19" font-weight="700" fill="#1f2328" text-anchor="start">How the model got better, round by round</text>
+<text x="976.0" y="38.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="end">dialect test = words wrong on 600 segments from 10 unheard municipalities</text>
+<rect x="24" y="62" width="220" height="262" rx="10" fill="#f3f4f6" stroke="#9aa4ae" stroke-width="1.5"/>
+<path d="M24 96 V72 a10 10 0 0 1 10 -10 H234 a10 10 0 0 1 10 10 V96 Z" fill="#9aa4ae"/>
+<text x="38.0" y="85.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Start</text>
+<text x="38.0" y="122.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">Whisper large-v3 by OpenAI,</text>
+<text x="38.0" y="142.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">as it is</text>
+<text x="38.0" y="250.0" font-size="30" font-weight="700" fill="#1f2328" text-anchor="start">40.4 %</text>
+<text x="38.0" y="270.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">dialect test</text>
+<line x1="247.0" y1="193.0" x2="271.0" y2="193.0" stroke="#59636e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="274" y="62" width="220" height="262" rx="10" fill="#f3f4f6" stroke="#9aa4ae" stroke-width="1.5"/>
+<path d="M274 96 V72 a10 10 0 0 1 10 -10 H484 a10 10 0 0 1 10 10 V96 Z" fill="#9aa4ae"/>
+<text x="288.0" y="85.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Pilot</text>
+<text x="288.0" y="122.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ read sentences (FLEURS)</text>
+<text x="288.0" y="142.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ parliament speech</text>
+<text x="288.0" y="162.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">   (VoxPopuli)</text>
+<g transform="translate(288.0 188.0) scale(0.667)" fill="none" stroke="#59636e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2m0-20v2m5 16v2m0-20v2M2 12h2m-2 5h2M2 7h2m16 5h2m-2 5h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></g>
+<text x="310.0" y="201.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">LUMI, 51 min</text>
+<text x="288.0" y="250.0" font-size="30" font-weight="700" fill="#1f2328" text-anchor="start">no gain</text>
+<text x="288.0" y="270.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">on spontaneous speech</text>
+<line x1="288" y1="284" x2="480" y2="284" stroke="#d8dee4"/>
+<text x="288.0" y="307.0" font-size="12.5" font-weight="700" fill="#1f2328" text-anchor="start">Lesson: read speech is not enough</text>
+<line x1="497.0" y1="193.0" x2="521.0" y2="193.0" stroke="#59636e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="524" y="62" width="220" height="262" rx="10" fill="#e8f0fa" stroke="#2f6fb3" stroke-width="1.5"/>
+<path d="M524 96 V72 a10 10 0 0 1 10 -10 H734 a10 10 0 0 1 10 10 V96 Z" fill="#2f6fb3"/>
+<text x="538.0" y="85.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Round 1</text>
+<text x="538.0" y="122.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ 62 h of dialect</text>
+<text x="538.0" y="142.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">   interviews (SKN)</text>
+<g transform="translate(538.0 188.0) scale(0.667)" fill="none" stroke="#59636e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2m0-20v2m5 16v2m0-20v2M2 12h2m-2 5h2M2 7h2m16 5h2m-2 5h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></g>
+<text x="560.0" y="201.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">LUMI, 2 h 2 min</text>
+<text x="538.0" y="250.0" font-size="30" font-weight="700" fill="#2f6fb3" text-anchor="start">22.2 %</text>
+<text x="538.0" y="270.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">dialect test</text>
+<line x1="538" y1="284" x2="730" y2="284" stroke="#d8dee4"/>
+<text x="538.0" y="307.0" font-size="12.5" font-weight="700" fill="#1f2328" text-anchor="start">Errors almost halved; no full stops</text>
+<line x1="747.0" y1="193.0" x2="771.0" y2="193.0" stroke="#59636e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="774" y="62" width="220" height="262" rx="10" fill="#e8f0fa" stroke="#2f6fb3" stroke-width="1.5"/>
+<path d="M774 96 V72 a10 10 0 0 1 10 -10 H984 a10 10 0 0 1 10 10 V96 Z" fill="#2f6fb3"/>
+<text x="788.0" y="85.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Round 2</text>
+<rect x="952" y="66" width="30" height="26" rx="6" fill="#ffffff"/><svg x="956.0" y="68.0" width="21.9" height="22.0" viewBox="0 0 256 257" xmlns:xlink="http://www.w3.org/1999/xlink"><path fill="#D97757" d="m50.228 170.321 50.357-28.257.843-2.463-.843-1.361h-2.462l-8.426-.518-28.775-.778-24.952-1.037-24.175-1.296-6.092-1.297L0 125.796l.583-3.759 5.12-3.434 7.324.648 16.202 1.101 24.304 1.685 17.629 1.037 26.118 2.722h4.148l.583-1.685-1.426-1.037-1.101-1.037-25.147-17.045-27.22-18.017-14.258-10.37-7.713-5.25-3.888-4.925-1.685-10.758 7-7.713 9.397.649 2.398.648 9.527 7.323 20.35 15.75L94.817 91.9l3.889 3.24 1.555-1.102.195-.777-1.75-2.917-14.453-26.118-15.425-26.572-6.87-11.018-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0 82.05 1.426l4.472 3.888 6.61 15.101 10.694 23.786 16.591 32.34 4.861 9.592 2.592 8.879.973 2.722h1.685v-1.556l1.36-18.211 2.528-22.36 2.463-28.776.843-8.1 4.018-9.722 7.971-5.25 6.222 2.981 5.12 7.324-.713 4.73-3.046 19.768-5.962 30.98-3.889 20.739h2.268l2.593-2.593 10.499-13.934 17.628-22.036 7.778-8.749 9.073-9.657 5.833-4.601h11.018l8.1 12.055-3.628 12.443-11.342 14.388-9.398 12.184-13.48 18.147-8.426 14.518.778 1.166 2.01-.194 30.46-6.481 16.462-2.982 19.637-3.37 8.88 4.148.971 4.213-3.5 8.62-20.998 5.184-24.628 4.926-36.682 8.685-.454.324.519.648 16.526 1.555 7.065.389h17.304l32.21 2.398 8.426 5.574 5.055 6.805-.843 5.184-12.962 6.611-17.498-4.148-40.83-9.721-14-3.5h-1.944v1.167l11.666 11.406 21.387 19.314 26.767 24.887 1.36 6.157-3.434 4.86-3.63-.518-23.526-17.693-9.073-7.972-20.545-17.304h-1.36v1.814l4.73 6.935 25.017 37.59 1.296 11.536-1.814 3.76-6.481 2.268-7.13-1.297-14.647-20.544-15.1-23.138-12.185-20.739-1.49.843-7.194 77.448-3.37 3.953-7.778 2.981-6.48-4.925-3.436-7.972 3.435-15.749 4.148-20.544 3.37-16.333 3.046-20.285 1.815-6.74-.13-.454-1.49.194-15.295 20.999-23.267 31.433-18.406 19.702-4.407 1.75-7.648-3.954.713-7.064 4.277-6.286 25.47-32.405 15.36-20.092 9.917-11.6-.065-1.686h-.583L44.07 198.125l-12.055 1.555-5.185-4.86.648-7.972 2.463-2.593 20.35-13.999-.064.065Z"/></svg>
+<text x="788.0" y="122.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ Opus adds punctuation</text>
+<text x="788.0" y="142.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ bigger LoRA, best of</text>
+<text x="788.0" y="162.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">   3 epochs</text>
+<g transform="translate(788.0 188.0) scale(0.667)" fill="none" stroke="#59636e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2m0-20v2m5 16v2m0-20v2M2 12h2m-2 5h2M2 7h2m16 5h2m-2 5h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></g>
+<text x="810.0" y="201.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">LUMI, 3 h 8 min</text>
+<text x="788.0" y="250.0" font-size="30" font-weight="700" fill="#2f6fb3" text-anchor="start">21.1 %</text>
+<text x="788.0" y="270.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">dialect test</text>
+<line x1="788" y1="284" x2="980" y2="284" stroke="#d8dee4"/>
+<text x="788.0" y="307.0" font-size="12.5" font-weight="700" fill="#1f2328" text-anchor="start">Published as v1.0</text>
+<rect x="148.0" y="400" width="340" height="214" rx="10" fill="#e9eef6" stroke="#1d3f6e" stroke-width="1.5"/>
+<path d="M148.0 434 V410 a10 10 0 0 1 10 -10 H478.0 a10 10 0 0 1 10 10 V434 Z" fill="#1d3f6e"/>
+<text x="162.0" y="423.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Internal version</text>
+<text x="162.0" y="460.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ 56 h more dialect interviews (LA-murre);</text>
+<text x="162.0" y="480.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">Opus rewrote their dialect spelling</text>
+<text x="162.0" y="500.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">into standard Finnish</text>
+<g transform="translate(162.0 512.0) scale(0.667)" fill="none" stroke="#59636e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2m0-20v2m5 16v2m0-20v2M2 12h2m-2 5h2M2 7h2m16 5h2m-2 5h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></g>
+<text x="184.0" y="525.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">LUMI, 4 h 57 min</text>
+<text x="162.0" y="570.0" font-size="30" font-weight="700" fill="#1d3f6e" text-anchor="start">19.7 %</text>
+<text x="276.0" y="554.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">the best, but kept internal:</text>
+<text x="276.0" y="572.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">LA-murre&#x27;s licence (CC BY-ND)</text>
+<text x="276.0" y="590.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">forbids sharing changed texts</text>
+<path d="M884.0 327 V362.0 H318.0 V395" fill="none" stroke="#59636e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="512.0" y="400" width="340" height="214" rx="10" fill="#f6eee4" stroke="#8a5a2b" stroke-width="1.5"/>
+<path d="M512.0 434 V410 a10 10 0 0 1 10 -10 H842.0 a10 10 0 0 1 10 10 V434 Z" fill="#8a5a2b"/>
+<text x="526.0" y="423.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Timestamps version</text>
+<text x="526.0" y="460.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ Whisper&#x27;s timestamp tokens on half</text>
+<text x="526.0" y="480.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">of the training segments</text>
+<g transform="translate(526.0 492.0) scale(0.667)" fill="none" stroke="#59636e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2m0-20v2m5 16v2m0-20v2M2 12h2m-2 5h2M2 7h2m16 5h2m-2 5h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></g>
+<text x="548.0" y="505.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">LUMI, 3 h 6 min</text>
+<text x="526.0" y="570.0" font-size="30" font-weight="700" fill="#8a5a2b" text-anchor="start">21.4 %</text>
+<text x="640.0" y="554.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">and sentence times that work:</text>
+<text x="640.0" y="572.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">published as the timestamps</text>
+<text x="640.0" y="590.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">branch</text>
+<path d="M884.0 327 V362.0 H682.0 V395" fill="none" stroke="#59636e" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="24.0" y="626.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Same base model and method in every round; the version to keep was picked by validation loss, never by test scores.</text>
+</svg>

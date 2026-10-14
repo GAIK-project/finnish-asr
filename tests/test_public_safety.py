@@ -46,7 +46,13 @@ FORBIDDEN_PATHS = [
     "*.wav",
     "*.flac",
 ]
-ALLOWED_AUDIO = {"docs/story/src/assets/heinola_0097.mp3", "docs/story/src/assets/palkane_0021.mp3"}  # SKN, CC BY
+ALLOWED_AUDIO = {  # SKN segments, CC BY 4.0: the story's two and the listening page's three (build_listen.py)
+    "docs/story/src/assets/heinola_0097.mp3",
+    "docs/story/src/assets/palkane_0021.mp3",
+    "docs/listen/SKN45a_Heinola_0097.mp3",
+    "docs/listen/SKN50a_Eurajoki_0203.mp3",
+    "docs/listen/SKN25a_Alastaro_0156.mp3",
+}
 
 
 def test_no_licence_restricted_or_private_files() -> None:

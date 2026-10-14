@@ -52,6 +52,12 @@ recognition. Made at Haaga-Helia University of Applied Sciences in the [GAIK pro
 (led by Haaga-Helia with the University of Helsinki and Tampere University, co-funded by the
 European Union, ERDF) to train [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects).
 
+**[GAIK project](https://gaik.ai/)** · [Haaga-Helia University of Applied Sciences](https://www.haaga-helia.fi/en) · developed by Akseli Leskinen ([laguagu](https://github.com/laguagu))
+
+🤗 [The model trained on it](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects) (dialect test word error rate 40.4 % → 21.1 %) · 📖 The story, with audio: [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) · [in English](https://gaik-project.github.io/finnish-asr/story/story.en.html) · 🔊 [listen and compare models](https://gaik-project.github.io/finnish-asr/listen.html)
+
+📊 [scripts, method and all results: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr) · 🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) · 💻 [GAIK on GitHub](https://github.com/GAIK-project) · 🌐 [gaik.ai](https://gaik.ai/)
+
 | Split | Segments | Hours | Municipalities |
 |---|--:|--:|---|
 | train | 15 042 | 61.9 | 38 |

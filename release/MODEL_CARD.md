@@ -60,9 +60,11 @@ trained at Haaga-Helia University of Applied Sciences in the [GAIK project](http
 (Generative AI-enhanced Knowledge Management in Business), a research project led by Haaga-Helia
 with the University of Helsinki and Tampere University, co-funded by the European Union (ERDF).
 
-🌐 [gaik.ai](https://gaik.ai/) · 💻 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) ·
-📊 [code, method and results on GitHub: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr) ·
-🗂️ [training dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
+**[GAIK project](https://gaik.ai/)** · [Haaga-Helia University of Applied Sciences](https://www.haaga-helia.fi/en) · developed by Akseli Leskinen ([laguagu](https://github.com/laguagu))
+
+📖 The story, with audio: [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) · [in English](https://gaik-project.github.io/finnish-asr/story/story.en.html) · 🔊 [listen and compare models](https://gaik-project.github.io/finnish-asr/listen.html) · 🗂️ [training data](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr) · ⏱️ [timestamp variant](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/timestamps/README.md)
+
+📊 [code, method and all results: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr) · 🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) · 💻 [GAIK on GitHub](https://github.com/GAIK-project) · 🌐 [gaik.ai](https://gaik.ai/)
 
 | Test | Whisper large-v3 | This model |
 |---|--:|--:|
@@ -73,7 +75,8 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 | A 180 s Finnish dental webinar, WER % (both decoded in chunks) | 15.7 | 13.9 |
 
 WER after lower-casing and removing punctuation. The ready-made Finnish fine-tunes trained on
-read speech score 48–57 % on the same dialect test.
+read speech score 48–57 % on the same dialect test, and the paid Gemini 3.5 Flash 34.6 % when asked
+for standard Finnish ([listen and compare](https://gaik-project.github.io/finnish-asr/listen.html)).
 
 ## Variants
 

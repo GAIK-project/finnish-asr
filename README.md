@@ -4,13 +4,15 @@
 
 # Finnish dialect speech-to-text
 
-**We taught OpenAI's Whisper to understand Finnish dialects.** On dialect speech it now gets about
-half as many words wrong (40 % → 21 %), and ordinary Finnish stays about as good as before. The model
-and its training data are free to use on Hugging Face.
+**We taught OpenAI's Whisper to understand Finnish dialects.** On dialect speech it gets about half as
+many words wrong as before (40 % → 21 %), far fewer than any other model we tried, Gemini 3.5 Flash
+included. Ordinary Finnish stays about as good as before. The model and its training data are free to
+use.
 
 🤗 [Model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects) ·
 🗂️ [Training data](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr) ·
-📖 The story, with audio: [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) ·
+🔊 [Listen and compare](https://gaik-project.github.io/finnish-asr/listen.html) ·
+📖 The story: [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) ·
 [in English](https://gaik-project.github.io/finnish-asr/story/story.en.html) ·
 🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) ·
 🌐 [gaik.ai](https://gaik.ai/)
@@ -18,7 +20,18 @@ and its training data are free to use on Hugging Face.
 Made by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of Applied
 Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).
 
-| | Whisper large-v3 | Our model |
+<img src="docs/img/leaderboard.svg" alt="Results at a glance: on dialect speech our model is first with 21.1 % of words wrong; on a standard-Finnish webinar Gemini 3.5 Flash makes the fewest meaning errors and our model is 18th" width="100%">
+
+- 🗣️ **Dialect speech: our model, by far.** 21.1 % of words wrong. The next best is Gemini 3.5 Flash,
+  34.6 % when asked for standard Finnish (40.8 % with the webinar's prompt); base Whisper large-v3 gets
+  40.4 % and Google Chirp 3 41.2 %.
+- 🏢 **Standard Finnish full of brand names: Gemini 3.5 Flash.** On a dental webinar our model's word
+  error rate is near the top (13.9 %, shared 3rd), but its few errors hit brand names and dental terms,
+  so the meaning judges put it 18th of 26.
+- ⚖️ **Four AI judges agree.** Claude and three open models on CSC's Aitta service all find far fewer
+  meaning errors in our models' dialect transcripts than in base Whisper's.
+
+| Our model against the model it started from | Whisper large-v3 | Our model |
 |---|--:|--:|
 | 🗣️ Dialect speech: words wrong | 40.4 % | **21.1 %** |
 | ⚖️ Another dialect corpus: meaning errors per 100 words | 25.9 | **13.6** |
@@ -29,7 +42,9 @@ Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Uni
 
 You give it Finnish speech, dialect or not. It writes standard Finnish, with punctuation.
 
-<img src="docs/img/example.svg" alt="A Heinola test sentence: Whisper large-v3 gets 8 of 19 words wrong, our model 1" width="100%">
+<img src="docs/img/example.svg" alt="A Heinola test sentence: Whisper large-v3, Gemini 3.5 Flash and our model against a person's transcript" width="100%">
+
+🔊 [Listen to this sentence and two more](https://gaik-project.github.io/finnish-asr/listen.html)
 
 ## 2. Where the data comes from
 
@@ -44,19 +59,36 @@ You give it Finnish speech, dialect or not. It writes standard Finnish, with pun
 - **LA-murre**: dialect interviews from 10 other places, used only for testing. University of Turku
   and Kotus, via [Kielipankki](http://urn.fi/urn:nbn:fi:lb-2020112935), CC BY-ND 4.0.
 
-## 3. What the language model did
-
-The audio and the words are people's work. A language model, Claude Opus 5.5, helped in two places:
-it added punctuation to the training text, and it judged the test results (step 5 below).
-
-<img src="docs/img/punctuation.svg" alt="Before: a transcript without punctuation. After: the same words with a question mark, a capital and a full stop" width="100%">
-
-## 4. How we made it
+## 3. How we made it
 
 <img src="docs/img/pipeline.svg" alt="Six steps: dialect speech, Opus adds punctuation, training on LUMI, word error test, blind LLM judge, published on Hugging Face" width="100%">
 
 Training ran on [LUMI](https://www.lumi-supercomputer.eu/), the EuroHPC supercomputer hosted by CSC
 in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-again) lists the commands.
+
+**Round by round:**
+
+<img src="docs/img/journey.svg" alt="Training rounds: start 40.4 %, pilot on read speech, round 1 with dialect interviews 22.2 %, round 2 published 21.1 %, an internal version 19.7 % and a timestamps version 21.4 %" width="100%">
+
+**Why is the best version not published?**
+
+| | Published (`v1.0`) | Internal version |
+|---|---|---|
+| Training data | SKN + FLEURS + VoxPopuli, all open licences | the same + 56 h of LA-murre interviews |
+| What the language model did | added punctuation | also rewrote LA-murre's dialect spelling in standard Finnish |
+| Dialect test, words wrong | 21.1 % | **19.7 %** |
+| Can it be shared? | ✅ yes, Apache 2.0 | ❌ no: LA-murre's licence (CC BY-ND) does not allow sharing changed texts, so the model trained on them stays internal |
+
+## 4. What the language model did
+
+The audio and the words are people's work. A language model, Claude Opus 5.5, helped in two places.
+First, it added punctuation to the training text and nothing else:
+
+<img src="docs/img/punctuation.svg" alt="Before: a transcript without punctuation. After: the same words with a question mark, a capital and a full stop" width="100%">
+
+Second, it judged the test transcripts blind. A real example from the webinar:
+
+<img src="docs/img/judge-example.svg" alt="A brand-name sentence from the webinar: Gemini 3.5 Flash gets all four brands right; our model writes Nobelbayer for Nobel Biocare, a major error" width="100%">
 
 ## 5. How we tested it
 
@@ -64,30 +96,30 @@ The test municipalities were kept out of training, so the test is speech the mod
 
 <img src="docs/img/data-split.svg" alt="SKN's 50 municipalities: 38 for training, 2 for validation, 10 for the test; LA-murre as a second test" width="100%">
 
-We scored it in two ways. Word error rate counts every word that differs. The blind judge sees the
-transcripts without knowing which model wrote them and counts only errors that change the meaning:
+Two scores: word error rate counts every word that differs, the blind judge only errors that change the meaning:
 
 <img src="docs/img/two-measures.svg" alt="Word error rate counts every differing word; the blind judge counts only meaning errors" width="100%">
 
-Three open models on CSC's Aitta service repeated the judging and agreed: every judge puts our
-models far ahead of base Whisper ([Second opinions](#second-opinions-open-model-judges-on-csc-aitta)).
-
 ## 6. How it compares
 
-**On dialects it is far ahead of every other open model we ran:**
+<img src="docs/img/dialect-ranking.svg" alt="Dialect test word error rate: ours 21.1 %, every other model 40 % or more" width="100%">
 
-<img src="docs/img/dialect-ranking.svg" alt="Dialect test word error rate: ours 21.1 %, Whisper large-v3 40.4 %, other open models 42.5–66.7 %" width="100%">
+On standard spoken Finnish the two scores pick different winners:
 
-**On ordinary spoken Finnish it is not the best.** On a 180 s dental-education webinar full of brand
-names, Gemini 3.5 Flash makes the fewest meaning errors and plain Whisper large-v3 is the best open
-model. Our model spells rare names and dental terms worse:
+<img src="docs/img/webinar.svg" alt="Webinar clip: Gemini 3.5 Flash makes the fewest meaning errors; our model's word error rate is shared 3rd but its meaning errors rank 18th" width="100%">
 
-<img src="docs/img/clip-ranking.svg" alt="Webinar clip: Gemini 3.5 Flash first; our published model 18th of 26 set-ups" width="100%">
+So: use our model for dialect speech, and Gemini 3.5 Flash or plain Whisper large-v3 for standard
+business Finnish with many names. 🔊 [Hear the differences](https://gaik-project.github.io/finnish-asr/listen.html) ·
+all 26 set-ups are in the [full table](#tldr).
 
-So: use our model for dialect speech, and plain Whisper large-v3 or an API service for standard
-business Finnish. All 26 set-ups are in the [full table](#tldr).
+## 7. Do other AI judges agree?
 
-## 7. Why it got better
+Three open models on CSC's Aitta service repeated the blind judging of the second dialect corpus.
+Each judge is stricter or milder, but all four put our models far ahead of base Whisper:
+
+<img src="docs/img/judges.svg" alt="Four blind judges rank base Whisper far behind our three fine-tuned models on LA-murre" width="100%">
+
+## 8. Why it got better
 
 - 🎧 **It practised the exact task.** 62 hours of dialect speech, each sentence paired with a
   person's standard-Finnish transcript, from 38 municipalities.
@@ -96,10 +128,11 @@ business Finnish. All 26 set-ups are in the [full table](#tldr).
 - 🧱 **It kept what it knew.** Read and parliament speech stayed in the training mix, so ordinary
   Finnish did not get worse.
 - ✍️ **It writes sentences.** With punctuation added to the training text, its output reads like text.
-- ➕ **More dialect speech helps further.** An internal version that also heard 56 hours of LA-murre
-  interviews gets 19.7 %, but that corpus's licence does not allow publishing it.
+- ➕ **More dialect speech helps further.** The internal version with 56 more hours gets 19.7 %.
+- 🏷️ **What got worse: rare names.** The interviews have no brand names or dental terms, and the
+  fine-tuned model spells them worse than base Whisper does; for those, use a general model.
 
-## 8. Use it
+## 9. Use it
 
 <img src="docs/img/which-version.svg" alt="Use the main model by default; use the timestamps revision for sentence times or long audio" width="100%">
 
@@ -120,6 +153,7 @@ has code that cuts it into pieces at quiet moments.
 # Full details
 
 Everything below is the full report: every model, every number, how each was measured, and the caveats.
+
 
 Organisations ask whether there are speech-to-text models that understand Finnish, dialects
 included, and can run locally. This repository runs 20 current speech-to-text set-ups, 12 of them
@@ -165,8 +199,8 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   on Common Voice: read speech, not a webinar.
 - 🗣️ **Dialects: every model struggles, and fine-tuning on dialect data nearly halves
   the errors.** On 600 dialect segments from 10 municipalities no model had heard, the
-  best ready-made model (Whisper large-v3) has 40 % WER and the Finnish fine-tunes
-  48–57 %. A LoRA fine-tune of Whisper large-v3 on 62 h of open dialect interviews
+  best ready-made open model (Whisper large-v3) has 40 % WER, the Finnish fine-tunes 48–57 % and
+  the best API service we ran, Gemini 3.5 Flash asked for standard Finnish, 34.6 %. A LoRA fine-tune of Whisper large-v3 on 62 h of open dialect interviews
   (SKN, CC BY 4.0) brings it to **22 %**, better in all 10 municipalities, with FLEURS
   and VoxPopuli kept about level. A second, independent dialect corpus (LA-murre, 10
   other localities) confirms it on meaning: a blind judge gives the fine-tune 13.8
@@ -304,7 +338,10 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | **This project, round 2: + punctuated SKN targets (published)** †‡§ | 21.1 | 58.1 | 7.6 | 10.8 | 1.6 | 0.98 |
 | **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§ | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
 | **This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** †‡§ | 22.2 | 58.0 | 7.8 | 10.6 | 1.9 | 0.96 |
+| Gemini 3.5 Flash (API, asked for standard Finnish) | 34.6 | – | – | – | – | – |
 | Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 1.7 | 0.98 |
+| Gemini 3.5 Flash (API, the clip's prompt) | 40.8 | – | – | – | – | – |
+| Google Chirp 3 (API) | 41.2 | – | – | – | – | – |
 | Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | 2.2 | 0.19 |
 | NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | 2.1 | 0.30 |
 | RASMUS Finnish-ASR-Canary-v2 + KenLM †‡ | 47.6 | 62.7 | 7.6 | 7.7 | 2.5 | 0.71 |
@@ -317,7 +354,10 @@ Corpus WER and CER after lower-casing and removing punctuation. Seconds per utte
 are FLEURS GPU time in batches of 16 on one AMD MI250X, model loading excluded. † trained
 on FLEURS training data, ‡ on VoxPopuli training data, § on SKN training data from
 other municipalities, ¶ on LA-murre training data from other localities (model cards, or this
-project), so those numbers are on familiar material. A dash: not run on the dialect sets.
+project), so those numbers are on familiar material. A dash: not run on that set. The API services
+ran on the SKN test only ([`run_api_benchmark.py`](scripts/run_api_benchmark.py)), with the clip runs'
+models and settings, one request per segment; "the clip's prompt" asks Gemini to write what is said,
+"standard Finnish" asks for standard word forms, which is what the SKN reference has.
 VoxPopuli references keep digits and abbreviations as the parliament wrote them, which costs every
 model some WER. The RASMUS model card reports 8.39 % (greedy) and 7.75 % (KenLM) on FLEURS; this run
 gives 8.4 % and 7.6 %.
@@ -831,6 +871,7 @@ bash $L push && bash $L setup && bash $L download clip && bash $L download bench
 for e in hf qwen nemo; do bash $L run clip $e; bash $L run bench $e; done            # six jobs
 bash $L status                                                                       # until the queue is empty
 bash $L fetch
+uv run --extra api-asr --extra judges --extra hub python scripts/run_api_benchmark.py   # Gemini, Chirp, OpenAI, ElevenLabs on SKN
 uv run python scripts/score_benchmark.py              # SKN/FLEURS/VoxPopuli table, no keys
 
 # the dialect model: SKN, punctuated targets, training, its tests
@@ -844,6 +885,8 @@ bash $L run bench hf --bench skn_fi && bash $L fetch
 uv run python scripts/dialect_chart.py                # docs/img/dialect-finetune.svg, no keys
 uv run python scripts/dialect_examples.py             # docs/DIALECT-EXAMPLES.md, no keys
 uv run python scripts/build_story.py                  # docs/story/story.{en,fi}.html, no keys
+uv run python scripts/readme_figures.py              # the front page's figures in docs/img/, no keys
+uv run --extra hub python scripts/build_listen.py    # docs/listen.html and its SKN clips, no keys
 uv run python scripts/build_compare.py                # results/compare.html (gitignored); fetches the SKN test parquet
 
 # timestamps and long-form (prepare_timestamps.py needs SKN's *_full.eaf files)

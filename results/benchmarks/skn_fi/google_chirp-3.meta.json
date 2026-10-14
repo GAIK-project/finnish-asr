@@ -1,0 +1,21 @@
+{
+  "arm_id": "google_chirp-3",
+  "model": "chirp_3",
+  "provider": "google-speech-v2",
+  "params": {
+    "language_codes": [
+      "fi-FI"
+    ],
+    "location": "eu",
+    "punctuation": true
+  },
+  "benchmark": "SKN dialect test, 10 held-out municipalities, human standard-Finnish reference",
+  "dataset": "GAIK-project/skn-finnish-dialects-asr",
+  "revision": "ee98f5e16dcb0986a5514b787bee100962be3bf6",
+  "utterances": 600,
+  "failed_this_run": 0,
+  "workers": 4,
+  "transcribe_s": 346.0,
+  "usage": {},
+  "gpu": null
+}

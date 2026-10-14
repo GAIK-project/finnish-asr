@@ -69,8 +69,11 @@ Trained at Haaga-Helia University of Applied Sciences in the [GAIK project](http
 (Generative AI-enhanced Knowledge Management in Business), a research project led by Haaga-Helia
 with the University of Helsinki and Tampere University, co-funded by the European Union (ERDF).
 
-🌐 [gaik.ai](https://gaik.ai/) · 📊 [code, method and results on GitHub: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr#the-timestamp-variant) ·
-🗂️ [training dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
+**[GAIK project](https://gaik.ai/)** · [Haaga-Helia University of Applied Sciences](https://www.haaga-helia.fi/en) · developed by Akseli Leskinen ([laguagu](https://github.com/laguagu))
+
+📖 The story, with audio: [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) · [in English](https://gaik-project.github.io/finnish-asr/story/story.en.html) · 🔊 [listen and compare models](https://gaik-project.github.io/finnish-asr/listen.html) · 🗂️ [training data](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
+
+📊 [code, method and all results: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr#the-timestamp-variant) · 🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) · 💻 [GAIK on GitHub](https://github.com/GAIK-project) · 🌐 [gaik.ai](https://gaik.ai/)
 
 ## Results
 
@@ -79,7 +82,7 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 | SKN dialect interviews, 10 municipalities not in training, WER % | 40.4 | **21.1** | 21.4 |
 | FLEURS Finnish, read sentences, WER % | 7.4 | 7.6 | 7.4 |
 | VoxPopuli Finnish, parliament speech, WER % | 12.7 | **10.8** | 11.2 |
-| LA-murre dialect interviews, meaning-error points per 100 words (blind LLM judge, judged together) | 24.2 | 13.7 | 13.7 |
+| LA-murre dialect interviews, meaning-error points per 100 words (blind LLM judge, the three judged together on 577 segments) | 24.2 | 13.7 | 13.7 |
 | SKN sentence starts with a timestamp within 1 s (600 test segments) | 60.8 % | 0.8 % | **57.8 %** |
 | Ten 4-minute dialect interviews in one go, with the fallback settings, WER % | 37.5 | 19.8 | **18.1** |
 | Sentence starts within 1 s in those interviews, with the fallback settings | 62.6 % | 18.9 % | 49.0 % |
@@ -89,7 +92,9 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 WER after lower-casing and removing punctuation. Timestamps are compared with the sentence times of
 SKN's own annotation; when the variant finds a sentence start, the median distance is 0.04 s. On the
 webinar, against the reference a listener checked at its 42 disputed spans, the variant gives 16.2 %
-in one go and 14.5 % in pieces (main model 14.0 % in pieces).
+in one go and 14.5 % in pieces (main model 14.0 % in pieces). The judge's points here come from a third
+judging round with these three models; the main model's card quotes the second round (base Whisper 25.9,
+main model 13.6, 583 segments), which judged four other models together, so compare points only within one round.
 
 The variant did not replace the main model. The rule set before the run allowed SKN to get at most
 about 0.5 points worse and FLEURS and VoxPopuli no worse; VoxPopuli got 0.4 points worse, and the

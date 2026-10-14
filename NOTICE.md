@@ -72,10 +72,15 @@ transcripts (`results/judgements/`), and the reference's tokens and sentences wi
   [`docs/story/src/assets/icons/LICENSE.lucide.txt`](docs/story/src/assets/icons/LICENSE.lucide.txt).
   The built pages (`docs/story/story.*.html`) carry the same credit in their footer, and the README's
   figures in `docs/img/` (drawn by `scripts/readme_figures.py`) use the same icons.
-- `docs/img/logos/*.svg`: the logos of Google, Meta, OpenAI, Hugging Face and Claude (Anthropic), from
-  [svgl](https://svgl.app/). They are their owners' trademarks, used in the README's figures only to
-  name the data sources and tools; no endorsement is implied, and they are not covered by this
-  repository's licences.
+- `docs/listen/*.mp3`: three SKN test segments (Suomen kielen näytteitä, Kotus, via Kielipankki, CC BY 4.0),
+  cut from the test split of GAIK-project/skn-finnish-dialects-asr by `scripts/build_listen.py`. The listening
+  page plays the Ajokortti clip from gaik-toolkit; it is not copied here.
+- `docs/img/logos/*.svg`: the logos of Google, Gemini, Meta, OpenAI, Hugging Face and Claude
+  (Anthropic) from [svgl](https://svgl.app/); ElevenLabs and Qwen from the Iconify `logos` set
+  (gilbarbara/logos, CC0 1.0 for the files); NVIDIA from the Iconify `simple-icons` set, in NVIDIA's
+  green. They are their owners' trademarks, used in the README's figures only to name who made each
+  model, data set or tool; no endorsement is implied, and they are not covered by this repository's
+  licences.
 
 ## Vendored code
 

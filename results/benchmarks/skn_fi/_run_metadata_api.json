@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T17:11:46+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "9d7276e46fdfe47622260ba8c3b173d936fdb30d",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (SKN dialect test, API services)",
+  "runner_path": "scripts/run_api_benchmark.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "gemini-3.5-flash",
+    "gemini-3.5-flash",
+    "chirp_3"
+  ],
+  "cli_args": [
+    "--workers",
+    "4",
+    "--arm",
+    "vertex_gemini-3.5-flash",
+    "--arm",
+    "vertex_gemini-3.5-flash-std",
+    "--arm",
+    "google_chirp-3"
+  ],
+  "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  },
+  "extra": {
+    "dataset": "GAIK-project/skn-finnish-dialects-asr",
+    "revision": "ee98f5e16dcb0986a5514b787bee100962be3bf6",
+    "arms": [
+      "vertex_gemini-3.5-flash",
+      "vertex_gemini-3.5-flash-std",
+      "google_chirp-3"
+    ],
+    "limit": null
+  }
+}

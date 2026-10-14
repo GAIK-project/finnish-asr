@@ -27,6 +27,7 @@ import argparse
 import json
 import re
 import sys
+import textwrap
 from html import escape
 from pathlib import Path
 
@@ -161,35 +162,6 @@ def pipeline() -> str:
     return svg(W, Y2 + BH + 22, "How the dialect model was made, in six steps", body)
 
 
-def example() -> str:
-    """SKN45a_Heinola_0097, a test segment; the outputs and error counts are the story's (section 04)."""
-    W, H = 1000, 404
-    body = [text(24, 38, "One real test sentence, from a municipality the model never heard", 19, 700)]
-    body.append(icon("audio-lines", 24, 56, 22, INK))
-    body.append(text(54, 73, "Heinola · SKN test segment SKN45a_Heinola_0097 · an older speaker's dialect", 14, 400, MUTED))
-    rows = [
-        ("What was said (a person's standard-Finnish transcript)", MUTED, None,
-         [("vaikka minäkin välistä vien juomaakin sille niin ei se pure mutta se irvistää että luulisi että nyt se puree", False)]),
-        ("Whisper large-v3 (OpenAI), as it is", BASE, "8 of 19 words wrong",
-         [("aika miekivälistäviä", True), (" juomaakin sille, niin ei se pure. ", False), ("Mut", True), (" se ", False),
-          ("hirvisti", True), (", että ", False), ("luulis", True), (", että nyt se ", False), ("puri", True), (".", False)]),
-        ("Our model", OURS, "1 of 19 words wrong",
-         [("Vaikka minäkin välistä vien juomaakin sille, niin ei se pure, mutta se ", False), ("irvisti", True),
-          (", että luulisi, että nyt se puree.", False)]),
-    ]
-    y = 104
-    for k, (head, color, score, parts) in enumerate(rows):
-        fill = "#f6f8fa" if k == 0 else BG
-        body.append(f'<rect x="24" y="{y}" width="{W - 48}" height="76" rx="10" fill="{fill}" stroke="{color}" stroke-width="{1 if k == 0 else 2}"/>')
-        body.append(text(42, y + 26, head, 14, 700, color if k else MUTED))
-        if score:
-            body.append(text(W - 42, y + 26, score, 15, 700, WARN if k == 1 else OURS, "end"))
-        body.append(words(42, y + 56, parts, 16))
-        y += 90
-    body.append(text(24, y + 12, "In English: “Even when I sometimes bring it something to drink, it doesn't bite, but it grimaces so you'd think it bites now.”", 13, 400, MUTED))
-    return svg(W, H, "A Heinola test segment: Whisper large-v3 gets 8 of 19 words wrong, our model 1", body)
-
-
 def punctuation() -> str:
     """SKN03a_Palkane_0021, a validation segment, as in the story's data section."""
     W, H = 1000, 372
@@ -240,39 +212,51 @@ def data_sources() -> str:
     return svg(W, H, "Sources: Whisper large-v3 by OpenAI, SKN, FLEURS by Google, VoxPopuli by Meta, LA-murre", body)
 
 
-DIALECT_SHORT = {
+DIALECT_SHORT = {  # arm -> (label, group); arms missing from scores.json are left out
     "ft_whisper-large-v3-fi-skn-punct-best": ("Ours (published)", "ours"),
     "ft_whisper-large-v3-fi-skn-punct-ts": ("Ours, timestamps version", "ours"),
-    "hf_whisper-large-v3": ("Whisper large-v3 (OpenAI)", "open"),
-    "hf_whisper-large-v3-turbo": ("Whisper large-v3 turbo (OpenAI)", "open"),
-    "nemo_canary-1b-v2": ("Canary 1B v2 (NVIDIA)", "open"),
-    "nemo_rasmus-canary-fi-v2-kenlm": ("Finnish Canary v2 + KenLM (RASMUS)", "open"),
-    "nemo_rasmus-canary-fi-v2": ("Finnish Canary v2 (RASMUS)", "open"),
-    "hf_whisper-large-finnish-v3": ("whisper-large-finnish-v3 (Finnish-NLP)", "open"),
-    "qwen_qwen3-asr-1.7b": ("Qwen3-ASR 1.7B (Alibaba)", "open"),
+    "vertex_gemini-3.5-flash": ("Gemini 3.5 Flash, asked to write as spoken", "API"),
+    "vertex_gemini-3.5-flash-std": ("Gemini 3.5 Flash, asked for standard Finnish", "API"),
+    "google_chirp-3": ("Google Chirp 3", "API"),
+    "hf_whisper-large-v3": ("Whisper large-v3", "open"),
+    "hf_whisper-large-v3-turbo": ("Whisper large-v3 turbo", "open"),
+    "nemo_canary-1b-v2": ("NVIDIA Canary 1B v2", "open"),
+    "nemo_rasmus-canary-fi-v2-kenlm": ("RASMUS Finnish Canary v2 + KenLM", "open"),
+    "nemo_rasmus-canary-fi-v2": ("RASMUS Finnish Canary v2", "open"),
+    "hf_whisper-large-finnish-v3": ("Finnish-NLP whisper-large-finnish-v3", "open"),
+    "qwen_qwen3-asr-1.7b": ("Qwen3-ASR 1.7B", "open"),
 }
 
 
 def dialect_ranking() -> str:
     path = PROJECT_ROOT / "results" / "benchmarks" / "skn_fi" / "scores.json"
     wer = {a["arm_id"]: a["WER"] for a in json.loads(path.read_text(encoding="utf-8"))["arms"]}
-    rows = sorted((wer[a], label, group) for a, (label, group) in DIALECT_SHORT.items())
-    W, ROW, TOP, LX, BX, BW = 1000, 34, 96, 330, 342, 560
+    rows = sorted((wer[a], label, group, a) for a, (label, group) in DIALECT_SHORT.items() if a in wer)
+    W, ROW, TOP, LX, BX, BW = 1000, 34, 112, 24, 400, 500
     vmax = 70.0
-    body = [text(24, 36, "Dialect test: our model against the other open models", 19, 700)]
+    colors = {"API": API, "open": OPEN, "ours": OURS}
+    body = [text(24, 36, "Dialect speech: our model against the others", 19, 700)]
     body.append(text(24, 60, "Word error rate %, 600 segments from 10 municipalities left out of our training. Lower is better.", 14, 400, MUTED))
-    body.append(text(24, 80, "Paid API services were not run on the dialect test.", 13, 400, MUTED))
+    lx = 24
+    for name, color in (("paid API service", API), ("open model, runs on your own GPU", OPEN), ("this project", OURS)):
+        body.append(f'<rect x="{lx}" y="76" width="14" height="14" rx="3" fill="{color}"/>')
+        body.append(text(lx + 20, 88, name, 13, 400, INK))
+        lx += 34 + 7.2 * len(name)
+    bottom = TOP + len(rows) * ROW
     for t in range(0, 71, 10):
         x = BX + BW * t / vmax
-        body.append(f'<line x1="{x:.1f}" y1="{TOP - 6}" x2="{x:.1f}" y2="{TOP + len(rows) * ROW}" stroke="{LINE}"/>')
-        body.append(text(x, TOP + len(rows) * ROW + 16, str(t), 11, 400, MUTED, "middle"))
-    for i, (v, label, group) in enumerate(rows):
+        body.append(f'<line x1="{x:.1f}" y1="{TOP - 6}" x2="{x:.1f}" y2="{bottom}" stroke="{LINE}"/>')
+        body.append(text(x, bottom + 16, str(t), 11, 400, MUTED, "middle"))
+    for i, (v, label, group, arm) in enumerate(rows):
         y = TOP + i * ROW
-        body.append(text(LX, y + 19, label, 14, 700 if group == "ours" else 400, INK, "end"))
-        fill = OURS if group == "ours" else BASE
-        body.append(f'<rect x="{BX}" y="{y + 5}" width="{BW * v / vmax:.1f}" height="{ROW - 10}" rx="3" fill="{fill}"/>')
-        body.append(text(BX + BW * v / vmax + 8, y + 19, f"{v:.1f}", 13, 700, INK))
-    return svg(W, TOP + len(rows) * ROW + 30, "SKN dialect test word error rate: our model 21.1 %, the best other open model 40.4 %", body)
+        if group == "ours":
+            body.append(f'<rect x="12" y="{y}" width="{W - 24}" height="{ROW}" rx="6" fill="{OURS_SOFT}"/>')
+        body.extend(label_with_logo(arm, label, LX, y + 22, group == "ours", f"d{i}"))
+        body.append(f'<rect x="{BX}" y="{y + 7}" width="{BW * v / vmax:.1f}" height="{ROW - 14}" rx="3" fill="{colors[group]}"/>')
+        body.append(text(BX + BW * v / vmax + 8, y + 22, f"{v:.1f}", 13, 700, INK))
+    best_other = min(r for r in rows if r[2] != "ours")
+    alt = f"Dialect test word error rate: our model {rows[0][0]:.1f} %, the best other model {best_other[1]} {best_other[0]:.1f} %"
+    return svg(W, bottom + 30, alt, body)
 
 
 def data_split() -> str:
@@ -441,6 +425,383 @@ def which_version() -> str:
     return svg(W, H, "Use the main model by default; use the timestamps revision for sentence times or long audio", body)
 
 
+R1_SOFT, DEEP = "#8fb6e0", "#1d3f6e"
+
+
+def card(x: float, y: float, w: float, h: float, head: str, color: str, soft: str) -> list[str]:
+    """A rounded card with a coloured header strip; returns its shapes."""
+    return [
+        f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="10" fill="{soft}" stroke="{color}" stroke-width="1.5"/>',
+        f'<path d="M{x} {y + 34} V{y + 10} a10 10 0 0 1 10 -10 H{x + w - 10} a10 10 0 0 1 10 10 V{y + 34} Z" fill="{color}"/>',
+        text(x + 14, y + 23, head, 14, 700, "#ffffff"),
+    ]
+
+
+def mark(name: str, x: float, y: float, h: float, uid: str, color: str = INK) -> tuple[str, float]:
+    """A logo when docs/img/logos has it, else a Lucide icon of the same name, else nothing."""
+    if (LOGOS / f"{name}.svg").exists():
+        return logo(name, x, y, h, uid)
+    if (ICONS / f"{name}.svg").exists():
+        return icon(name, x, y, h, color), h
+    return "", 0.0
+
+
+def journey() -> str:
+    """The rounds of training, from the base model to the two published versions (numbers: README)."""
+    W, H = 1000, 640
+    body = [ARROW_DEF, text(24, 38, "How the model got better, round by round", 19, 700)]
+    body.append(text(W - 24, 38, "dialect test = words wrong on 600 segments from 10 unheard municipalities", 13, 400, MUTED, "end"))
+    top = [
+        ("Start", "openai", BASE, "#f3f4f6", ["Whisper large-v3 by OpenAI,", "as it is"], None, "40.4 %", "dialect test", ""),
+        ("Pilot", "audio-lines", BASE, "#f3f4f6", ["+ read sentences (FLEURS)", "+ parliament speech", "   (VoxPopuli)"], "51 min",
+         "no gain", "on spontaneous speech", "Lesson: read speech is not enough"),
+        ("Round 1", "map-pin", R1_SOFT, OURS_SOFT, ["+ 62 h of dialect", "   interviews (SKN)"], "2 h 2 min", "22.2 %", "dialect test",
+         "Errors almost halved; no full stops"),
+        ("Round 2", "logo:claude", OURS, OURS_SOFT, ["+ Opus adds punctuation", "+ bigger LoRA, best of", "   3 epochs"], "3 h 8 min",
+         "21.1 %", "dialect test", "Published as v1.0"),
+    ]
+    CW, gap, y0, CH = 220, 30, 62, 262
+    xs = [24 + i * (CW + gap) for i in range(4)]
+    for i, (head, ic, color, soft, lines, lumi, big, unit, note) in enumerate(top):
+        x = xs[i]
+        body.extend(card(x, y0, CW, CH, head, color if color != R1_SOFT else OURS, soft))
+        if ic.startswith("logo:"):
+            m, _ = mark(ic[5:], x + CW - 38, y0 + 6, 22, f"j{i}")
+            body.append(f'<rect x="{x + CW - 42}" y="{y0 + 4}" width="30" height="26" rx="6" fill="#ffffff"/>' + m)
+        for k, ln in enumerate(lines):
+            body.append(text(x + 14, y0 + 60 + k * 20, ln, 14, 400, INK))
+        if lumi:
+            body.append(icon("cpu", x + 14, y0 + 126, 16, MUTED))
+            body.append(text(x + 36, y0 + 139, f"LUMI, {lumi}", 13, 400, MUTED))
+        body.append(text(x + 14, y0 + 188, big, 30, 700, OURS if i >= 2 else INK))
+        body.append(text(x + 14, y0 + 208, unit, 13, 400, MUTED))
+        if note:
+            body.append(f'<line x1="{x + 14}" y1="{y0 + 222}" x2="{x + CW - 14}" y2="{y0 + 222}" stroke="{LINE}"/>')
+            body.append(text(x + 14, y0 + 245, note, 12.5, 700, INK))
+        if i < 3:
+            body.append(arrow(x + CW + 3, y0 + CH / 2, x + CW + gap - 3, y0 + CH / 2))
+    # two branches from round 2
+    BW, by, BH = 340, 400, 214
+    bx = [W / 2 - BW - 12, W / 2 + 12]
+    branches = [
+        ("Internal version", DEEP, "#e9eef6", ["+ 56 h more dialect interviews (LA-murre);", "Opus rewrote their dialect spelling", "into standard Finnish"],
+         "4 h 57 min", "19.7 %", "the best, but kept internal:", "LA-murre's licence (CC BY-ND) forbids sharing changed texts"),
+        ("Timestamps version", LLM, LLM_SOFT, ["+ Whisper's timestamp tokens on half", "of the training segments"],
+         "3 h 6 min", "21.4 %", "and sentence times that work:", "published as the timestamps branch"),
+    ]
+    cx3 = xs[3] + CW / 2
+    for j, (head, color, soft, lines, lumi, big, n1, n2) in enumerate(branches):
+        x = bx[j]
+        body.extend(card(x, by, BW, BH, head, color, soft))
+        for k, ln in enumerate(lines):
+            body.append(text(x + 14, by + 60 + k * 20, ln, 14, 400, INK))
+        body.append(icon("cpu", x + 14, by + 112 if len(lines) == 3 else by + 92, 16, MUTED))
+        body.append(text(x + 36, (by + 125) if len(lines) == 3 else by + 105, f"LUMI, {lumi}", 13, 400, MUTED))
+        body.append(text(x + 14, by + 170, big, 30, 700, color))
+        body.append(text(x + 128, by + 154, n1, 13, 700, INK))
+        for k, ln in enumerate(textwrap.wrap(n2, 32)):
+            body.append(text(x + 128, by + 172 + k * 18, ln, 12.5, 400, MUTED))
+        tx = x + BW / 2
+        body.append(
+            f'<path d="M{cx3:.1f} {y0 + CH + 3} V{(y0 + CH + by) / 2:.1f} H{tx:.1f} V{by - 5}" fill="none" stroke="{MUTED}" '
+            f'stroke-width="2" marker-end="url(#arrow)"/>'
+        )
+    body.append(text(24, H - 14, "Same base model and method in every round; the version to keep was picked by validation loss, never by test scores.", 13, 400, MUTED))
+    return svg(W, H, "Training rounds: pilot, round 1 with dialect interviews, round 2 published, an internal version and a timestamps version", body)
+
+
+DIALECT_JUDGES = [
+    ("claude-opus-5-5", "Claude Opus 5.5", "claude", "the main judge"),
+    ("aitta-gpt-oss-120b", "gpt-oss-120b", "openai", "on CSC Aitta"),
+    ("aitta-gemma-4-31b-it", "Gemma 4 31B", "google", "on CSC Aitta"),
+    ("aitta-qwen3-6-27b", "Qwen3.6 27B", "qwen", "on CSC Aitta"),
+]
+JUDGED = [
+    ("hf_whisper-large-v3", "Whisper large-v3", BASE),
+    ("ft_whisper-large-v3-fi-skn", "Ours, round 1", R1_SOFT),
+    ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, published", OURS),
+    ("ft_whisper-large-v3-fi-skn-lamurre-best", "Ours, internal", DEEP),
+]
+
+
+def judges() -> str:
+    """Four blind judges on LA-murre, from results/judgements_dialect/lamurre_fi/agreement-r2.json."""
+    path = PROJECT_ROOT / "results" / "judgements_dialect" / "lamurre_fi" / "agreement-r2.json"
+    data = json.loads(path.read_text(encoding="utf-8"))["judges"]
+    W, H = 1000, 452
+    body = [text(24, 38, "Four judges, one verdict: our models make far fewer meaning errors", 19, 700)]
+    body.append(text(24, 62, "Meaning-error points per 100 words on the second dialect corpus (LA-murre), lower is better. Each judge is", 14, 400, MUTED))
+    body.append(text(24, 82, "stricter or milder, so compare bars inside one panel. All four put base Whisper far behind our models.", 14, 400, MUTED))
+    PW, gap, py, ph = 229, 14, 100, 300
+    vmax = 28.0
+    for i, (jid, name, lg, where) in enumerate(DIALECT_JUDGES):
+        x = 24 + i * (PW + gap)
+        d = data[jid]
+        body.append(f'<rect x="{x}" y="{py}" width="{PW}" height="{ph}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
+        m, w = mark(lg, x + 12, py + 12, 22, f"g{i}")
+        body.append(m)
+        body.append(text(x + 12 + (w + 8 if w else 0), py + 29, name, 15, 700, INK))
+        sub = f"{d['segments']} segments, {where}"
+        body.append(text(x + 12, py + 50, sub, 12, 400, MUTED))
+        if "against_reference" in d:
+            pct = round(d["against_reference"]["pairwise_same_preference"] * 100)
+            body.append(text(x + 12, py + 68, f"agrees with Claude in {pct} % of pairs", 12, 700, OPEN))
+        else:
+            body.append(text(x + 12, py + 68, "the reference for the others", 12, 700, MUTED))
+        base_y, top_y = py + ph - 28, py + 96
+        bw, bgap = 38, 14
+        for k, (arm, _, color) in enumerate(JUDGED):
+            v = d["points_per_100w"][arm]
+            hgt = (base_y - top_y) * v / vmax
+            bx = x + 22 + k * (bw + bgap)
+            body.append(f'<rect x="{bx}" y="{base_y - hgt:.1f}" width="{bw}" height="{hgt:.1f}" rx="3" fill="{color}"/>')
+            body.append(text(bx + bw / 2, base_y - hgt - 6, f"{v:.1f}", 13, 700, INK, "middle"))
+        body.append(f'<line x1="{x + 14}" y1="{base_y}" x2="{x + PW - 14}" y2="{base_y}" stroke="{MUTED}"/>')
+    lx = 24
+    for _, label, color in JUDGED:
+        body.append(f'<rect x="{lx}" y="{py + ph + 22}" width="14" height="14" rx="3" fill="{color}"/>')
+        body.append(text(lx + 20, py + ph + 34, label, 13, 400, INK))
+        lx += 44 + 7.4 * len(label)
+    return svg(W, H, "Four blind judges rank base Whisper far behind our three fine-tuned models on LA-murre", body)
+
+
+MAKER = {  # arm id prefix -> logo file in docs/img/logos (or a Lucide icon); first match wins
+    "vertex_gemini": "gemini", "vertex_": "google", "google_": "google", "elevenlabs_": "elevenlabs", "openai_": "openai",
+    "hf_whisper-large-v3": "openai", "hf_whisper-large-finnish-v3": "hugging-face", "hh_whisperx": "hugging-face",
+    "hf_orukeet": "hugging-face", "hf_wav2vec2": "hugging-face", "nemo_rasmus": "hugging-face",
+    "nemo_canary": "nvidia", "hf_parakeet": "nvidia", "qwen_": "qwen", "ft_": "",
+}
+
+
+def maker(arm_id: str) -> str:
+    return next((v for k, v in MAKER.items() if arm_id.startswith(k)), "")
+
+
+def label_with_logo(arm_id: str, label: str, x: float, y: float, bold: bool, uid: str) -> list[str]:
+    """A row label with the maker's logo in a column to its left (our models get a blue dot)."""
+    out = [text(x + 30, y, label, 14, 700 if bold else 400, INK)]
+    lx = x
+    name = maker(arm_id)
+    if arm_id.startswith("ft_"):
+        out.append(f'<circle cx="{lx + 9:.1f}" cy="{y - 5:.1f}" r="6" fill="{OURS}"/>')
+    elif name:
+        m, w = mark(name, lx, y - 15, 18, uid)
+        out.append(m)
+    return out
+
+
+WEBINAR_LABELS = {**SHORT, "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, published (in pieces)",
+                  "hh_whisperx_fi": "WhisperX + Finnish-NLP model", "hf_whisper-large-finnish-v3": "Finnish-NLP whisper-large-v3"}
+
+
+def webinar() -> str:
+    """The Ajokortti clip, two scores side by side: meaning-error points (mean of two judges) and WER."""
+    scores = {a["arm_id"]: a for a in json.loads(SCORES_PATH.read_text(encoding="utf-8"))["arms"]}
+    rows = []
+    for arm_id, (_, kind) in ROWS.items():
+        pts = sum(judge(j, arm_id)["error_points_per_100w"] for j in JUDGES) / len(JUDGES)
+        rows.append((pts, scores[arm_id]["metrics"]["WER"], arm_id))
+    by_pts = sorted(rows)
+    by_wer = sorted(rows, key=lambda r: r[1])
+    keep = {r[2] for r in by_pts[:7]} | {r[2] for r in by_wer[:4]} | {"ft_whisper-large-v3-fi-skn-punct-best-chunks"}
+    keep -= {"ft_whisper-large-v3-fi-skn-lamurre-best-chunks", "ft_whisper-large-v3-fi-pilot"}  # internal / pilot: in the full table
+    shown = [r for r in by_pts if r[2] in keep]
+    def tied_rank(i: int) -> dict[str, int]:  # equal values at one decimal share a rank
+        return {r[2]: 1 + sum(round(o[i], 1) < round(r[i], 1) for o in rows) for r in rows}
+
+    rank_pts, rank_wer = tied_rank(0), tied_rank(1)
+    W, ROW, TOP, LX = 1000, 34, 128, 24
+    P1, P1W, P2, P2W = 370, 250, 690, 220
+    body = [text(24, 36, "Standard spoken Finnish: two scores, two different winners", 19, 700)]
+    body.append(text(24, 60, f"A 180 s dental webinar with many brand names (the Ajokortti clip), {len(rows)} set-ups. Lower is better in both.", 14, 400, MUTED))
+    body.append(text(P1, 98, "Meaning errors per 100 words", 14, 700, LLM))
+    body.append(text(P1, 115, "two blind LLM judges (Claude, Gemini)", 12, 400, MUTED))
+    body.append(text(P2, 98, "Word error rate %", 14, 700, OURS))
+    body.append(text(P2, 115, "every differing word counts", 12, 400, MUTED))
+    vmax1, vmax2 = 10.0, 22.0
+    for i, (pts, wer, arm_id) in enumerate(shown):
+        y = TOP + i * ROW
+        ours = arm_id.startswith("ft_")
+        if ours:
+            body.append(f'<rect x="12" y="{y - 2}" width="{W - 24}" height="{ROW}" rx="6" fill="{OURS_SOFT}"/>')
+        body.extend(label_with_logo(arm_id, WEBINAR_LABELS[arm_id], LX, y + 20, ours, f"w{i}"))
+        for x0, pw, v, vmax, rank, color in ((P1, P1W, pts, vmax1, rank_pts[arm_id], LLM), (P2, P2W, wer, vmax2, rank_wer[arm_id], OURS)):
+            bw = max(pw * min(v, vmax) / vmax, 2)
+            body.append(f'<rect x="{x0}" y="{y + 7}" width="{bw:.1f}" height="{ROW - 14}" rx="3" fill="{color}" opacity="{1 if rank == 1 else 0.55}"/>')
+            tag = f"{v:.1f}" + ("  best" if rank == 1 else f"  #{rank}")
+            body.append(text(x0 + bw + 6, y + 21, tag, 13, 700 if rank == 1 else 400, INK))
+    bottom = TOP + len(shown) * ROW
+    body.append(text(24, bottom + 26, "Gemini 3.5 Flash makes the fewest meaning errors. Our model's WER is near the top, but its few errors hit brand names and", 13, 400, INK))
+    body.append(text(24, bottom + 44, "dental terms, which change the meaning. #n = rank among all set-ups; the rest are in the full table.", 13, 400, INK))
+    return svg(W, bottom + 58, "Webinar clip: meaning-error points and word error rate side by side", body)
+
+
+def marked(ref: str, hyp: str) -> tuple[list[tuple[str, bool]], int, int]:
+    """hyp's words with the ones WER counts as wrong flagged; the error count (S+D+I) and the reference length.
+
+    Words are compared as the scorer does: lower-cased, every punctuation character removed."""
+    import jiwer
+
+    def norm(t: str) -> str:
+        return jiwer.RemovePunctuation()(t.lower()).strip()
+
+    pairs = [(t, norm(t)) for t in hyp.split()]
+    ref_words = [w for w in (norm(w) for w in ref.split()) if w]
+    out = jiwer.process_words(" ".join(ref_words), " ".join(n for _, n in pairs if n))
+    bad = {i for a in out.alignments[0] if a.type in ("substitute", "insert") for i in range(a.hyp_start_idx, a.hyp_end_idx)}
+    parts, k = [], 0
+    for t, n in pairs:
+        parts.append((t, bool(n) and k in bad))
+        k += bool(n)
+    spaced = [(t + (" " if i < len(parts) - 1 else ""), f) for i, (t, f) in enumerate(parts)]
+    return spaced, out.substitutions + out.deletions + out.insertions, len(ref_words)
+
+
+def bench_row(arm: str, seg: str) -> dict | None:
+    path = PROJECT_ROOT / "results" / "benchmarks" / "skn_fi" / f"{arm}.jsonl"
+    if not path.exists():
+        return None
+    return next((r for r in map(json.loads, path.read_text(encoding="utf-8").splitlines()) if r["id"] == seg), None)
+
+
+EXAMPLE_SEG = "SKN45a_Heinola_0097.wav"
+EXAMPLE_ARMS = [  # arm, label, maker logo, colour
+    ("hf_whisper-large-v3", "Whisper large-v3 (OpenAI), as it is", "openai", BASE),
+    ("vertex_gemini-3.5-flash", "Gemini 3.5 Flash (Google)", "gemini", LLM),
+    ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "", OURS),
+]
+
+
+def example() -> str:
+    """SKN45a_Heinola_0097, a test segment: each model's output from results/benchmarks/skn_fi, errors marked."""
+    rows = [(a, lab, lg, col, bench_row(a, EXAMPLE_SEG)) for a, lab, lg, col in EXAMPLE_ARMS]
+    rows = [r for r in rows if r[4]]
+    ref = rows[0][4]["ref"]
+    W = 1000
+    H = 104 + 90 * (len(rows) + 1) + 30
+    body = [text(24, 38, "One real test sentence, from a municipality the model never heard", 19, 700)]
+    body.append(icon("audio-lines", 24, 56, 22, INK))
+    body.append(text(54, 73, "Heinola · SKN test segment SKN45a_Heinola_0097 · an older speaker's dialect", 14, 400, MUTED))
+    y = 104
+    body.append(f'<rect x="24" y="{y}" width="{W - 48}" height="76" rx="10" fill="#f6f8fa" stroke="{MUTED}"/>')
+    body.append(text(42, y + 26, "What was said (a person's standard-Finnish transcript)", 14, 700, MUTED))
+    body.append(text(42, y + 56, ref, 16))
+    for i, (arm, lab, lg, col, row) in enumerate(rows):
+        y += 90
+        parts, errs, n = marked(ref, row["hyp"])
+        ours = arm.startswith("ft_")
+        body.append(f'<rect x="24" y="{y}" width="{W - 48}" height="76" rx="10" fill="{OURS_SOFT if ours else BG}" stroke="{col}" stroke-width="2"/>')
+        x0 = 42
+        if lg:
+            m, w = mark(lg, 42, y + 11, 20, f"e{i}")
+            body.append(m)
+            x0 = 42 + w + 8
+        body.append(text(x0, y + 26, lab, 14, 700, OURS if ours else INK))
+        body.append(text(W - 42, y + 26, f"{errs} of {n} words wrong", 15, 700, OURS if ours else WARN, "end"))
+        body.append(words(42, y + 56, parts, 16))
+    body.append(text(24, y + 102, "In English: “Even when I sometimes bring it something to drink, it doesn't bite, but it grimaces so you'd think it bites now.”", 13, 400, MUTED))
+    return svg(W, H, "A Heinola test segment: Whisper large-v3, Gemini 3.5 Flash and our model against a person's transcript", body)
+
+
+# The brand-name sentence of the Ajokortti clip (78.3-84.0 s, results/clip/gt_alignment.json): each arm's text as
+# stored in results/transcriptions/, and the Claude judge's verdicts from results/judgements/claude-opus-5-5/.
+BRAND_REF = "Straumann, Densply Sirona, Nobel Biocare ja Camlog-Conelog eli Implantona Oy."
+BRAND_ROWS = [
+    ("Gemini 3.5 Flash (Google)", "gemini", "Straumann, Dentsply Sirona, Nobel Biocare ja Camlog Conelog eli Implantona Oy.",
+     set(), [("no meaning errors", OPEN)]),
+    ("Our model", "", "Straumann, Densplay-sirvana, Nobelbayer, ja Camlock-Connellock eli implanttoona Oy.",
+     {"Densplay-sirvana,", "Nobelbayer,", "Camlock-Connellock", "implanttoona"},
+     [("major: “Nobelbayer” is a different name", WARN), ("3 × minor: misspelled, still recognisable", "#b7791f")]),
+    ("Whisper large-v3 (OpenAI)", "openai", "Straumanni, Dentsply Sirona, Noble Biocare ja Camlock Conelog, eli implanttoona OY.",
+     {"Straumanni,", "Noble", "Camlock", "implanttoona"}, [("1 × minor: names misspelled, still recognisable", "#b7791f")]),
+]
+
+
+def judge_example() -> str:
+    W, H = 1000, 470
+    body = [text(24, 38, "What the judge does: one real sentence from the webinar (78–84 s)", 19, 700)]
+    body.append(text(24, 62, "The judge reads the reference and each transcript without knowing which model wrote it, and scores only", 14, 400, MUTED))
+    body.append(text(24, 82, "the errors that change the meaning: critical 10, major 5, minor 1 point.", 14, 400, MUTED))
+    body.append(f'<rect x="24" y="100" width="{W - 48}" height="62" rx="10" fill="#f6f8fa" stroke="{MUTED}"/>')
+    body.append(text(42, 123, "Reference: four implant brands", 13, 700, MUTED))
+    body.append(text(42, 148, BRAND_REF, 16))
+    y = 176
+    for i, (lab, lg, hyp, bad, verdicts) in enumerate(BRAND_ROWS):
+        ours = lg == ""
+        body.append(f'<rect x="24" y="{y}" width="{W - 48}" height="88" rx="10" fill="{OURS_SOFT if ours else BG}" stroke="{OURS if ours else LINE}" stroke-width="{2 if ours else 1.5}"/>')
+        x0 = 42
+        if lg:
+            m, w = mark(lg, 42, y + 10, 20, f"b{i}")
+            body.append(m)
+            x0 = 42 + w + 8
+        body.append(text(x0, y + 25, lab, 14, 700, OURS if ours else INK))
+        toks = hyp.split()
+        body.append(words(42, y + 52, [(t + (" " if k < len(toks) - 1 else ""), t in bad) for k, t in enumerate(toks)], 16))
+        cx = 42
+        for label, color in verdicts:
+            w = 7.0 * len(label) + 22
+            body.append(f'<rect x="{cx}" y="{y + 62}" width="{w:.0f}" height="20" rx="10" fill="{color}"/>')
+            body.append(text(cx + 11, y + 76, label, 12, 700, "#ffffff"))
+            cx += w + 8
+        y += 98
+    body.append(text(24, y + 10, "Verdicts of the main judge, Claude Opus 5.5; the second judge, Gemini 3.1 Pro, also rates “Nobelbayer” major. Red words differ", 13, 400, INK))
+    body.append(text(24, y + 28, "from the reference: WER counts each of them, the judge only the ones that matter. Hear it on the listening page.", 13, 400, INK))
+    return svg(W, y + 42, "A brand-name sentence from the webinar: Gemini 3.5 Flash, our model and Whisper large-v3 with the judge's verdicts", body)
+
+
+def leaderboard() -> str:
+    """Results at a glance: the best models on dialect speech (SKN WER) and on the webinar (meaning errors)."""
+    skn = {a["arm_id"]: a["WER"] for a in json.loads((PROJECT_ROOT / "results" / "benchmarks" / "skn_fi" / "scores.json").read_text(encoding="utf-8"))["arms"]}
+    left = sorted((skn[a], lab, grp, a) for a, (lab, grp) in DIALECT_SHORT.items() if a in skn and a != "ft_whisper-large-v3-fi-skn-punct-ts")
+    clip = []
+    for arm_id, (_, kind) in ROWS.items():
+        pts = sum(judge(j, arm_id)["error_points_per_100w"] for j in JUDGES) / len(JUDGES)
+        clip.append((pts, WEBINAR_LABELS.get(arm_id, SHORT[arm_id]), "ours" if arm_id.startswith("ft_") else kind, arm_id))
+    clip.sort()
+    ours_rank = next(i for i, r in enumerate(clip) if r[3] == "ft_whisper-large-v3-fi-skn-punct-best-chunks")
+    N = 6
+    right = clip[: N - 2] + [None, clip[ours_rank]]  # the published model; the other fine-tunes are in the full table
+    W, PW, ROW, TOP = 1000, 466, 34, 118
+    short = {"nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Canary v2 + KenLM", "nemo_rasmus-canary-fi-v2": "RASMUS Canary v2",
+             "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, published", "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash, std Finnish", "vertex_gemini-3.5-flash": "Gemini 3.5 Flash, as spoken",
+             "hf_whisper-large-v3-chunks": "Whisper large-v3, in pieces"}
+    colors = {"API": API, "open": OPEN, "ours": OURS}
+    body = [text(24, 36, "Results at a glance", 19, 700)]
+    panels = [
+        (24, "Dialect speech", "words wrong, %: 600 interview segments", left[:N], 45.0, "{:.1f} %", None),
+        (24 + PW + 20, "Standard spoken Finnish", "meaning errors per 100 words: a 180 s webinar", right, 10.0, "{:.1f}", ours_rank),
+    ]
+    for px, title, sub, rows, vmax, fmt, orank in panels:
+        body.append(f'<rect x="{px}" y="52" width="{PW}" height="{TOP - 52 + N * ROW + 26}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
+        body.append(text(px + 16, 78, title, 16, 700, INK))
+        body.append(text(px + 16, 98, sub, 12.5, 400, MUTED))
+        for i, r in enumerate(rows):
+            y = TOP + i * ROW
+            if r is None:
+                body.append(text(px + 46, y + 20, "…", 14, 700, MUTED))
+                continue
+            v, lab, grp, arm = r
+            rank = (orank + 1) if (orank is not None and i == len(rows) - 1) else i + 1
+            if grp == "ours":
+                body.append(f'<rect x="{px + 6}" y="{y + 1}" width="{PW - 12}" height="{ROW - 2}" rx="6" fill="{OURS_SOFT}"/>')
+            body.append(text(px + 30, y + 22, f"{rank}.", 14, 700, MUTED, "end"))
+            lab = short.get(arm, lab)
+            body.extend(label_with_logo(arm, lab if len(lab) <= 32 else lab[:31] + "…", px + 38, y + 22, grp == "ours", f"l{px}{i}"))
+            bx, bw = px + 290, PW - 290 - 60
+            w = max(bw * min(v, vmax) / vmax, 2)
+            body.append(f'<rect x="{bx}" y="{y + 9}" width="{w:.1f}" height="{ROW - 18}" rx="3" fill="{colors[grp]}"/>')
+            body.append(text(bx + w + 6, y + 22, fmt.format(v), 13, 700, INK))
+    bottom = TOP + N * ROW + 26 + 52 - 52
+    y = bottom + 34
+    lx = 24
+    for name, color in (("paid API service", API), ("open model, runs on your own GPU", OPEN), ("this project", OURS)):
+        body.append(f'<rect x="{lx}" y="{y - 12}" width="14" height="14" rx="3" fill="{color}"/>')
+        body.append(text(lx + 20, y, name, 13, 400, INK))
+        lx += 34 + 7.2 * len(name)
+    body.append(text(W - 24, y, "lower is better in both", 13, 400, MUTED, "end"))
+    return svg(W, y + 16, "Results at a glance: best models on dialect speech and on a standard-Finnish webinar", body)
+
+
 FIGURES = {
     "example.svg": example,
     "punctuation.svg": punctuation,
@@ -451,6 +812,11 @@ FIGURES = {
     "two-measures.svg": two_measures,
     "clip-ranking.svg": clip_ranking,
     "which-version.svg": which_version,
+    "journey.svg": journey,
+    "judges.svg": judges,
+    "webinar.svg": webinar,
+    "judge-example.svg": judge_example,
+    "leaderboard.svg": leaderboard,
 }
 
 

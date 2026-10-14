@@ -62,6 +62,12 @@ LABELS = {
     "nemo_canary-1b-v2": "NVIDIA Canary 1B v2",
     "nemo_rasmus-canary-fi-v2": "RASMUS Finnish-ASR-Canary-v2, greedy †‡",
     "nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Finnish-ASR-Canary-v2 + KenLM †‡",
+    "vertex_gemini-3.5-flash": "Gemini 3.5 Flash (API, the clip's prompt)",
+    "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash (API, asked for standard Finnish)",
+    "google_chirp-3": "Google Chirp 3 (API)",
+    "openai_gpt-transcribe": "OpenAI gpt-transcribe (API)",
+    "openai_gpt-4o-mini-transcribe": "OpenAI gpt-4o-mini-transcribe (API)",
+    "elevenlabs_scribe-v2": "ElevenLabs Scribe v2 (API)",
 }
 
 

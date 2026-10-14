@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-14T12:43:44+00:00",
+  "generated_utc": "2026-10-14T17:12:17+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -108,6 +108,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "vertex_gemini-3.5-flash-std",
+      "label": "Gemini 3.5 Flash (API, asked for standard Finnish)",
+      "utterances": 600,
+      "WER": 34.65,
+      "CER": 17.66,
+      "SUB": 24.39,
+      "DEL": 8.05,
+      "INS": 2.21,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 3.02,
+      "model": "gemini-3.5-flash",
+      "gpu": null
+    },
+    {
       "arm_id": "hf_whisper-large-v3",
       "label": "Whisper large-v3",
       "utterances": 600,
@@ -121,6 +136,36 @@
       "seconds_per_utterance": 1.368,
       "model": "openai/whisper-large-v3",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "vertex_gemini-3.5-flash",
+      "label": "Gemini 3.5 Flash (API, the clip's prompt)",
+      "utterances": 600,
+      "WER": 40.76,
+      "CER": 18.99,
+      "SUB": 30.69,
+      "DEL": 7.71,
+      "INS": 2.36,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 2.28,
+      "model": "gemini-3.5-flash",
+      "gpu": null
+    },
+    {
+      "arm_id": "google_chirp-3",
+      "label": "Google Chirp 3 (API)",
+      "utterances": 600,
+      "WER": 41.25,
+      "CER": 19.5,
+      "SUB": 26.05,
+      "DEL": 6.19,
+      "INS": 9.01,
+      "ref_words": 19696,
+      "empty_hyps": 8,
+      "seconds_per_utterance": 1.464,
+      "model": "chirp_3",
+      "gpu": null
     },
     {
       "arm_id": "hf_whisper-large-v3-turbo",
