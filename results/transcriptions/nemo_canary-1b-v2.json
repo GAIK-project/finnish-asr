@@ -1,0 +1,80 @@
+{
+  "arm_id": "nemo_canary-1b-v2",
+  "stage": "asr",
+  "provider": "huggingface-gpu",
+  "model": "nvidia/canary-1b-v2",
+  "text": "Suojärven Timon luento, potilasvahingot proteetiikassa. Siinä tulee hyvin laajasta proteetiikkaa, yleensä vähän vaikeusasteen arviointia ja muuta. Sitten on pari tuolloin Martta Martoa luento perimplanttiitista. Ja sitten implanttikeissä on semmoinen vodkässi, jossa Peterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla. Ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä semmoinen osa, missä on tärkeää tunnistaa, missä ne on sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään. Siellä on implantologiaa, Advanced-webinaarisarjaa, Timosuojäröjä ja Ilkka Pallo. Siinä tehdään high-end implanttihoitoa etualueella, estetisoluja ja tosi vaativia temppuja. Ne on tärkeää tunnistaa. Kuitatte, että milloin, missä menee se raja, että milloin työ voi muuttukin yhtäkkiä todella hankalaksi. Sitten on myös oikumishoidollisia näkökulmia. Timo ja Virpi Müller, Oiko ja Virpi, ne keskustelevat sitten siitä aiheesta, miten sitä voidaan preproteettisesti hyödyntää. Teoria lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa 1 on tehty. Ajokorttiosa 2. Komponentit tutuksi päivä Helsingissä Clarion hotellissa. Se alkaa Peterin kertausluennolla, vähän perusasioita kerrataan siihen alkupohjalle. Sen jälkeen se on neljä implanttibrändin mukana. Straumannin, Densply-siirron, Nobel Bayer Care ja Camlock Conalog eli implantoona OY. tutustaa heidän komponentteihin, mitä minimoisia osia siellä on, miten ne eroavat toisistaan. Ja siellä on myös neljä eri skanneria sitten mukana, eli päästään katsomaan, miten skannerilla jäljennetään. Ja tosiaan päivä ideana on se, että tutustaa näihin osiin, tutustaa skannereihin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin piihevi on se osa kolme. Se on tämä pienryhmävalmennus, mestarikisäljivalmennus, jossa Peter ottaa kopin. Enintään kymmenen mahtuu mukaan. Ne, jotka tähän lähtee, kannattaa NOPSAan ilmoittautua, että saa paikan sieltä. Tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Tiivistettynä koostumus on aloituspäivä Futurentitiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista, privaattivastaanotolla, sitten on etäsessioita Peterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen paketti kaikille. Kesto on noin 6-9 kuukautta, mutta nyt mä annan Peterille puheenvuoron. Kerro pikkusen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus. Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi. Tarkennetaan sitä advanced vaativan implanttiproteetiikan ja perusimplanttiproteetiikan rajapintaa, että osaa tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä Hanson, jossa",
+  "params": {
+    "recipe": "canary",
+    "source_lang": "fi",
+    "target_lang": "fi",
+    "pnc": "yes",
+    "decoding": "greedy",
+    "chunks": {
+      "min_s": 15.0,
+      "max_s": 25.0,
+      "window_s": 0.1
+    },
+    "env": "nemo",
+    "device": "cuda",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0",
+      "nemo": "3.0.0"
+    }
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Canary 1B v2",
+  "notes": "latency_s includes model loading.",
+  "words": null,
+  "latency_s": 236.87,
+  "usage": null,
+  "created_at_utc": "2026-10-12T08:29:14+00:00",
+  "raw": {
+    "segments": [
+      {
+        "start": 0.0,
+        "end": 21.85,
+        "text": "Suojärven Timon luento, potilasvahingot proteetiikassa. Siinä tulee hyvin laajasta proteetiikkaa, yleensä vähän vaikeusasteen arviointia ja muuta. Sitten on pari tuolloin Martta Martoa luento perimplanttiitista. Ja sitten implanttikeissä on semmoinen vodkässi, jossa Peterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla. Ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan."
+      },
+      {
+        "start": 21.85,
+        "end": 41.4,
+        "text": "Viimeisenä on vielä semmoinen osa, missä on tärkeää tunnistaa, missä ne on sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään. Siellä on implantologiaa, Advanced-webinaarisarjaa, Timosuojäröjä ja Ilkka Pallo. Siinä tehdään high-end implanttihoitoa etualueella, estetisoluja ja tosi vaativia temppuja. Ne on tärkeää tunnistaa."
+      },
+      {
+        "start": 41.4,
+        "end": 64.55,
+        "text": "Kuitatte, että milloin, missä menee se raja, että milloin työ voi muuttukin yhtäkkiä todella hankalaksi. Sitten on myös oikumishoidollisia näkökulmia. Timo ja Virpi Müller, Oiko ja Virpi, ne keskustelevat sitten siitä aiheesta, miten sitä voidaan preproteettisesti hyödyntää. Teoria lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa 1 on tehty."
+      },
+      {
+        "start": 64.55,
+        "end": 83.9,
+        "text": "Ajokorttiosa 2. Komponentit tutuksi päivä Helsingissä Clarion hotellissa. Se alkaa Peterin kertausluennolla, vähän perusasioita kerrataan siihen alkupohjalle. Sen jälkeen se on neljä implanttibrändin mukana. Straumannin, Densply-siirron, Nobel Bayer Care ja Camlock Conalog eli implantoona OY."
+      },
+      {
+        "start": 83.9,
+        "end": 107.95,
+        "text": "tutustaa heidän komponentteihin, mitä minimoisia osia siellä on, miten ne eroavat toisistaan. Ja siellä on myös neljä eri skanneria sitten mukana, eli päästään katsomaan, miten skannerilla jäljennetään. Ja tosiaan päivä ideana on se, että tutustaa näihin osiin, tutustaa skannereihin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin piihevi on se osa kolme."
+      },
+      {
+        "start": 107.95,
+        "end": 132.6,
+        "text": "Se on tämä pienryhmävalmennus, mestarikisäljivalmennus, jossa Peter ottaa kopin. Enintään kymmenen mahtuu mukaan. Ne, jotka tähän lähtee, kannattaa NOPSAan ilmoittautua, että saa paikan sieltä. Tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän."
+      },
+      {
+        "start": 132.6,
+        "end": 157.45,
+        "text": "Tiivistettynä koostumus on aloituspäivä Futurentitiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista, privaattivastaanotolla, sitten on etäsessioita Peterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen paketti kaikille. Kesto on noin 6-9 kuukautta, mutta nyt mä annan Peterille puheenvuoron. Kerro pikkusen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus."
+      },
+      {
+        "start": 157.45,
+        "end": 180.0,
+        "text": "Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi. Tarkennetaan sitä advanced vaativan implanttiproteetiikan ja perusimplanttiproteetiikan rajapintaa, että osaa tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä Hanson, jossa"
+      }
+    ]
+  },
+  "repeat": 1
+}

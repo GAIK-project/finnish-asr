@@ -1,0 +1,161 @@
+{
+  "arm_id": "hf_whisper-large-v3-turbo",
+  "label": "Whisper large-v3 turbo",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "39be0e3aa481fe849e64ee1909b489e89f4f159492368b5b4532ebe920f1e750",
+  "created_at_utc": "2026-10-12T08:23:46+00:00",
+  "latency_s": 17.6,
+  "usage": {
+    "input_tokens": 5115,
+    "output_tokens": 2025
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 1.49,
+    "error_counts": {
+      "critical": 0,
+      "major": 0,
+      "minor": 6
+    },
+    "entities": {
+      "correct": 6,
+      "variant": 8,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 88
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "Potilasvahingossa protetiikassa",
+        "explanation": "Lecture title is mis-inflected ('in patient injury'), but the topic is still recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hyvin laajasti",
+        "transcript_span": "hyvin laaista",
+        "explanation": "'laajasti' (broadly) is garbled into a non-word; the meaning can be guessed."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeissä",
+        "explanation": "'Implant cases' is rendered in the wrong case form ('in implant cases')."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "Implantologia ja Advanced-webinaarisarja",
+        "explanation": "The inserted 'ja' splits the series name into two items."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "Timo ja Virpi Müller keskustelevat",
+        "explanation": "Virpi's role as orthodontist is omitted."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hands-on",
+        "transcript_span": "Hanson",
+        "explanation": "'hands-on' is misrecognised as 'Hanson', which reads like a name."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Klarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumannia"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Nobel Biaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camelog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand; the transcript has the correct spelling."
+      }
+    ],
+    "usability": 88,
+    "summary": "The transcript is highly faithful: all numbers (parts 1–3, four brands, four scanners, max ten participants, 6–9 months) and the course structure are correct. The errors are minor: the lecture title and a few words are mis-inflected or garbled, Virpi's role as orthodontist is dropped, 'hands-on' becomes 'Hanson', and several names have spelling slips (Peetter, Pallos, Müller, Nobel Biaker, Camelog, Klarion) but remain recognisable."
+  }
+}

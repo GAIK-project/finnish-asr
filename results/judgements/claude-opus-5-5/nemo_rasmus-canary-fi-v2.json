@@ -1,0 +1,217 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2",
+  "label": "RASMUS Finnish Canary v2 (greedy)",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "2adec6f99e6cf7ebd460ca76f3031483e5eb195aac3b14d44ee56463a50a2dd7",
+  "created_at_utc": "2026-10-12T10:12:32+00:00",
+  "latency_s": 32.2,
+  "usage": {
+    "input_tokens": 5137,
+    "output_tokens": 3382
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.47,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 11
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 6,
+      "wrong": 3,
+      "missing": 0
+    },
+    "entities_ok": 11,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 72
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "parodontologi Martta Martolan luento",
+        "transcript_span": "parodon tuolki Marta-Marto-luento",
+        "explanation": "The lecturer's name is garbled and her profession (periodontist) is broken into nonsense."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hyvin laajasti protetiikkaa",
+        "transcript_span": "hyvin laajasta protetiikkaa",
+        "explanation": "Wrong inflection; the meaning is still inferable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timo Suojar ja Ilkka Pallos",
+        "explanation": "Both surnames are truncated but still recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etualueelle, estetiisaloja",
+        "explanation": "\"Aesthetic area\" is garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "kuita tekee",
+        "explanation": "Garbled phrase; \"when you do it yourself\" is lost."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "oiko ja Virpi",
+        "explanation": "The role \"orthodontist\" is split into nonsense."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kerrataan",
+        "transcript_span": "kerrotaan",
+        "explanation": "\"Reviewed\" becomes \"told\"."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Straumann",
+        "transcript_span": "Traumannin",
+        "explanation": "Brand misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplay-siirron",
+        "explanation": "Dentsply Sirona is garbled, and \"Sirona\" is lost."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel-Bayakerin",
+        "explanation": "Brand misspelled; still recognisable through \"Nobel\"."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog eli Implantona Oy",
+        "transcript_span": "Camelog-Connellog eli implanttoona OY",
+        "explanation": "Brand and company names misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Futudentin tiloissa",
+        "transcript_span": "tuturentitiloissa",
+        "explanation": "The venue company Futudent is unrecognisable."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "minor",
+        "reference_span": "noin kuusi-yhdeksän kuukautta",
+        "transcript_span": "noin 6 vai 9 kuukautta",
+        "explanation": "A range of 6–9 months becomes \"6 or 9\"."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hands-on",
+        "transcript_span": "Hanson",
+        "explanation": "\"Hands-on\" is garbled into a name-like word."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Timo Suojar"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Marta-Marto"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Traumannin"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Densplay-siirron"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Nobel-Bayakerin"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camelog-Connellog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "tuturentitiloissa"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplay-siirron",
+        "explanation": "The reference itself misspells the brand; the canonical form is Dentsply Sirona."
+      }
+    ],
+    "usability": 72,
+    "summary": "The course structure, numbers (parts 1–3, four brands, four scanners, max 10 participants) and most content survive. Several names are garbled: Martta Martola, Dentsply Sirona and Futudent are unrecognisable, and the other brands and surnames are misspelled but recognisable. The duration is rendered as \"6 or 9\" instead of 6–9 months. There are a few minor wording garbles."
+  }
+}

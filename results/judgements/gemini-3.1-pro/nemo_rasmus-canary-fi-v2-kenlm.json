@@ -1,0 +1,201 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
+  "label": "RASMUS Finnish Canary v2 + KenLM",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "918c55a5d62fd4bed1d1319a29b4958541165998a5df3ffc81578d8ee289ed17",
+  "created_at_utc": "2026-10-12T10:13:35+00:00",
+  "latency_s": 63.9,
+  "usage": {
+    "input_tokens": 3192,
+    "output_tokens": 1782
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 15.42,
+    "error_counts": {
+      "critical": 3,
+      "major": 6,
+      "minor": 2
+    },
+    "entities": {
+      "correct": 3,
+      "variant": 4,
+      "wrong": 6,
+      "missing": 1
+    },
+    "entities_ok": 7,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 60
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "parodontologi Martta Martolan luento",
+        "transcript_span": "parodon tuollakin Martta-Marto-luento",
+        "explanation": "The speaker's title and name are completely garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "semmoinen vodcast, jossa",
+        "transcript_span": "semmoinen voimakkaasti, jossa",
+        "explanation": "The format 'vodcast' was misrecognized as the adverb 'voimakkaasti' (strongly)."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "nämä eivät ole missään nimessä sellaisia",
+        "transcript_span": "nää ei oo missään nyt sellaisia,",
+        "explanation": "The idiom 'missään nimessä' was changed to 'missään nyt', slightly altering the emphasis."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen.",
+        "transcript_span": "Timo Suojar ja Ilkka Pallos ja",
+        "explanation": "Both names are significantly misspelled and garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "ja esteettisen alueen ja",
+        "transcript_span": "estetiisaloja ja",
+        "explanation": "The phrase 'esteettisen alueen' became the non-existent word 'estetiisaloja'."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "tunnistaa kun itse tekee, että",
+        "transcript_span": "tunnistaa. mitä tekee, että",
+        "explanation": "The phrase 'kun itse tekee' was garbled into 'mitä tekee', losing the reference to doing it oneself."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja Virpi,",
+        "transcript_span": "Oiko ja Virpi",
+        "explanation": "The profession 'oikoja' (orthodontist) was split into a name and conjunction, completely losing the meaning."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Straumann, Densply Sirona, Nobel Biocare ja Camlog-Conelog",
+        "transcript_span": "Traumannin, Densplay-siirron, Nobel-Bayakerin ja Cambridge-Conalog",
+        "explanation": "A crucial list of four dental implant brands was completely garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "miten skannereilla jäljennetään",
+        "transcript_span": "miten skannerilla jäljitetään.",
+        "explanation": "In a dental context, 'jäljennetään' (take an impression/scan) was wrongly transcribed as 'jäljitetään' (tracked)."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "aloituspäivä Futudentin tiloissa",
+        "transcript_span": "aloituspäivä tutkintotiloissa",
+        "explanation": "The company name 'Futudent' was lost and replaced with 'tutkintotiloissa' (examination rooms)."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "tämä hands-on,",
+        "transcript_span": "tämä Hanson,",
+        "explanation": "The English term for practical training 'hands-on' was transcribed as the name 'Hanson'."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Martta-Marto"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Petterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "wrong",
+        "transcript_form": "Traumannin"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Densplay-siirron"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel-Bayakerin"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Cambridge-Conalog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "missing",
+        "transcript_form": ""
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perimplantiitista",
+        "explanation": "The correct medical term is 'peri-implantiitista' (with two i's in the middle), though both texts use the spoken short version."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplay-siirron",
+        "explanation": "The reference spells the brand 'Densply Sirona', but the correct canonical spelling is 'Dentsply Sirona'."
+      }
+    ],
+    "usability": 60,
+    "summary": "The transcript struggles significantly with foreign brand names, specialist dental terminology, and English loan words. The complete misinterpretation of a list of implant brands, changing 'jäljennetään' (scan/impress) to 'jäljitetään' (track), missing 'Futudent', and turning 'hands-on' into 'Hanson' makes the transcript quite unreliable for an audience needing the exact details of the course."
+  }
+}

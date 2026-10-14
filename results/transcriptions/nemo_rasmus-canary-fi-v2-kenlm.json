@@ -1,0 +1,85 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
+  "stage": "asr",
+  "provider": "huggingface-gpu",
+  "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+  "text": "Suojärven Timo-luento potilasvahingot protetiikassa. Siinä tulee hyvin laajaa protetiikkaa, yleensä vähän vaikeusasteen arviointia ja muuta. Sitten on parodon tuollakin Martta-Marto-luento perimplantiitista ja sitten implanttikeissiä ja semmoinen voimakkaasti, jossa Petterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan. Viimeisenä on vielä semmonen osa, missä on tärkeää tunnistaa, nää ei oo missään nyt sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, elikkä siellä on implantologiaa Advanced-webinaarisarja Timo Suojar ja Ilkka Pallos ja siinä tehdään sitten semmoista niinku sanotaanko high-end-implanttihoitoa etualueelle, estetiisaloja ja tosi vaativia temppuja, mutta ne on tärkeää tunnistaa. mitä tekee, että milloin missä menee se raja, että milloin työ voi muuttuukin yhtäkkiä todella hankalaksi. Ja sitten on myös oikomishoidollisia näkökulmia. Timo ja Virpi Müller, Oiko ja Virpi keskustelevat sitten siitä aiheesta, miten sitä voidaan preproteettisesti hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa 1 on tehty. Ajokortti osa 2, komponentit tutuksi päivä Helsingissä Clarion hotellissa. Se alkaa Peterin kertausluennolla, vähän näitä perusasioita kerrataan siihen alkupohjalle ja sen jälkeen se on 4 implanttibrändin mukana, Traumannin, Densplay-siirron, Nobel-Bayakerin ja Cambridge-Conalog eli implanttoona OY. tutustua heidän komponentteihin, mitä tämmöisiä osia siellä on, miten ne eroavat toisistaan ja siellä on myös 4 eri skanneria sitten mukana, elikkä päästään katsomaan miten skannerilla jäljitetään. Ja tosiaan päivän idea on se, että tutustua näihin osiin, tutustua skanneriin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin pihvi on se osa 3. Ja se on tää pienryhmävalmennusmestari-kisällivalmennus, jossa sitten Peter ottaa kopin. Enintään 10 mahtuu mukaan, elikkä ne jotka tähän lähtee, niin kannattaa Nopsaan ilmoittautua, että saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Eli ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Ja... Tiivistettynä koostumus on aloituspäivä tutkintotiloissa Helsingissä, sitten on Petterin työskentelyn seuraamista, privaattivastaanotolla, sitten on etäsessioita Petterin kanssa ja lopuksi vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kesto noin 6-9 kuukautta, mutta nyt mä annan Petterille puheenvuoron. Kerro pikkusen tuosta rakenteesta siitä aloituspäivästä alkaen, miten se menee tää valmennus. Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiproteetiikan ja perusimplanttiproteetiikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä Hanson, jossa...",
+  "params": {
+    "recipe": "canary_kenlm",
+    "source_lang": "fi",
+    "target_lang": "fi",
+    "pnc": "yes",
+    "decoding": {
+      "strategy": "beam",
+      "beam_size": 5,
+      "ngram_lm_model": "RASMUS/Finnish-ASR-Canary-v2:models/kenlm_5M.nemo",
+      "ngram_lm_alpha": 0.2
+    },
+    "chunks": {
+      "min_s": 15.0,
+      "max_s": 25.0,
+      "window_s": 0.1
+    },
+    "env": "nemo",
+    "device": "cuda",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0",
+      "nemo": "3.0.0"
+    }
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "RASMUS Finnish Canary v2 + KenLM",
+  "notes": "latency_s includes model loading.",
+  "words": null,
+  "latency_s": 64.97,
+  "usage": null,
+  "created_at_utc": "2026-10-12T08:40:07+00:00",
+  "raw": {
+    "segments": [
+      {
+        "start": 0.0,
+        "end": 21.85,
+        "text": "Suojärven Timo-luento potilasvahingot protetiikassa. Siinä tulee hyvin laajaa protetiikkaa, yleensä vähän vaikeusasteen arviointia ja muuta. Sitten on parodon tuollakin Martta-Marto-luento perimplantiitista ja sitten implanttikeissiä ja semmoinen voimakkaasti, jossa Petterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan."
+      },
+      {
+        "start": 21.85,
+        "end": 41.4,
+        "text": "Viimeisenä on vielä semmonen osa, missä on tärkeää tunnistaa, nää ei oo missään nyt sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, elikkä siellä on implantologiaa Advanced-webinaarisarja Timo Suojar ja Ilkka Pallos ja siinä tehdään sitten semmoista niinku sanotaanko high-end-implanttihoitoa etualueelle, estetiisaloja ja tosi vaativia temppuja, mutta ne on tärkeää tunnistaa."
+      },
+      {
+        "start": 41.4,
+        "end": 64.55,
+        "text": "mitä tekee, että milloin missä menee se raja, että milloin työ voi muuttuukin yhtäkkiä todella hankalaksi. Ja sitten on myös oikomishoidollisia näkökulmia. Timo ja Virpi Müller, Oiko ja Virpi keskustelevat sitten siitä aiheesta, miten sitä voidaan preproteettisesti hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa 1 on tehty."
+      },
+      {
+        "start": 64.55,
+        "end": 83.9,
+        "text": "Ajokortti osa 2, komponentit tutuksi päivä Helsingissä Clarion hotellissa. Se alkaa Peterin kertausluennolla, vähän näitä perusasioita kerrataan siihen alkupohjalle ja sen jälkeen se on 4 implanttibrändin mukana, Traumannin, Densplay-siirron, Nobel-Bayakerin ja Cambridge-Conalog eli implanttoona OY."
+      },
+      {
+        "start": 83.9,
+        "end": 107.95,
+        "text": "tutustua heidän komponentteihin, mitä tämmöisiä osia siellä on, miten ne eroavat toisistaan ja siellä on myös 4 eri skanneria sitten mukana, elikkä päästään katsomaan miten skannerilla jäljitetään. Ja tosiaan päivän idea on se, että tutustua näihin osiin, tutustua skanneriin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin pihvi on se osa 3."
+      },
+      {
+        "start": 107.95,
+        "end": 132.6,
+        "text": "Ja se on tää pienryhmävalmennusmestari-kisällivalmennus, jossa sitten Peter ottaa kopin. Enintään 10 mahtuu mukaan, elikkä ne jotka tähän lähtee, niin kannattaa Nopsaan ilmoittautua, että saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Eli ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Ja..."
+      },
+      {
+        "start": 132.6,
+        "end": 157.45,
+        "text": "Tiivistettynä koostumus on aloituspäivä tutkintotiloissa Helsingissä, sitten on Petterin työskentelyn seuraamista, privaattivastaanotolla, sitten on etäsessioita Petterin kanssa ja lopuksi vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kesto noin 6-9 kuukautta, mutta nyt mä annan Petterille puheenvuoron. Kerro pikkusen tuosta rakenteesta siitä aloituspäivästä alkaen, miten se menee tää valmennus."
+      },
+      {
+        "start": 157.45,
+        "end": 180.0,
+        "text": "Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiproteetiikan ja perusimplanttiproteetiikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä Hanson, jossa..."
+      }
+    ]
+  },
+  "repeat": 1
+}

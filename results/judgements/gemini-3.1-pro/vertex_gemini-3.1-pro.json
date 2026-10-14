@@ -1,0 +1,229 @@
+{
+  "arm_id": "vertex_gemini-3.1-pro",
+  "label": "Gemini 3.1 Pro",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "8c489d694b9e084b55ea05ff4a41c0f87a3cce072a31e29943a7cfbb660b917f",
+  "created_at_utc": "2026-10-12T08:30:58+00:00",
+  "latency_s": 62.1,
+  "usage": {
+    "input_tokens": 3162,
+    "output_tokens": 1870
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 18.41,
+    "error_counts": {
+      "critical": 3,
+      "major": 8,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 4,
+      "variant": 6,
+      "wrong": 3,
+      "missing": 1
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 70
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "",
+        "transcript_span": "koulutusta, ",
+        "explanation": "An extra word was added at the start of the transcript."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "The specific format 'vodcast' (video podcast) was replaced with the generic 'podcast'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Kallos",
+        "explanation": "The speaker's name was misrecognised and garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etu estetisellä alueella",
+        "explanation": "Two distinct anatomical zones (anterior zone and aesthetic zone) were merged into a single mangled phrase."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kun",
+        "transcript_span": "kuka",
+        "explanation": "Changes the meaning from 'when one does it oneself' to 'who does it themselves'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "oikomishoidollisia",
+        "transcript_span": "hoidollisia",
+        "explanation": "The specific clinical field 'orthodontic' was lost, leaving only a generic 'treatment' perspective."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja",
+        "transcript_span": "oiko ja",
+        "explanation": "The professional title 'orthodontist' (oikoja) was incorrectly split into a verb and a conjunction."
+      },
+      {
+        "category": "omission",
+        "severity": "critical",
+        "reference_span": "pre-proteettisesti ",
+        "transcript_span": "",
+        "explanation": "The clinically important term 'pre-prosthetically' was completely omitted."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "Peterin ",
+        "transcript_span": "",
+        "explanation": "The speaker's name was omitted before the review lecture."
+      },
+      {
+        "category": "omission",
+        "severity": "critical",
+        "reference_span": "Densply Sirona, ",
+        "transcript_span": "",
+        "explanation": "One of the four major implant brands mentioned was completely left out of the transcript."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobellcare",
+        "explanation": "The brand name Nobel Biocare was misrecognised as Nobellcare."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlock",
+        "explanation": "The implant brand Camlog-Conelog was severely garbled."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "kaikista kovimmille ",
+        "transcript_span": "",
+        "explanation": "An intensifier describing the veterans was omitted, slightly softening the tone."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "struktuurista",
+        "transcript_span": "puurista",
+        "explanation": "The word 'structure' was replaced with a garbled non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Tarkennetaan",
+        "transcript_span": "taan",
+        "explanation": "The verb 'Tarkennetaan' (we specify/refine) was truncated to just its suffix, losing the meaning of the sentence."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Suojarven Timon / Timo Suojarvi"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Petterin / Petter"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Kallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "missing",
+        "transcript_form": ""
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobellcare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Camlock"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perri-implantiitista",
+        "explanation": "The reference contains a typo for 'peri-implantiitista'."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "",
+        "explanation": "The reference misspells the widely known dental brand 'Dentsply Sirona' as 'Densply'."
+      }
+    ],
+    "usability": 70,
+    "summary": "The transcript is generally cohesive, but suffers from severe terminology and brand name omissions. Critical losses include the entire omission of the major implant brand 'Dentsply Sirona' and the clinical term 'pre-proteettisesti', as well as changing the specific 'oikomishoidollisia' (orthodontic) to just 'hoidollisia' (treatment). Additionally, a speaker's name and several other implant brands are significantly misrecognised, lowering usability for readers seeking precise course details."
+  }
+}

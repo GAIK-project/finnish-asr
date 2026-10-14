@@ -1,0 +1,194 @@
+{
+  "arm_id": "hf_whisper-large-finnish-v3",
+  "label": "whisper-large-finnish-v3",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "6b8154ce7fa6ad914f1170f368428baf05db954b0478bc951fa48872b258ab8a",
+  "created_at_utc": "2026-10-12T08:29:18+00:00",
+  "latency_s": 68.2,
+  "usage": {
+    "input_tokens": 3175,
+    "output_tokens": 1655
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 8.46,
+    "error_counts": {
+      "critical": 0,
+      "major": 6,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 6,
+      "variant": 5,
+      "wrong": 3,
+      "missing": 0
+    },
+    "entities_ok": 11,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja, semmoinen",
+        "transcript_span": "ImplanttiCase ja semmoinen",
+        "explanation": "The partitive plural form 'caseja' was misinterpreted as the noun 'Case' and the conjunction 'ja', slightly altering the sentence structure."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "ensimmäisenä lähteä",
+        "transcript_span": "ensimmäisen lähteen",
+        "explanation": "The verb 'lähteä' (start to do) was misrecognized as the noun 'lähteen' (source's), which makes the sentence illogical."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "elikkä siellä on Implantologiaa Advanced -",
+        "transcript_span": "",
+        "explanation": "The name of the webinar series 'Implantologiaa Advanced' and its connecting words were completely dropped from the transcript."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timo Suojärve ja Ilkka Pallos",
+        "explanation": "The speakers' names are recognizable, but their genitive case endings are dropped, causing them to sound ungrammatical and slightly mangled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Tutustutaan",
+        "transcript_span": "tutustaa",
+        "explanation": "The passive verb 'tutustutaan' (we familiarize) is changed to the active 'tutustaa' (familiarizes), altering the grammar of the clause."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Denzbley-Sirona",
+        "explanation": "The well-known brand Dentsply Sirona is severely misspelled and garbled in its first part."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobelbacher",
+        "explanation": "The brand name Nobel Biocare is entirely garbled into something resembling a German surname, rendering it unrecognizable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Kamloch-Konelloch",
+        "explanation": "The brand names Camlog and Conelog are severely misspelled and hard to recognize."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "miten ne eroavat ",
+        "transcript_span": "",
+        "explanation": "The phrase asking 'how they differ' is omitted, leaving the word 'toisistaan' (from each other) grammatically stranded."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoontunuttaa",
+        "explanation": "The passive verb 'kokoonnutaan' (we gather) is mangled into an ungrammatical form, slightly disrupting the sentence flow."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Timo Suojärve"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marttolan"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Denzbley-Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobelbacher"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Kamloch-Konelloch"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Denzbley-Sirona",
+        "explanation": "The reference misspells the brand Dentsply as 'Densply'."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perimplantiitista",
+        "explanation": "The reference misspells the medical term 'peri-implantiitti' as 'perimplantiitti' by omitting one 'i'."
+      }
+    ],
+    "usability": 75,
+    "summary": "The transcript mostly captures the structure and content of the webinar program, but it fails significantly on several key brand names, which are garbled beyond recognition. It also completely misses the specific name of an advanced webinar series and contains a few grammatical glitches that disrupt readability. Its usability is decent for general understanding, but compromised for a reader who specifically needs to know the brands and courses mentioned."
+  }
+}

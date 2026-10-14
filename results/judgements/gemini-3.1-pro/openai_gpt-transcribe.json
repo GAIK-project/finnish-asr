@@ -1,0 +1,173 @@
+{
+  "arm_id": "openai_gpt-transcribe",
+  "label": "OpenAI gpt-transcribe",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "62e0bf7354546f524cffccf48c6c8a15cea7684df74bc7795c45d2cf7ec20bdb",
+  "created_at_utc": "2026-10-12T08:30:14+00:00",
+  "latency_s": 56.2,
+  "usage": {
+    "input_tokens": 3176,
+    "output_tokens": 1345
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 8.46,
+    "error_counts": {
+      "critical": 3,
+      "major": 0,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 10,
+      "variant": 2,
+      "wrong": 2,
+      "missing": 0
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 78
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "potilasvaihtoehdot",
+        "explanation": "The transcript changes the topic of the lecture from patient injuries/malpractice ('potilasvahingot') to patient options ('potilasvaihtoehdot'), changing the meaning entirely."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "The transcript drops the video aspect by changing 'vodcast' to the generic 'podcast'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Pallas",
+        "explanation": "The speaker's surname is transcribed as a different, incorrect name, which misidentifies the person."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "kuin itse tekee",
+        "explanation": "The word 'kun' (when) is transcribed as 'kuin' (than/like), which creates a slight grammatical error but doesn't ruin the sentence's intelligibility."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Virpi Myller",
+        "transcript_span": "Virpi Müller",
+        "explanation": "The surname is misspelled, although it remains phonetically identical and recognizable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Se alkaa",
+        "transcript_span": "Siellä alkaa",
+        "explanation": "The pronoun 'se' (it) is changed to 'siellä' (there), slightly altering the phrasing."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Implantona Oy",
+        "transcript_span": "implanttioina Oy",
+        "explanation": "The company name 'Implantona' is completely lost and replaced by 'implanttioina' (as implants)."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peeterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallas"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "correct",
+        "transcript_form": "Camlog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "wrong",
+        "transcript_form": "implanttioina Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "periimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplantiitista",
+        "explanation": "The reference is missing the second 'i' in the clinical term. The transcript has the correct spelling."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspelled the brand name 'Dentsply'. The transcript has the correct spelling."
+      }
+    ],
+    "usability": 78,
+    "summary": "The transcript captures most of the course content, dates, and concepts very well. However, it changes the topic of the first lecture from malpractice to options, misidentifies one of the speakers (Pallonen -> Pallas), and completely misses a company name (Implantona -> implanttioina)."
+  }
+}

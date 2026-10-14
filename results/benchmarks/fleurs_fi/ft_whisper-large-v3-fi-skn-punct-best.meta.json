@@ -1,0 +1,18 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
+  "model": "whisper-large-v3-fi-skn-punct-best",
+  "recipe": "whisper",
+  "benchmark": "google/fleurs fi_fi test",
+  "utterances": 918,
+  "batch_size": 16,
+  "load_s": 90.1,
+  "transcribe_s": 900.1,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid007856",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22777907"
+}

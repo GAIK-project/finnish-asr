@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-13T17:00:03+00:00",
+  "gaik_evals_commit": "bd2d7629a6a6c7ae112d1b784538c58fb776fc46",
+  "gaik_evals_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, QAD-1 ground truth)",
+  "runner_path": "projects/finnish-asr-models/scripts/judge_asr.py",
+  "dataset_path": "projects/qadental-transcription-translation/dataset/ajokortti",
+  "dataset_git_object": "a02c57d58cfed00fe83bfa58af219f54cda34d89",
+  "model_or_deployment": [
+    "claude-opus-5-5",
+    "gemini-3.1-pro-preview"
+  ],
+  "cli_args": [
+    "--arm",
+    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks"
+  ],
+  "env": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "set",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "set",
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  },
+  "extra": {
+    "prompt_version": "asr-judge-v1",
+    "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+    "ref_words_whitespace": 402
+  }
+}

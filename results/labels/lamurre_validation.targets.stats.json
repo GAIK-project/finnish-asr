@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-10-13T07:08:36+00:00",
+  "mode": "normalise",
+  "model": "claude-opus-5-5",
+  "prompt_sha256": "88232dbd9dfac72e7fed8a8dbbf290c246f1f2101804d45e919ffced37dfbb05",
+  "segments": 174,
+  "llm_target_accepted": 174,
+  "rows_written": 174,
+  "failed_calls": 0,
+  "usage": {
+    "input_tokens": 19636,
+    "output_tokens": 16783
+  }
+}

@@ -1,0 +1,210 @@
+<title>The Dialect Model Story</title>
+<div class="wrap">
+
+<header class="hero">
+  <div class="stack">
+    <p class="eyebrow">GAIK · Haaga-Helia · October 2026</p>
+    <h1>Teaching Whisper to hear Finnish dialects</h1>
+    <p class="lede">A speech-to-text model trained on open dialect interviews recorded in the 1960s and 70s. This page explains what data we used, what we did with it, where Claude Opus 5.5 came in, and how the result was measured.</p>
+    <div class="nums">
+      <div class="num"><b>40.4 → 21.1 %</b><span>word errors on the dialect test, Whisper large-v3 → our model</span></div>
+      <div class="num"><b>25.9 → 13.6</b><span>meaning-error points per 100 words on a second dialect corpus</span></div>
+      <div class="num"><b>3 h 14 min</b><span>of training on one AMD MI250X GPU on LUMI</span></div>
+    </div>
+  </div>
+  <figure>
+    <img src="{{img:hero}}" alt="A reel-to-reel tape recorder and a microphone on a wooden kitchen table in a farmhouse, birch trees outside the window.">
+    <figcaption>Illustration, AI-generated (GPT Image 2.5). The SKN interviews were recorded in kitchens like this one.</figcaption>
+  </figure>
+</header>
+
+<section>
+  <div class="sec-head"><span class="step">00</span><h2>The whole pipeline at a glance</h2></div>
+  <div class="flow" role="list">
+    <div role="listitem"><span class="t">{{icon:audio-lines}} Audio</span><p>SKN dialect interviews from 50 municipalities, cut into 2–25 s segments.</p></div>
+    <div role="listitem" class="llm"><span class="t">{{icon:sparkles}} Opus: punctuation</span><p>Opus added full stops, commas and capitals to the training text. The words were not allowed to change.</p></div>
+    <div role="listitem"><span class="t">{{icon:cpu}} Training</span><p>A LoRA fine-tune of Whisper large-v3 on LUMI, keeping the best of three epochs.</p></div>
+    <div role="listitem"><span class="t">{{icon:chart-column}} WER tests</span><p>A dialect test from 10 municipalities the model never heard, plus standard-Finnish FLEURS and VoxPopuli.</p></div>
+    <div role="listitem" class="llm"><span class="t">{{icon:scale}} Opus: judge</span><p>On a second dialect corpus, Opus blindly counted the meaning errors in every model's transcript.</p></div>
+  </div>
+  <p class="note">The steps in brown are the two places where the published model used a language model. Opus never heard any audio and never wrote a test reference.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">01</span><h2>Data: where the audio and the texts came from</h2></div>
+  <div class="col stack">
+    <p><b>Suomen kielen näytteitä (SKN)</b>, "Samples of Spoken Finnish", is a corpus of the Institute for the Languages of Finland (Kotus), distributed by the Language Bank of Finland (Kielipankki) under CC BY 4.0. It holds about two hours of interviews from each of 50 municipalities across Finland, mostly with elderly speakers. Every sentence is transcribed twice: in <b>dialect spelling</b> (with phonetic marks) and in <b>standard Finnish word forms</b>.</p>
+    <p>We cut the interviews into 2–25 second segments and split them <b>by municipality</b>: 38 municipalities for training (15 042 segments, 62 h), 2 for validation (Pälkäne, Sotkamo) and 10 for the test, every fifth number of the SKN booklet series. The test municipalities represent five of SKN's six main dialect groups: south-western and Häme dialects, Savo and the south-east. The Ostrobothnian and Peräpohjola dialects are in training only. The model never heard any interviewee from a test municipality; a few interviewers recorded both test and training municipalities, and their questions are kept in the segments.</p>
+  </div>
+
+  <article class="specimen" aria-label="Example segment from Pälkäne">
+    <header>
+      <div><span class="eyebrow">Validation · Pälkäne · 5.7 s</span><br><code>SKN03a_Palkane_0021</code></div>
+      <audio controls preload="none" src="{{audio:palkane}}"></audio>
+    </header>
+    <div class="row dia"><span class="k">Dialect spelling<code>text_dialect</code></span><span class="v">Vieläkö ossaisitte ? 'kyyllᴀ̈ . minä "niŋ kauvan ‿ossaaŋ ku ma "eläŋkɪ .</span></div>
+    <div class="row"><span class="k">Standard Finnish, by a person<code>text_normalized</code></span><span class="v">vieläkö osaisitte kyllä minä niin kauan osaan kun minä elän</span></div>
+    <div class="row"><span class="k">Training target<code>text</code></span><span class="v">Vieläkö osaisitte? Kyllä minä niin kauan osaan kun minä elän. <span class="tag">llm-punctuation</span></span></div>
+  </article>
+  <p class="note col">In English: "Do you still know how? Yes, I'll know it as long as I live."</p>
+
+  <div class="col stack callout">
+    <p><b>What does <code>llm-punctuation</code> mean in the dataset?</b> It says that the punctuation and capitals in the row's <code>text</code> field were added by Opus. The words are still the person's: an answer was accepted only if its words were exactly those of the human standard-Finnish transcript. The value <span class="tag h">human</span> means <code>text</code> is the human text as it is: that holds for the 18 training segments whose punctuation failed the check, and for the whole test split.</p>
+    <p class="note">Why punctuation? SKN's standard-Finnish text has none, so the first version of the model learned to write without a single full stop or comma.</p>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Corpus</th><th>What</th><th>Use in the published model</th><th>Licence</th></tr></thead>
+      <tbody>
+        <tr><td><b>SKN</b> (Kotus / Kielipankki)</td><td>dialect interviews from 50 municipalities</td><td>training 38 municipalities, validation 2, test 10</td><td>CC BY 4.0</td></tr>
+        <tr><td><b>FLEURS</b> (Google)</td><td>Wikipedia sentences read aloud</td><td>training 2 704, test 918</td><td>CC BY 4.0</td></tr>
+        <tr><td><b>VoxPopuli</b> (Meta)</td><td>European Parliament speeches</td><td>training 7 504, test 478</td><td>CC0</td></tr>
+        <tr><td><b>LA-murre</b> (University of Turku, Kotus / Kielipankki)</td><td>a second dialect corpus, 10 other localities</td><td>test only (583 segments)</td><td>CC BY-ND 4.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">FLEURS and VoxPopuli are there so that ordinary standard Finnish does not get worse while the model learns dialects. All training data is openly licensed.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">02</span><h2>Where Claude Opus 5.5 was used</h2></div>
+  <p class="col">Opus had four jobs. The first two concern the published model, the third only an internal comparison model, and the fourth the scoring of a webinar clip. On top of that, the training and LUMI code was written with Claude Code.</p>
+  <div class="roles">
+    <article class="role">
+      <h3>{{icon:pencil-line}} Punctuation for the training text</h3>
+      <p>Opus got 20 standard-Finnish texts at a time (text only, no audio) and added punctuation and capitals. The code rejected every answer whose words differed from the original.</p>
+      <p class="meta">15 024 / 15 042 accepted · about USD 52 · <code>prepare_targets.py</code></p>
+    </article>
+    <article class="role">
+      <h3>{{icon:scale}} Blind judge on LA-murre</h3>
+      <p>LA-murre's reference is in dialect spelling, so word error rate would punish standard Finnish. Opus read the reference and four models' transcripts, unnamed, and counted only meaning errors.</p>
+      <p class="meta">583 segments · about USD 11 per round · <code>judge_dialect.py</code></p>
+    </article>
+    <article class="role internal">
+      <h3>{{icon:file-text}} Dialect to standard Finnish (internal model only)</h3>
+      <p>In an extra experiment Opus rewrote the dialect-spelling texts of LA-murre's training recordings in standard Finnish, word for word. The model trained on them is the best on both dialect tests, but LA-murre's licence forbids sharing a derived version, so it was not published.</p>
+      <p class="meta">15 529 segments · about USD 49 · not published</p>
+    </article>
+    <article class="role">
+      <h3>{{icon:shield-check}} Judges for the webinar clip</h3>
+      <p>Transcripts of a 180 s dental webinar were scored by Opus and Gemini 3.1 Pro: each read the human text and one transcript without the model's name, counted meaning errors and checked 14 names and terms.</p>
+      <p class="meta">all 20+ set-ups · <code>judge_asr.py</code></p>
+    </article>
+  </div>
+  <p class="note">Opus cost about USD 125 for the whole project. Every test reference was made by people, and no model output was ever used as the right answer.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">03</span><h2>Training on LUMI</h2></div>
+  <div class="col stack">
+    <p>The base is OpenAI's <b>Whisper large-v3</b> (1.55 billion parameters), the best open model for ordinary Finnish in our comparison. The whole model was not retrained. <b>LoRA</b> adds small extra matrices to the attention layers and trains only those: about 2 % of the weights. At the end the add-on was merged into the weights, so the published model works like any Whisper model.</p>
+    <ul class="plain">
+      <li>25 250 training segments: SKN 15 042, FLEURS 2 704, VoxPopuli 7 504.</li>
+      <li>LoRA rank 64 on the attention <code>q_proj</code> and <code>v_proj</code> layers, learning rate 1e-4, batch 8, three passes (epochs) over the data.</li>
+      <li>Run: one AMD MI250X GPU on CSC's LUMI supercomputer, 3 h 14 min. The model was chosen on the validation municipalities, never on test results.</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="chart">{{chart:loss}}</div>
+    <figcaption class="cap">Validation loss (lower is better) before training and after each epoch. The fourth-epoch point comes from a separate four-epoch run, which showed that training longer starts to overfit. Epoch 2 was kept.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">04</span><h2>Measure 1: word error rate (WER)</h2></div>
+  <div class="col stack">
+    <p><b>WER</b> counts how many words must be substituted, deleted or inserted to turn the model's text into the human text, divided by the number of words in the human text. Before comparing, text is lower-cased and punctuation removed. On the dialect test the reference is SKN's standard-Finnish transcript: the model is right when it hears dialect and writes standard Finnish.</p>
+  </div>
+  <article class="specimen" aria-label="Comparison on a Heinola segment">
+    <header>
+      <div><span class="eyebrow">Test · Heinola · a municipality the model never heard</span><br><code>SKN45a_Heinola_0097</code></div>
+      <audio controls preload="none" src="{{audio:heinola}}"></audio>
+    </header>
+    <div class="cmp">
+      <div class="line"><span class="k">Dialect spelling</span><span class="v mono">vaikka miekiiv̆ välistä viej juomaakii sillen niin ‿ei se pure . mut se irvistie että luulis ‿että nyt se purie .</span><span class="e"></span></div>
+      <div class="line"><span class="k">Human (reference)</span><span class="v">vaikka minäkin välistä vien juomaakin sille niin ei se pure mutta se irvistää että luulisi että nyt se puree</span><span class="e"></span></div>
+      <div class="line"><span class="k">Whisper large-v3</span><span class="v"><mark>aika miekivälistäviä</mark> juomaakin sille, niin ei se pure. <mark>Mut</mark> se <mark>hirvisti</mark>, että <mark>luulis</mark>, että nyt se <mark>puri</mark>.</span><span class="e">8 / 19</span></div>
+      <div class="line"><span class="k">Our model</span><span class="v">Vaikka minäkin välistä vien juomaakin sille, niin ei se pure, mutta se <mark>irvisti</mark>, että luulisi, että nyt se puree.</span><span class="e">1 / 19</span></div>
+    </div>
+  </article>
+  <p class="note col">In English: "Even when I sometimes bring it something to drink, it doesn't bite, but it grimaces so you'd think it bites now."</p>
+  <figure>
+    <div class="legend"><span><i style="background:var(--base)"></i>Whisper large-v3</span><span><i style="background:var(--spruce)"></i>Our model</span></div>
+    <div class="chart">{{chart:wer}}</div>
+    <figcaption class="cap">WER by municipality, 60 segments each, 600 in all. Our model is better in all ten: 40.4 → 21.1 % overall. Ready-made Finnish fine-tunes (trained on read speech) score 48–57 % on the same test.</figcaption>
+  </figure>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Test</th><th class="n">Whisper large-v3</th><th class="n">Our model</th></tr></thead>
+      <tbody>
+        <tr><td>SKN dialect test, 10 municipalities, WER %</td><td class="n">40.4</td><td class="n"><b>21.1</b></td></tr>
+        <tr><td>FLEURS, read sentences, WER %</td><td class="n">7.4</td><td class="n">7.6</td></tr>
+        <tr><td>VoxPopuli, parliament speech, WER %</td><td class="n">12.7</td><td class="n">10.8</td></tr>
+        <tr><td>180 s dental webinar, WER % (decoded in chunks)</td><td class="n">15.7</td><td class="n">13.9</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">05</span><h2>Measure 2: an LLM judge on a second dialect corpus</h2></div>
+  <div class="col stack">
+    <p>The SKN test shares SKN's own writing conventions with the training data, so we needed a second, completely unseen corpus: <b>LA-murre</b>, 583 segments from ten localities that are not in SKN. Its reference, however, is written in dialect spelling, so WER would punish a model for exactly what we want from it: writing standard Finnish.</p>
+    <p>So for every segment Opus read the dialect reference and the transcripts of four models, labelled A–D and in a different order each time. It counted only errors that change the meaning: a wrong word, name or number, missing or invented content. Dialect against standard forms, punctuation and filler words are not errors.</p>
+  </div>
+  <div class="scale">
+    <div class="sev"><b>10 pts</b><strong>critical</strong><span>the segment's main point is lost or reversed</span></div>
+    <div class="sev"><b>5 pts</b><strong>major</strong><span>a content word, name or number is wrong, or a clause is missing</span></div>
+    <div class="sev"><b>1 pt</b><strong>minor</strong><span>a small slip a reader can see through</span></div>
+  </div>
+  <div class="formula">points per 100 words = (10 × critical + 5 × major + 1 × minor) ÷ reference words × 100<br>our model: (10 × 8 + 5 × 340 + 612) ÷ 17 625 × 100 = 13.6</div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Model (the judge saw only a letter)</th><th class="n">Points / 100 words</th><th class="n">Critical</th><th class="n">Major</th><th class="n">Minor</th><th class="n">Segments without errors</th></tr></thead>
+      <tbody>
+        <tr><td>Whisper large-v3</td><td class="n">25.9</td><td class="n">74</td><td class="n">600</td><td class="n">821</td><td class="n">50</td></tr>
+        <tr><td>Our model, round 1 (no punctuation)</td><td class="n">13.8</td><td class="n">7</td><td class="n">342</td><td class="n">649</td><td class="n">116</td></tr>
+        <tr class="ours"><td><b>Our model, published</b></td><td class="n"><b>13.6</b></td><td class="n">8</td><td class="n">340</td><td class="n">612</td><td class="n">121</td></tr>
+        <tr><td>Internal model (+ LA-murre training, not published)</td><td class="n">11.4</td><td class="n">12</td><td class="n">266</td><td class="n">562</td><td class="n">143</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col stack callout">
+    <p><b>An example of the judge at work</b> (Tammela, 26 words). Whisper large-v3 left out a clause about the daughter's husband: <b>1 major = 5 points</b>. The published model kept the content and added one extra "ja" ("and"): <b>1 minor = 1 point</b>. The round-1 model got the same segment with no errors.</p>
+    <p class="note">LA-murre texts are not shown on this page: their licence (CC BY-ND) does not allow sharing modified copies, so they are not published.</p>
+  </div>
+  <details>
+    <summary>The judge's instructions, word for word</summary>
+<pre>{{prompt}}</pre>
+    <p class="note">This is the public version, <code>dialect-judge-v2</code>. The scores above were made with v1, which differs only in the three example word pairs of the first paragraph: v1's came from the LA-murre corpus, these come from SKN.</p>
+  </details>
+  <p class="note col">Limitation: the judge is itself a language model and ran once. Differences of one point per 100 words are read as ties unless a sign test says otherwise. The gap between the published model and Whisper is still clear: it had fewer points in 398 segments and more in 89 (sign test p &lt; 0.001). The gap to the round-1 model is not significant (p = 0.10).</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">06</span><h2>Where the model is weaker</h2></div>
+  <ul class="plain col">
+    <li><b>Rare names and terms in standard-Finnish speech.</b> On the webinar the judges found more name and term errors than for plain Whisper (for example "Nobelbayer" for Nobel Biocare), although its WER was lower. For standard Finnish full of brand names, plain Whisper is the safer choice.</li>
+    <li><b>Old speech, not every dialect.</b> Both dialect corpora are interviews with elderly speakers from the 1960s and 70s. Today's regional speech was not tested, and the SKN test has no Ostrobothnian dialect.</li>
+    <li><b>Standard Finnish, not a phonetic dialect transcript.</b> The model writes what is said, in standard Finnish word forms.</li>
+    <li><b>Long audio must be cut.</b> Whisper's own long-form loop made the model repeat one phrase. Pieces of 15–25 s cut at quiet points work (13.7 % WER on the webinar); the model card has the code.</li>
+    <li><b>One training run and one judge.</b> The numbers come from a single seed.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">07</span><h2>Links</h2></div>
+  <div class="links">
+    <a href="https://github.com/GAIK-project/finnish-asr">{{icon:file-text}}<span>Code, results and method: GAIK-project/finnish-asr</span></a>
+    <a href="https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects">{{icon:graduation-cap}}<span>The model on Hugging Face: GAIK-project/whisper-large-v3-fi-dialects</span></a>
+    <a href="https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr/viewer/default/validation">{{icon:database}}<span>The dataset and its viewer (listen to segments)</span></a>
+    <a href="https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/finnish_dialect_asr">{{icon:chart-column}}<span>Summary in gaik-toolkit · finnish_dialect_asr</span></a>
+    <a href="https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval#october-2026-current-models-and-an-llm-judge">{{icon:audio-lines}}<span>Starting point: 20 set-ups compared on a webinar clip</span></a>
+    <a href="https://www.kielipankki.fi/corpora/skn/">{{icon:map-pin}}<span>The original SKN corpus at Kielipankki</span></a>
+    <a href="https://gaik.ai/">{{icon:link}}<span>The GAIK project (gaik.ai)</span></a>
+  </div>
+  <p class="note">Suomen kielen näytteitä, Institute for the Languages of Finland (Kotus), via Kielipankki – The Language Bank of Finland, CC BY 4.0. Developed by Akseli Leskinen, Haaga-Helia University of Applied Sciences, in the GAIK project. Computing: LUMI, through CSC – IT Center for Science, Finland.</p>
+</section>
+
+</div>

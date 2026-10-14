@@ -1,0 +1,213 @@
+{
+  "arm_id": "openai_gpt-4o-transcribe",
+  "label": "OpenAI gpt-4o-transcribe",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "161d563bf9d4ddbb6f424585841c8774180c6d414f1d0ca729d901b305a9939a",
+  "created_at_utc": "2026-10-12T08:24:37+00:00",
+  "latency_s": 23.4,
+  "usage": {
+    "input_tokens": 5152,
+    "output_tokens": 2825
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 5.97,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 9
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 6,
+      "wrong": 3,
+      "missing": 0
+    },
+    "entities_ok": 11,
+    "entities_total": 14,
+    "ref_doubts": 3,
+    "usability": 78
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Marta Martoon",
+        "explanation": "The periodontist's surname is garbled and hard to recognise."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaisirona",
+        "explanation": "The brand Dentsply Sirona is garbled and split into nonsense words."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Pajaker",
+        "explanation": "The brand Nobel Biocare is garbled."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlog",
+        "explanation": "The Conelog part of the brand name is missing."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Implantona Oy",
+        "transcript_span": "implanttoona Oy",
+        "explanation": "Company name misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin",
+        "transcript_span": "Futurentin",
+        "explanation": "Company name misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Straumann",
+        "transcript_span": "Strauman",
+        "explanation": "Brand misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Clarion hotellissa",
+        "transcript_span": "Klarion Hotellissa",
+        "explanation": "Hotel name misspelled but recognisable."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "minor",
+        "reference_span": "kuusi-yhdeksän kuukautta",
+        "transcript_span": "kuusi vai yhdeksän kuukautta",
+        "explanation": "A 6–9 month range is rendered as '6 or 9 months'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "vodkasti",
+        "explanation": "The term is garbled into a non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "oikoa Virpi",
+        "explanation": "'orthodontist' becomes the verb 'to straighten'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "high-end-implanttihoitoa",
+        "transcript_span": "high-end implanttihointoja",
+        "explanation": "Misspelled non-word; meaning still guessable."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timo / Timo Suojärvi"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Marta Martoon"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetter"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallonen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Klarion Hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Niden, Splaisirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Pajaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "Futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "peri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaisirona",
+        "explanation": "The reference misspells Dentsply. The transcript is still wrong."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "peri-implantiitista",
+        "explanation": "The transcript has the standard spelling; the reference form is a slip."
+      },
+      {
+        "reference_span": "Suojärven Timon luento",
+        "transcript_span": "koulutusta. Suojärven Timo luento",
+        "explanation": "Extra words at the clip edges ('koulutusta', final 'jossa') are likely real audio cut from the reference, not hallucinations."
+      }
+    ],
+    "usability": 78,
+    "summary": "Course content, structure, numbers and most names come through. The main losses are in brand names: Dentsply Sirona and Nobel Biocare are garbled, Conelog is dropped, and Martta Martola becomes 'Marta Martoon'. The duration 'kuusi-yhdeksän' becomes 'kuusi vai yhdeksän'. Several other names have small, recognisable spelling slips."
+  }
+}

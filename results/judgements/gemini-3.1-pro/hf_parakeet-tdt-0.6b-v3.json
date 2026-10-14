@@ -1,0 +1,203 @@
+{
+  "arm_id": "hf_parakeet-tdt-0.6b-v3",
+  "label": "Parakeet TDT 0.6B v3",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "d9e312d96b65dfe08a944c1505a98a361ec6dea7d04d92e55dd6a45b27757021",
+  "created_at_utc": "2026-10-12T08:26:52+00:00",
+  "latency_s": 74.5,
+  "usage": {
+    "input_tokens": 3121,
+    "output_tokens": 1802
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 17.41,
+    "error_counts": {
+      "critical": 2,
+      "major": 10,
+      "minor": 0
+    },
+    "entities": {
+      "correct": 2,
+      "variant": 10,
+      "wrong": 2,
+      "missing": 0
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 70
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "potilasvahemmat protetiikassa",
+        "explanation": "The topic 'patient injuries' is misrecognized as 'patient parents', completely changing the meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi Martta Martolan",
+        "transcript_span": "parino tulakin martta martala",
+        "explanation": "The professional title 'periodontist' is lost and replaced with nonsensical words."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Viimeisenä on vielä sitten semmoinen osio missä on tärkeää tunnistaa",
+        "transcript_span": "Viimeisen aviaan semmoinen osa, missä tärkeää tunnistaa",
+        "explanation": "The start of the sentence is garbled with the non-word 'aviaan'."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "Siinä tehdään sitten semmoista niin kuin sanotaanko high-end-implanttihoitoa",
+        "transcript_span": "Siinähän high-end implanttihoitoa",
+        "explanation": "The main verb 'tehdään' (is done) is missing, breaking the sentence structure and meaning."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "tunnistaa kun itse tekee, että milloin missä menee se raja",
+        "transcript_span": "tunnistaa. Milloin missä menee se raja",
+        "explanation": "The condition 'when doing it yourself' is omitted, which is important context for recognizing one's limits."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "oikean virpi",
+        "explanation": "The title 'orthodontist' (oikoja) is misrecognized as the adjective 'right' (oikean)."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Bajer",
+        "explanation": "The well-known dental brand name is garbled beyond recognition."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "mestari-kisälli -valmennus",
+        "transcript_span": "Mestarivalmennus",
+        "explanation": "The term 'apprentice' (kisälli) is missing, losing the dual master-apprentice concept of the training."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "valmistuneet yleishammaslääkärit, joilla on",
+        "transcript_span": "valmistunut yleisha lääkrittyä olla",
+        "explanation": "The target group description (graduated general dentists) is severely garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Futudentin",
+        "transcript_span": "futurentin",
+        "explanation": "The company name 'Futudent' is misspelled, losing the connection to dentistry ('dent')."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "critical",
+        "reference_span": "kuusi-yhdeksän kuukautta",
+        "transcript_span": "6.9. kuukautta",
+        "explanation": "A duration of 'six to nine months' is misrecognized as the exact decimal '6.9 months'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "tämä hands-on,",
+        "transcript_span": "tämä Hanson,",
+        "explanation": "The term for practical training 'hands-on' is misrecognized as the name 'Hanson'."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Timo Suojare"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "martta martala"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkkapallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "klarionhotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densplayserona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Bajer"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlo Conolog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "semmoinen vodcast,",
+        "transcript_span": "semmoinen podcast,",
+        "explanation": "The reference specifies 'vodcast' (video podcast), but the more common term 'podcast' in the transcript is very likely what was actually said or intended."
+      }
+    ],
+    "usability": 70,
+    "summary": "The transcript captures the overall structure and topics of the dental course but contains multiple significant errors. Critical errors include misinterpreting 'patient injuries' as 'patient parents' and changing the course duration from '6-9 months' to '6.9 months'. There are also numerous major errors where professional titles (periodontist, orthodontist), concepts (master-apprentice, hands-on), and target audiences are replaced with garbled or nonsensical words. Several names and brands are heavily misspelled."
+  }
+}

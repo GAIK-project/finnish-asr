@@ -1,0 +1,159 @@
+{
+  "arm_id": "elevenlabs_scribe-v2",
+  "label": "ElevenLabs Scribe v2",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "7b4fed51ba6e216c29e0aa85da88ac4ed9cd14e97ade57aa0e93731fb11278c8",
+  "created_at_utc": "2026-10-12T08:03:36+00:00",
+  "latency_s": 26.8,
+  "usage": {
+    "input_tokens": 5175,
+    "output_tokens": 2055
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 1.24,
+    "error_counts": {
+      "critical": 0,
+      "major": 0,
+      "minor": 5
+    },
+    "entities": {
+      "correct": 11,
+      "variant": 3,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 92
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marton",
+        "explanation": "Surname shortened (Martola → Marton). Still recognisable from the first name and the parodontologist context."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "Vodcast (video) is rendered as podcast. The format type changes slightly."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Virpi Myller",
+        "transcript_span": "Virpi Müller",
+        "explanation": "Surname misspelled (Myller → Müller) but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlog Connectlog",
+        "explanation": "The Conelog part is garbled as Connectlog. The brand is still recognisable via Camlog."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "minor",
+        "reference_span": "kuusi-yhdeksän kuukautta",
+        "transcript_span": "kuusi vai yhdeksän kuukautta",
+        "explanation": "The 6–9 month range becomes '6 or 9 months', which slightly changes the duration statement."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon / Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marton"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallosen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlog Connectlog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "Implantona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "peri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand. The transcript has the canonical spelling."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "peri-implantiitista",
+        "explanation": "The reference form is a misspelling of peri-implantiitti. The transcript is correct."
+      }
+    ],
+    "usability": 92,
+    "summary": "The transcript is very close to the reference and preserves all course structure, brands, locations and counts. The only issues are minor:\n- Name slips: Marton, Müller, Connectlog.\n- Vodcast is rendered as podcast.\n- The 6–9 month duration is phrased as '6 or 9'.\nThe transcript also gets Dentsply and peri-implantiitti right where the reference misspells them."
+  }
+}

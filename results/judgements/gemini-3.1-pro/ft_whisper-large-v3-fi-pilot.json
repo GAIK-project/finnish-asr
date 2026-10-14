@@ -1,0 +1,187 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-pilot",
+  "label": "Whisper large-v3 + LoRA on FLEURS and VoxPopuli (pilot)",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "677ee95d45df85ccd836d91dc135e31c311d021f9d83954cc576871ad3c6569b",
+  "created_at_utc": "2026-10-12T13:14:24+00:00",
+  "latency_s": 60.8,
+  "usage": {
+    "input_tokens": 3193,
+    "output_tokens": 1562
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 8.21,
+    "error_counts": {
+      "critical": 0,
+      "major": 6,
+      "minor": 3
+    },
+    "entities": {
+      "correct": 8,
+      "variant": 5,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 85
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "Suojärven Timon luento",
+        "transcript_span": "Koulutusta Suojärven Timon luento,",
+        "explanation": "The transcript adds the word 'Koulutusta' at the beginning of the text, which is not in the reference."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "implantologi jaImplantologia ja advanced webinaarisarja",
+        "explanation": "The name of the webinar series is garbled and parts of it are hallucinated or repeated."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "esteettisen alueen",
+        "transcript_span": "estetisalueella",
+        "explanation": "The word 'esteettisen' is slightly garbled into a compound form 'estetisalueella', though the meaning remains somewhat understandable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kerrataan",
+        "transcript_span": "kerrotaan",
+        "explanation": "Changing 'kerrataan' (reviewed) to 'kerrotaan' (told) alters the meaning regarding what is done with the basic topics during the lecture."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobelbayerker",
+        "explanation": "The brand name Nobel Biocare is garbled beyond recognition."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlock-Conallock",
+        "explanation": "The brand name is heavily misspelled based on phonetics, making it difficult to recognize correctly."
+      },
+      {
+        "category": "addition",
+        "severity": "major",
+        "reference_span": "Tutustutaan",
+        "transcript_span": "YY tutustuu",
+        "explanation": "The transcript invents a subject 'YY' and changes a passive statement into an active one, garbling the sentence."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "konkareille",
+        "transcript_span": "konkureille",
+        "explanation": "The word 'konkareille' (veterans/experts) is replaced by 'konkureille', which is not a proper word and loses the intended meaning."
+      },
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "perusimplanttiprotetiikan rajapintaa",
+        "transcript_span": "perusimplanttiprotetiikan,liikan rajapintaa",
+        "explanation": "The transcript includes an artifact/stutter fragment 'liikan' that adds meaningless noise."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallosen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densply-Cirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobelbayerker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock-Conallock"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplanttiitista",
+        "explanation": "The reference misspells the clinical term 'peri-implantiitti', whereas the transcript's spelling is closer to correct."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densply-Cirona",
+        "explanation": "The reference misspells the brand name 'Dentsply' by omitting the 't'. Both the reference and transcript have it wrong."
+      }
+    ],
+    "usability": 85,
+    "summary": "The transcript is mostly accurate and captures the structure of the educational content well. However, it struggles with some specialized technical brand names (like Nobel Biocare and Camlog-Conelog) and contains a few isolated garbled words ('konkureille', 'YY tutustuu') which cause minor drops in readability."
+  }
+}

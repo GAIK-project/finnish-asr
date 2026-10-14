@@ -1,0 +1,18 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-lamurre",
+  "model": "whisper-large-v3-fi-skn-lamurre",
+  "recipe": "whisper",
+  "benchmark": "SKN dialect test: 10 held-out municipalities, normalised text (prepare_skn.py)",
+  "utterances": 600,
+  "batch_size": 16,
+  "load_s": 36.2,
+  "transcribe_s": 869.5,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005030",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22771325"
+}

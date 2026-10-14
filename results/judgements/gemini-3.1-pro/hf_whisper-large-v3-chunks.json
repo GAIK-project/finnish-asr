@@ -1,0 +1,154 @@
+{
+  "arm_id": "hf_whisper-large-v3-chunks",
+  "label": "Whisper large-v3, chunked",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "8a32e28cdb8bc681d857557823c72b2881392b4917f6d049e10665c72770d0e1",
+  "created_at_utc": "2026-10-13T16:56:24+00:00",
+  "latency_s": 85.1,
+  "usage": {
+    "input_tokens": 3177,
+    "output_tokens": 1282
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 5.47,
+    "error_counts": {
+      "critical": 1,
+      "major": 2,
+      "minor": 2
+    },
+    "entities": {
+      "correct": 10,
+      "variant": 4,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 85
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "ja sitten Implantticaseja, semmoinen vodcast,",
+        "transcript_span": "Ja sitten implanttikeissä ja semmoinen vodcast,",
+        "explanation": "The transcript misinterprets the English loanword 'cases' as 'keissä', garbling the meaning from 'implant cases' to 'in implant frames/rings'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "nämä eivät ole missään nimessä sellaisia",
+        "transcript_span": "Nämä eivät ole missään edes sellaisia,",
+        "explanation": "The common idiom 'missään nimessä' (under no circumstances) is misheard as 'missään edes'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "siellä on Implantologiaa Advanced -webinaarisarja,",
+        "transcript_span": "Siellä on implantologia ja advanced webinaarisarja",
+        "explanation": "The title of the webinar series is split and altered, incorrectly turning 'Advanced Implantology' into 'implantology and advanced'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etualueella, estetisalueella",
+        "explanation": "The word 'esteettisen' (aesthetic) is garbled into the non-word 'estetisalueella', though it remains somewhat recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "miten sitä voidaan pre-proteettisesti hyödyntää.",
+        "transcript_span": "miten sitä voidaan reproteettisesti hyödyntää.",
+        "explanation": "The transcript changes the clinical term 'pre-proteettisesti' (pre-prosthetic, before prosthetics) to a non-existent word 'reproteettisesti', which completely changes or loses the clinical meaning."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon / Timo Suojärven / Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peeterin / Peterin / Peter / Peterille"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallosen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotelissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin / Ajokortiosa"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona,",
+        "transcript_span": "Dentsply Sirona,",
+        "explanation": "The transcript correctly spells the brand 'Dentsply Sirona', whereas the reference transcript contains a typo ('Densply')."
+      }
+    ],
+    "usability": 85,
+    "summary": "The transcript is largely accurate and correctly captures most of the course details, proper names, and medical brand names (even correcting a typo in the reference for Dentsply Sirona). However, it struggles with a few English loanwords (turning 'cases' into 'keissä') and makes one critical error by changing the clinical term 'pre-proteettisesti' to 'reproteettisesti'."
+  }
+}

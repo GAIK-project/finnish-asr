@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T09:07:05+00:00",
+  "gaik_evals_commit": "d5c59a0d08852c1a6fc4d717dccbaea1ef2b31fe",
+  "gaik_evals_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (LA-murre dialect test, meaning judge)",
+  "runner_path": "projects/finnish-asr-models/scripts/judge_dialect.py",
+  "dataset_path": "projects/finnish-asr-models/results/benchmarks/lamurre_fi",
+  "dataset_git_object": "382f952921ff6aa2c05a5b12050ebe424ea1c995",
+  "model_or_deployment": [
+    "openai/gpt-oss-120b"
+  ],
+  "cli_args": [
+    "--round",
+    "r2",
+    "--arms",
+    "hf_whisper-large-v3,ft_whisper-large-v3-fi-skn,ft_whisper-large-v3-fi-skn-punct-best,ft_whisper-large-v3-fi-skn-lamurre-best",
+    "--provider",
+    "aitta",
+    "--judge-model",
+    "openai/gpt-oss-120b",
+    "--workers",
+    "4"
+  ],
+  "env": {
+    "AITTA_API_TOKEN": "set"
+  },
+  "extra": {
+    "prompt_version": "dialect-judge-v1",
+    "prompt_sha256": "10a383473b0c935160acad762080fd778a049a979d81ecc4cbd2cd92e2d951e5",
+    "segments": 583,
+    "round": "r2",
+    "provider": "aitta"
+  }
+}

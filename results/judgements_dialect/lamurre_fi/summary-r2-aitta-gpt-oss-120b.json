@@ -1,0 +1,52 @@
+{
+  "generated_utc": "2026-10-14T09:07:05+00:00",
+  "benchmark": "lamurre_fi",
+  "judge": "openai/gpt-oss-120b",
+  "prompt_version": "dialect-judge-v1",
+  "segments": 583,
+  "ref_words": 17625,
+  "usage": {
+    "input_tokens": 347890,
+    "output_tokens": 843140
+  },
+  "arms": {
+    "hf_whisper-large-v3": {
+      "critical": 110,
+      "major": 467,
+      "minor": 177,
+      "error_points_per_100w": 20.49,
+      "segments_without_errors": 86,
+      "segments_best_or_tied": 237
+    },
+    "ft_whisper-large-v3-fi-skn": {
+      "critical": 43,
+      "major": 359,
+      "minor": 141,
+      "error_points_per_100w": 13.42,
+      "segments_without_errors": 173,
+      "segments_best_or_tied": 385
+    },
+    "ft_whisper-large-v3-fi-skn-punct-best": {
+      "critical": 42,
+      "major": 353,
+      "minor": 143,
+      "error_points_per_100w": 13.21,
+      "segments_without_errors": 175,
+      "segments_best_or_tied": 385
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "critical": 44,
+      "major": 339,
+      "minor": 142,
+      "error_points_per_100w": 12.92,
+      "segments_without_errors": 186,
+      "segments_best_or_tied": 390
+    }
+  },
+  "arms_judged_together": [
+    "hf_whisper-large-v3",
+    "ft_whisper-large-v3-fi-skn",
+    "ft_whisper-large-v3-fi-skn-punct-best",
+    "ft_whisper-large-v3-fi-skn-lamurre-best"
+  ]
+}

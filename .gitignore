@@ -1,0 +1,46 @@
+# ---------------------------------------------------------------------------
+# Licence-restricted outputs: never commit these.
+# LA-murre (Lauseopin arkiston murrekorpus) is CC BY-ND 4.0. Its texts, model transcripts paired
+# with them, judge records and LLM rewrites are produced locally by the public scripts and stay local.
+# ---------------------------------------------------------------------------
+results/benchmarks/lamurre_fi/*.jsonl
+results/judgements_dialect/**/*.jsonl
+results/judgements_dialect/**/.meta*/
+results/labels/lamurre_*.jsonl
+# the listening page embeds the clip as base64 (and its private build also LA-murre text)
+results/compare.html
+results/_compare_run_metadata.json
+# judge records that quote HY's non-public tool transcripts
+results/judgements/*/hy2[56]_*.json
+results/transcriptions/**/hy2[56]_*.json
+
+# ---------------------------------------------------------------------------
+# Weights, raw data, logs, keys
+# ---------------------------------------------------------------------------
+# LoRA adapters (the internal LA-murre model among them); the public model is on Hugging Face
+results/finetune/*/adapter/
+*.safetensors
+# regenerable intermediates: prepare_skn.py output and LLM batch caches
+results/labels/*.cache.jsonl
+results/labels/skn_train.jsonl
+results/labels/skn_validation.jsonl
+# LUMI Slurm logs and archives (user names, project ids, scratch paths)
+results/gpu_run/*.tar.gz
+*.out
+fiasr-*.out
+# the downloaded clip, references and 16 kHz copy; corpora; fine-tuned models
+data/
+models/
+.env
+.env.*
+!.env.example
+
+# ---------------------------------------------------------------------------
+# Python and tools
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/

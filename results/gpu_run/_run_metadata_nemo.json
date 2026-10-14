@@ -1,0 +1,20 @@
+{
+  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, QAD-1 ground truth)",
+  "dataset": "projects/qadental-transcription-translation/dataset/ajokortti",
+  "runner": "projects/finnish-asr-models/scripts/run_open_models.py",
+  "env": "nemo",
+  "arms": [
+    "nemo_canary-1b-v2",
+    "nemo_rasmus-canary-fi-v2",
+    "nemo_rasmus-canary-fi-v2-kenlm"
+  ],
+  "host": "nid007862",
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "slurm_job_id": "22734819"
+}

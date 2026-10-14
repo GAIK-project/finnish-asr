@@ -1,0 +1,187 @@
+{
+  "arm_id": "openai_gpt-4o-transcribe",
+  "label": "OpenAI gpt-4o-transcribe",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "161d563bf9d4ddbb6f424585841c8774180c6d414f1d0ca729d901b305a9939a",
+  "created_at_utc": "2026-10-12T08:30:00+00:00",
+  "latency_s": 45.6,
+  "usage": {
+    "input_tokens": 3200,
+    "output_tokens": 1479
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 7.46,
+    "error_counts": {
+      "critical": 1,
+      "major": 3,
+      "minor": 5
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 5,
+      "wrong": 4,
+      "missing": 0
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "",
+        "transcript_span": "koulutusta. ",
+        "explanation": "The transcript adds a word at the beginning that is not in the reference."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Marta Martoon",
+        "explanation": "The surname of the speaker is garbled into an incorrect name."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "nimessä",
+        "transcript_span": "",
+        "explanation": "The word 'nimessä' is missing from the idiom 'missään nimessä' (under no circumstances)."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "oikoja Virpi, keskustelevat",
+        "transcript_span": "oikoa Virpi, Virpi keskusteluvat",
+        "explanation": "The noun 'oikoja' (orthodontist) is changed to the verb 'oikoa' (to straighten), and the name 'Virpi' is erroneously repeated."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaisirona",
+        "explanation": "The major dental brand Dentsply Sirona is completely mangled into two unrecognizable words."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Pajaker",
+        "explanation": "The brand name 'Biocare' is severely misspelled."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "-Conelog",
+        "transcript_span": "",
+        "explanation": "The 'Conelog' part of the brand name 'Camlog-Conelog' is omitted."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin",
+        "transcript_span": "Futurentin",
+        "explanation": "The company name Futudent is slightly misspelled as Futurent."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "The duration is changed from a range (6 to 9) to alternatives (6 or 9)."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timo / Timo Suojärvi / Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Marta Martoon"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin / Peetter / Peetterille"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallonen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller / Virpi"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Klarion Hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Niden, Splaisirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Pajaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "Futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "peri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "peri-implantiitista",
+        "explanation": "The transcript uses the correct medical spelling 'peri-implantiitti', whereas the reference is misspelled as 'perimplantiitista'."
+      },
+      {
+        "reference_span": "Densply",
+        "transcript_span": "Niden, Splai",
+        "explanation": "The correct brand name is 'Dentsply', which is misspelled as 'Densply' in the reference."
+      }
+    ],
+    "usability": 75,
+    "summary": "The transcript conveys the structure and course information reasonably well but struggles significantly with specialized medical and brand terminology. Key names of speakers and companies (Martta Martola, Dentsply Sirona, Nobel Biocare) are severely garbled, which limits the usability for professionals seeking precise references from the webinar."
+  }
+}

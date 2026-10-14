@@ -1,0 +1,52 @@
+{
+  "args": {
+    "download": false,
+    "name": "whisper-large-v3-fi-skn-lamurre",
+    "data": "skn+open+lamurre",
+    "skn_text": "punct",
+    "base": "openai/whisper-large-v3",
+    "epochs": 4,
+    "lr": 0.0001,
+    "batch": 8,
+    "lora_r": 64,
+    "limit": null,
+    "seed": 0,
+    "env": "hf"
+  },
+  "train_items": {
+    "skn": 15042,
+    "lamurre": 15529,
+    "fleurs": 2704,
+    "voxpopuli": 7504
+  },
+  "val_items": 1476,
+  "epochs": [
+    {
+      "epoch": 1,
+      "step": 5097,
+      "val_loss": 0.2464,
+      "minutes": 99.3
+    },
+    {
+      "epoch": 2,
+      "step": 10194,
+      "val_loss": 0.2375,
+      "minutes": 198.7
+    },
+    {
+      "epoch": 3,
+      "step": 15291,
+      "val_loss": 0.2393,
+      "minutes": 298.1
+    },
+    {
+      "epoch": 4,
+      "step": 20388,
+      "val_loss": 0.2454,
+      "minutes": 397.5
+    }
+  ],
+  "val_loss_before": 0.6039,
+  "gpu": "AMD Instinct MI250X",
+  "base": "openai/whisper-large-v3"
+}

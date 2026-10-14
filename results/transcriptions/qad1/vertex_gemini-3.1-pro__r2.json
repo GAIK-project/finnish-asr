@@ -1,0 +1,43 @@
+{
+  "arm_id": "vertex_gemini-3.1-pro__r2",
+  "stage": "asr",
+  "provider": "google-vertex",
+  "model": "gemini-3.1-pro-preview",
+  "text": "koulutusta. Suojärven Timon luento potilasvahingot protetiikassa. Siinä tulee hyvin niinku laajasti protetiikkaa yleensä, vähän vaikeusasteen arviointia ja muuta. Sit on parodontologi Martta Marttolan luento peri-implantiitista ja sitten implanttikeissejä semmonen vodcast, jossa Peterin kanssa käydään läpi näitä yleisiä ongelmia tai yleisimpiä ongelmia mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan.\n\nViimeisenä on vielä sit semmonen osio missä on tärkeää tunnistaa nää ei oo missään nimessä sellaisia mitä kannattaa ensimmäisenä lähteä tekemään elikkä siellä on implantologia advanced webinaarisarja Timo Suojärvi ja Ilkka Pallos ja siinä tehdään sit semmosta niinku sanotaanko high end implanttihoitoa ja etualueella esteettisellä alueella ja tosi tosi vaativia temppuja mutta ne on tärkeitä tunnistaa kun itse tekee että missä menee se raja että milloin työ voi muuttuakin yhtäkkiä todella hankalaksi ja. Sitten on myös oikomishoidollisia näkökulmia. Timo ja Virpi Myller oikoja Virpi niin keskustelevat sitten siitä siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää.\n\nTeorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty. Ajokortin osa kaksi komponentit tutuksi -päivä Helsingissä Clarion-hotellissa. Se alkaa Peterin kertausluennolla vähän näitä perusasioita kerrataan siihen alkuun pohjalle. Ja sen jälkeen siellä on neljä implanttibrändiä mukana Straumann, Dentsply Sirona, Nobel Biocare ja Camlog Conelog eli Implantona Oy. Tutustutaan heidän komponentteihin mitä mimmoisia osia siellä on miten ne eroavat toisistaan. Ja siellä on myös neljä eri skanneria sitten mukana elikkä päästään katsomaan miten skannereilla jäljennetään. Ja. Tosiaan päivän ideana on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähäsen harjoittelemaan niillä siellä paikan päällä sitten jäljentämistä.\n\nSitten sanoisin, että tän ajokortin pihvi on se osa kolme. Ja se on tää pienryhmävalmennus mestarikisällivalmennus jossa sitten Peter ottaa kopin enintään kymmenen mahtuu mukaan, elikkä ne, jotka tähän lähtee, niin kannattaa nopeasti ilmoittautua, että saa saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Eli ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Ja tiivistettynä koostumus on aloituspäivä Futurdentin tiloissa Helsingissä. Sit on Peterin työskentelyn seuraamista yksityisvastaanotolla. Sit on etäsessioita Peterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmonen paketti kaikille. Kesto on noin kuudesta yhdeksään kuukautta, mutta nyt mä annan Peterille puheenvuoron. Kerro pikkuisen tosta struktuurista siitä aloituspäivästä alkaen miten se menee tää valmennus.\n\nJoo se koostuu teoriaosuudesta. Käydään muutamia asioita läpi. Tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita joita me hoidetaan. Ja sitten toinen osa on tämä hands-on jossa",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech exactly as spoken, in Finnish. Do not translate, summarise or correct the speakers. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Gemini 3.1 Pro",
+  "notes": "General multimodal LLM prompted to transcribe; a third model family for the ground-truth audit.",
+  "words": null,
+  "latency_s": 19.24,
+  "usage": {
+    "candidates_token_count": 946,
+    "candidates_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 946
+      }
+    ],
+    "prompt_token_count": 4536,
+    "prompt_tokens_details": [
+      {
+        "modality": "AUDIO",
+        "token_count": 4500
+      },
+      {
+        "modality": "TEXT",
+        "token_count": 36
+      }
+    ],
+    "thoughts_token_count": 1372,
+    "total_token_count": 6854,
+    "traffic_type": "ON_DEMAND"
+  },
+  "created_at_utc": "2026-09-25T10:37:23+00:00",
+  "raw": null,
+  "repeat": 2
+}

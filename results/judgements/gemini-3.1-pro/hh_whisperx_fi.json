@@ -1,0 +1,201 @@
+{
+  "arm_id": "hh_whisperx_fi",
+  "label": "HH WhisperX (Finnish-NLP)",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "9d4cd0248783b6744bf9dc8a4e3c7828af458425691f0f848a06ed596c9a3f59",
+  "created_at_utc": "2026-10-12T08:04:02+00:00",
+  "latency_s": 52.8,
+  "usage": {
+    "input_tokens": 3188,
+    "output_tokens": 1608
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 8.71,
+    "error_counts": {
+      "critical": 0,
+      "major": 6,
+      "minor": 5
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 6,
+      "wrong": 3,
+      "missing": 0
+    },
+    "entities_ok": 11,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 78
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "potilasvahingon protetiikassa",
+        "explanation": "'Patient injuries in prosthetics' is transcribed as 'Patient injury's prosthetics', altering the grammatical meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja,",
+        "transcript_span": "ImplanttiCase ja",
+        "explanation": "The plural 'implant cases' is split into a singular brand-like name 'ImplantCase' and the conjunction 'ja'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "on vielä",
+        "transcript_span": "aviain",
+        "explanation": "The words 'is still' are replaced by 'aviain', which is not a real Finnish word, garbling the sentence."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään niissä",
+        "explanation": "The idiom 'under no circumstances' is misheard as 'in any of those'."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": ", oikoja Virpi,",
+        "transcript_span": "",
+        "explanation": "The speaker's professional title (orthodontist) and first name repetition are entirely omitted."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Komponentit Tutuksi",
+        "transcript_span": "komponentin tutuksi",
+        "explanation": "The plural course name 'Getting familiar with components' is incorrectly transcribed as singular."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kerrataan",
+        "transcript_span": "kerrotaan",
+        "explanation": "The verb 'reviewed' is changed to 'told'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Denzbley-Sirona",
+        "explanation": "The company name is misspelled significantly, making the first part hard to recognize."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel-Baker",
+        "explanation": "The brand name 'Biocare' is completely replaced with 'Baker'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Kamloch-Konelloch",
+        "explanation": "The company name is garbled into a phonetically spelled, unrecognizable form."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoon otetaan",
+        "explanation": "The verb 'gather together' is misheard as 'are taken together', distorting the meaning of the meeting."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Timo Suojärve"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marttola"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peter"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Clarion Hotelissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Denzbley-Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel-Baker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Kamloch-Konelloch"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Denzbley-Sirona",
+        "explanation": "The reference misspelled 'Dentsply' as 'Densply'."
+      },
+      {
+        "reference_span": "tunnistaa, nämä eivät ole",
+        "transcript_span": "tunnistaa, että nämä eivät ole",
+        "explanation": "The transcript includes the conjunction 'että', which makes the sentence structure grammatically correct and was likely actually spoken."
+      }
+    ],
+    "usability": 78,
+    "summary": "The transcript mostly captures the factual flow of the webinar, retaining the structure and overall meaning. However, it severely struggles with specific terminology and brand names, garbling several major dental companies almost beyond recognition, and completely drops the professional title of one speaker."
+  }
+}

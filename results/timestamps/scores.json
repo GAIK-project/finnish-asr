@@ -1,0 +1,62 @@
+{
+  "hf_whisper-large-v3": {
+    "test_segments": {
+      "segments": 600,
+      "wer_with_timestamps": 40.95,
+      "segments_with_timestamps": 600,
+      "boundaries": {
+        "sentence_starts": 791,
+        "within_0_5s": 0.535,
+        "within_1s": 0.608,
+        "median_s": 0.18
+      }
+    },
+    "longform": {
+      "sequential": {
+        "wer": 37.52,
+        "windows_with_loop": 0,
+        "boundaries": {
+          "sentence_starts": 302,
+          "within_0_5s": 0.454,
+          "within_1s": 0.626,
+          "median_s": 0.6
+        }
+      },
+      "chunks": {
+        "wer": 39.36,
+        "windows_with_loop": 0
+      },
+      "windows": 10
+    }
+  },
+  "hub_whisper-large-v3-fi-dialects": {
+    "test_segments": {
+      "segments": 600,
+      "wer_with_timestamps": 21.18,
+      "segments_with_timestamps": 600,
+      "boundaries": {
+        "sentence_starts": 791,
+        "within_0_5s": 0.008,
+        "within_1s": 0.008,
+        "median_s": 5.33
+      }
+    },
+    "longform": {
+      "sequential": {
+        "wer": 21.51,
+        "windows_with_loop": 1,
+        "boundaries": {
+          "sentence_starts": 302,
+          "within_0_5s": 0.129,
+          "within_1s": 0.172,
+          "median_s": 5.96
+        }
+      },
+      "chunks": {
+        "wer": 17.32,
+        "windows_with_loop": 0
+      },
+      "windows": 10
+    }
+  }
+}

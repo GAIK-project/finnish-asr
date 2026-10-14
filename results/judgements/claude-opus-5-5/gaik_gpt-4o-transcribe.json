@@ -1,0 +1,208 @@
+{
+  "arm_id": "gaik_gpt-4o-transcribe",
+  "label": "gaik Transcriber: gpt-4o-transcribe",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "720c667fbc5aa206a50be0994d4a36a9f941e4f9aec62e631672ec905786ad10",
+  "created_at_utc": "2026-10-12T08:24:08+00:00",
+  "latency_s": 23.4,
+  "usage": {
+    "input_tokens": 5156,
+    "output_tokens": 2933
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 5.97,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 9
+    },
+    "entities": {
+      "correct": 6,
+      "variant": 5,
+      "wrong": 3,
+      "missing": 0
+    },
+    "entities_ok": 11,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Suojärven Timon luento",
+        "transcript_span": "Suojaarven Timo luento",
+        "explanation": "Surname misspelled but recognisable; correct later in text."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hyvin laajasti protetiikkaa",
+        "transcript_span": "hyvin laajasta protetiikkaa",
+        "explanation": "Wrong inflection; meaning still inferable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan luento",
+        "transcript_span": "Marta Marto luento",
+        "explanation": "Lecturer's surname garbled (Martola → Marto)."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Peterin kanssa",
+        "transcript_span": "Peetterin kanssa",
+        "explanation": "Peter consistently spelled 'Peetter'; recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "kuin itse tekijät",
+        "explanation": "Phrase garbled; meaning partly survives."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "keskustelevat",
+        "transcript_span": "keskustelivat",
+        "explanation": "Tense changed from present to past."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Straumann",
+        "transcript_span": "Strauman",
+        "explanation": "Brand misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaissirona",
+        "explanation": "Dentsply Sirona garbled beyond easy recognition."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel, Pajaker",
+        "explanation": "Biocare garbled into 'Pajaker'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Implantona Oy",
+        "transcript_span": "implanttoona Oy",
+        "explanation": "Company name misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin tiloissa",
+        "transcript_span": "Futurentin tiloissa",
+        "explanation": "Futudent misspelled as Futurent."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "minor",
+        "reference_span": "kuusi-yhdeksän kuukautta",
+        "transcript_span": "kuusi tai yhdeksän kuukautta",
+        "explanation": "Range 6–9 months rendered as '6 or 9 months'."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Timo Suojärvi"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Marta Marto"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallonen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Niden, Splaissirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel, Pajaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Kamlog, Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "Futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "periimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaissirona",
+        "explanation": "Reference misspells the brand; canonical is Dentsply Sirona."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplantiitista",
+        "explanation": "Reference drops an 'i'; transcript form is closer to canonical peri-implantiitti."
+      }
+    ],
+    "usability": 75,
+    "summary": "Transcript follows the reference closely in content and structure; no sentences lost. Main problems are names: Martta Martola's surname, Dentsply Sirona and Nobel Biocare are garbled, and several other names (Peter, Futudent, Straumann, Implantona) are misspelled but recognisable. Duration range slightly altered."
+  }
+}

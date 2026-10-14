@@ -1,0 +1,36 @@
+{
+  "args": {
+    "download": false,
+    "name": "whisper-large-v3-fi-pilot",
+    "base": "openai/whisper-large-v3",
+    "epochs": 2,
+    "lr": 0.0001,
+    "batch": 8,
+    "lora_r": 32,
+    "limit": null,
+    "seed": 0,
+    "env": "hf"
+  },
+  "train_items": {
+    "fleurs": 2704,
+    "voxpopuli": 7504
+  },
+  "val_items": 1102,
+  "epochs": [
+    {
+      "epoch": 1,
+      "step": 1276,
+      "val_loss": 0.1764,
+      "minutes": 25.6
+    },
+    {
+      "epoch": 2,
+      "step": 2552,
+      "val_loss": 0.1746,
+      "minutes": 51.2
+    }
+  ],
+  "val_loss_before": 0.4788,
+  "gpu": "AMD Instinct MI250X",
+  "base": "openai/whisper-large-v3"
+}

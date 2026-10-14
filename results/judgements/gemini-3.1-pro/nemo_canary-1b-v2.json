@@ -1,0 +1,210 @@
+{
+  "arm_id": "nemo_canary-1b-v2",
+  "label": "Canary 1B v2",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "83dfe63939fd512d7bcfb15a15b6f1ac13c1820308548d256e16f969e3cc968f",
+  "created_at_utc": "2026-10-12T10:13:38+00:00",
+  "latency_s": 98.1,
+  "usage": {
+    "input_tokens": 3166,
+    "output_tokens": 1819
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 17.91,
+    "error_counts": {
+      "critical": 3,
+      "major": 8,
+      "minor": 2
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 5,
+      "wrong": 4,
+      "missing": 0
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 55
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hyvin laajasti",
+        "transcript_span": "hyvin laajasta",
+        "explanation": "Grammatical case error changes 'broadly' to 'from broad', but the general meaning remains understandable."
+      },
+      {
+        "category": "omission",
+        "severity": "critical",
+        "reference_span": "parodontologi Martta Martolan",
+        "transcript_span": "pari tuolloin Martta Martoa",
+        "explanation": "The speaker's professional title 'parodontologi' (periodontist) is replaced with nonsense ('pari tuolloin'), losing important medical context, and the name is slightly mangled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeissä",
+        "explanation": "'Implant cases' (used as a title) is misrecognized as 'in implant spaces', altering the meaning significantly."
+      },
+      {
+        "category": "omission",
+        "severity": "critical",
+        "reference_span": "nämä eivät ole missään nimessä sellaisia mitä",
+        "transcript_span": "missä ne on sellaisia, mitä",
+        "explanation": "A critical negation is dropped, completely reversing the advice given about attempting advanced procedures (from 'by no means ones to do first' to 'where they are ones to do first')."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timosuojäröjä ja Ilkka Pallo",
+        "explanation": "The names of the course instructors are completely garbled beyond recognition."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "esteettisen alueen",
+        "transcript_span": "estetisoluja",
+        "explanation": "'Aesthetic area' is misrecognized as 'aesthetic cells', which is clinically meaningless in this context."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "Kuitatte",
+        "explanation": "The phrase 'when you do it yourself' is misrecognized as 'you acknowledge/receipt', losing the point about recognizing one's own limits."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "Oiko ja Virpi",
+        "explanation": "The professional title 'oikoja' (orthodontist) is split into a proper name 'Oiko' and the word 'and', creating a nonexistent person."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densply-siirron",
+        "explanation": "The company name Dentsply Sirona is garbled to include the Finnish word for 'transfer' (siirron)."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Bayer Care",
+        "explanation": "The company name Nobel Biocare is incorrectly transcribed to include 'Bayer'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "mimmoisia",
+        "transcript_span": "minimoisia",
+        "explanation": "The colloquial word 'mimmoisia' (what kind) is replaced with 'minimoisia' (minimal), slightly altering the sentence meaning."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Futudentin",
+        "transcript_span": "Futurenti",
+        "explanation": "The company name Futudent is wrongly transcribed as Futurenti."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "hands-on",
+        "transcript_span": "Hanson",
+        "explanation": "The educational format term 'hands-on' is misrecognized as the proper name 'Hanson'."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Martoa"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallo"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumannin"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Densply-siirron"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Bayer Care"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conalog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implantoona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "Futurenti"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densply-siirron",
+        "explanation": "The correct spelling of the company is Dentsply Sirona, but the reference misses the 't'."
+      }
+    ],
+    "usability": 55,
+    "summary": "The transcript struggles significantly with technical dental terminology, English loanwords, and proper names (companies and individuals). The most severe error is the omission of a negation, completely flipping a crucial piece of clinical advice regarding advanced procedures. Furthermore, professional titles like 'parodontologi' and 'oikoja' are replaced by nonsensical text or false names, reducing the usability of the transcript considerably."
+  }
+}

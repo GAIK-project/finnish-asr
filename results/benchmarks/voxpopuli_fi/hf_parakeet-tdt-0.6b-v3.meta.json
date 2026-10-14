@@ -1,0 +1,18 @@
+{
+  "arm_id": "hf_parakeet-tdt-0.6b-v3",
+  "model": "nvidia/parakeet-tdt-0.6b-v3",
+  "recipe": "pipeline",
+  "benchmark": "facebook/voxpopuli fi test",
+  "utterances": 478,
+  "batch_size": 16,
+  "load_s": 13.2,
+  "transcribe_s": 84.0,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005073",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22740498"
+}

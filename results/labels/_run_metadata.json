@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-13T07:39:01+00:00",
+  "gaik_evals_commit": "76991779ceda8d141c863222d4e2e387ce0c9650",
+  "gaik_evals_dirty": true,
+  "app_under_test": "Finnish ASR dialect fine-tune: LLM-written training targets",
+  "runner_path": "projects/finnish-asr-models/scripts/prepare_targets.py",
+  "dataset_path": "projects/finnish-asr-models/results/labels/lamurre_train.jsonl",
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "claude-opus-5-5"
+  ],
+  "cli_args": [
+    "normalise",
+    "results/labels/lamurre_train.jsonl"
+  ],
+  "env": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "set",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "set"
+  },
+  "extra": {
+    "mode": "normalise",
+    "prompt_sha256": "88232dbd9dfac72e7fed8a8dbbf290c246f1f2101804d45e919ffced37dfbb05"
+  }
+}

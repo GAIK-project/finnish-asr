@@ -1,0 +1,187 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn",
+  "label": "Whisper large-v3 + LoRA on SKN dialects and open data",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "6352ff6252f67d753dabc916b721c29dde8a859c4826323a9bc3603913e112b6",
+  "created_at_utc": "2026-10-12T20:15:15+00:00",
+  "latency_s": 90.5,
+  "usage": {
+    "input_tokens": 3186,
+    "output_tokens": 1560
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 9.45,
+    "error_counts": {
+      "critical": 1,
+      "major": 5,
+      "minor": 3
+    },
+    "entities": {
+      "correct": 6,
+      "variant": 6,
+      "wrong": 2,
+      "missing": 0
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 65
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marttolen",
+        "explanation": "The speaker's surname is misspelled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "implantologia ja advanced webinaarisarja",
+        "explanation": "The proper name of the webinar series is split with a conjunction, altering the meaning from a specific title to a list of topics."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Pallos",
+        "explanation": "The speaker's surname is truncated and loses its genitive case, though the person remains recognizable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etualoja ja estetisoalueja",
+        "explanation": "The clinical terminology for dental areas is completely garbled and turned into non-words."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "oiko ja Virpi Virpi",
+        "explanation": "The profession 'orthodontist' (oikoja) is misrecognized as a verb and a conjunction, and the name is duplicated, making the sentence confusing."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Nobel Biocare ja Camlog-Conelog",
+        "transcript_span": "Nobelbayer, ja Kamloch-Konelloch",
+        "explanation": "The implant brand names are severely garbled. 'Nobel Biocare' is entirely unrecognizable and sounds like a different company."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "mestari-kisälli -valmennus",
+        "transcript_span": "mestarekisällövalmennus",
+        "explanation": "The term for master-apprentice is misspelled, making it slightly confusing but still decipherable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kovimmille konkareille",
+        "transcript_span": "kovin mieti konkareille",
+        "explanation": "The word meaning 'toughest' is replaced with unrelated words, rendering the phrase nonsensical."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "major",
+        "reference_span": "kuusi-yhdeksän kuukautta",
+        "transcript_span": "kuusi vai yhdeksän kuukautta",
+        "explanation": "A duration of 'six to nine months' is changed to 'six or nine months', altering the meaning."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marttolen"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Dentsply-siroona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobelbayer"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Kamloch-Konelloch"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplanttiitista",
+        "explanation": "The reference seems to have a typo, missing the 'i' in 'peri-implantiitista'. The transcript's spelling is closer to correct despite double letters."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply-siroona",
+        "explanation": "The reference misspelled 'Dentsply' by omitting the 't'."
+      }
+    ],
+    "usability": 65,
+    "summary": "The transcript effectively captures the general flow and most names of the webinar structure, but struggles significantly with specialized clinical terminology and brand names. Some crucial implant brands are severely garbled (Nobel Biocare -> Nobelbayer), and phrases describing course content and target audiences are occasionally reduced to nonsensical words."
+  }
+}

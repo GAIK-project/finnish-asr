@@ -1,0 +1,114 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-pilot",
+  "stage": "asr",
+  "provider": "huggingface-gpu",
+  "model": "whisper-large-v3-fi-pilot",
+  "text": "Koulutusta Suojärven Timon luento, potilasvaihingot protetiikassa, siinä tulee hyvin laajasti protetiikkaa, yleensä vähän vaikeusasteen arviointi ja muuta. Sitten on parodontologi Martta Martola luento periimplanttiitista ja sitten implanttikeissiä ja semmoinen vodcast, jossa Peterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa, nämä eivät ole missään nimessä sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologi jaImplantologia ja advanced webinaarisarja, Timo Suojärven ja Ilkka Pallosen, siinä tehdään semmoista high end implanttihoitoa ja etualueella, estetisalueella, tosi vaativia temppuja, mutta ne on tärkeää tunnistaa, kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttukin yhtäkkiä todella hankalaksi. Sitten on myös oikomishoidollisia näkökulmia, Timo ja Virpi Müller, oikoja Virpi, keskustelevat sitten siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää.Teorian lopuksi on lopputentti, ja sen suorittamalla ajokortin osa 1 on tehty. Ajokortin osa 2, komponentit tutuksi päivä, Helsingissä Clarion Hotellissa, alkaa Peterin kertausluennolla, vähän perusasioita kerrotaan siihen alkuun pohjalle, ja sen jälkeen siellä on neljä implanttebrändiä mukana, Straumann, Densply-Cirona, Nobelbayerker ja Camlock-Conallock eli implanttoona Oy.YY tutustuu heidän komponentteihinsa, millaisia osia siellä on, miten ne eroavat toisistaan, ja siellä on myös neljä eri skanneria mukana, eli päästään katsomaan, miten skannereilla jäljennetään. Tosiaan päivän ideana on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähän harjoittelemaan niillä myös siellä paikan päällä jäljentämistä. Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme, ja se on tämä pienryhmävalmennus, mestarikisällövalmennus,jossa sitten Peter ottaa kopin, enintään kymmenen mahtuu mukaan, eli ne, jotka tähän lähtevät, kannattaa nopsaan ilmoittautua, että saa paikan sieltä. Tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista, eli ei ehkä kaikista kovimmille konkureille, mutta hekin ovat toki tervetulleita tähän. Tiivistettynä koostumus on aloituspäivä futudentin tiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista privaattivastaanotolla,Sitten on etäsessioita Peterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kesto on noin 6-9 kuukautta, mutta nyt minä annan Peterille puheenvuoron. Kerro pikkusen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus? Joo, se koostuu teoriaosuudesta, käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan,liikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä hands on, jossa",
+  "params": {
+    "recipe": "whisper",
+    "language": "fi",
+    "task": "transcribe",
+    "dtype": "float16",
+    "long_form": "sequential, return_timestamps=True",
+    "env": "hf",
+    "device": "cuda",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0"
+    }
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Whisper large-v3 + LoRA on FLEURS and VoxPopuli (pilot)",
+  "notes": "latency_s includes model loading.",
+  "words": null,
+  "latency_s": 125.82,
+  "usage": null,
+  "created_at_utc": "2026-10-12T12:53:32+00:00",
+  "raw": {
+    "chunks": [
+      {
+        "text": "Koulutusta Suojärven Timon luento, potilasvaihingot protetiikassa, siinä tulee hyvin laajasti protetiikkaa, yleensä vähän vaikeusasteen arviointi ja muuta. Sitten on parodontologi Martta Martola luento periimplanttiitista ja sitten implanttikeissiä ja semmoinen vodcast, jossa Peterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan.",
+        "start": 0.0,
+        "end": 22.0
+      },
+      {
+        "text": "Viimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa, nämä eivät ole missään nimessä sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologi ja",
+        "start": 22.0,
+        "end": 29.0
+      },
+      {
+        "text": "Implantologia ja advanced webinaarisarja, Timo Suojärven ja Ilkka Pallosen, siinä tehdään semmoista high end implanttihoitoa ja etualueella, estetisalueella, tosi vaativia temppuja, mutta ne on tärkeää tunnistaa, kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttukin yhtäkkiä todella hankalaksi.",
+        "start": 29.0,
+        "end": 45.72
+      },
+      {
+        "text": "Sitten on myös oikomishoidollisia näkökulmia, Timo ja Virpi Müller, oikoja Virpi, keskustelevat sitten siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää.",
+        "start": 45.72,
+        "end": 57.08
+      },
+      {
+        "text": "",
+        "start": 57.98,
+        "end": 57.08
+      },
+      {
+        "text": "Teorian lopuksi on lopputentti, ja sen suorittamalla ajokortin osa 1 on tehty. Ajokortin osa 2, komponentit tutuksi päivä, Helsingissä Clarion Hotellissa, alkaa Peterin kertausluennolla, vähän perusasioita kerrotaan siihen alkuun pohjalle, ja sen jälkeen siellä on neljä implanttebrändiä mukana, Straumann, Densply-Cirona, Nobelbayerker ja Camlock-Conallock eli implanttoona Oy.",
+        "start": 64.08,
+        "end": 83.08
+      },
+      {
+        "text": "YY tutustuu heidän komponentteihinsa, millaisia osia siellä on, miten ne eroavat toisistaan, ja siellä on myös neljä eri skanneria mukana, eli päästään katsomaan, miten skannereilla jäljennetään.",
+        "start": 83.08,
+        "end": 94.08
+      },
+      {
+        "text": "Tosiaan päivän ideana on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähän harjoittelemaan niillä myös siellä paikan päällä jäljentämistä.",
+        "start": 94.08,
+        "end": 103.08
+      },
+      {
+        "text": "Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme, ja se on tämä pienryhmävalmennus, mestarikisällövalmennus,",
+        "start": 103.08,
+        "end": 111.08
+      },
+      {
+        "text": "jossa sitten Peter ottaa kopin, enintään kymmenen mahtuu mukaan, eli ne, jotka tähän lähtevät, kannattaa nopsaan ilmoittautua, että saa paikan sieltä.",
+        "start": 111.08,
+        "end": 121.08
+      },
+      {
+        "text": "Tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista, eli ei ehkä kaikista kovimmille konkureille, mutta hekin ovat toki tervetulleita tähän.",
+        "start": 121.08,
+        "end": 132.08
+      },
+      {
+        "text": "Tiivistettynä koostumus on aloituspäivä futudentin tiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista privaattivastaanotolla,",
+        "start": 132.08,
+        "end": 140.08
+      },
+      {
+        "text": "Sitten on etäsessioita Peterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille.",
+        "start": 140.08,
+        "end": 148.08
+      },
+      {
+        "text": "Kesto on noin 6-9 kuukautta, mutta nyt minä annan Peterille puheenvuoron. Kerro pikkusen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus?",
+        "start": 148.08,
+        "end": 158.08
+      },
+      {
+        "text": "Joo, se koostuu teoriaosuudesta, käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan,",
+        "start": 158.08,
+        "end": 170.08
+      },
+      {
+        "text": "liikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä hands on, jossa",
+        "start": 170.08,
+        "end": 180.08
+      }
+    ]
+  },
+  "repeat": 1
+}

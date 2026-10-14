@@ -1,0 +1,159 @@
+{
+  "arm_id": "openai_gpt-transcribe",
+  "label": "OpenAI gpt-transcribe",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "62e0bf7354546f524cffccf48c6c8a15cea7684df74bc7795c45d2cf7ec20bdb",
+  "created_at_utc": "2026-10-12T08:24:44+00:00",
+  "latency_s": 17.6,
+  "usage": {
+    "input_tokens": 5117,
+    "output_tokens": 2036
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 4.23,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 2
+    },
+    "entities": {
+      "correct": 10,
+      "variant": 2,
+      "wrong": 2,
+      "missing": 0
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 80
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "potilasvaihtoehdot protetiikassa",
+        "explanation": "The lecture title changes from 'patient injuries in prosthetics' to 'patient alternatives in prosthetics', so the reader gets the wrong lecture topic."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "The format changes from video podcast to podcast."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Pallas",
+        "explanation": "The lecturer's surname is wrong: Pallas instead of Pallonen."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Implantona Oy",
+        "transcript_span": "implanttioina Oy",
+        "explanation": "The company name is garbled and no longer reads as Implantona Oy."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Virpi Myller",
+        "transcript_span": "Virpi Müller",
+        "explanation": "The surname is misspelled but still recognisable."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Timo Suojärvi"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peeter"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallas"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "correct",
+        "transcript_form": "Camlog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "wrong",
+        "transcript_form": "implanttioina Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "periimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand; the transcript has the correct spelling."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplantiitista",
+        "explanation": "The reference spelling is a slip; the transcript matches the correct term peri-implantiitti."
+      }
+    ],
+    "usability": 80,
+    "summary": "The transcript is largely accurate and complete, and all numbers are correct (four brands, four scanners, at most 10 participants, 6–9 months). The main problems are names and one title: the first lecture is wrongly given as 'potilasvaihtoehdot', Ilkka Pallonen becomes 'Pallas', and Implantona Oy is garbled to 'implanttioina'. Peter is spelled 'Peeter' and Myller 'Müller', but both stay recognisable."
+  }
+}

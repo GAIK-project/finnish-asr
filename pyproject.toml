@@ -1,0 +1,50 @@
+[project]
+name = "finnish-asr"
+version = "0.1.0"
+description = "Finnish speech-to-text: 20+ models compared, and a Whisper fine-tune for dialects (GAIK project)"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Akseli Leskinen (Haaga-Helia University of Applied Sciences)" }]
+# Scoring, tables, charts, story pages and the offline tests. The judges import pydantic and
+# python-dotenv at module level, so those are here too.
+dependencies = [
+    "jiwer>=4.0,<5",  # the published numbers were made with jiwer 4.0.0
+    "rapidfuzz>=3.14",
+    "pydantic>=2.13",
+    "python-dotenv>=1.2",
+]
+
+[project.optional-dependencies]
+# LLM judges and the LLM-written training targets (judge_asr, judge_dialect, prepare_targets)
+judges = ["anthropic>=0.103", "google-genai>=2.4", "openai>=2.37"]
+# ElevenLabs and Google Chirp 3 on the clip (run_api_asr)
+api-asr = ["requests>=2.34", "numpy>=2.0", "google-auth>=2.53"]
+# Hugging Face Hub: the listening page (build_compare) and publishing (publish_hf)
+hub = ["huggingface-hub>=1.16", "pyarrow>=20", "soundfile>=0.13"]
+# get_clip.py --prepare-audio (also needs ffmpeg on PATH)
+clip = ["numpy>=2.0"]
+# The GPU stacks (torch, transformers, peft, qwen-asr, NeMo) run only on LUMI and are pinned in
+# lumi/setup.sh, not here.
+
+[dependency-groups]
+dev = ["pytest>=9", "ruff>=0.15", "numpy>=2.0"]  # numpy: the quiet-point chunking test
+
+[tool.uv]
+package = false  # a collection of scripts and results, not an importable package
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+src = ["scripts"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# inline CSS and JS of the listening page
+"scripts/build_compare.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

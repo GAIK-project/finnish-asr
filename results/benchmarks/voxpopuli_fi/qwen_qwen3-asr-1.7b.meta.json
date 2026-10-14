@@ -1,0 +1,19 @@
+{
+  "arm_id": "qwen_qwen3-asr-1.7b",
+  "model": "Qwen/Qwen3-ASR-1.7B",
+  "recipe": "qwen",
+  "benchmark": "facebook/voxpopuli fi test",
+  "utterances": 478,
+  "batch_size": 16,
+  "load_s": 6.8,
+  "transcribe_s": 213.4,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005084",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "4.57.6",
+    "qwen_asr": "?"
+  },
+  "slurm_job_id": "22740501"
+}

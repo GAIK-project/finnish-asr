@@ -1,0 +1,194 @@
+{
+  "arm_id": "hf_whisper-large-v3-turbo",
+  "label": "Whisper large-v3 turbo",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "39be0e3aa481fe849e64ee1909b489e89f4f159492368b5b4532ebe920f1e750",
+  "created_at_utc": "2026-10-12T08:28:14+00:00",
+  "latency_s": 83.1,
+  "usage": {
+    "input_tokens": 3171,
+    "output_tokens": 1636
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 8.46,
+    "error_counts": {
+      "critical": 0,
+      "major": 6,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 7,
+      "variant": 6,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 82
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "Potilasvahingossa",
+        "explanation": "The word's case ending was changed from nominative to inessive, changing the meaning slightly from 'patient injuries' to 'in a patient injury'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "laajasti",
+        "transcript_span": "laaista",
+        "explanation": "The adverb 'laajasti' was transcribed as the non-word 'laaista' (presumably meant as 'laajasta'), slightly altering the grammar."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeissä ja",
+        "explanation": "The term for 'implant cases' was incorrectly split and garbled into 'in implant cases and', losing the intended meaning of a podcast topic."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Implantologiaa Advanced",
+        "transcript_span": "Implantologia ja Advanced",
+        "explanation": "The webinar series name was improperly split into two separate words by inserting 'ja'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Pallos,",
+        "explanation": "The speaker's last name was cut off and distorted."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "esteettisen alueen",
+        "transcript_span": "estetisalueella",
+        "explanation": "The term 'esteettinen alue' (aesthetic area) was garbled into a non-word compound 'estetisalueella'."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": ", oikoja Virpi,",
+        "transcript_span": "",
+        "explanation": "The speaker's profession as an orthodontist ('oikoja') was omitted, leading to a loss of important context regarding her role."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Biaker",
+        "explanation": "The brand name was heavily garbled and made difficult to recognise."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Tutustutaan",
+        "transcript_span": "Tutustetaan",
+        "explanation": "The verb voice shifted from 'tutustutaan' (let's get to know/familiarise) to 'tutustetaan' (let's introduce)."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "hands-on,",
+        "transcript_span": "Hanson.",
+        "explanation": "The educational term 'hands-on' (practical training) was misunderstood as the name 'Hanson', completely losing the meaning."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peter"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Klarion"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumannia"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Biaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camelog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference incorrectly misses the 't' in 'Dentsply', which the transcript spelled correctly."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perimplantiitista",
+        "explanation": "Both the reference and the transcript write 'perimplantiitista', but the correct canonical spelling of the medical condition is 'peri-implantiitti'."
+      }
+    ],
+    "usability": 82,
+    "summary": "The transcript is generally quite readable and follows the flow of the speaker well. However, it suffers from several major errors in transcribing English loanwords and specific titles (e.g., 'hands-on' interpreted as 'Hanson', 'Implantticaseja' as 'implanttikeissä', and 'Nobel Biocare' as 'Nobel Biaker'). It also misses an important apposition regarding a speaker's profession ('oikoja Virpi')."
+  }
+}

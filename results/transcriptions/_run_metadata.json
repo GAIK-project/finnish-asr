@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-12T08:00:01+00:00",
+  "gaik_evals_commit": "8b38012b75954ccfdc36269be92141958cd95597",
+  "gaik_evals_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, QAD-1 ground truth)",
+  "runner_path": "projects/finnish-asr-models/scripts/run_api_asr.py",
+  "dataset_path": "projects/qadental-transcription-translation/dataset/ajokortti",
+  "dataset_git_object": "a02c57d58cfed00fe83bfa58af219f54cda34d89",
+  "model_or_deployment": [
+    "chirp_3"
+  ],
+  "cli_args": [
+    "--arm",
+    "google_chirp-3",
+    "--repeats",
+    "3"
+  ],
+  "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  }
+}

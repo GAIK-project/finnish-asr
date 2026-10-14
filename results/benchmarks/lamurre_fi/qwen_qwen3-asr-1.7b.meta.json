@@ -1,0 +1,19 @@
+{
+  "arm_id": "qwen_qwen3-asr-1.7b",
+  "model": "Qwen/Qwen3-ASR-1.7B",
+  "recipe": "qwen",
+  "benchmark": "LA-murre dialect test: 10 localities outside SKN, dialect text (prepare_lamurre.py)",
+  "utterances": 583,
+  "batch_size": 16,
+  "load_s": 7.0,
+  "transcribe_s": 255.8,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005050",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "4.57.6",
+    "qwen_asr": "?"
+  },
+  "slurm_job_id": "22759685"
+}

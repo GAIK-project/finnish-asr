@@ -1,0 +1,209 @@
+<title>Murremallin tarina</title>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="stack">
+    <p class="eyebrow">GAIK · Haaga-Helia · lokakuu 2026</p>
+    <h1>Whisper oppi kuulemaan murretta</h1>
+    <p class="lede">Avoimista 1960–70-lukujen murrehaastatteluista koulutettu puheentunnistusmalli. Tämä sivu kertoo, mitä dataa käytettiin, mitä sille tehtiin, missä kohdissa käytettiin Claude Opus 5.5:tä ja miten tulos mitattiin.</p>
+    <div class="nums">
+      <div class="num"><b>40,4 → 21,1 %</b><span>sanavirheitä murretestissä, Whisper large-v3 → oma malli</span></div>
+      <div class="num"><b>25,9 → 13,6</b><span>merkitysvirhepisteitä / 100 sanaa toisella murrekorpuksella</span></div>
+      <div class="num"><b>3 h 14 min</b><span>koulutus yhdellä AMD MI250X -GPU:lla LUMIssa</span></div>
+    </div>
+  </div>
+  <figure>
+    <img src="{{img:hero}}" alt="Kelanauhuri ja mikrofoni puisella keittiönpöydällä maalaistalossa, ikkunasta näkyy koivikko.">
+    <figcaption>Kuvitus, tekoälyn tekemä (GPT Image 2.5). SKN:n haastattelut nauhoitettiin juuri tällaisissa keittiöissä.</figcaption>
+  </figure>
+</header>
+
+<section>
+  <div class="sec-head"><span class="step">00</span><h2>Koko ketju yhdellä silmäyksellä</h2></div>
+  <div class="flow" role="list">
+    <div role="listitem"><span class="t">{{icon:audio-lines}} Ääni</span><p>SKN:n murrehaastattelut 50 kunnasta, leikattu 2–25 s pätkiksi.</p></div>
+    <div role="listitem" class="llm"><span class="t">{{icon:sparkles}} Opus: välimerkit</span><p>Opus lisäsi pisteet, pilkut ja isot alkukirjaimet koulutustekstiin. Sanat eivät saaneet muuttua.</p></div>
+    <div role="listitem"><span class="t">{{icon:cpu}} Koulutus</span><p>LoRA-hienosäätö Whisper large-v3:lle LUMIssa, paras kolmesta epookista talteen.</p></div>
+    <div role="listitem"><span class="t">{{icon:chart-column}} WER-testit</span><p>Murretesti 10 kunnasta, joita malli ei kuullut, sekä yleiskieliset FLEURS ja VoxPopuli.</p></div>
+    <div role="listitem" class="llm"><span class="t">{{icon:scale}} Opus: tuomari</span><p>Toisella murrekorpuksella Opus laski sokkona merkitysvirheet kaikkien mallien teksteistä.</p></div>
+  </div>
+  <p class="note">Ruskealla merkityt vaiheet ovat ne kaksi kohtaa, joissa julkaistu malli käytti kielimallia. Opus ei koskaan kuullut ääntä eikä kirjoittanut testien vertailutekstejä.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">01</span><h2>Data: mistä ääni ja tekstit tulivat</h2></div>
+  <div class="col stack">
+    <p><b>Suomen kielen näytteitä (SKN)</b> on Kotimaisten kielten keskuksen (Kotus) aineisto, jota jaetaan Kielipankissa CC BY 4.0 -lisenssillä. Siinä on noin kaksi tuntia haastattelua kustakin 50 kunnasta eri puolilta Suomea, enimmäkseen iäkkäitä puhujia. Jokainen lause on litteroitu kahdesti: <b>murreasussa</b> (foneettisin merkein) ja <b>yleiskielen sanamuodoin</b>.</p>
+    <p>Leikkasimme haastattelut 2–25 sekunnin pätkiksi ja jaoimme ne <b>kunnittain</b>: koulutukseen 38 kuntaa (15 042 pätkää, 62 h), validointiin 2 kuntaa (Pälkäne, Sotkamo) ja testiin 10 kuntaa, SKN:n vihkosarjan joka viides numero. Testikunnat edustavat viittä SKN:n kuudesta murreryhmästä: lounais- ja hämäläismurteita, Savoa ja kaakkoismurteita. Pohjalais- ja peräpohjalaismurteet ovat vain koulutuksessa. Testikuntien haastateltavia malli ei kuullut koskaan; muutama haastattelija nauhoitti sekä testi- että koulutuskuntia, ja heidän kysymyksensä ovat pätkissä mukana.</p>
+  </div>
+
+  <article class="specimen" aria-label="Esimerkkipätkä Pälkäneeltä">
+    <header>
+      <div><span class="eyebrow">Validointi · Pälkäne · 5,7 s</span><br><code>SKN03a_Palkane_0021</code></div>
+      <audio controls preload="none" src="{{audio:palkane}}"></audio>
+    </header>
+    <div class="row dia"><span class="k">Murreasu<code>text_dialect</code></span><span class="v">Vieläkö ossaisitte ? 'kyyllᴀ̈ . minä "niŋ kauvan ‿ossaaŋ ku ma "eläŋkɪ .</span></div>
+    <div class="row"><span class="k">Yleiskieli, ihmisen tekemä<code>text_normalized</code></span><span class="v">vieläkö osaisitte kyllä minä niin kauan osaan kun minä elän</span></div>
+    <div class="row"><span class="k">Koulutuksen kohdeteksti<code>text</code></span><span class="v">Vieläkö osaisitte? Kyllä minä niin kauan osaan kun minä elän. <span class="tag">llm-punctuation</span></span></div>
+  </article>
+
+  <div class="col stack callout">
+    <p><b>Mitä <code>llm-punctuation</code> tarkoittaa datasetissä?</b> Se kertoo, että rivin <code>text</code>-kentän välimerkit ja isot alkukirjaimet on lisännyt Opus. Sanat ovat silti ihmisen: vastaus hyväksyttiin vain, jos sen sanat olivat täsmälleen samat kuin ihmisen yleiskielisessä litteraatissa. Arvo <span class="tag h">human</span> tarkoittaa, että <code>text</code> on ihmisen teksti sellaisenaan: niin on 18 koulutuspätkässä, joiden välimerkitys ei läpäissyt tarkistusta, ja koko testiosassa.</p>
+    <p class="note">Miksi välimerkit? SKN:n yleiskielisessä tekstissä niitä ei ole, joten ensimmäinen versio mallista oppi kirjoittamaan ilman yhtäkään pistettä tai pilkkua.</p>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Aineisto</th><th>Mitä</th><th>Käyttö julkaistussa mallissa</th><th>Lisenssi</th></tr></thead>
+      <tbody>
+        <tr><td><b>SKN</b> (Kotus / Kielipankki)</td><td>murrehaastattelut 50 kunnasta</td><td>koulutus 38 kuntaa, validointi 2, testi 10</td><td>CC BY 4.0</td></tr>
+        <tr><td><b>FLEURS</b> (Google)</td><td>luettuja Wikipedia-lauseita</td><td>koulutus 2 704, testi 918</td><td>CC BY 4.0</td></tr>
+        <tr><td><b>VoxPopuli</b> (Meta)</td><td>Euroopan parlamentin puheita</td><td>koulutus 7 504, testi 478</td><td>CC0</td></tr>
+        <tr><td><b>LA-murre</b> (Turun yliopisto, Kotus / Kielipankki)</td><td>toinen murrekorpus, 10 muuta paikkakuntaa</td><td>vain testi (583 pätkää)</td><td>CC BY-ND 4.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">FLEURS ja VoxPopuli ovat mukana, jotta tavallinen yleiskieli ei heikkene murteen opettelussa. Kaikki koulutusdata on avointa.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">02</span><h2>Missä Claude Opus 5.5:tä käytettiin</h2></div>
+  <p class="col">Opus oli mukana neljässä tehtävässä. Kaksi ensimmäistä koskevat julkaistua mallia, kolmas vain sisäistä vertailumallia ja neljäs webinaarileikkeen arviointia. Lisäksi koulutus- ja LUMI-koodi kirjoitettiin Claude Coden kanssa.</p>
+  <div class="roles">
+    <article class="role">
+      <h3>{{icon:pencil-line}} Välimerkit koulutustekstiin</h3>
+      <p>Opus sai 20 yleiskielistä tekstiä kerrallaan (vain tekstiä, ei ääntä) ja lisäsi välimerkit ja isot alkukirjaimet. Koodi hylkäsi jokaisen vastauksen, jonka sanat poikkesivat alkuperäisestä.</p>
+      <p class="meta">15 024 / 15 042 hyväksyttiin · noin 52 USD · <code>prepare_targets.py</code></p>
+    </article>
+    <article class="role">
+      <h3>{{icon:scale}} Sokko tuomari LA-murteella</h3>
+      <p>LA-murteen vertailuteksti on murreasussa, joten sanavirhe rankaisisi yleiskielestä. Opus luki vertailutekstin ja neljän mallin litteraatit nimettöminä ja laski vain merkitysvirheet.</p>
+      <p class="meta">583 pätkää · noin 11 USD per kierros · <code>judge_dialect.py</code></p>
+    </article>
+    <article class="role internal">
+      <h3>{{icon:file-text}} Murre yleiskielelle (vain sisäinen malli)</h3>
+      <p>Lisäkokeessa Opus kirjoitti LA-murteen koulutuspätkien murreasuiset tekstit yleiskielelle, sana sanalta. Siitä koulutettu malli on paras molemmissa murretesteissä, mutta LA-murteen lisenssi kieltää muokatun version jakamisen, joten mallia ei julkaistu.</p>
+      <p class="meta">15 529 pätkää · noin 49 USD · ei julkaistu</p>
+    </article>
+    <article class="role">
+      <h3>{{icon:shield-check}} Webinaarileikkeen tuomarit</h3>
+      <p>180 s:n hammaslääkäriwebinaarin litteraatit arvioivat Opus ja Gemini 3.1 Pro: kumpikin luki ihmisen tekstin ja yhden litteraatin ilman mallin nimeä, laski merkitysvirheet ja tarkisti 14 nimeä ja termiä.</p>
+      <p class="meta">kaikki 20+ mallia · <code>judge_asr.py</code></p>
+    </article>
+  </div>
+  <p class="note">Opuksen kulut koko työssä noin 125 USD. Testien vertailutekstit ovat kaikki ihmisten tekemiä, eikä mallin tulostetta käytetty koskaan oikeana vastauksena.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">03</span><h2>Koulutus LUMIssa</h2></div>
+  <div class="col stack">
+    <p>Pohjana on OpenAI:n <b>Whisper large-v3</b> (1,55 mrd. parametria), joka oli vertailussamme paras avoin malli tavalliselle suomelle. Koko mallia ei koulutettu uudelleen. <b>LoRA</b> lisää huomiokerroksiin pienet lisämatriisit ja kouluttaa vain ne: noin 2 % painoista. Lopuksi lisäosa yhdistettiin painoihin, joten julkaistu malli toimii kuin tavallinen Whisper.</p>
+    <ul class="plain">
+      <li>Koulutusdataa 25 250 pätkää: SKN 15 042, FLEURS 2 704, VoxPopuli 7 504.</li>
+      <li>LoRA rank 64 huomion <code>q_proj</code>- ja <code>v_proj</code>-kerroksissa, oppimisnopeus 1e-4, erä 8, kolme kierrosta (epookkia) koko datan yli.</li>
+      <li>Ajo: yksi AMD MI250X -GPU CSC:n LUMI-supertietokoneella, 3 h 14 min. Mallin valinta tehtiin validointikunnilla, ei koskaan testituloksilla.</li>
+    </ul>
+  </div>
+  <figure>
+    <div class="chart">{{chart:loss}}</div>
+    <figcaption class="cap">Validointihäviö (pienempi on parempi) ennen koulutusta ja jokaisen epookin jälkeen. Neljännen epookin piste on erillisestä nelikierroksisesta ajosta, joka näytti, että pidempi koulutus alkaa ylisovittaa. Talteen otettiin epookki 2.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">04</span><h2>Mittaus 1: sanavirheet (WER)</h2></div>
+  <div class="col stack">
+    <p><b>WER</b> (word error rate) laskee, kuinka monta sanaa pitää vaihtaa, poistaa tai lisätä, jotta mallin teksti vastaa ihmisen tekstiä, jaettuna ihmisen tekstin sanamäärällä. Ennen vertailua kirjaimet pienennetään ja välimerkit poistetaan. Murretestissä vertailuteksti on SKN:n yleiskielinen litteraatti: malli on oikeassa, kun se kuulee murretta ja kirjoittaa yleiskieltä.</p>
+  </div>
+  <article class="specimen" aria-label="Vertailu Heinolan pätkällä">
+    <header>
+      <div><span class="eyebrow">Testi · Heinola · kunta, jota malli ei kuullut</span><br><code>SKN45a_Heinola_0097</code></div>
+      <audio controls preload="none" src="{{audio:heinola}}"></audio>
+    </header>
+    <div class="cmp">
+      <div class="line"><span class="k">Murreasu</span><span class="v mono">vaikka miekiiv̆ välistä viej juomaakii sillen niin ‿ei se pure . mut se irvistie että luulis ‿että nyt se purie .</span><span class="e"></span></div>
+      <div class="line"><span class="k">Ihminen (vertailu)</span><span class="v">vaikka minäkin välistä vien juomaakin sille niin ei se pure mutta se irvistää että luulisi että nyt se puree</span><span class="e"></span></div>
+      <div class="line"><span class="k">Whisper large-v3</span><span class="v"><mark>aika miekivälistäviä</mark> juomaakin sille, niin ei se pure. <mark>Mut</mark> se <mark>hirvisti</mark>, että <mark>luulis</mark>, että nyt se <mark>puri</mark>.</span><span class="e">8 / 19</span></div>
+      <div class="line"><span class="k">Oma malli</span><span class="v">Vaikka minäkin välistä vien juomaakin sille, niin ei se pure, mutta se <mark>irvisti</mark>, että luulisi, että nyt se puree.</span><span class="e">1 / 19</span></div>
+    </div>
+  </article>
+  <figure>
+    <div class="legend"><span><i style="background:var(--base)"></i>Whisper large-v3</span><span><i style="background:var(--spruce)"></i>Oma malli</span></div>
+    <div class="chart">{{chart:wer}}</div>
+    <figcaption class="cap">WER kunnittain, 60 pätkää per kunta, yhteensä 600. Oma malli on parempi kaikissa kymmenessä kunnassa: kaikki yhteensä 40,4 → 21,1 %. Valmiit suomeksi hienosäädetyt mallit (luettua puhetta) saavat samassa testissä 48–57 %.</figcaption>
+  </figure>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Testi</th><th class="n">Whisper large-v3</th><th class="n">Oma malli</th></tr></thead>
+      <tbody>
+        <tr><td>SKN-murretesti, 10 kuntaa, WER %</td><td class="n">40,4</td><td class="n"><b>21,1</b></td></tr>
+        <tr><td>FLEURS, luetut lauseet, WER %</td><td class="n">7,4</td><td class="n">7,6</td></tr>
+        <tr><td>VoxPopuli, parlamenttipuhe, WER %</td><td class="n">12,7</td><td class="n">10,8</td></tr>
+        <tr><td>180 s hammaslääkäriwebinaari, WER % (paloiteltuna)</td><td class="n">15,7</td><td class="n">13,9</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">05</span><h2>Mittaus 2: LLM-tuomari toisella murrekorpuksella</h2></div>
+  <div class="col stack">
+    <p>SKN-testi jakaa SKN:n omat kirjoitustavat koulutusdatan kanssa, joten tarvittiin toinen, täysin vieras korpus: <b>LA-murre</b>, 583 pätkää kymmeneltä paikkakunnalta, jotka eivät ole SKN:ssä. Sen vertailuteksti on kuitenkin murreasussa, joten WER rankaisisi mallia juuri siitä, mitä siltä halutaan, eli yleiskielen kirjoittamisesta.</p>
+    <p>Siksi Opus luki jokaisesta pätkästä murreasuisen vertailutekstin ja neljän mallin litteraatit kirjaimilla A–D nimettyinä ja joka pätkässä eri järjestyksessä. Se laski vain virheet, jotka muuttavat merkitystä: väärä sana, nimi tai luku, puuttuva tai keksitty sisältö. Murre- ja yleiskielen ero, välimerkit ja täytesanat eivät ole virheitä.</p>
+  </div>
+  <div class="scale">
+    <div class="sev"><b>10 p</b><strong>critical</strong><span>pätkän pääasia katoaa tai kääntyy</span></div>
+    <div class="sev"><b>5 p</b><strong>major</strong><span>sisältösana, nimi tai luku väärin, tai lause puuttuu</span></div>
+    <div class="sev"><b>1 p</b><strong>minor</strong><span>pieni lipsahdus, jonka lukija ymmärtää</span></div>
+  </div>
+  <div class="formula">pisteet / 100 sanaa = (10 × critical + 5 × major + 1 × minor) ÷ vertailutekstin sanat × 100<br>oma malli: (10 × 8 + 5 × 340 + 612) ÷ 17 625 × 100 = 13,6</div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Malli (tuomari näki vain kirjaimen)</th><th class="n">Pisteet / 100 sanaa</th><th class="n">Critical</th><th class="n">Major</th><th class="n">Minor</th><th class="n">Virheettömiä pätkiä</th></tr></thead>
+      <tbody>
+        <tr><td>Whisper large-v3</td><td class="n">25,9</td><td class="n">74</td><td class="n">600</td><td class="n">821</td><td class="n">50</td></tr>
+        <tr><td>Oma malli, kierros 1 (ei välimerkkejä)</td><td class="n">13,8</td><td class="n">7</td><td class="n">342</td><td class="n">649</td><td class="n">116</td></tr>
+        <tr class="ours"><td><b>Oma malli, julkaistu</b></td><td class="n"><b>13,6</b></td><td class="n">8</td><td class="n">340</td><td class="n">612</td><td class="n">121</td></tr>
+        <tr><td>Sisäinen malli (+ LA-murre-koulutus, ei julkaistu)</td><td class="n">11,4</td><td class="n">12</td><td class="n">266</td><td class="n">562</td><td class="n">143</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col stack callout">
+    <p><b>Esimerkki tuomarin työstä</b> (Tammela, 26 sanaa). Whisper large-v3 jätti pois sivulauseen, jossa kerrotaan tyttären miehestä: <b>1 major = 5 pistettä</b>. Julkaistu malli piti sisällön ja lisäsi yhden ylimääräisen "ja"-sanan: <b>1 minor = 1 piste</b>. Kierroksen 1 malli sai saman pätkän virheettä.</p>
+    <p class="note">LA-murteen tekstejä ei näytetä tällä sivulla: niiden lisenssi (CC BY-ND) ei salli muokattujen versioiden jakamista, joten niitä ei julkaista.</p>
+  </div>
+  <details>
+    <summary>Tuomarin ohje sanasta sanaan (englanniksi)</summary>
+<pre>{{prompt}}</pre>
+    <p class="note">Tämä on julkinen versio, <code>dialect-judge-v2</code>. Yllä olevat pisteet tehtiin versiolla v1, joka eroaa vain ensimmäisen kappaleen kolmessa esimerkkisanaparissa: v1:n esimerkit olivat LA-murre-korpuksesta, nämä ovat SKN:stä.</p>
+  </details>
+  <p class="note col">Rajoitus: tuomari on itsekin kielimalli ja ajettiin kerran. Yhden pisteen erot 100 sanaa kohden luetaan tasapeleiksi, ellei merkkitesti sano muuta. Julkaistun mallin ero Whisperiin on silti selvä: se sai vähemmän pisteitä 398 pätkässä ja enemmän 89:ssä (merkkitesti p &lt; 0,001). Ero kierroksen 1 malliin ei ole merkitsevä (p = 0,10).</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">06</span><h2>Missä malli on heikompi</h2></div>
+  <ul class="plain col">
+    <li><b>Harvinaiset nimet ja termit yleiskielisessä puheessa.</b> Webinaarissa tuomarit löysivät enemmän nimi- ja termivirheitä kuin perus-Whisperille (esimerkiksi "Nobelbayer", kun puhuttiin Nobel Biocaresta), vaikka WER oli pienempi. Brändinimiä täynnä olevaan yleiskieleen perus-Whisper on varmempi.</li>
+    <li><b>Vanha puhe, ei kaikkia murteita.</b> Molemmat murrekorpukset ovat 1960–70-lukujen haastatteluja iäkkäiltä puhujilta. Nykypäivän alueellista puhetta ei testattu, eikä SKN-testissä ole pohjalaismurteita.</li>
+    <li><b>Yleiskieli, ei foneettinen murretranskriptio.</b> Malli kirjoittaa sen, mitä sanotaan, yleiskielen sanamuodoin.</li>
+    <li><b>Pitkä ääni pitää pilkkoa.</b> Whisperin oma pitkän äänen silmukka sai mallin toistamaan yhtä fraasia. 15–25 s palat hiljaisista kohdista leikattuina toimivat (13,7 % WER webinaarissa); mallikortissa on valmis koodi.</li>
+    <li><b>Yksi koulutusajo ja yksi tuomari.</b> Luvut ovat yhdestä siemenestä.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">07</span><h2>Linkit</h2></div>
+  <div class="links">
+    <a href="https://github.com/GAIK-project/finnish-asr">{{icon:file-text}}<span>Koodi, tulokset ja menetelmä: GAIK-project/finnish-asr</span></a>
+    <a href="https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects">{{icon:graduation-cap}}<span>Malli Hugging Facessa: GAIK-project/whisper-large-v3-fi-dialects</span></a>
+    <a href="https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr/viewer/default/validation">{{icon:database}}<span>Datasetti ja sen selain (kuuntele pätkiä)</span></a>
+    <a href="https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/finnish_dialect_asr">{{icon:chart-column}}<span>Tiivistelmä gaik-toolkitissa · finnish_dialect_asr</span></a>
+    <a href="https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval#october-2026-current-models-and-an-llm-judge">{{icon:audio-lines}}<span>Lähtökohta: 20 mallin vertailu webinaarileikkeellä</span></a>
+    <a href="https://www.kielipankki.fi/corpora/skn/">{{icon:map-pin}}<span>Alkuperäinen SKN-aineisto Kielipankissa</span></a>
+    <a href="https://gaik.ai/">{{icon:link}}<span>GAIK-hanke (gaik.ai)</span></a>
+  </div>
+  <p class="note">Suomen kielen näytteitä, Kotimaisten kielten keskus (Kotus), Kielipankin kautta, CC BY 4.0. Tekijä: Akseli Leskinen, Haaga-Helia, GAIK-hanke. Laskenta: LUMI, CSC – Tieteen tietotekniikan keskus.</p>
+</section>
+
+</div>

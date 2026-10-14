@@ -1,0 +1,182 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best-chunks",
+  "label": "Fine-tuned whisper-large-v3-fi-skn-lamurre-best, chunked",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "dfa6ddd546552daca2938220ae1b62bcb89c9ad5ceeda2a0b69378471dc11fc4",
+  "created_at_utc": "2026-10-13T17:00:03+00:00",
+  "latency_s": 67.4,
+  "usage": {
+    "input_tokens": 3205,
+    "output_tokens": 1428
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.22,
+    "error_counts": {
+      "critical": 0,
+      "major": 4,
+      "minor": 5
+    },
+    "entities": {
+      "correct": 8,
+      "variant": 4,
+      "wrong": 2,
+      "missing": 0
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 85
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi",
+        "transcript_span": "Pardojen tolki",
+        "explanation": "The clinical profession name was completely garbled into meaningless words."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marttojen",
+        "explanation": "The speaker's surname was altered into a different plural noun, changing the name."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään edes",
+        "explanation": "An idiom meaning 'under no circumstances' was misheard, slightly altering the meaning and making it ungrammatical."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "implantologia ja advanced webinaarisarja",
+        "explanation": "The specific course name was split with a conjunction."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Palos",
+        "explanation": "The speaker's surname was cut short, creating a different but similar-sounding name."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Ajokortin",
+        "transcript_span": "Ajokorti on",
+        "explanation": "A genitive form was incorrectly split into a nominative noun and a verb."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kovimmille",
+        "transcript_span": "kovin mene",
+        "explanation": "The word meaning 'to the toughest' was garbled into nonsense ('kovin mene'), destroying the meaning of the phrase."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Kesto",
+        "transcript_span": "Kesti",
+        "explanation": "The noun 'duration' was replaced by the past-tense verb 'lasted'."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "major",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "A duration range ('six to nine') was changed to two distinct options ('six or nine'), altering the stated timeline."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon / Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Martta Marttojen"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin / Peterille"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Palos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Nobelbiocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camblog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "Implanttona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "vähän sen harjoittelemaan",
+        "transcript_span": "vähäsen harjoittelemaan",
+        "explanation": "The transcript correctly captures the colloquial word 'vähäsen' (a little), whereas the reference incorrectly splits it into two words."
+      }
+    ],
+    "usability": 85,
+    "summary": "The transcript is generally quite readable and follows the flow of the webinar well. However, it struggles with some fast-spoken phrases and specific names, notably mangling the clinical profession 'parodontologi', a speaker's surname, and confusing a duration range with two separate options. A few minor word slips also alter sentence structure slightly."
+  }
+}

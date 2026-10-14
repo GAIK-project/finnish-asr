@@ -1,0 +1,2009 @@
+{
+  "arm_id": "hh_whisperx_fi__r2",
+  "stage": "asr",
+  "provider": "hh-whisperx",
+  "model": "Finnish-NLP/whisper-large-finnish-v3-ct2 (HH WhisperX server)",
+  "text": "Suojärven Timon luento potilasvahingon protetiikassa. Siinä tulee hyvin laajasti protetiikkaa ja yleensä vähän vaikeusasteen arviointia ja muuta. Sitten on paradontologi Martta Marttola luento perimplantiitista ja sitten ImplanttiCase ja semmoinen vodcast jossa Peterin kanssa käydään läpi näitä yleisiä ongelmia tai yleisimpiä ongelmia mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan. Viimeisenä aviain sitten semmoinen osio, missä on tärkeää tunnistaa, että nämä eivät ole missään niissä sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään. Elikkä siellä on implantologia ja advanced webinaarisarja Timo Suojärve ja Ilkka Pallos ja siinä tehdään sitten semmoista niin kuin sanotaanko high-end -implanttihoitoa ja etualue, esteettisalue ja tosi vaativia temppuja, mutta ne on tärkeää tunnistaa kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttukin yhtäkkiä todella hankalaksi. Sitten on myös oikomishoidollisia näkökulmia. Timo ja Virpi Myller keskustelevat sitten siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty. Aiokortiosa kaksi, komponentin tutuksi päivä Helsingissä Clarion Hotelissa. Se alkaa Peterin kertausluennolla, vähän näitä perusasioita kerrotaan siihen alkuunpohjalle ja sen jälkeen siellä on neljä implanttebrändiä mukana: Straumann, Denzbley-Sirona, Nobel-Baker ja Kamloch-Konelloch eli implanttoona Oy. Tutustutaan heidän komponentteihin, mitä mimmoisia osia siellä on, miten ne eroavat toisistaan ja siellä on myös neljä eri skanneria sitten mukana, elikkä päästään katsomaan miten skannereilla jäljennetään ja Tosiaan päiväideana on se, että tutustutaan näihin osiin, tututaan skannereihin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme ja se on tämä pienryhmävalmennus, mestarikisällinvalmennus, jossa sitten Peter ottaa kopin. Enintään kymmenen mahtuu mukaan, elikkä ne jotka tähän lähtee, niin kannattaa nopsan ilmoittautua, että saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Ehkä ei kaikista kovimmille konkareille, mutta hekin ovat toki tervetulleita tähän. Tiivistettynä koostumus on aloituspäivä futudentin tiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista privaattivastaanotolla, sitten on etäsessioita Peterin kanssa ja lopussa vielä kokoon otetaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kesto noin kuusi-yhdeksän kuukautta, mutta nyt minä annan Peterille puheenvuoron. Kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus. Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi. Tarkennetaan sitä advanced -vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa, että osataan tunnistaa pikkuisen paremmin tätä potilasvalintaa ja potilaita, joita me hoidamme. Ja sitten toinen osa on tämä hands-on,",
+  "params": {
+    "language": "fi"
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "HH WhisperX (Finnish-NLP)",
+  "notes": "QAdental's default 'WhisperX (local)'. language='fi' selects the Finnish fine-tuned model.",
+  "words": [
+    {
+      "word": "Suojärven",
+      "start": 0.031,
+      "end": 1.533
+    },
+    {
+      "word": "Timon",
+      "start": 1.573,
+      "end": 1.774
+    },
+    {
+      "word": "luento",
+      "start": 1.814,
+      "end": 2.154
+    },
+    {
+      "word": "potilasvahingon",
+      "start": 2.174,
+      "end": 2.755
+    },
+    {
+      "word": "protetiikassa.",
+      "start": 2.795,
+      "end": 3.797
+    },
+    {
+      "word": "Siinä",
+      "start": 3.817,
+      "end": 4.017
+    },
+    {
+      "word": "tulee",
+      "start": 4.037,
+      "end": 4.237
+    },
+    {
+      "word": "hyvin",
+      "start": 4.257,
+      "end": 4.437
+    },
+    {
+      "word": "laajasti",
+      "start": 4.778,
+      "end": 5.078
+    },
+    {
+      "word": "protetiikkaa",
+      "start": 5.098,
+      "end": 5.599
+    },
+    {
+      "word": "ja",
+      "start": 5.619,
+      "end": 5.659
+    },
+    {
+      "word": "yleensä",
+      "start": 5.679,
+      "end": 5.94
+    },
+    {
+      "word": "vähän",
+      "start": 5.96,
+      "end": 6.16
+    },
+    {
+      "word": "vaikeusasteen",
+      "start": 6.521,
+      "end": 7.101
+    },
+    {
+      "word": "arviointia",
+      "start": 7.202,
+      "end": 7.602
+    },
+    {
+      "word": "ja",
+      "start": 7.622,
+      "end": 7.722
+    },
+    {
+      "word": "muuta.",
+      "start": 7.742,
+      "end": 8.483
+    },
+    {
+      "word": "Sitten",
+      "start": 8.503,
+      "end": 8.684
+    },
+    {
+      "word": "on",
+      "start": 8.724,
+      "end": 8.824
+    },
+    {
+      "word": "paradontologi",
+      "start": 8.844,
+      "end": 9.445
+    },
+    {
+      "word": "Martta",
+      "start": 9.465,
+      "end": 9.785
+    },
+    {
+      "word": "Marttola",
+      "start": 9.805,
+      "end": 10.206
+    },
+    {
+      "word": "luento",
+      "start": 10.226,
+      "end": 10.546
+    },
+    {
+      "word": "perimplantiitista",
+      "start": 10.587,
+      "end": 11.688
+    },
+    {
+      "word": "ja",
+      "start": 12.189,
+      "end": 12.289
+    },
+    {
+      "word": "sitten",
+      "start": 12.429,
+      "end": 12.71
+    },
+    {
+      "word": "ImplanttiCase",
+      "start": 12.89,
+      "end": 13.651
+    },
+    {
+      "word": "ja",
+      "start": 13.671,
+      "end": 13.771
+    },
+    {
+      "word": "semmoinen",
+      "start": 13.791,
+      "end": 14.092
+    },
+    {
+      "word": "vodcast",
+      "start": 14.132,
+      "end": 14.592
+    },
+    {
+      "word": "jossa",
+      "start": 14.612,
+      "end": 14.833
+    },
+    {
+      "word": "Peterin",
+      "start": 14.873,
+      "end": 15.173
+    },
+    {
+      "word": "kanssa",
+      "start": 15.193,
+      "end": 15.374
+    },
+    {
+      "word": "käydään",
+      "start": 15.394,
+      "end": 15.594
+    },
+    {
+      "word": "läpi",
+      "start": 15.634,
+      "end": 15.814
+    },
+    {
+      "word": "näitä",
+      "start": 15.854,
+      "end": 16.015
+    },
+    {
+      "word": "yleisiä",
+      "start": 16.055,
+      "end": 16.355
+    },
+    {
+      "word": "ongelmia",
+      "start": 16.996,
+      "end": 17.316
+    },
+    {
+      "word": "tai",
+      "start": 17.337,
+      "end": 17.397
+    },
+    {
+      "word": "yleisimpiä",
+      "start": 17.437,
+      "end": 17.817
+    },
+    {
+      "word": "ongelmia",
+      "start": 17.857,
+      "end": 18.138
+    },
+    {
+      "word": "mitä",
+      "start": 18.158,
+      "end": 18.298
+    },
+    {
+      "word": "implanttien",
+      "start": 18.338,
+      "end": 18.739
+    },
+    {
+      "word": "kanssa",
+      "start": 18.759,
+      "end": 18.959
+    },
+    {
+      "word": "voi",
+      "start": 18.979,
+      "end": 19.119
+    },
+    {
+      "word": "tulla",
+      "start": 19.139,
+      "end": 19.339
+    },
+    {
+      "word": "ja",
+      "start": 19.38,
+      "end": 19.44
+    },
+    {
+      "word": "ne",
+      "start": 19.48,
+      "end": 19.56
+    },
+    {
+      "word": "on",
+      "start": 19.58,
+      "end": 19.7
+    },
+    {
+      "word": "hyvä",
+      "start": 19.74,
+      "end": 20.0
+    },
+    {
+      "word": "tunnistaa",
+      "start": 20.04,
+      "end": 20.361
+    },
+    {
+      "word": "ja",
+      "start": 20.381,
+      "end": 20.461
+    },
+    {
+      "word": "tietää",
+      "start": 20.481,
+      "end": 20.762
+    },
+    {
+      "word": "miten",
+      "start": 20.782,
+      "end": 20.922
+    },
+    {
+      "word": "ne",
+      "start": 20.962,
+      "end": 21.062
+    },
+    {
+      "word": "ratkaistaan.",
+      "start": 21.102,
+      "end": 22.444
+    },
+    {
+      "word": "Viimeisenä",
+      "start": 22.508,
+      "end": 22.949
+    },
+    {
+      "word": "aviain",
+      "start": 22.989,
+      "end": 23.209
+    },
+    {
+      "word": "sitten",
+      "start": 23.229,
+      "end": 23.37
+    },
+    {
+      "word": "semmoinen",
+      "start": 23.39,
+      "end": 23.61
+    },
+    {
+      "word": "osio,",
+      "start": 23.63,
+      "end": 23.79
+    },
+    {
+      "word": "missä",
+      "start": 23.81,
+      "end": 23.951
+    },
+    {
+      "word": "on",
+      "start": 23.971,
+      "end": 24.051
+    },
+    {
+      "word": "tärkeää",
+      "start": 24.091,
+      "end": 24.492
+    },
+    {
+      "word": "tunnistaa,",
+      "start": 24.532,
+      "end": 24.912
+    },
+    {
+      "word": "että",
+      "start": 24.933,
+      "end": 25.013
+    },
+    {
+      "word": "nämä",
+      "start": 25.033,
+      "end": 25.153
+    },
+    {
+      "word": "eivät",
+      "start": 25.173,
+      "end": 25.273
+    },
+    {
+      "word": "ole",
+      "start": 25.293,
+      "end": 25.393
+    },
+    {
+      "word": "missään",
+      "start": 25.433,
+      "end": 25.634
+    },
+    {
+      "word": "niissä",
+      "start": 25.654,
+      "end": 25.774
+    },
+    {
+      "word": "sellaisia,",
+      "start": 25.794,
+      "end": 26.095
+    },
+    {
+      "word": "mitä",
+      "start": 26.115,
+      "end": 26.255
+    },
+    {
+      "word": "kannattaa",
+      "start": 26.275,
+      "end": 26.636
+    },
+    {
+      "word": "ensimmäisenä",
+      "start": 26.656,
+      "end": 27.056
+    },
+    {
+      "word": "lähteä",
+      "start": 27.077,
+      "end": 27.357
+    },
+    {
+      "word": "tekemään.",
+      "start": 27.397,
+      "end": 27.758
+    },
+    {
+      "word": "Elikkä",
+      "start": 27.818,
+      "end": 28.018
+    },
+    {
+      "word": "siellä",
+      "start": 28.058,
+      "end": 28.239
+    },
+    {
+      "word": "on",
+      "start": 28.259,
+      "end": 28.339
+    },
+    {
+      "word": "implantologia",
+      "start": 28.94,
+      "end": 29.601
+    },
+    {
+      "word": "ja",
+      "start": 29.641,
+      "end": 29.701
+    },
+    {
+      "word": "advanced",
+      "start": 29.741,
+      "end": 30.282
+    },
+    {
+      "word": "webinaarisarja",
+      "start": 30.643,
+      "end": 31.425
+    },
+    {
+      "word": "Timo",
+      "start": 31.665,
+      "end": 31.865
+    },
+    {
+      "word": "Suojärve",
+      "start": 31.885,
+      "end": 32.326
+    },
+    {
+      "word": "ja",
+      "start": 32.346,
+      "end": 32.406
+    },
+    {
+      "word": "Ilkka",
+      "start": 32.446,
+      "end": 32.707
+    },
+    {
+      "word": "Pallos",
+      "start": 32.727,
+      "end": 33.048
+    },
+    {
+      "word": "ja",
+      "start": 33.088,
+      "end": 33.128
+    },
+    {
+      "word": "siinä",
+      "start": 33.168,
+      "end": 33.348
+    },
+    {
+      "word": "tehdään",
+      "start": 33.609,
+      "end": 33.789
+    },
+    {
+      "word": "sitten",
+      "start": 33.829,
+      "end": 34.029
+    },
+    {
+      "word": "semmoista",
+      "start": 34.049,
+      "end": 34.33
+    },
+    {
+      "word": "niin",
+      "start": 34.791,
+      "end": 34.871
+    },
+    {
+      "word": "kuin",
+      "start": 34.891,
+      "end": 34.971
+    },
+    {
+      "word": "sanotaanko",
+      "start": 34.991,
+      "end": 35.192
+    },
+    {
+      "word": "high-end",
+      "start": 35.212,
+      "end": 35.672
+    },
+    {
+      "word": "-implanttihoitoa",
+      "start": 36.234,
+      "end": 36.895
+    },
+    {
+      "word": "ja",
+      "start": 36.935,
+      "end": 36.995
+    },
+    {
+      "word": "etualue,",
+      "start": 37.035,
+      "end": 37.476
+    },
+    {
+      "word": "esteettisalue",
+      "start": 37.496,
+      "end": 38.097
+    },
+    {
+      "word": "ja",
+      "start": 38.117,
+      "end": 38.157
+    },
+    {
+      "word": "tosi",
+      "start": 38.458,
+      "end": 38.618
+    },
+    {
+      "word": "vaativia",
+      "start": 38.658,
+      "end": 39.039
+    },
+    {
+      "word": "temppuja,",
+      "start": 39.079,
+      "end": 39.48
+    },
+    {
+      "word": "mutta",
+      "start": 39.5,
+      "end": 39.7
+    },
+    {
+      "word": "ne",
+      "start": 40.101,
+      "end": 40.141
+    },
+    {
+      "word": "on",
+      "start": 40.161,
+      "end": 40.241
+    },
+    {
+      "word": "tärkeää",
+      "start": 40.281,
+      "end": 40.562
+    },
+    {
+      "word": "tunnistaa",
+      "start": 40.762,
+      "end": 41.183
+    },
+    {
+      "word": "kun",
+      "start": 41.483,
+      "end": 41.543
+    },
+    {
+      "word": "itse",
+      "start": 41.563,
+      "end": 41.744
+    },
+    {
+      "word": "tekee,",
+      "start": 41.764,
+      "end": 41.924
+    },
+    {
+      "word": "että",
+      "start": 41.944,
+      "end": 42.024
+    },
+    {
+      "word": "milloin",
+      "start": 42.044,
+      "end": 42.225
+    },
+    {
+      "word": "missä",
+      "start": 42.245,
+      "end": 42.385
+    },
+    {
+      "word": "menee",
+      "start": 42.405,
+      "end": 42.565
+    },
+    {
+      "word": "se",
+      "start": 42.585,
+      "end": 42.625
+    },
+    {
+      "word": "raja,",
+      "start": 42.645,
+      "end": 42.786
+    },
+    {
+      "word": "että",
+      "start": 42.886,
+      "end": 42.966
+    },
+    {
+      "word": "milloin",
+      "start": 43.347,
+      "end": 43.487
+    },
+    {
+      "word": "työ",
+      "start": 43.467,
+      "end": 43.888
+    },
+    {
+      "word": "voi",
+      "start": 44.028,
+      "end": 44.148
+    },
+    {
+      "word": "muuttukin",
+      "start": 44.168,
+      "end": 44.589
+    },
+    {
+      "word": "yhtäkkiä",
+      "start": 44.609,
+      "end": 44.97
+    },
+    {
+      "word": "todella",
+      "start": 44.99,
+      "end": 45.25
+    },
+    {
+      "word": "hankalaksi.",
+      "start": 45.29,
+      "end": 45.811
+    },
+    {
+      "word": "Sitten",
+      "start": 46.272,
+      "end": 46.433
+    },
+    {
+      "word": "on",
+      "start": 46.453,
+      "end": 46.493
+    },
+    {
+      "word": "myös",
+      "start": 46.513,
+      "end": 46.653
+    },
+    {
+      "word": "oikomishoidollisia",
+      "start": 46.793,
+      "end": 47.695
+    },
+    {
+      "word": "näkökulmia.",
+      "start": 48.216,
+      "end": 49.178
+    },
+    {
+      "word": "Timo",
+      "start": 49.198,
+      "end": 49.418
+    },
+    {
+      "word": "ja",
+      "start": 49.458,
+      "end": 49.558
+    },
+    {
+      "word": "Virpi",
+      "start": 49.839,
+      "end": 50.099
+    },
+    {
+      "word": "Myller",
+      "start": 50.139,
+      "end": 50.48
+    },
+    {
+      "word": "keskustelevat",
+      "start": 50.801,
+      "end": 52.564
+    },
+    {
+      "word": "sitten",
+      "start": 52.604,
+      "end": 52.824
+    },
+    {
+      "word": "siitä",
+      "start": 53.345,
+      "end": 54.287
+    },
+    {
+      "word": "aiheesta",
+      "start": 54.347,
+      "end": 54.728
+    },
+    {
+      "word": "ja",
+      "start": 54.748,
+      "end": 54.788
+    },
+    {
+      "word": "miten",
+      "start": 54.808,
+      "end": 54.968
+    },
+    {
+      "word": "sitä",
+      "start": 55.008,
+      "end": 55.169
+    },
+    {
+      "word": "voidaan",
+      "start": 55.189,
+      "end": 55.469
+    },
+    {
+      "word": "preproteettisesti",
+      "start": 55.65,
+      "end": 56.511
+    },
+    {
+      "word": "hyödyntää.",
+      "start": 56.551,
+      "end": 58.355
+    },
+    {
+      "word": "Teorian",
+      "start": 58.375,
+      "end": 58.655
+    },
+    {
+      "word": "lopuksi",
+      "start": 58.695,
+      "end": 59.056
+    },
+    {
+      "word": "on",
+      "start": 59.597,
+      "end": 59.737
+    },
+    {
+      "word": "lopputentti",
+      "start": 59.797,
+      "end": 60.378
+    },
+    {
+      "word": "ja",
+      "start": 60.399,
+      "end": 60.479
+    },
+    {
+      "word": "sen",
+      "start": 60.499,
+      "end": 60.639
+    },
+    {
+      "word": "suorittamalla",
+      "start": 60.679,
+      "end": 61.26
+    },
+    {
+      "word": "sitten",
+      "start": 61.28,
+      "end": 61.561
+    },
+    {
+      "word": "se",
+      "start": 61.901,
+      "end": 62.062
+    },
+    {
+      "word": "ajokortin",
+      "start": 62.542,
+      "end": 63.003
+    },
+    {
+      "word": "osa",
+      "start": 63.084,
+      "end": 63.324
+    },
+    {
+      "word": "yksi",
+      "start": 63.384,
+      "end": 63.604
+    },
+    {
+      "word": "on",
+      "start": 63.645,
+      "end": 63.745
+    },
+    {
+      "word": "tehty.",
+      "start": 63.925,
+      "end": 64.446
+    },
+    {
+      "word": "Aiokortiosa",
+      "start": 65.388,
+      "end": 65.989
+    },
+    {
+      "word": "kaksi,",
+      "start": 66.009,
+      "end": 66.369
+    },
+    {
+      "word": "komponentin",
+      "start": 66.649,
+      "end": 67.17
+    },
+    {
+      "word": "tutuksi",
+      "start": 67.31,
+      "end": 67.75
+    },
+    {
+      "word": "päivä",
+      "start": 67.77,
+      "end": 68.111
+    },
+    {
+      "word": "Helsingissä",
+      "start": 68.431,
+      "end": 69.051
+    },
+    {
+      "word": "Clarion",
+      "start": 69.572,
+      "end": 69.892
+    },
+    {
+      "word": "Hotelissa.",
+      "start": 69.912,
+      "end": 70.953
+    },
+    {
+      "word": "Se",
+      "start": 70.973,
+      "end": 71.033
+    },
+    {
+      "word": "alkaa",
+      "start": 71.053,
+      "end": 71.293
+    },
+    {
+      "word": "Peterin",
+      "start": 71.333,
+      "end": 71.734
+    },
+    {
+      "word": "kertausluennolla,",
+      "start": 71.774,
+      "end": 72.835
+    },
+    {
+      "word": "vähän",
+      "start": 72.855,
+      "end": 73.055
+    },
+    {
+      "word": "näitä",
+      "start": 73.075,
+      "end": 73.215
+    },
+    {
+      "word": "perusasioita",
+      "start": 73.255,
+      "end": 73.816
+    },
+    {
+      "word": "kerrotaan",
+      "start": 73.836,
+      "end": 74.236
+    },
+    {
+      "word": "siihen",
+      "start": 74.276,
+      "end": 74.496
+    },
+    {
+      "word": "alkuunpohjalle",
+      "start": 74.556,
+      "end": 75.257
+    },
+    {
+      "word": "ja",
+      "start": 75.758,
+      "end": 75.838
+    },
+    {
+      "word": "sen",
+      "start": 76.018,
+      "end": 76.118
+    },
+    {
+      "word": "jälkeen",
+      "start": 76.158,
+      "end": 76.358
+    },
+    {
+      "word": "siellä",
+      "start": 76.398,
+      "end": 76.538
+    },
+    {
+      "word": "on",
+      "start": 76.558,
+      "end": 76.618
+    },
+    {
+      "word": "neljä",
+      "start": 76.638,
+      "end": 76.859
+    },
+    {
+      "word": "implanttebrändiä",
+      "start": 76.899,
+      "end": 77.679
+    },
+    {
+      "word": "mukana:",
+      "start": 77.699,
+      "end": 78.28
+    },
+    {
+      "word": "Straumann,",
+      "start": 78.3,
+      "end": 78.961
+    },
+    {
+      "word": "Denzbley-Sirona,",
+      "start": 78.981,
+      "end": 79.921
+    },
+    {
+      "word": "Nobel-Baker",
+      "start": 79.981,
+      "end": 80.882
+    },
+    {
+      "word": "ja",
+      "start": 80.962,
+      "end": 81.062
+    },
+    {
+      "word": "Kamloch-Konelloch",
+      "start": 81.123,
+      "end": 81.963
+    },
+    {
+      "word": "eli",
+      "start": 82.123,
+      "end": 82.324
+    },
+    {
+      "word": "implanttoona",
+      "start": 82.384,
+      "end": 82.964
+    },
+    {
+      "word": "Oy.",
+      "start": 83.024,
+      "end": 83.965
+    },
+    {
+      "word": "Tutustutaan",
+      "start": 83.985,
+      "end": 84.366
+    },
+    {
+      "word": "heidän",
+      "start": 84.406,
+      "end": 84.626
+    },
+    {
+      "word": "komponentteihin,",
+      "start": 84.666,
+      "end": 85.487
+    },
+    {
+      "word": "mitä",
+      "start": 85.567,
+      "end": 85.727
+    },
+    {
+      "word": "mimmoisia",
+      "start": 85.847,
+      "end": 86.207
+    },
+    {
+      "word": "osia",
+      "start": 86.387,
+      "end": 86.628
+    },
+    {
+      "word": "siellä",
+      "start": 86.668,
+      "end": 86.908
+    },
+    {
+      "word": "on,",
+      "start": 86.968,
+      "end": 87.088
+    },
+    {
+      "word": "miten",
+      "start": 87.188,
+      "end": 87.348
+    },
+    {
+      "word": "ne",
+      "start": 87.368,
+      "end": 87.428
+    },
+    {
+      "word": "eroavat",
+      "start": 87.468,
+      "end": 87.789
+    },
+    {
+      "word": "toisistaan",
+      "start": 87.849,
+      "end": 88.349
+    },
+    {
+      "word": "ja",
+      "start": 88.71,
+      "end": 88.75
+    },
+    {
+      "word": "siellä",
+      "start": 88.77,
+      "end": 88.93
+    },
+    {
+      "word": "on",
+      "start": 88.97,
+      "end": 89.01
+    },
+    {
+      "word": "myös",
+      "start": 89.03,
+      "end": 89.17
+    },
+    {
+      "word": "neljä",
+      "start": 89.21,
+      "end": 89.47
+    },
+    {
+      "word": "eri",
+      "start": 89.49,
+      "end": 89.61
+    },
+    {
+      "word": "skanneria",
+      "start": 89.65,
+      "end": 90.211
+    },
+    {
+      "word": "sitten",
+      "start": 90.231,
+      "end": 90.491
+    },
+    {
+      "word": "mukana,",
+      "start": 90.531,
+      "end": 90.872
+    },
+    {
+      "word": "elikkä",
+      "start": 90.892,
+      "end": 91.132
+    },
+    {
+      "word": "päästään",
+      "start": 91.172,
+      "end": 91.492
+    },
+    {
+      "word": "katsomaan",
+      "start": 91.532,
+      "end": 91.872
+    },
+    {
+      "word": "miten",
+      "start": 91.892,
+      "end": 92.053
+    },
+    {
+      "word": "skannereilla",
+      "start": 92.093,
+      "end": 92.633
+    },
+    {
+      "word": "jäljennetään",
+      "start": 92.833,
+      "end": 93.374
+    },
+    {
+      "word": "ja",
+      "start": 93.394,
+      "end": 94.635
+    },
+    {
+      "word": "Tosiaan",
+      "start": 94.615,
+      "end": 95.057
+    },
+    {
+      "word": "päiväideana",
+      "start": 95.097,
+      "end": 95.538
+    },
+    {
+      "word": "on",
+      "start": 95.558,
+      "end": 95.598
+    },
+    {
+      "word": "se,",
+      "start": 95.618,
+      "end": 95.679
+    },
+    {
+      "word": "että",
+      "start": 95.699,
+      "end": 95.779
+    },
+    {
+      "word": "tutustutaan",
+      "start": 95.819,
+      "end": 96.18
+    },
+    {
+      "word": "näihin",
+      "start": 96.2,
+      "end": 96.441
+    },
+    {
+      "word": "osiin,",
+      "start": 96.501,
+      "end": 96.782
+    },
+    {
+      "word": "tututaan",
+      "start": 96.963,
+      "end": 97.224
+    },
+    {
+      "word": "skannereihin",
+      "start": 97.244,
+      "end": 97.786
+    },
+    {
+      "word": "ja",
+      "start": 97.826,
+      "end": 97.906
+    },
+    {
+      "word": "päästään",
+      "start": 97.946,
+      "end": 98.247
+    },
+    {
+      "word": "vähän",
+      "start": 98.268,
+      "end": 98.428
+    },
+    {
+      "word": "sen",
+      "start": 98.448,
+      "end": 98.609
+    },
+    {
+      "word": "harjoittelemaan",
+      "start": 98.629,
+      "end": 99.13
+    },
+    {
+      "word": "niillä",
+      "start": 99.171,
+      "end": 99.371
+    },
+    {
+      "word": "myös",
+      "start": 99.391,
+      "end": 99.532
+    },
+    {
+      "word": "siellä",
+      "start": 99.552,
+      "end": 99.753
+    },
+    {
+      "word": "paikan",
+      "start": 100.034,
+      "end": 100.294
+    },
+    {
+      "word": "päällä",
+      "start": 100.335,
+      "end": 100.596
+    },
+    {
+      "word": "sitten",
+      "start": 100.636,
+      "end": 100.876
+    },
+    {
+      "word": "jäljentämistä.",
+      "start": 101.659,
+      "end": 102.803
+    },
+    {
+      "word": "Sitten",
+      "start": 104.048,
+      "end": 104.449
+    },
+    {
+      "word": "sanoisin,",
+      "start": 104.689,
+      "end": 105.009
+    },
+    {
+      "word": "että",
+      "start": 105.029,
+      "end": 105.17
+    },
+    {
+      "word": "tämän",
+      "start": 105.21,
+      "end": 105.37
+    },
+    {
+      "word": "ajokortin",
+      "start": 105.47,
+      "end": 106.011
+    },
+    {
+      "word": "pihvi",
+      "start": 106.051,
+      "end": 106.411
+    },
+    {
+      "word": "on",
+      "start": 106.652,
+      "end": 106.752
+    },
+    {
+      "word": "se",
+      "start": 106.772,
+      "end": 106.892
+    },
+    {
+      "word": "osa",
+      "start": 107.132,
+      "end": 107.352
+    },
+    {
+      "word": "kolme",
+      "start": 107.373,
+      "end": 107.693
+    },
+    {
+      "word": "ja",
+      "start": 108.494,
+      "end": 108.594
+    },
+    {
+      "word": "se",
+      "start": 108.915,
+      "end": 108.995
+    },
+    {
+      "word": "on",
+      "start": 109.035,
+      "end": 109.095
+    },
+    {
+      "word": "tämä",
+      "start": 109.115,
+      "end": 109.295
+    },
+    {
+      "word": "pienryhmävalmennus,",
+      "start": 109.335,
+      "end": 110.296
+    },
+    {
+      "word": "mestarikisällinvalmennus,",
+      "start": 110.317,
+      "end": 111.358
+    },
+    {
+      "word": "jossa",
+      "start": 111.378,
+      "end": 111.578
+    },
+    {
+      "word": "sitten",
+      "start": 111.598,
+      "end": 111.859
+    },
+    {
+      "word": "Peter",
+      "start": 112.119,
+      "end": 112.459
+    },
+    {
+      "word": "ottaa",
+      "start": 112.499,
+      "end": 112.76
+    },
+    {
+      "word": "kopin.",
+      "start": 112.8,
+      "end": 113.08
+    },
+    {
+      "word": "Enintään",
+      "start": 113.581,
+      "end": 113.941
+    },
+    {
+      "word": "kymmenen",
+      "start": 113.981,
+      "end": 114.302
+    },
+    {
+      "word": "mahtuu",
+      "start": 114.342,
+      "end": 114.662
+    },
+    {
+      "word": "mukaan,",
+      "start": 114.702,
+      "end": 115.043
+    },
+    {
+      "word": "elikkä",
+      "start": 115.083,
+      "end": 115.343
+    },
+    {
+      "word": "ne",
+      "start": 115.504,
+      "end": 115.624
+    },
+    {
+      "word": "jotka",
+      "start": 115.664,
+      "end": 115.844
+    },
+    {
+      "word": "tähän",
+      "start": 116.064,
+      "end": 116.245
+    },
+    {
+      "word": "lähtee,",
+      "start": 116.425,
+      "end": 116.825
+    },
+    {
+      "word": "niin",
+      "start": 116.845,
+      "end": 116.925
+    },
+    {
+      "word": "kannattaa",
+      "start": 117.686,
+      "end": 118.067
+    },
+    {
+      "word": "nopsan",
+      "start": 118.087,
+      "end": 118.387
+    },
+    {
+      "word": "ilmoittautua,",
+      "start": 118.428,
+      "end": 119.008
+    },
+    {
+      "word": "että",
+      "start": 119.028,
+      "end": 119.169
+    },
+    {
+      "word": "saa",
+      "start": 119.509,
+      "end": 119.729
+    },
+    {
+      "word": "paikan",
+      "start": 119.769,
+      "end": 120.03
+    },
+    {
+      "word": "sieltä.",
+      "start": 120.05,
+      "end": 120.711
+    },
+    {
+      "word": "Ja",
+      "start": 120.731,
+      "end": 120.831
+    },
+    {
+      "word": "tässä",
+      "start": 121.371,
+      "end": 121.652
+    },
+    {
+      "word": "kohderyhmänä",
+      "start": 121.992,
+      "end": 122.593
+    },
+    {
+      "word": "on",
+      "start": 122.633,
+      "end": 122.733
+    },
+    {
+      "word": "valmistuneet",
+      "start": 122.773,
+      "end": 123.234
+    },
+    {
+      "word": "yleishammaslääkärit,",
+      "start": 123.274,
+      "end": 123.975
+    },
+    {
+      "word": "joilla",
+      "start": 123.995,
+      "end": 124.215
+    },
+    {
+      "word": "on",
+      "start": 124.235,
+      "end": 124.295
+    },
+    {
+      "word": "vähän",
+      "start": 124.315,
+      "end": 124.556
+    },
+    {
+      "word": "tai",
+      "start": 124.596,
+      "end": 124.736
+    },
+    {
+      "word": "ei",
+      "start": 124.776,
+      "end": 124.896
+    },
+    {
+      "word": "lainkaan",
+      "start": 124.916,
+      "end": 125.237
+    },
+    {
+      "word": "kokemusta",
+      "start": 125.257,
+      "end": 125.657
+    },
+    {
+      "word": "implanttihoidoista.",
+      "start": 125.898,
+      "end": 127.66
+    },
+    {
+      "word": "Ehkä",
+      "start": 127.64,
+      "end": 127.96
+    },
+    {
+      "word": "ei",
+      "start": 128.0,
+      "end": 128.141
+    },
+    {
+      "word": "kaikista",
+      "start": 128.161,
+      "end": 128.461
+    },
+    {
+      "word": "kovimmille",
+      "start": 128.862,
+      "end": 129.242
+    },
+    {
+      "word": "konkareille,",
+      "start": 129.282,
+      "end": 129.803
+    },
+    {
+      "word": "mutta",
+      "start": 129.823,
+      "end": 130.023
+    },
+    {
+      "word": "hekin",
+      "start": 130.063,
+      "end": 130.203
+    },
+    {
+      "word": "ovat",
+      "start": 130.244,
+      "end": 130.324
+    },
+    {
+      "word": "toki",
+      "start": 130.344,
+      "end": 130.544
+    },
+    {
+      "word": "tervetulleita",
+      "start": 130.584,
+      "end": 131.265
+    },
+    {
+      "word": "tähän.",
+      "start": 131.285,
+      "end": 132.206
+    },
+    {
+      "word": "Tiivistettynä",
+      "start": 132.827,
+      "end": 133.328
+    },
+    {
+      "word": "koostumus",
+      "start": 133.368,
+      "end": 133.788
+    },
+    {
+      "word": "on",
+      "start": 133.828,
+      "end": 133.908
+    },
+    {
+      "word": "aloituspäivä",
+      "start": 133.948,
+      "end": 134.569
+    },
+    {
+      "word": "futudentin",
+      "start": 134.99,
+      "end": 135.41
+    },
+    {
+      "word": "tiloissa",
+      "start": 135.43,
+      "end": 135.751
+    },
+    {
+      "word": "Helsingissä,",
+      "start": 135.791,
+      "end": 136.832
+    },
+    {
+      "word": "sitten",
+      "start": 136.852,
+      "end": 136.993
+    },
+    {
+      "word": "on",
+      "start": 137.013,
+      "end": 137.113
+    },
+    {
+      "word": "Peterin",
+      "start": 137.153,
+      "end": 137.533
+    },
+    {
+      "word": "työskentelyn",
+      "start": 137.553,
+      "end": 138.134
+    },
+    {
+      "word": "seuraamista",
+      "start": 138.174,
+      "end": 138.735
+    },
+    {
+      "word": "privaattivastaanotolla,",
+      "start": 138.855,
+      "end": 140.077
+    },
+    {
+      "word": "sitten",
+      "start": 140.097,
+      "end": 140.277
+    },
+    {
+      "word": "on",
+      "start": 140.297,
+      "end": 140.377
+    },
+    {
+      "word": "etäsessioita",
+      "start": 140.457,
+      "end": 141.118
+    },
+    {
+      "word": "Peterin",
+      "start": 141.158,
+      "end": 141.539
+    },
+    {
+      "word": "kanssa",
+      "start": 141.579,
+      "end": 141.899
+    },
+    {
+      "word": "ja",
+      "start": 142.3,
+      "end": 142.36
+    },
+    {
+      "word": "lopussa",
+      "start": 142.4,
+      "end": 142.64
+    },
+    {
+      "word": "vielä",
+      "start": 142.66,
+      "end": 142.82
+    },
+    {
+      "word": "kokoon",
+      "start": 142.86,
+      "end": 143.141
+    },
+    {
+      "word": "otetaan",
+      "start": 143.161,
+      "end": 143.381
+    },
+    {
+      "word": "ja",
+      "start": 143.401,
+      "end": 143.501
+    },
+    {
+      "word": "jaetaan",
+      "start": 143.521,
+      "end": 143.842
+    },
+    {
+      "word": "kaikki",
+      "start": 143.982,
+      "end": 144.282
+    },
+    {
+      "word": "todistukset",
+      "start": 144.703,
+      "end": 145.264
+    },
+    {
+      "word": "ja",
+      "start": 145.284,
+      "end": 145.364
+    },
+    {
+      "word": "digitaalinen",
+      "start": 145.544,
+      "end": 146.045
+    },
+    {
+      "word": "semmoinen",
+      "start": 146.065,
+      "end": 146.345
+    },
+    {
+      "word": "paketti",
+      "start": 146.425,
+      "end": 146.866
+    },
+    {
+      "word": "kaikille.",
+      "start": 147.106,
+      "end": 148.248
+    },
+    {
+      "word": "Kesto",
+      "start": 148.268,
+      "end": 148.528
+    },
+    {
+      "word": "noin",
+      "start": 148.548,
+      "end": 148.708
+    },
+    {
+      "word": "kuusi-yhdeksän",
+      "start": 148.728,
+      "end": 149.349
+    },
+    {
+      "word": "kuukautta,",
+      "start": 149.389,
+      "end": 149.71
+    },
+    {
+      "word": "mutta",
+      "start": 149.73,
+      "end": 149.87
+    },
+    {
+      "word": "nyt",
+      "start": 149.89,
+      "end": 149.95
+    },
+    {
+      "word": "minä",
+      "start": 149.97,
+      "end": 150.05
+    },
+    {
+      "word": "annan",
+      "start": 150.07,
+      "end": 150.25
+    },
+    {
+      "word": "Peterille",
+      "start": 150.291,
+      "end": 150.771
+    },
+    {
+      "word": "puheenvuoron.",
+      "start": 150.971,
+      "end": 152.053
+    },
+    {
+      "word": "Kerro",
+      "start": 152.073,
+      "end": 152.333
+    },
+    {
+      "word": "pikkuisen",
+      "start": 152.373,
+      "end": 152.694
+    },
+    {
+      "word": "tuosta",
+      "start": 152.754,
+      "end": 153.014
+    },
+    {
+      "word": "struktuurista",
+      "start": 153.535,
+      "end": 154.276
+    },
+    {
+      "word": "siitä",
+      "start": 154.316,
+      "end": 154.516
+    },
+    {
+      "word": "aloituspäivästä",
+      "start": 154.716,
+      "end": 155.397
+    },
+    {
+      "word": "alkaen,",
+      "start": 155.457,
+      "end": 155.858
+    },
+    {
+      "word": "miten",
+      "start": 155.878,
+      "end": 156.038
+    },
+    {
+      "word": "se",
+      "start": 156.078,
+      "end": 156.158
+    },
+    {
+      "word": "menee",
+      "start": 156.339,
+      "end": 156.559
+    },
+    {
+      "word": "tämä",
+      "start": 156.599,
+      "end": 156.759
+    },
+    {
+      "word": "valmennus.",
+      "start": 156.779,
+      "end": 157.36
+    },
+    {
+      "word": "Joo,",
+      "start": 158.352,
+      "end": 158.733
+    },
+    {
+      "word": "se",
+      "start": 158.753,
+      "end": 158.873
+    },
+    {
+      "word": "koostuu",
+      "start": 158.913,
+      "end": 159.354
+    },
+    {
+      "word": "teoriaosuudesta.",
+      "start": 159.514,
+      "end": 160.496
+    },
+    {
+      "word": "Käydään",
+      "start": 161.257,
+      "end": 161.598
+    },
+    {
+      "word": "muutamia",
+      "start": 161.838,
+      "end": 162.279
+    },
+    {
+      "word": "asioita",
+      "start": 162.439,
+      "end": 162.9
+    },
+    {
+      "word": "läpi.",
+      "start": 163.04,
+      "end": 163.3
+    },
+    {
+      "word": "Tarkennetaan",
+      "start": 163.541,
+      "end": 164.102
+    },
+    {
+      "word": "sitä",
+      "start": 164.142,
+      "end": 164.462
+    },
+    {
+      "word": "advanced",
+      "start": 164.643,
+      "end": 165.204
+    },
+    {
+      "word": "-vaativan",
+      "start": 166.286,
+      "end": 166.766
+    },
+    {
+      "word": "implanttiprotetiikan",
+      "start": 166.847,
+      "end": 167.868
+    },
+    {
+      "word": "ja",
+      "start": 167.908,
+      "end": 168.049
+    },
+    {
+      "word": "perusimplanttiprotetiikan",
+      "start": 168.329,
+      "end": 170.333
+    },
+    {
+      "word": "rajapintaa,",
+      "start": 170.393,
+      "end": 171.555
+    },
+    {
+      "word": "että",
+      "start": 171.575,
+      "end": 171.655
+    },
+    {
+      "word": "osataan",
+      "start": 171.675,
+      "end": 171.975
+    },
+    {
+      "word": "tunnistaa",
+      "start": 171.995,
+      "end": 172.436
+    },
+    {
+      "word": "pikkuisen",
+      "start": 172.456,
+      "end": 172.817
+    },
+    {
+      "word": "paremmin",
+      "start": 172.857,
+      "end": 173.177
+    },
+    {
+      "word": "tätä",
+      "start": 173.278,
+      "end": 173.498
+    },
+    {
+      "word": "potilasvalintaa",
+      "start": 173.778,
+      "end": 174.8
+    },
+    {
+      "word": "ja",
+      "start": 174.84,
+      "end": 174.94
+    },
+    {
+      "word": "potilaita,",
+      "start": 175.061,
+      "end": 175.702
+    },
+    {
+      "word": "joita",
+      "start": 175.722,
+      "end": 175.922
+    },
+    {
+      "word": "me",
+      "start": 175.962,
+      "end": 176.042
+    },
+    {
+      "word": "hoidamme.",
+      "start": 176.082,
+      "end": 177.184
+    },
+    {
+      "word": "Ja",
+      "start": 177.204,
+      "end": 177.324
+    },
+    {
+      "word": "sitten",
+      "start": 177.505,
+      "end": 177.785
+    },
+    {
+      "word": "toinen",
+      "start": 177.825,
+      "end": 178.046
+    },
+    {
+      "word": "osa",
+      "start": 178.106,
+      "end": 178.326
+    },
+    {
+      "word": "on",
+      "start": 178.386,
+      "end": 178.547
+    },
+    {
+      "word": "tämä",
+      "start": 178.587,
+      "end": 178.827
+    },
+    {
+      "word": "hands-on,",
+      "start": 179.047,
+      "end": 179.989
+    }
+  ],
+  "latency_s": 12.76,
+  "usage": null,
+  "created_at_utc": "2026-09-25T10:32:54+00:00",
+  "raw": {
+    "language": "fi",
+    "n_segments": 24
+  },
+  "repeat": 2
+}

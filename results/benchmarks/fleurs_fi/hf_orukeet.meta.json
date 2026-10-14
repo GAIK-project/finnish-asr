@@ -1,0 +1,18 @@
+{
+  "arm_id": "hf_orukeet",
+  "model": "oruk/orukeet",
+  "recipe": "pipeline",
+  "benchmark": "google/fleurs fi_fi test",
+  "utterances": 918,
+  "batch_size": 16,
+  "load_s": 10.7,
+  "transcribe_s": 33.9,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005079",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22738362"
+}

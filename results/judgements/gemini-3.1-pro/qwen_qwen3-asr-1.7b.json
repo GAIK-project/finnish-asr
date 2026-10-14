@@ -1,0 +1,225 @@
+{
+  "arm_id": "qwen_qwen3-asr-1.7b",
+  "label": "Qwen3-ASR 1.7B",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "a02ca79d5f6c5fb4a3970307e18d4390d5d677880ea3d2b9b006314e14b9cfe0",
+  "created_at_utc": "2026-10-12T08:27:47+00:00",
+  "latency_s": 50.7,
+  "usage": {
+    "input_tokens": 3107,
+    "output_tokens": 1985
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 33.58,
+    "error_counts": {
+      "critical": 11,
+      "major": 5,
+      "minor": 0
+    },
+    "entities": {
+      "correct": 1,
+      "variant": 6,
+      "wrong": 7,
+      "missing": 0
+    },
+    "entities_ok": 7,
+    "entities_total": 14,
+    "ref_doubts": 0,
+    "usability": 20
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "potilasvähennettöikässä",
+        "explanation": "The clinical subject 'patient injuries in prosthodontics' is garbled into a nonsense word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "parodontologi",
+        "transcript_span": "parannettu laki",
+        "explanation": "The profession 'periodontist' is misrecognized as 'improved law'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja, semmoinen vodcast",
+        "transcript_span": "implantkeissa semmoinen voideesti",
+        "explanation": "The format 'implant cases, a kind of vodcast' is replaced by nonsense words."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "jossa Peterin kanssa käydään läpi näitä yleisiä ongelmia",
+        "transcript_span": "jos Peterin askelalla on tyyleisiä ongelmia",
+        "explanation": "The phrase 'where we go through these common problems with Peter' is completely garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "Implantologiaa Advanced",
+        "transcript_span": "implanttolakiä äävänst",
+        "explanation": "The course name 'Implantology Advanced' is misrecognized as 'implant law'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "etualueen ja esteettisen alueen ja tosi vaativia temppuja",
+        "transcript_span": "ei tule oleisti se ollee tosiaan vaihtivien pujaa",
+        "explanation": "The important clinical regions 'anterior region and aesthetic region' are entirely lost to hallucinated words."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "oikomishoidollisia",
+        "transcript_span": "oikein myös hoitoisia",
+        "explanation": "The clinical term 'orthodontic' is lost and replaced with disjointed words."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Virpi Myller, oikoja Virpi",
+        "transcript_span": "virtimylleen oikea virti virtinen",
+        "explanation": "The name and profession 'orthodontist Virpi' are entirely mangled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "lopputentti ja sen",
+        "transcript_span": "loputteen tiesen",
+        "explanation": "The word for 'final exam' is broken up into unrelated words."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Straumann, Densply Sirona, Nobel Biocare ja Camlog-Conelog",
+        "transcript_span": "straumaniden splaissirana, novelpaajärjä kämmelkanelokli",
+        "explanation": "All four key dental implant brand names are heavily garbled beyond recognition."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "mestari-kisälli -valmennus, jossa sitten Peter ottaa kopin",
+        "transcript_span": "valmistusmestarikisällivärmössä sitten Peterot taakoon pin",
+        "explanation": "The phrase describing the coaching structure and Peter 'catching the ball' (taking charge) is lost to gibberish."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "yleishammaslääkärit",
+        "transcript_span": "tyyleissanmassa",
+        "explanation": "The target audience 'general dentists' is replaced by a meaningless word."
+      },
+      {
+        "category": "omission",
+        "severity": "critical",
+        "reference_span": "ei",
+        "transcript_span": "",
+        "explanation": "Missing the negation flips the meaning entirely: 'not for the most experienced' becomes 'for the most experienced'."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "critical",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi-viisiksi",
+        "explanation": "The duration of the coaching is wrong (6-9 months vs 6-5 months)."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "puheenvuoron",
+        "transcript_span": "uuden vuoron",
+        "explanation": "'Giving the floor' becomes 'giving a new turn'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "hands-on",
+        "transcript_span": "Hansen jos",
+        "explanation": "The essential practical training format 'hands-on' is misrecognized as a proper name."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "wrong",
+        "transcript_form": "Suojarev. Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Martta. Martta"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka paallose"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "wrong",
+        "transcript_form": "virtimylleen"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "wrong",
+        "transcript_form": "straumaniden"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "splaissirana"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "novelpaajärjä"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "kämmelkanelokli"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoana oyu"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "variant",
+        "transcript_form": "ajo-kortin"
+      }
+    ],
+    "ref_doubts": [],
+    "usability": 20,
+    "summary": "The transcript is exceptionally poor and seemingly produced by a model completely unfamiliar with dental terminology or standard Finnish pacing. Almost all clinical terms, brand names, and names of professionals are garbled into nonsensical sequences of syllables. Crucial information, such as durations and target audiences, is either wrong or reversed."
+  }
+}

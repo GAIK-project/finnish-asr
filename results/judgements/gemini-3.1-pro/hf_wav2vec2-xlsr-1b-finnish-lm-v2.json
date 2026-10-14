@@ -1,0 +1,250 @@
+{
+  "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+  "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "5d606ea8213ca9cb5b8d40fc11b4927545f7d7d66d0d429f4049d499152bfd2c",
+  "created_at_utc": "2026-10-12T08:27:12+00:00",
+  "latency_s": 87.6,
+  "usage": {
+    "input_tokens": 3144,
+    "output_tokens": 2100
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 26.12,
+    "error_counts": {
+      "critical": 3,
+      "major": 15,
+      "minor": 0
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 5,
+      "wrong": 4,
+      "missing": 0
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 45
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "puotilasvahingas",
+        "explanation": "The core word is garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "laajasti",
+        "transcript_span": "iin kulaajasti",
+        "explanation": "The word is misrecognised into a non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "parodontologi",
+        "transcript_span": "pardonu tuolaki",
+        "explanation": "The clinical title is completely garbled into nonsense."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeissä ja",
+        "explanation": "Meaning changes from 'implant cases' to 'in implantkes'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään ole",
+        "explanation": "The idiom 'missään nimessä' (under no circumstances) is broken by replacing the noun with 'ole'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Advanced",
+        "transcript_span": "adverst",
+        "explanation": "The English name of the webinar series is garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "timosuojare ja ilkkapallossa",
+        "explanation": "Both speakers' names are severely garbled, with incorrect case endings changing the meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etualueelle esteettisalueet",
+        "explanation": "Incorrect grammatical cases change the structure and meaning of the sentence."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kun itse tekee,",
+        "transcript_span": "kuitatteke",
+        "explanation": "The phrase is garbled into a nonsense word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikomishoidollisia",
+        "transcript_span": "oikomieshoidollisia",
+        "explanation": "An extra 'mies' (man) inserted in the middle of the word changes its meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kerrataan",
+        "transcript_span": "kerrotaan",
+        "explanation": "Meaning changes from 'reviewed/revised' to 'told'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Densply Sirona, Nobel Biocare ja Camlog-Conelog",
+        "transcript_span": "densplaishirana nobl paijaker ja kamle konelog",
+        "explanation": "Multiple prominent industry brand names are completely garbled beyond recognition."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "osia siellä",
+        "transcript_span": "osiasialla",
+        "explanation": "Garbled into a compound word 'osiasialla' which alters the meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "idea on se, että",
+        "transcript_span": "idean ase",
+        "explanation": "The phrase 'the idea is that' is garbled into 'idea's weapon'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "valmennus",
+        "transcript_span": "valmius",
+        "explanation": "Meaning changes from 'coaching' to 'readiness'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "joilla on",
+        "transcript_span": "vo ollaan",
+        "explanation": "The relative pronoun is garbled, losing the subject meaning 'who have'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "advanced",
+        "transcript_span": "atvernst",
+        "explanation": "The English term is garbled into nonsense."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "hands-on,",
+        "transcript_span": "hhanson jos s",
+        "explanation": "The English term is garbled into nonsense."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "suojärven timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "martta martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "ilkkapallossa"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "virpi myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "klarion"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "straumanni"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "densplaishirana"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "nobl paijaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "kamle konelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "implantona oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "per implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "per implantiitista",
+        "explanation": "The correct medical spelling should be 'peri-implantiitista'."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "densplaishirana",
+        "explanation": "The brand name in the reference contains a typo; it should be 'Dentsply Sirona'."
+      }
+    ],
+    "usability": 45,
+    "summary": "The transcript suffers from severe acoustic modeling failures when encountering clinical terms, English words, and proper names, resulting in phonetic gibberish (e.g., 'pardonu tuolaki' for 'parodontologi', 'densplaishirana' for 'Dentsply Sirona'). The core meaning of several sentences is lost due to misrecognised words and distorted inflections. While basic Finnish text is mostly readable, the destruction of dense domain terminology makes the text highly unreliable as a standalone document."
+  }
+}

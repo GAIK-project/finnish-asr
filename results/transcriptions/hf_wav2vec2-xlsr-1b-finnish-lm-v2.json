@@ -1,0 +1,76 @@
+{
+  "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+  "stage": "asr",
+  "provider": "huggingface-gpu",
+  "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
+  "text": "ke a suojärven timo luento puotilasvahingas protetiikassa siinä tulee hyvin iin kulaajasti protetiikkaa yleensä vähän vaikeusasteen arviointi ja muuta sitte on pardonu tuolaki martta martola luento per implantiitista ja sitte implanttikeissä ja semmoinen vodkest jossa peetterin kanssa käydään läpi näitä  yleisimpi ongelmi mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaaja tietää miten ne ratkaistaan viimeisenä on vielä sitten semmoinen osuus missä on tärkeä tunnistaa nämän eivät olet missään ole sellaisia mitä kannattaa ensimmäisen lähteä tekimään elikkä siellä on implantologiaa adverst vebinarsaria timosuojare ja ilkkapallossa ja siinä tehdään sitten semmoista niinkn  hai end implanttihoitoa ja etualueelle esteettisalueet tosi vaativia temppuja mutta ne on tärkeää tunnistaa kuitatteke ett milloin missä menee se raja ett milloin työ voi muuttuki yhtäkkii todella hankalaksi ja sitte on myös oikomieshoidollisia näkökulmia timo ja virpi myller oikoja virpi virpine keskustelevat sitten siitä siitä aiheesta miten sitä voidaan preproteettisesti hyödyntää teorian lopuksi on lopputenttia sen suorittamalla sitte se ajokortin osa yks on tehty ajokortiosa kaksi komponentti tutuksi päivä helsingissä klarion hotellissa se alkaa peterin kertausluennolla vähännä perusasioita kerrotaan siihen alkuupohjalle ja sen jälkeen se on neljä implanttibrändi mukana straumanni densplaishirana nobl paijaker ja kamle konelog eli implantona oy tutustaa heidän komponentteihin mitä mimmoisia osiasialla on miten ne eroavat toisistaan ja siellä on myös neljä eri skanneria sitten mukana elikkä päästään katsomaan miten s kannereilla jäljennetään ja tosiaan päivän idean ase tutustaa näihin osiin tututa kannereihin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitte jäljentämistä sitten sanoisin että tämän ajokortin pihvi on se osa kolme ja se on tämä pienryhmä valmennus mestari kisälle valmius jossa sitten peetter ottaa kopin enintään kymmenen mahtuu mukaan elikkä ne jotka tähän lähteet niin kannattaa nopsaan ilmoittautua että saa paikan sieltäja tässä kohderyhmänä on valmistuneet että yleishammaslääkärit vo ollaan vähän tai ei lainkaan kokemusta implanttihoidoista eli ehkä ei kaikista kovimmille konkareille mutta hekin oat toki tervetulleita tähän tiivistettynä koostumus on aloituspäivä futudentin tiloissa helsingissä sitteon peetterin työskentelyn seuraamista privaatti vastaanotolla sitte etäsessiota petterin kanssa ja lopussi vielä kokoonnuttaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille kesto noin kuusita yhdeksän kuukautta mutta nyt mä annan peetterille puheenvuoron kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen  miten se menee tämä valmennus joo se koostuu teorianosuudesta käydään muutamia asioita läpi tarkennetaan sitä atvernst vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa että osataa tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita joita me hoidamme ja sitten toinen osa on tämä hhanson jos s",
+  "params": {
+    "recipe": "ctc",
+    "decoder": "greedy CTC (the repo's KenLM is not used)",
+    "chunks": {
+      "min_s": 15.0,
+      "max_s": 25.0,
+      "window_s": 0.1
+    },
+    "env": "hf",
+    "device": "cuda",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "4.55.3"
+    }
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
+  "notes": "latency_s includes model loading.",
+  "words": null,
+  "latency_s": 44.86,
+  "usage": null,
+  "created_at_utc": "2026-10-12T08:04:07+00:00",
+  "raw": {
+    "segments": [
+      {
+        "start": 0.0,
+        "end": 21.85,
+        "text": "ke a suojärven timo luento puotilasvahingas protetiikassa siinä tulee hyvin iin kulaajasti protetiikkaa yleensä vähän vaikeusasteen arviointi ja muuta sitte on pardonu tuolaki martta martola luento per implantiitista ja sitte implanttikeissä ja semmoinen vodkest jossa peetterin kanssa käydään läpi näitä  yleisimpi ongelmi mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaaja tietää miten ne ratkaistaan"
+      },
+      {
+        "start": 21.85,
+        "end": 41.4,
+        "text": "viimeisenä on vielä sitten semmoinen osuus missä on tärkeä tunnistaa nämän eivät olet missään ole sellaisia mitä kannattaa ensimmäisen lähteä tekimään elikkä siellä on implantologiaa adverst vebinarsaria timosuojare ja ilkkapallossa ja siinä tehdään sitten semmoista niinkn  hai end implanttihoitoa ja etualueelle esteettisalueet tosi vaativia temppuja mutta ne on tärkeää tunnistaa"
+      },
+      {
+        "start": 41.4,
+        "end": 64.55,
+        "text": "kuitatteke ett milloin missä menee se raja ett milloin työ voi muuttuki yhtäkkii todella hankalaksi ja sitte on myös oikomieshoidollisia näkökulmia timo ja virpi myller oikoja virpi virpine keskustelevat sitten siitä siitä aiheesta miten sitä voidaan preproteettisesti hyödyntää teorian lopuksi on lopputenttia sen suorittamalla sitte se ajokortin osa yks on tehty"
+      },
+      {
+        "start": 64.55,
+        "end": 83.9,
+        "text": "ajokortiosa kaksi komponentti tutuksi päivä helsingissä klarion hotellissa se alkaa peterin kertausluennolla vähännä perusasioita kerrotaan siihen alkuupohjalle ja sen jälkeen se on neljä implanttibrändi mukana straumanni densplaishirana nobl paijaker ja kamle konelog eli implantona oy"
+      },
+      {
+        "start": 83.9,
+        "end": 107.95,
+        "text": "tutustaa heidän komponentteihin mitä mimmoisia osiasialla on miten ne eroavat toisistaan ja siellä on myös neljä eri skanneria sitten mukana elikkä päästään katsomaan miten s kannereilla jäljennetään ja tosiaan päivän idean ase tutustaa näihin osiin tututa kannereihin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitte jäljentämistä sitten sanoisin että tämän ajokortin pihvi on se osa kolme"
+      },
+      {
+        "start": 107.95,
+        "end": 132.6,
+        "text": "ja se on tämä pienryhmä valmennus mestari kisälle valmius jossa sitten peetter ottaa kopin enintään kymmenen mahtuu mukaan elikkä ne jotka tähän lähteet niin kannattaa nopsaan ilmoittautua että saa paikan sieltäja tässä kohderyhmänä on valmistuneet että yleishammaslääkärit vo ollaan vähän tai ei lainkaan kokemusta implanttihoidoista eli ehkä ei kaikista kovimmille konkareille mutta hekin oat toki tervetulleita tähän"
+      },
+      {
+        "start": 132.6,
+        "end": 157.45,
+        "text": "tiivistettynä koostumus on aloituspäivä futudentin tiloissa helsingissä sitteon peetterin työskentelyn seuraamista privaatti vastaanotolla sitte etäsessiota petterin kanssa ja lopussi vielä kokoonnuttaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille kesto noin kuusita yhdeksän kuukautta mutta nyt mä annan peetterille puheenvuoron kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen  miten se menee tämä valmennus"
+      },
+      {
+        "start": 157.45,
+        "end": 180.0,
+        "text": "joo se koostuu teorianosuudesta käydään muutamia asioita läpi tarkennetaan sitä atvernst vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa että osataa tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita joita me hoidamme ja sitten toinen osa on tämä hhanson jos s"
+      }
+    ]
+  },
+  "repeat": 1
+}

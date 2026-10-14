@@ -1,0 +1,159 @@
+{
+  "arm_id": "vertex_gemini-3.5-flash",
+  "label": "Gemini 3.5 Flash",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "ffd79e91ec7299fd62f95e6e1c44d31351358d4e20791cd04aeb791191cf36c4",
+  "created_at_utc": "2026-10-12T08:31:11+00:00",
+  "latency_s": 71.0,
+  "usage": {
+    "input_tokens": 3227,
+    "output_tokens": 1236
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 1.24,
+    "error_counts": {
+      "critical": 0,
+      "major": 0,
+      "minor": 5
+    },
+    "entities": {
+      "correct": 13,
+      "variant": 1,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 95
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "Suojärven Timon",
+        "transcript_span": "koulutusta. Suojärven Timon",
+        "explanation": "The transcript includes an extra stray word 'koulutusta' at the beginning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "semmoinen vodcast, jossa",
+        "transcript_span": "semmoinen podcast, jossa",
+        "explanation": "The term 'vodcast' (video podcast) is changed to 'podcast'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "jossa Peterin kanssa",
+        "transcript_span": "jossa Petteri kanssa",
+        "explanation": "The name 'Peter' is transcribed as the Finnish name 'Petteri' consistently throughout the text, and the genitive case ending is missing in this first occurrence."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "mitä kannattaa ensimmäisenä lähteä",
+        "transcript_span": "mitä kannattaa ensimmäisellä lähteä",
+        "explanation": "The grammatical change from 'ensimmäisenä' to 'ensimmäisellä' slightly shifts the meaning from 'as the first thing' to 'on the first try'."
+      },
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "tämä hands-on,",
+        "transcript_span": "tämä hands-on, jossa",
+        "explanation": "The transcript ends with an extra 'jossa', leaving the sentence abruptly trailing off."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon / Timo Suojärvi / Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Petteri / Petterin / Petterille"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallonen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "correct",
+        "transcript_form": "Camlog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "Implantona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "peri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The transcript uses the correct spelling for the brand Dentsply Sirona, whereas the reference is slightly misspelled."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "peri-implantiitista",
+        "explanation": "The transcript uses the correct standard medical spelling (peri-implantiitti)."
+      }
+    ],
+    "usability": 95,
+    "summary": "The transcript is of excellent quality and conveys all the clinical and logistical information accurately. The only notable discrepancies are the transcription of the name 'Peter' as the Finnish equivalent 'Petteri', and a couple of minor grammatical alterations. In fact, the transcript correctly spells a few domain-specific terms (Dentsply, peri-implantiitti) that were slightly misspelled in the reference."
+  }
+}

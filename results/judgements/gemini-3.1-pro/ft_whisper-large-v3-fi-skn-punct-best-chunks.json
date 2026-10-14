@@ -1,0 +1,201 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-punct-best-chunks",
+  "label": "Fine-tuned whisper-large-v3-fi-skn-punct-best, chunked",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "3573d7d7a6bb032f5f045cc49499c83a32e921c79647520fafb9bbc0cf0f88ed",
+  "created_at_utc": "2026-10-13T16:58:55+00:00",
+  "latency_s": 60.8,
+  "usage": {
+    "input_tokens": 3207,
+    "output_tokens": 1600
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 10.95,
+    "error_counts": {
+      "critical": 1,
+      "major": 6,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 7,
+      "variant": 3,
+      "wrong": 4,
+      "missing": 0
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 70
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "",
+        "transcript_span": "koulutusta. ",
+        "explanation": "The transcript includes an extra word at the beginning, possibly from cut-off speech not included in the reference."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi",
+        "transcript_span": "Pardentolki",
+        "explanation": "The clinical title is severely garbled and unrecognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marttojen",
+        "explanation": "The surname Martola is wrongly interpreted as the word 'Marttojen'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "ImplanttiCase ja",
+        "explanation": "The compound word is split, introducing an erroneous conjunction."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään mielessä",
+        "explanation": "A common idiom is altered, shifting the tone slightly."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced",
+        "transcript_span": "implantologia ja advanced",
+        "explanation": "The name of the course is split with a conjunction, altering the title."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Palos,",
+        "explanation": "The surname Pallonen is garbled into 'Palos'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "pre-proteettisesti",
+        "transcript_span": "reproteettisesti",
+        "explanation": "The prefix 'pre-' (before) is changed to 're-' (again), which changes the clinical meaning of the treatment sequence entirely."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplay-sirvana",
+        "explanation": "The company name Dentsply Sirona is garbled beyond clear recognition."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobelbayer",
+        "explanation": "The company name Nobel Biocare is incorrectly substituted with 'Nobelbayer'."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "major",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "A duration range of '6 to 9 months' is changed to '6 or 9 months', which alters the meaning."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Martta Marttojen"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Palos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Densplay-sirvana"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobelbayer"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock-Connellock"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplanttiitista",
+        "explanation": "The transcript spells 'peri-implantiitti' closer to the correct medical term, while the reference seems to miss an 'i'."
+      },
+      {
+        "reference_span": "Densply",
+        "transcript_span": "Densplay",
+        "explanation": "The reference misspells the canonical brand name 'Dentsply' as 'Densply'."
+      }
+    ],
+    "usability": 70,
+    "summary": "The transcript preserves the general structure and most of the practical information regarding the course. However, it struggles heavily with clinical terms, brand names, and several proper nouns, which makes it less reliable for a professional audience. Crucially, the change from 'pre-prosthetic' to 're-prosthetic' alters clinical meaning, and major dental brands are garbled."
+  }
+}

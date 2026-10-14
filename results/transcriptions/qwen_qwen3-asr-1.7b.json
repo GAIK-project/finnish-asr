@@ -1,0 +1,34 @@
+{
+  "arm_id": "qwen_qwen3-asr-1.7b",
+  "stage": "asr",
+  "provider": "huggingface-gpu",
+  "model": "Qwen/Qwen3-ASR-1.7B",
+  "text": "Suojarev. Timo luento potilasvähennettöikässä. Siinä tulee hyvin laajat prottettiikainen se vähän vaikeusasteen arviointia muuta. Sitten parannettu laki Martta. Martta luento periimplanttiista ja sitten implantkeissa semmoinen voideesti jos Peterin askelalla on tyyleisiä ongelmia. Yleisin piirre ongelmiin, että implantteina saa olla hyvät tunnistaetietä miten ratkaista. Viimeisenä aviassa semmonen osa missä tärkeät tunnistaen missen ne selaisi mitä kannattaa ensimmäisen lähtee tekemällä, että siellä on implanttolakiä äävänst, vebinäärisä ja Timo suojarev ja Ilkka paallose siinä tehdään semmonen kuin haeen implanttihoito ei tule oleisti se ollee tosiaan vaihtivien pujaa, mutta on tärkeää tunnista, kuin te tekisit milloin missä menen sen rajat, milloin työ muuttuu yhtäkkiä toisella hankkaillessa. Sitten myös oikein myös hoitoisia näkökuulia Timoja virtimylleen oikea virti virtinen keskustella vatsiin siitä siitä aiheesta, miten sitä voidaan preproteettisesti hyödyntää. Teoria lopuksi on loputteen tiesen suorittamalla sitten ajo-kortin osa yksi on tehtävä. Ajo-kortin osa kaksi komponentit tutuksi päivä Helsingissä Clarion-hotellissa. Se on kai Peterin kertausluenolla vähän perusasiota kerrataa siihen alkupohjalle ja sielläkin se on neljä implantteperäntiä mukana straumaniden splaissirana, novelpaajärjä kämmelkanelokli implanttoana oyu tutusta heiden komponentteihin, mitä muissa osiin siellä on, miten ne rovattu toisistaan. Siellä myös neljä skanneria sitten mukana, eli päästä kattamaan miten skannerilla jääjennetään ja tosiaan päivä idea on se tutustua näihin osiin, tutustua skanneriin ja päästä vähän sen harjoittelmaan niille myös siellä paikan päällä sitten jääjentämistä. Sitten sanoin, että ajo-kortin pihi vii on se osa kolme ja se on tää pienryhmä valmistusmestarikisällivärmössä sitten Peterot taakoon pin enintään kymmenen mahtuu mukana, eli ne tähän lähteni kannattaa nopeasti ilmoittautua saapaisijalta ja tässä kohteri ryhmä on valmistunut tyyleissanmassa, jotta on vähän tai ei lainkaan kumusta implanttihoitoista, eli ehkä kaikista kovimmin konkareille, mutta hekin on tarkittettu tulleet tähän ja tiivistettynä koostumus on aloituspäivä futurentin tilassa Helsingissä. Sitten Peterin työskentelyseuraamista privaattevastaan toilla sitten etäsejäta Peterin kanssa lopussa kokoontuu ja aietaan kaikki todistukset ja digitaalisemman paketti kaikille. Kestoon on kuusi-viisiksi kuukautta. Nyt maan Peterille uuden vuoron kerron pikkuun toista struktuuresta siitä aloituspästä alkaen, miten se menetää valmennus. Joo, se koostuu teoriaosuudesta käydään muutamia asioita läpi. Tarkennetaan sitä äävänst vaativan implanttiprottettiikkaa perusimplanttiprottettiikkaa rajapinta ja tosataan tunnista pikkasen paremmin tämä potilasvalinta ja potilaita, jota me hoitetaan. Ja sitten toinen osa on tämä Hansen jos",
+  "params": {
+    "recipe": "qwen",
+    "language": "Finnish",
+    "dtype": "bfloat16",
+    "max_new_tokens": 4096,
+    "backend": "transformers",
+    "env": "qwen",
+    "device": "cuda",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "4.57.6",
+      "qwen_asr": "?"
+    }
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Qwen3-ASR 1.7B",
+  "notes": "latency_s includes model loading.",
+  "words": null,
+  "latency_s": 70.06,
+  "usage": null,
+  "created_at_utc": "2026-10-12T08:09:11+00:00",
+  "raw": {
+    "detected_language": "Finnish"
+  },
+  "repeat": 1
+}

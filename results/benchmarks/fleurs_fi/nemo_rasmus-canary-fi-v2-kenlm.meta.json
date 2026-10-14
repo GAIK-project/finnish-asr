@@ -1,0 +1,19 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
+  "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+  "recipe": "canary_kenlm",
+  "benchmark": "google/fleurs fi_fi test",
+  "utterances": 918,
+  "batch_size": 16,
+  "load_s": 27.6,
+  "transcribe_s": 651.0,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid007947",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "slurm_job_id": "22738263"
+}

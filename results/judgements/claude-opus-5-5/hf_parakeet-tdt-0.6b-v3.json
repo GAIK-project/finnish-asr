@@ -1,0 +1,280 @@
+{
+  "arm_id": "hf_parakeet-tdt-0.6b-v3",
+  "label": "Parakeet TDT 0.6B v3",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "d9e312d96b65dfe08a944c1505a98a361ec6dea7d04d92e55dd6a45b27757021",
+  "created_at_utc": "2026-10-12T08:23:45+00:00",
+  "latency_s": 35.0,
+  "usage": {
+    "input_tokens": 5033,
+    "output_tokens": 3995
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 12.69,
+    "error_counts": {
+      "critical": 0,
+      "major": 7,
+      "minor": 16
+    },
+    "entities": {
+      "correct": 3,
+      "variant": 10,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 62
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "potilasvahemmat protetiikassa",
+        "explanation": "The lecture title word 'potilasvahingot' (patient injuries) is garbled into a non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi Martta Martolan",
+        "transcript_span": "parino tulakin martta martala",
+        "explanation": "The speaker's profession (periodontist) is garbled and lost."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "martta martala",
+        "explanation": "The surname is misspelled but recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "The format is given as podcast instead of vodcast (video)."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Peterin",
+        "transcript_span": "Peetterin",
+        "explanation": "Peter's name is spelled inconsistently (Peetter/Peeter/Petter/Peette) but remains recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Viimeisenä on vielä sitten semmoinen osio",
+        "transcript_span": "Viimeisen aviaan semmoinen osa",
+        "explanation": "The phrase is garbled, but the sense of a 'last section' survives."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timo Suojare ja Ilkkapallos",
+        "explanation": "Both lecturer names are misspelled but recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etualue ja estetisoluea",
+        "explanation": "'esteettisen alueen' (aesthetic zone) is garbled."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "",
+        "explanation": "The qualifier 'when doing it yourself' is missing."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikomishoidollisia näkökulmia",
+        "transcript_span": "oikeamishoidollisia näkökulmia",
+        "explanation": "The orthodontic term is garbled into a non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "oikean virpi",
+        "explanation": "The fact that Virpi is an orthodontist is lost."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Ajokortin osa kaksi",
+        "transcript_span": "Ajokortiossa kaksi",
+        "explanation": "'Part two' of the course is garbled but inferable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kerrataan",
+        "transcript_span": "kerrotaan",
+        "explanation": "'Reviewed' becomes 'told'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Bajer",
+        "explanation": "The brand name is garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplayserona",
+        "explanation": "The brand is misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog eli Implantona Oy",
+        "transcript_span": "Camlo Conolog, eli implanttoona Oy",
+        "explanation": "The brand and company names are misspelled but recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "eroavat",
+        "transcript_span": "roovat",
+        "explanation": "'Differ' is garbled into a non-word."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "mestari-kisälli -valmennus",
+        "transcript_span": "Mestarivalmennus",
+        "explanation": "The 'kisälli' part of the coaching name is missing."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "valmistuneet yleishammaslääkärit, joilla on",
+        "transcript_span": "valmistunut yleisha lääkrittyä olla",
+        "explanation": "The target group (qualified general dentists) is garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin",
+        "transcript_span": "futurentin",
+        "explanation": "The company name is misspelled but recognisable."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "major",
+        "reference_span": "Kesto on noin kuusi-yhdeksän kuukautta",
+        "transcript_span": "Kesto noin 6.9. kuukautta",
+        "explanation": "The 6–9 month range is rendered like a date and is ambiguous or misleading."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoannut",
+        "explanation": "'We gather' is garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hands-on",
+        "transcript_span": "Hanson",
+        "explanation": "The term 'hands-on' is garbled into a name-like word."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Suojarven timon / Timo Suojare"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "martta martala"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin / Peeterin / Petterin / Peette"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkkapallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "klarionhotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densplayserona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Bajer"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlo Conolog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplayserona",
+        "explanation": "The reference misspells the brand; the canonical spelling is Dentsply Sirona."
+      }
+    ],
+    "usability": 62,
+    "summary": "The overall course structure, the sequence of parts and the number of participants (10) survive. However, many words and names are garbled: the lecture title, the periodontist and orthodontist roles, the target group, Nobel Biocare, and the 6–9 month duration, which is rendered like a date. Most entities are recognisable only as spelling variants."
+  }
+}

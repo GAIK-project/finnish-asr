@@ -1,0 +1,180 @@
+{
+  "arm_id": "openai_gpt-4o-mini-transcribe",
+  "label": "OpenAI gpt-4o-mini-transcribe",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "3566ca29ccb40adb69480669615cb42155ce62310830da0a60e7e0bacfc8b86e",
+  "created_at_utc": "2026-10-12T08:29:56+00:00",
+  "latency_s": 75.1,
+  "usage": {
+    "input_tokens": 3197,
+    "output_tokens": 1397
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 11.44,
+    "error_counts": {
+      "critical": 2,
+      "major": 5,
+      "minor": 1
+    },
+    "entities": {
+      "correct": 6,
+      "variant": 4,
+      "wrong": 4,
+      "missing": 0
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 82
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marto",
+        "explanation": "The lecturer's surname is garbled and unrecognizable."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään",
+        "explanation": "The idiom 'missään nimessä' (by no means) loses 'nimessä', changing the meaning to 'nowhere' or 'anywhere'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "ensimmäisenä",
+        "transcript_span": "ensimmäisen",
+        "explanation": "A minor grammatical case error that slightly alters the structure of the clause."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timo Suojärvi ja Ilkka Pallo",
+        "explanation": "Lecturer Ilkka Pallonen's surname is garbled to 'Pallo', and grammatical cases are lost."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "ja etualueella esteettiselle alueella",
+        "explanation": "Grammatical cases are garbled and conjunctions changed, which alters the syntactic meaning of the phrase."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "critical",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlock Connect",
+        "explanation": "The implant brand name 'Camlog-Conelog' is completely replaced by a different generic term, introducing a false fact."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Futudentin",
+        "transcript_span": "Futurentin",
+        "explanation": "The company name Futudent is misspelled as Futurentin."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "critical",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "A duration range (6-9) is changed to an alternative (6 or 9), which alters the factual meaning."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Martta Marto"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peeterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallo"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Camlock Connect"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "Futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspelled 'Dentsply', whereas the transcript caught the correct spelling."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplanttiitista",
+        "explanation": "The reference misspelled the clinical term 'peri-implantiitti' missing an 'i'."
+      }
+    ],
+    "usability": 82,
+    "summary": "The transcript captures the core message well and has good sentence flow, but it suffers from several errors in specialized names, including lecturers' names and product/company names. It also incorrectly transcribes a duration range '6-9' as '6 or 9'."
+  }
+}

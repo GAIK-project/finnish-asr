@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Finnish speech-to-text: 20+ models compared, and a Whisper fine-tune for dialects"
+type: software
+authors:
+  - family-names: Leskinen
+    given-names: Akseli
+    affiliation: Haaga-Helia University of Applied Sciences
+repository-code: "https://github.com/GAIK-project/finnish-asr"
+url: "https://gaik.ai/"
+license: MIT
+keywords:
+  - speech recognition
+  - Finnish
+  - dialects
+  - Whisper
+  - evaluation
+references:
+  - type: software
+    title: "whisper-large-v3-fi-dialects"
+    authors:
+      - name: GAIK project
+    url: "https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects"
+    license: Apache-2.0
+  - type: data
+    title: "skn-finnish-dialects-asr"
+    authors:
+      - name: GAIK project
+    url: "https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr"
+    license: CC-BY-4.0
+  - type: data
+    title: "Suomen kielen näytteitä (SKN)"
+    authors:
+      - name: "Kotimaisten kielten keskus (Kotus)"
+    publisher:
+      name: "Kielipankki - The Language Bank of Finland"
+    url: "http://urn.fi/urn:nbn:fi:lb-2020112937"
+    license: CC-BY-4.0

@@ -1,0 +1,182 @@
+{
+  "arm_id": "hf_whisper-large-v3",
+  "label": "whisper-large-v3 (base)",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "0efb7e2e607e3699ebe2c0999dd74491d593060f7bf2073c2fa24a065bdacb52",
+  "created_at_utc": "2026-10-12T08:29:19+00:00",
+  "latency_s": 65.2,
+  "usage": {
+    "input_tokens": 3193,
+    "output_tokens": 1438
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 5.22,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 6
+    },
+    "entities": {
+      "correct": 4,
+      "variant": 9,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 90
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "",
+        "transcript_span": "koulutusta. ",
+        "explanation": "The transcript adds an extra word at the beginning that is not in the reference."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja,",
+        "transcript_span": "implanttikeissä ja",
+        "explanation": "The topic name 'implant cases' is misheard as 'in implant cases and', changing the meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään edes",
+        "explanation": "The idiom 'missään nimessä' (by no means) is replaced with 'missään edes', breaking the intended phrasing."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced",
+        "transcript_span": "implantologia ja advanced",
+        "explanation": "The name of the webinar series is slightly altered by adding 'ja'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen.",
+        "transcript_span": "Timo Suojärve ja Ilkka Pallos,",
+        "explanation": "The names are garbled, notably 'Pallonen' turning into a wrong name 'Pallos'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "esteettisen alueen",
+        "transcript_span": "estetisalueen,",
+        "explanation": "The phrase 'esteettisen alueen' is compressed into a garbled compound word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Tutustutaan",
+        "transcript_span": "Tutustaa",
+        "explanation": "The passive verb form is changed to an active one, making the sentence grammatically incorrect in context."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "tutustutaan näihin osiin, tutustutaan skannereihin",
+        "transcript_span": "tutustaa näihin osiin, tututa skannereihin",
+        "explanation": "The verbs are misheard as incorrect/garbled forms ('tutustaa', 'tututa')."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoonnotta",
+        "explanation": "The verb is garbled into a non-standard form."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Timo Suojärve"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peeterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Straumanni"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Noble Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference has a typo ('Densply'). The transcript correctly spells 'Dentsply'."
+      }
+    ],
+    "usability": 90,
+    "summary": "The transcript is highly usable and captures the main educational facts properly. However, there are a few name misspellings (one major: 'Ilkka Pallos' instead of 'Ilkka Pallonen') and minor grammatical or word-level garbling ('tututa', 'kokoonnotta', 'implanttikeissä ja')."
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, QAD-1 ground truth)",
+  "dataset": "projects/qadental-transcription-translation/dataset/ajokortti",
+  "runner": "projects/finnish-asr-models/scripts/run_open_models.py",
+  "env": "qwen",
+  "arms": [
+    "qwen_qwen3-asr-1.7b",
+    "qwen_qwen3-asr-0.6b"
+  ],
+  "host": "nid005110",
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "4.57.6",
+    "qwen_asr": "?"
+  },
+  "slurm_job_id": "22734063"
+}

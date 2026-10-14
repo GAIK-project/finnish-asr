@@ -1,0 +1,41 @@
+{
+  "arm_id": "vertex_gemini-3.1-pro",
+  "stage": "asr",
+  "provider": "google-vertex",
+  "model": "gemini-3.1-pro-preview",
+  "text": "koulutusta, Suojarven Timon luento potilasvahingot protetiikassa. Siinä tulee hyvin niinku laaja protetiikkaa yleensä vähäsen vaikeusasteen arviointia ja muuta. Sit on paradontologi Martta Martola luento perri-implantiitista ja sitten implanttikeissejä semmonen podcast, jossa Petterin kanssa käydään läpi näitä yleisiä tai yleisimpiä ongelmia mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan.\n\nViimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa. Nämä ei ole missään nimessä sellaisia mitä kannattaa ensimmäisenä lähteä tekemään, elikkä siellä on implantologia advanced webinaarisarja Timo Suojarvi ja Ilkka Kallos ja siinä tehdään sit semmosta niinku sanotaanko high-end implanttihoito etu estetisellä alueella tosi tosi vaativia temppuja, mutta ne on tärkeää tunnistaa kuka itse tekee, että missä menee se raja, että milloin työ voi muuttuakin yhtäkkiä todella hankalaksi ja sitten on myös hoidollisia näkökulmia Timo ja Virpi Müller oiko ja Virpi niin keskustelevat sitten siitä siitä aiheesta ja miten sitä voidaan hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty. Ajokortin osa 2 komponentti tutuksi päivä Helsingissä Clarion hotellissa. Se alkaa kertausluennolla vähän näitä perusasioita kerrataan siihen alkuun pohjalle ja sen jälkeen siellä on neljä implanttibrändiä mukana, Strauman, Nobellcare ja Camlock eli implanttona Oy. Tutustutaan heidän komponentteihin, mitä mimmosia osia siellä on, miten ne eroavat toisistaan ja siellä on myös neljä eri scanneria sitten mukana, elikkä päästään katsomaan miten scannerilla jäljennetään. Ja tosiaan päivän idea on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähäsen harjoittelemaan niillä siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tän ajokortin pihvi on se osa kolme. Ja se on tää pienryhmä valmennus mestarikesälli valmennus, jossa sitten Petter ottaa kopin enintään 10 mahtuu mukaan, elikkä ne jotka tähän lähtee niin kannattaa nopeaan ilmoittautua, että saa saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. eli ehkä ei niille konkareille, mutta hekin on toki tervetulleita tähän. Ja tiivistettynä koostumus on aloituspäivä Futudentin tiloissa Helsingissä. Sitten on Petterin työskentelyn seuraamista yksityisvastaanotolla, sit on etäsessioita Petterin kanssa ja lopuksi vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmonen paketti kaikille. Kesto noin kuusi- yhdeksän kuukautta, mutta nyt mä annan Petterille puheenvuoron kerro pikkusen tuosta puurista siitä aloituspäivästä alkaen, miten se menee tää valmennus. Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi taan sitä advanced vaativan implanttiprotetiikan ja perus implanttiprotetiikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä hands on, jossa",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech exactly as spoken, in Finnish. Do not translate, summarise or correct the speakers. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Gemini 3.1 Pro",
+  "notes": "General multimodal LLM prompted to transcribe; a third model family for the ground-truth audit.",
+  "words": null,
+  "latency_s": 19.75,
+  "usage": {
+    "candidates_token_count": 916,
+    "candidates_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 916
+      }
+    ],
+    "prompt_token_count": 4536,
+    "prompt_tokens_details": [
+      {
+        "modality": "TEXT",
+        "token_count": 36
+      },
+      {
+        "modality": "AUDIO",
+        "token_count": 4500
+      }
+    ],
+    "total_token_count": 5452,
+    "traffic_type": "ON_DEMAND"
+  },
+  "created_at_utc": "2026-09-25T10:26:44+00:00",
+  "raw": null
+}

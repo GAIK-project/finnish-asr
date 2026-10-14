@@ -1,0 +1,19 @@
+{
+  "arm_id": "nemo_canary-1b-v2",
+  "model": "nvidia/canary-1b-v2",
+  "recipe": "canary",
+  "benchmark": "google/fleurs fi_fi test",
+  "utterances": 918,
+  "batch_size": 16,
+  "load_s": 97.0,
+  "transcribe_s": 273.9,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid007947",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "slurm_job_id": "22738263"
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-13T06:28:27+00:00",
+  "gaik_evals_commit": "0c7bd144a08b48fa8d28a5f4839692a6a9d0bf4c",
+  "gaik_evals_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (LA-murre dialect test, meaning judge)",
+  "runner_path": "projects/finnish-asr-models/scripts/judge_dialect.py",
+  "dataset_path": "projects/finnish-asr-models/results/benchmarks/lamurre_fi",
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "claude-opus-5-5"
+  ],
+  "cli_args": [],
+  "env": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "set",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "set"
+  },
+  "extra": {
+    "prompt_version": "dialect-judge-v1",
+    "prompt_sha256": "8489bd830dc33f11aa66ad711cec7b868a78920ce649e065942de414a8ce7543",
+    "segments": 564
+  }
+}

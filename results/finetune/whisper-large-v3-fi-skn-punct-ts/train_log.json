@@ -1,0 +1,49 @@
+{
+  "args": {
+    "download": false,
+    "name": "whisper-large-v3-fi-skn-punct-ts",
+    "data": "skn+open",
+    "skn_text": "punct",
+    "base": "openai/whisper-large-v3",
+    "epochs": 3,
+    "lr": 0.0001,
+    "batch": 8,
+    "lora_r": 64,
+    "limit": null,
+    "seed": 0,
+    "timestamps": 0.5,
+    "env": "hf"
+  },
+  "train_items": {
+    "skn": 15042,
+    "lamurre": 0,
+    "fleurs": 2704,
+    "voxpopuli": 7504,
+    "skn_with_times": 15040
+  },
+  "val_items": 1302,
+  "epochs": [
+    {
+      "epoch": 1,
+      "step": 3156,
+      "val_loss": 0.2236,
+      "minutes": 62.0
+    },
+    {
+      "epoch": 2,
+      "step": 6312,
+      "val_loss": 0.2158,
+      "minutes": 124.1
+    },
+    {
+      "epoch": 3,
+      "step": 9468,
+      "val_loss": 0.218,
+      "minutes": 186.2
+    }
+  ],
+  "val_loss_before": 0.5395,
+  "best_epoch": 2,
+  "gpu": "AMD Instinct MI250X",
+  "base": "openai/whisper-large-v3"
+}

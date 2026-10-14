@@ -1,0 +1,194 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-chunks",
+  "label": "Whisper large-v3 + LoRA on SKN dialects and open data, chunked",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "ecbfe8da704f1b54d7ec4dc43ca6a880165209d5721cbcd367cf45d947e5091f",
+  "created_at_utc": "2026-10-13T16:57:53+00:00",
+  "latency_s": 87.0,
+  "usage": {
+    "input_tokens": 3163,
+    "output_tokens": 1793
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 9.7,
+    "error_counts": {
+      "critical": 1,
+      "major": 5,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 9,
+      "variant": 4,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 82
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "Suojärven Timon luento",
+        "transcript_span": "koulutusta, Suojärven Timon luento",
+        "explanation": "The transcript adds the word 'koulutusta' at the beginning, slightly altering the opening."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "potilasvaiheita",
+        "explanation": "The topic of the lecture changes from 'potilasvahingot' (patient injuries/malpractice) to 'potilasvaiheita' (patient phases), which loses the intended meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään edes",
+        "explanation": "The strong negative phrase 'missään nimessä' (under no circumstances) is misrecognized as 'missään edes', which alters and weakens the meaning of the warning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced",
+        "transcript_span": "implantologia ja advanced",
+        "explanation": "The course name 'Implantologiaa Advanced' is split into two separate words with a conjunction, slightly confusing the title."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Ilkka Pallosen.",
+        "transcript_span": "Ilkka Palos ja",
+        "explanation": "The surname 'Pallonen' is garbled into a different name 'Palos' and combined with a conjunction, making the original surname unrecognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "etualueen ja esteettisen alueen",
+        "transcript_span": "etualue, estetisalue",
+        "explanation": "The transcript drops grammatical cases and garbles 'esteettinen alue' into an incorrect compound 'estetisalue'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikoja Virpi, keskustelevat",
+        "transcript_span": "oiko ja Virpi Virpi niin keskustelevat",
+        "explanation": "The professional title 'oikoja' (orthodontist) is split into a verb and conjunction ('oiko ja'), and the name is repeated, garbling the sentence."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "pre-proteettisesti",
+        "transcript_span": "reproteettisesti",
+        "explanation": "A specific clinical term 'pre-proteettisesti' (pre-prosthetically) is replaced with a non-existent or incorrect prefix 'reproteettisesti', which would misinform the reader."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kovimmille",
+        "transcript_span": "kovin mene",
+        "explanation": "The word 'kovimmille' (for the most experienced/hardcore) is misrecognized as 'kovin mene', making the phrase meaningless."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "A duration range '6 to 9' is changed to '6 or 9', slightly changing the meaning of the timeframe."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marttolen"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Palos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand Dentsply as 'Densply'; the transcript correctly includes the 't'."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplanttiitista",
+        "explanation": "The reference misspells the clinical term 'peri-implantiitti' by missing an 'i' (perimplantiitti); the transcript is closer with double 'i's."
+      }
+    ],
+    "usability": 82,
+    "summary": "The transcript is fairly accurate in capturing the structure and content of the dental education courses, including correctly recognizing most of the specialized brand names (even fixing a typo in 'Dentsply'). However, it struggles with some specific terms and names, resulting in major errors like changing 'potilasvahingot' to 'potilasvaiheita', breaking the title 'oikoja' into 'oiko ja', and garbling the name 'Ilkka Pallonen' into 'Ilkka Palos'. Most critically, it incorrectly transcribes the clinical term 'pre-proteettisesti' as 'reproteettisesti', which could misinform a professional reader. Overall usability remains good despite these localized issues."
+  }
+}

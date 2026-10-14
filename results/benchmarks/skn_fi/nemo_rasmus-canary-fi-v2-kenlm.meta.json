@@ -1,0 +1,19 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
+  "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+  "recipe": "canary_kenlm",
+  "benchmark": "SKN dialect test: 10 held-out municipalities, normalised text (prepare_skn.py)",
+  "utterances": 600,
+  "batch_size": 16,
+  "load_s": 35.6,
+  "transcribe_s": 668.0,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005051",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "slurm_job_id": "22747362"
+}

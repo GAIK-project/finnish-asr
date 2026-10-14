@@ -1,0 +1,74 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-lamurre",
+  "stage": "asr",
+  "provider": "huggingface-gpu",
+  "model": "whisper-large-v3-fi-skn-lamurre",
+  "text": "Suojärven Timon luento potilasvaihingot protetiikassa, siinä tulee hyvin niin kuin laajasti protetiikkaa yleensä, vähän vaikeusasteen arviointi ja muuta, sitten on pardodontologi Martta Martollan luento periimplantitista, ja sitten ImplanttiCase, ja semmoinen vodcast, jossa Peeterin kanssa käydään läpi näitä yleisiä ongelmia tai yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa, nämä ei ole missään nimessä sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologian ja adverttien koulutuskoulutusta, Suojärven Timon luento potilasvaihingot protetiikassa, siinä tulee hyvin niin kuin laajasti protetiikkaa yleensä, vähän vaikeusasteen arviointi ja muuta, sitten on pardodontologi Martta Marttolle luento periimplantitista, ja sitten ImplanttiCase ja semmoinen vodcast, jossa Peeterin kanssa käydään läpi näitä yleisiä ongelmia tai yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa, nämä ei ole missään ei ole sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologian ja adverttien kanssa koulutusta.Teoriassa tehdään sitten webinaarisarjaa, Timo Suojajärven ja Ilkka Palos, ja siinä tehdään sitten semmoista niin kuin sanotaanko high end implanttihoitoa etualoille, estetisalolle, ja tosi tosi vaativia temppuja, mutta ne on tärkeää tunnistaa, kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttuukin yhtäkkiä todella hankalaksi, ja sitten on myös oikomishoidollisia näkökulmia, Timo ja Virpi Müller, oikoja Virpi Virpi, niin keskustelevat sitten siitä siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää.Teorian lopuksi on lopputentti, ja sen suorittamalla sitten se ajokortin osa yksi on tehty. Ajokortin osa kaksi, komponentit tutuksi päivä Helsingissä Clarion hotellissa, se alkaa Peterin kertausluennolla, vähän ne perusasioita kerrataan siihen alkuunpohjalle, ja sen jälkeen siellä on neljä implanttebrändiä mukana, Strauman, Densplei-Sirona, Nobelbäcker ja Camblo-Konelok, eli Implanttona Oy.tutustaa heidän komponenttejensa, minkälaisia osia siellä on, miten ne eroavat toisistaan, ja siellä on myös neljä eri skanneria sitten mukana, eli päästään katsomaan, miten skannereilla jäljennetään, ja tosiaan päiväidean osa on, että tutustaa näihin osiin, tututaan skannereihin, ja päästään vähäsen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme, ja se on tämä pienryhmävalmennus, mestare- ja kisällövalmennus, jossa sitten Peter ottaa kopin.Kopin enintään kymmenen mahtuu mukaan, eli ne jotka tähän lähtee, niin kannattaa nopsan ilmoittautua, että saa saa paikan sieltä, ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista, eli ehkä ei kaikista kovin mene konkareelle, mutta hekin on toki tervetulleita tähän, ja tiivistettynä koostumus on aloituspäivä Futudentin tiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista privaattivastaanotolla, sitten on etäsesiota Peterin kanssa, ja lopussa on se, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunutKuusi vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kestui noin kuusi yli yhdeksän kuukautta, mutta nyt minä annan Peterille puheenvuoron. Kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus. Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa, että osataan tunnistaa pikkuisen paljon.Se osataan tunnistaa pikkuisen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan, ja sitten toinen osa on tämä hands-on.",
+  "params": {
+    "recipe": "whisper",
+    "language": "fi",
+    "task": "transcribe",
+    "dtype": "float16",
+    "long_form": "sequential, return_timestamps=True",
+    "env": "hf",
+    "device": "cuda",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0"
+    }
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Fine-tuned whisper-large-v3-fi-skn-lamurre",
+  "notes": "latency_s includes model loading.",
+  "words": null,
+  "latency_s": 209.67,
+  "usage": null,
+  "created_at_utc": "2026-10-13T14:30:24+00:00",
+  "raw": {
+    "chunks": [
+      {
+        "text": "Suojärven Timon luento potilasvaihingot protetiikassa, siinä tulee hyvin niin kuin laajasti protetiikkaa yleensä, vähän vaikeusasteen arviointi ja muuta, sitten on pardodontologi Martta Martollan luento periimplantitista, ja sitten ImplanttiCase, ja semmoinen vodcast, jossa Peeterin kanssa käydään läpi näitä yleisiä ongelmia tai yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa, nämä ei ole missään nimessä sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologian ja adverttien koulutuskoulutusta, Suojärven Timon luento potilasvaihingot protetiikassa, siinä tulee hyvin niin kuin laajasti protetiikkaa yleensä, vähän vaikeusasteen arviointi ja muuta, sitten on pardodontologi Martta Marttolle luento periimplantitista, ja sitten ImplanttiCase ja semmoinen vodcast, jossa Peeterin kanssa käydään läpi näitä yleisiä ongelmia tai yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä sitten semmoinen osio, missä on tärkeää tunnistaa, nämä ei ole missään ei ole sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologian ja adverttien kanssa koulutusta.Teoriassa tehdään sitten webinaarisarjaa, Timo Suojajärven ja Ilkka Palos, ja siinä tehdään sitten semmoista niin kuin sanotaanko high end implanttihoitoa etualoille, estetisalolle, ja tosi tosi vaativia temppuja, mutta ne on tärkeää tunnistaa, kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttuukin yhtäkkiä todella hankalaksi, ja sitten on myös oikomishoidollisia näkökulmia, Timo ja Virpi Müller, oikoja Virpi Virpi, niin keskustelevat sitten siitä siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää.",
+        "start": 0.0,
+        "end": 28.0
+      },
+      {
+        "text": "Teorian lopuksi on lopputentti, ja sen suorittamalla sitten se ajokortin osa yksi on tehty.",
+        "start": 28.0,
+        "end": 34.6
+      },
+      {
+        "text": "Ajokortin osa kaksi, komponentit tutuksi päivä Helsingissä Clarion hotellissa, se alkaa Peterin kertausluennolla, vähän ne perusasioita kerrataan siihen alkuunpohjalle, ja sen jälkeen siellä on neljä implanttebrändiä mukana, Strauman, Densplei-Sirona, Nobelbäcker ja Camblo-Konelok, eli Implanttona Oy.",
+        "start": 34.6,
+        "end": 53.6
+      },
+      {
+        "text": "tutustaa heidän komponenttejensa, minkälaisia osia siellä on, miten ne eroavat toisistaan, ja siellä on myös neljä eri skanneria sitten mukana, eli päästään katsomaan, miten skannereilla jäljennetään, ja tosiaan päiväidean osa on, että tutustaa näihin osiin, tututaan skannereihin, ja päästään vähäsen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä.",
+        "start": 53.6,
+        "end": 73.6
+      },
+      {
+        "text": "Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme, ja se on tämä pienryhmävalmennus, mestare- ja kisällövalmennus, jossa sitten Peter ottaa kopin.",
+        "start": 73.6,
+        "end": 82.6
+      },
+      {
+        "text": "Kopin enintään kymmenen mahtuu mukaan, eli ne jotka tähän lähtee, niin kannattaa nopsan ilmoittautua, että saa saa paikan sieltä, ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista, eli ehkä ei kaikista kovin mene konkareelle, mutta hekin on toki tervetulleita tähän, ja tiivistettynä koostumus on aloituspäivä Futudentin tiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista privaattivastaanotolla, sitten on etäsesiota Peterin kanssa, ja lopussa on se, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunut, että hän on valmistunutKuusi vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kestui noin kuusi yli yhdeksän kuukautta, mutta nyt minä annan Peterille puheenvuoron. Kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus.",
+        "start": 82.6,
+        "end": 97.6
+      },
+      {
+        "text": "Joo, se koostuu teoriaosuudesta. Käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa, että osataan tunnistaa pikkuisen paljon.",
+        "start": 97.6,
+        "end": 111.6
+      },
+      {
+        "text": "Se osataan tunnistaa pikkuisen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan, ja sitten toinen osa on tämä hands-on.",
+        "start": 111.6,
+        "end": 119.6
+      }
+    ]
+  },
+  "repeat": 1
+}

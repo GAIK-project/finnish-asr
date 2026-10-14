@@ -1,0 +1,203 @@
+{
+  "arm_id": "vertex_gemini-3.1-pro",
+  "label": "Gemini 3.1 Pro",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "8c489d694b9e084b55ea05ff4a41c0f87a3cce072a31e29943a7cfbb660b917f",
+  "created_at_utc": "2026-10-12T08:24:53+00:00",
+  "latency_s": 23.6,
+  "usage": {
+    "input_tokens": 5104,
+    "output_tokens": 2854
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.97,
+    "error_counts": {
+      "critical": 0,
+      "major": 4,
+      "minor": 8
+    },
+    "entities": {
+      "correct": 4,
+      "variant": 8,
+      "wrong": 1,
+      "missing": 1
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 70
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Kallos",
+        "explanation": "Lecturer's surname Pallonen garbled to Kallos, a different name."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "oikomishoidollisia näkökulmia",
+        "transcript_span": "hoidollisia näkökulmia",
+        "explanation": "'Orthodontic' perspectives reduced to generic 'treatment' perspectives, so the topic is lost."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "miten sitä voidaan pre-proteettisesti hyödyntää",
+        "transcript_span": "miten sitä voidaan hyödyntää",
+        "explanation": "'Pre-prosthetically' is missing, so the specific use is lost."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "Densply Sirona,",
+        "transcript_span": "Strauman, Nobellcare",
+        "explanation": "One of the four implant brands (Dentsply Sirona) is missing; only three brands are listed."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlock",
+        "explanation": "Brand is misspelled and 'Conelog' is dropped."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "struktuurista",
+        "transcript_span": "puurista",
+        "explanation": "'Structure' becomes a nonsense word ('drill'), so the question is garbled."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "Se alkaa Peterin kertausluennolla",
+        "transcript_span": "Se alkaa kertausluennolla",
+        "explanation": "The person giving the review lecture is not named."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "Vodcast (video) is rendered as podcast."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "kuka itse tekee",
+        "explanation": "'When' becomes 'who', which slightly garbles the sentence."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "oiko ja Virpi",
+        "explanation": "The role 'orthodontist' is split into nonsense."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "ei kaikista kovimmille konkareille",
+        "transcript_span": "ei niille konkareille",
+        "explanation": "The qualifier 'the most experienced' is lost."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Tarkennetaan sitä",
+        "transcript_span": "läpi taan sitä",
+        "explanation": "The verb 'clarify' is garbled."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Suojarven Timon / Timo Suojarvi"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Petterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Kallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "missing",
+        "transcript_form": ""
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Nobellcare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "",
+        "explanation": "The reference misspells Dentsply; the canonical form is Dentsply Sirona. The transcript omits the brand anyway."
+      }
+    ],
+    "usability": 70,
+    "summary": "Overall structure, numbers (parts 1–3, four brands/scanners, max 10, 6–9 months) and most names survive. Main losses: Ilkka Pallonen becomes 'Kallos', Dentsply Sirona is dropped from the brand list, 'orthodontic perspectives' becomes generic, and 'struktuurista' is garbled to 'puurista'. Several names are minor spelling variants."
+  }
+}

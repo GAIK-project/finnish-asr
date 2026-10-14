@@ -1,0 +1,40 @@
+{
+  "arm_id": "openai_gpt-4o-transcribe",
+  "stage": "asr",
+  "provider": "openai",
+  "model": "gpt-4o-transcribe",
+  "text": "koulutusta. Suojärven Timo luento potilasvahingot protetiikassa, siinä tulee hyvin laajasti protetiikkaa yleensä, vähän vaikeusasteen arviointia ja muuta. Sitten on parodontologi Marta Martoon luento peri-implantiitista, ja sitten implanttikeissejä, semmoinen vodkasti, jossa Peetterin kanssa käydään läpi näitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla, ja ne on hyvä tunnistaa ja tietää, miten ne ratkaistaan. Viimeisenä on vielä semmoinen osio, missä on tärkeää tunnistaa, nämä ei ole missään sellaisia, mitä kannattaa ensimmäisenä lähteä tekemään, eli siellä on implantologia advanced webinaarisarja Timo Suojärvi ja Ilkka Pallonen, siinä tehdään sitten semmoista high-end implanttihointoja etualueella, estettisellä alueella ja tosi vaativia temppuja, mutta ne on tärkeää tunnistaa, kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttuakin yhtäkkiä todella hankalaksi. Sitten on myös oikomishoidollisia näkökulmia, Timo ja Virpi Myller, oikoa Virpi, Virpi keskusteluvat sitten siitä aiheesta, miten sitä voidaan preproteettisesti hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty. Ajokortin osa kaksi, komponentit tutuksi päivä Helsingissä, Klarion Hotellissa, se alkaa Peetterin kertausluennolla, vähän näitä perusasioita kerrataan siihen alkupohjalle, ja sen jälkeen siellä on neljä implanttibrändiä mukana, Strauman, Niden, Splaisirona, Nobel Pajaker ja Camlog, eli implanttoona Oy, tutustutaan heidän komponentteihin, millaisia osia siellä on, miten ne eroavat toisistaan, ja siellä on myös neljä eri skanneria sitten mukana, eli päästään katsomaan, miten skannereilla jäljennetään. Ja tosiaan päivän ideana on se, että tutustutaan näihin osiin, tutustutaan skannereihin, ja päästään vähän sen harjoittelemaan niille myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme, ja se on tämä pienryhmävalmennusmestari-kisällivalmennus, jossa sitten Peetter ottaa kopin enintään kymmenen mahtuu mukaan, eli ne, jotka tähän lähtee, niin kannattaa nopsaan ilmoittautua, että saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implantihoidoista, eli ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Ja tiivistettynä koostumus on aloituspäivä Futurentin tiloissa Helsingissä, sitten on Peetterin työskentelyn seuraamista privaattivastaanotolla, sitten on etäsessioita Peetterin kanssa, ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen sellainen paketti kaikille. Kesto on noin kuusi vai yhdeksän kuukautta, mutta nyt mä annan Peetterille puheenvuoron. Kerro pikkusen tuosta struktuurista, siitä aloituspäivästä alkaen, miten se menee tämä valmennus. Joo, se koostuu teoriaosuudesta, käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa, että osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä hands-on, jossa",
+  "params": {
+    "language": "fi"
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "OpenAI gpt-4o-transcribe",
+  "notes": "Called directly on the whole 180 s file (HY went through gaik Transcriber).",
+  "words": null,
+  "latency_s": 12.26,
+  "usage": {
+    "input_tokens": 1800,
+    "output_tokens": 883,
+    "total_tokens": 2683,
+    "type": "tokens",
+    "input_token_details": {
+      "audio_tokens": 1800,
+      "text_tokens": 0
+    }
+  },
+  "created_at_utc": "2026-09-25T10:25:40+00:00",
+  "raw": {
+    "logprobs": null,
+    "usage": {
+      "input_tokens": 1800,
+      "output_tokens": 883,
+      "total_tokens": 2683,
+      "type": "tokens",
+      "input_token_details": {
+        "audio_tokens": 1800,
+        "text_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "arm_id": "hf_whisper-large-v3-turbo",
+  "model": "openai/whisper-large-v3-turbo",
+  "recipe": "whisper",
+  "benchmark": "google/fleurs fi_fi test",
+  "utterances": 918,
+  "batch_size": 16,
+  "load_s": 14.9,
+  "transcribe_s": 172.1,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005079",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22738362"
+}

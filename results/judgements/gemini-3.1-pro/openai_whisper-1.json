@@ -1,0 +1,180 @@
+{
+  "arm_id": "openai_whisper-1",
+  "label": "OpenAI whisper-1",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "ebdee8c867d4b4272b359ba83e25c5d3d0fd34a95ed8d7fd6fcf2143d709fbfc",
+  "created_at_utc": "2026-10-12T08:30:29+00:00",
+  "latency_s": 70.6,
+  "usage": {
+    "input_tokens": 3145,
+    "output_tokens": 1593
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 10.45,
+    "error_counts": {
+      "critical": 2,
+      "major": 4,
+      "minor": 2
+    },
+    "entities": {
+      "correct": 5,
+      "variant": 9,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "potilasvaiheena",
+        "explanation": "The lecture topic 'patient injuries' (potilasvahingot) is incorrectly transcribed as 'as a patient phase' (potilasvaiheena), which completely changes the meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja,",
+        "transcript_span": "implanttikeissä ja",
+        "explanation": "The term 'implant cases' is garbled into 'implanttikeissä ja' (in implant gigs and), losing the meaning of discussing clinical cases."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään edes",
+        "explanation": "The idiom 'missään nimessä' (under no circumstances) is incorrectly transcribed, which garbles the intended meaning of the phrase."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "Myller, oikoja Virpi, keskustelevat sitten siitä aiheesta ja miten",
+        "transcript_span": "Müller keskustelevat siitä aiheesta, miten",
+        "explanation": "The profession of the speaker ('oikoja', orthodontist) and the conjunction 'ja' are omitted, causing a loss of relevant context."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "että tutustutaan näihin osiin, tutustutaan skannereihin",
+        "transcript_span": "on tutustua skannereihin",
+        "explanation": "A clause stating that participants will familiarize themselves with the components/parts is omitted."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "mahtuu mukaan",
+        "transcript_span": "mahtua mukaan",
+        "explanation": "The present tense verb 'mahtuu' is transcribed as the infinitive 'mahtua', creating a minor grammatical error but the meaning survives."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoontaa",
+        "explanation": "The passive form 'kokoonnutaan' (we gather) is mistranscribed as the active 'kokoontaa', which is grammatically incorrect but understandable."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "critical",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "A duration range of '6 to 9 months' is incorrectly transcribed as a choice '6 or 9 months' (kuusi vai yhdeksän)."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peeterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallosen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Straumanni"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Noble Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conellog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "futudentitiloissa"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densply Sirona",
+        "explanation": "The canonical brand name is Dentsply Sirona, but both the reference and the transcript spell it Densply."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perimplantiitista",
+        "explanation": "The correct medical term is peri-implantiitti, but the reference transcript spells it without the 'i' (perimplantiitista)."
+      }
+    ],
+    "usability": 75,
+    "summary": "The transcript mostly captures the flow and factual content of the dental webinar well. However, there are a few critical and major errors that impact usability: 'patient injuries' is misheard as 'patient phase', a course duration range (6-9) is turned into an 'or' choice (6 or 9), and a mention of clinical 'cases' is phonetically garbled. Additionally, a speaker's profession (orthodontist) and a clause about course content were omitted. Several brands and foreign names are recognized with slight spelling variants, which is typical for domain-specific speech."
+  }
+}

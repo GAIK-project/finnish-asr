@@ -1,0 +1,210 @@
+{
+  "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+  "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "5d606ea8213ca9cb5b8d40fc11b4927545f7d7d66d0d429f4049d499152bfd2c",
+  "created_at_utc": "2026-10-12T08:23:35+00:00",
+  "latency_s": 24.9,
+  "usage": {
+    "input_tokens": 5052,
+    "output_tokens": 2721
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.22,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 10
+    },
+    "entities": {
+      "correct": 6,
+      "variant": 7,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 72
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "puotilasvahingas",
+        "explanation": "Lecture title word garbled but still recognisable as patient injuries."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi",
+        "transcript_span": "pardonu tuolaki",
+        "explanation": "Speaker's professional title (periodontist) is garbled beyond recognition."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "implantologiaa adverst vebinarsaria",
+        "explanation": "The course-series name is garbled; 'Advanced webinar series' is hard to recover."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "timosuojare ja ilkkapallossa",
+        "explanation": "Both lecturer names are misspelled but still recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "nämä eivät ole missään nimessä sellaisia",
+        "transcript_span": "nämän eivät olet missään ole sellaisia",
+        "explanation": "The phrase is garbled, but the negation survives."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "kuitatteke",
+        "explanation": "The phrase is garbled into a non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kerrataan",
+        "transcript_span": "kerrotaan",
+        "explanation": "'Reviewed' became 'told'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "nobl paijaker",
+        "explanation": "The brand name is badly garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "densplaishirana",
+        "explanation": "The brand name is misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "kamle konelog",
+        "explanation": "The brand name is partially garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "mestari-kisälli -valmennus",
+        "transcript_span": "mestari kisälle valmius",
+        "explanation": "'Coaching' became 'readiness'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "joilla on",
+        "transcript_span": "vo ollaan",
+        "explanation": "The relative clause is garbled; the target-group meaning is still inferable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "advanced",
+        "transcript_span": "atvernst",
+        "explanation": "The term is garbled."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "suojärven timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "martta martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "ilkkapallossa"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "virpi myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "klarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "straumanni"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "densplaishirana"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "nobl paijaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "kamle konelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "implantona oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "per implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "densplaishirana",
+        "explanation": "The reference misspells the brand; the canonical spelling is Dentsply Sirona."
+      }
+    ],
+    "usability": 72,
+    "summary": "The transcript is unpunctuated and lowercase, with many phonetic garblings, but all numbers (parts 1–3, four brands, four scanners, max ten participants, 6–9 months) and the course structure are preserved. The main losses are the periodontist title, the Advanced webinar series name and the Nobel Biocare brand. Several other names are misspelled but recognisable."
+  }
+}

@@ -1,0 +1,4480 @@
+{
+  "source": "QAD-1 scores.json asr.gt_tokens, asr.gt_sentences and asr.gt_audit, sha256 08aad700c2faad63e7aede523103608f45aec928a25ee9d49eaa5420ab48b730, QAD-1 commit 8402324, GAIK's internal evaluation repository. Derived from the public reference (gaik-toolkit transcription_eval/data/reference.txt) and GAIK's own runs on the public clip; no HY tool output.",
+  "gt_tokens": [
+    {
+      "idx": 0,
+      "token": "suojärven",
+      "start": 0.031,
+      "end": 1.533,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 1,
+      "token": "timon",
+      "start": 1.573,
+      "end": 1.774,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 2,
+      "token": "luento",
+      "start": 1.814,
+      "end": 2.154,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 3,
+      "token": "potilasvahingot",
+      "start": 2.174,
+      "end": 2.755,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 4,
+      "token": "protetiikassa",
+      "start": 2.795,
+      "end": 3.797,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 5,
+      "token": "siinä",
+      "start": 3.817,
+      "end": 4.017,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 6,
+      "token": "tulee",
+      "start": 4.037,
+      "end": 4.237,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 7,
+      "token": "hyvin",
+      "start": 4.257,
+      "end": 4.437,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 8,
+      "token": "laajasti",
+      "start": 4.778,
+      "end": 5.078,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 9,
+      "token": "protetiikkaa",
+      "start": 5.098,
+      "end": 5.599,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 10,
+      "token": "yleensä",
+      "start": 5.679,
+      "end": 5.94,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 11,
+      "token": "vähän",
+      "start": 5.96,
+      "end": 6.16,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 12,
+      "token": "vaikeusasteen",
+      "start": 6.521,
+      "end": 7.101,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 13,
+      "token": "arviointia",
+      "start": 7.202,
+      "end": 7.602,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 14,
+      "token": "ja",
+      "start": 7.622,
+      "end": 7.722,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 15,
+      "token": "muuta",
+      "start": 7.742,
+      "end": 8.483,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 16,
+      "token": "sitten",
+      "start": 8.503,
+      "end": 8.684,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 17,
+      "token": "on",
+      "start": 8.724,
+      "end": 8.824,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 18,
+      "token": "parodontologi",
+      "start": 8.844,
+      "end": 9.445,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 19,
+      "token": "martta",
+      "start": 9.465,
+      "end": 9.785,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 20,
+      "token": "martolan",
+      "start": 9.805,
+      "end": 10.206,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 21,
+      "token": "luento",
+      "start": 10.226,
+      "end": 10.546,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 22,
+      "token": "perimplantiitista",
+      "start": 10.587,
+      "end": 11.688,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 23,
+      "token": "ja",
+      "start": 12.189,
+      "end": 12.289,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 24,
+      "token": "sitten",
+      "start": 12.429,
+      "end": 12.71,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 25,
+      "token": "implantticaseja",
+      "start": 13.671,
+      "end": 13.771,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 26,
+      "token": "semmoinen",
+      "start": 13.791,
+      "end": 14.092,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 27,
+      "token": "vodcast",
+      "start": 14.132,
+      "end": 14.592,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 28,
+      "token": "jossa",
+      "start": 14.612,
+      "end": 14.833,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 29,
+      "token": "peterin",
+      "start": 14.873,
+      "end": 15.173,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 30,
+      "token": "kanssa",
+      "start": 15.193,
+      "end": 15.374,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 31,
+      "token": "käydään",
+      "start": 15.394,
+      "end": 15.594,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 32,
+      "token": "läpi",
+      "start": 15.634,
+      "end": 15.814,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 33,
+      "token": "näitä",
+      "start": 15.854,
+      "end": 16.015,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 34,
+      "token": "yleisiä",
+      "start": 16.055,
+      "end": 16.355,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 35,
+      "token": "ongelmia",
+      "start": 16.996,
+      "end": 17.316,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 36,
+      "token": "tai",
+      "start": 17.337,
+      "end": 17.397,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 37,
+      "token": "yleisimpiä",
+      "start": 17.437,
+      "end": 17.817,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 38,
+      "token": "ongelmia",
+      "start": 17.857,
+      "end": 18.138,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 39,
+      "token": "mitä",
+      "start": 18.158,
+      "end": 18.298,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 40,
+      "token": "implanttien",
+      "start": 18.338,
+      "end": 18.739,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 41,
+      "token": "kanssa",
+      "start": 18.759,
+      "end": 18.959,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 42,
+      "token": "voi",
+      "start": 18.979,
+      "end": 19.119,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 43,
+      "token": "tulla",
+      "start": 19.139,
+      "end": 19.339,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 44,
+      "token": "ja",
+      "start": 19.38,
+      "end": 19.44,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 45,
+      "token": "ne",
+      "start": 19.48,
+      "end": 19.56,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 46,
+      "token": "on",
+      "start": 19.58,
+      "end": 19.7,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 47,
+      "token": "hyvä",
+      "start": 19.74,
+      "end": 20.0,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 48,
+      "token": "tunnistaa",
+      "start": 20.04,
+      "end": 20.361,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 49,
+      "token": "ja",
+      "start": 20.381,
+      "end": 20.461,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 50,
+      "token": "tietää",
+      "start": 20.481,
+      "end": 20.762,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 51,
+      "token": "miten",
+      "start": 20.782,
+      "end": 20.922,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 52,
+      "token": "ne",
+      "start": 20.962,
+      "end": 21.062,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 53,
+      "token": "ratkaistaan",
+      "start": 21.102,
+      "end": 22.444,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 54,
+      "token": "viimeisenä",
+      "start": 22.508,
+      "end": 22.949,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 55,
+      "token": "on",
+      "start": 22.989,
+      "end": 23.209,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 56,
+      "token": "vielä",
+      "start": 23.12,
+      "end": 23.24,
+      "time_source": "openai_whisper-1"
+    },
+    {
+      "idx": 57,
+      "token": "sitten",
+      "start": 23.229,
+      "end": 23.37,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 58,
+      "token": "semmoinen",
+      "start": 23.39,
+      "end": 23.61,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 59,
+      "token": "osio",
+      "start": 23.63,
+      "end": 23.79,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 60,
+      "token": "missä",
+      "start": 23.81,
+      "end": 23.951,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 61,
+      "token": "on",
+      "start": 23.971,
+      "end": 24.051,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 62,
+      "token": "tärkeää",
+      "start": 24.091,
+      "end": 24.492,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 63,
+      "token": "tunnistaa",
+      "start": 24.532,
+      "end": 24.912,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 64,
+      "token": "nämä",
+      "start": 25.033,
+      "end": 25.153,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 65,
+      "token": "eivät",
+      "start": 25.173,
+      "end": 25.273,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 66,
+      "token": "ole",
+      "start": 25.293,
+      "end": 25.393,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 67,
+      "token": "missään",
+      "start": 25.433,
+      "end": 25.634,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 68,
+      "token": "nimessä",
+      "start": 25.654,
+      "end": 25.774,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 69,
+      "token": "sellaisia",
+      "start": 25.794,
+      "end": 26.095,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 70,
+      "token": "mitä",
+      "start": 26.115,
+      "end": 26.255,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 71,
+      "token": "kannattaa",
+      "start": 26.275,
+      "end": 26.636,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 72,
+      "token": "ensimmäisenä",
+      "start": 26.656,
+      "end": 27.056,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 73,
+      "token": "lähteä",
+      "start": 27.077,
+      "end": 27.357,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 74,
+      "token": "tekemään",
+      "start": 27.397,
+      "end": 27.758,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 75,
+      "token": "elikkä",
+      "start": 27.818,
+      "end": 28.018,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 76,
+      "token": "siellä",
+      "start": 28.058,
+      "end": 28.239,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 77,
+      "token": "on",
+      "start": 28.259,
+      "end": 28.339,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 78,
+      "token": "implantologiaa",
+      "start": 29.641,
+      "end": 29.701,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 79,
+      "token": "advanced",
+      "start": 29.741,
+      "end": 30.282,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 80,
+      "token": "webinaarisarja",
+      "start": 30.643,
+      "end": 31.425,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 81,
+      "token": "timo",
+      "start": 31.665,
+      "end": 31.865,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 82,
+      "token": "suojärven",
+      "start": 31.885,
+      "end": 32.326,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 83,
+      "token": "ja",
+      "start": 32.346,
+      "end": 32.406,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 84,
+      "token": "ilkka",
+      "start": 32.446,
+      "end": 32.707,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 85,
+      "token": "pallosen",
+      "start": 33.088,
+      "end": 33.128,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 86,
+      "token": "siinä",
+      "start": 33.168,
+      "end": 33.348,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 87,
+      "token": "tehdään",
+      "start": 33.609,
+      "end": 33.789,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 88,
+      "token": "sitten",
+      "start": 33.829,
+      "end": 34.029,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 89,
+      "token": "semmoista",
+      "start": 34.049,
+      "end": 34.33,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 90,
+      "token": "niin",
+      "start": 34.791,
+      "end": 34.871,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 91,
+      "token": "kuin",
+      "start": 34.891,
+      "end": 34.971,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 92,
+      "token": "sanotaanko",
+      "start": 34.991,
+      "end": 35.192,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 93,
+      "token": "highendimplanttihoitoa",
+      "start": 35.212,
+      "end": 35.672,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 94,
+      "token": "etualueen",
+      "start": 36.234,
+      "end": 36.895,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 95,
+      "token": "ja",
+      "start": 36.935,
+      "end": 36.995,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 96,
+      "token": "esteettisen",
+      "start": 37.035,
+      "end": 37.476,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 97,
+      "token": "alueen",
+      "start": 37.496,
+      "end": 38.097,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 98,
+      "token": "ja",
+      "start": 38.117,
+      "end": 38.157,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 99,
+      "token": "tosi",
+      "start": 38.458,
+      "end": 38.618,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 100,
+      "token": "vaativia",
+      "start": 38.658,
+      "end": 39.039,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 101,
+      "token": "temppuja",
+      "start": 39.079,
+      "end": 39.48,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 102,
+      "token": "mutta",
+      "start": 39.5,
+      "end": 39.7,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 103,
+      "token": "ne",
+      "start": 40.101,
+      "end": 40.141,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 104,
+      "token": "on",
+      "start": 40.161,
+      "end": 40.241,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 105,
+      "token": "tärkeää",
+      "start": 40.281,
+      "end": 40.562,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 106,
+      "token": "tunnistaa",
+      "start": 40.762,
+      "end": 41.183,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 107,
+      "token": "kun",
+      "start": 41.483,
+      "end": 41.543,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 108,
+      "token": "itse",
+      "start": 41.563,
+      "end": 41.744,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 109,
+      "token": "tekee",
+      "start": 41.764,
+      "end": 41.924,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 110,
+      "token": "että",
+      "start": 41.944,
+      "end": 42.024,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 111,
+      "token": "milloin",
+      "start": 42.044,
+      "end": 42.225,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 112,
+      "token": "missä",
+      "start": 42.245,
+      "end": 42.385,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 113,
+      "token": "menee",
+      "start": 42.405,
+      "end": 42.565,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 114,
+      "token": "se",
+      "start": 42.585,
+      "end": 42.625,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 115,
+      "token": "raja",
+      "start": 42.645,
+      "end": 42.786,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 116,
+      "token": "että",
+      "start": 42.886,
+      "end": 42.966,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 117,
+      "token": "milloin",
+      "start": 43.347,
+      "end": 43.487,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 118,
+      "token": "työ",
+      "start": 43.467,
+      "end": 43.888,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 119,
+      "token": "voi",
+      "start": 44.028,
+      "end": 44.148,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 120,
+      "token": "muuttuakin",
+      "start": 44.168,
+      "end": 44.589,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 121,
+      "token": "yhtäkkiä",
+      "start": 44.609,
+      "end": 44.97,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 122,
+      "token": "todella",
+      "start": 44.99,
+      "end": 45.25,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 123,
+      "token": "hankalaksi",
+      "start": 45.29,
+      "end": 45.811,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 124,
+      "token": "ja",
+      "start": 45.811,
+      "end": 46.272,
+      "time_source": "interpolated"
+    },
+    {
+      "idx": 125,
+      "token": "sitten",
+      "start": 46.272,
+      "end": 46.433,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 126,
+      "token": "on",
+      "start": 46.453,
+      "end": 46.493,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 127,
+      "token": "myös",
+      "start": 46.513,
+      "end": 46.653,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 128,
+      "token": "oikomishoidollisia",
+      "start": 46.793,
+      "end": 47.695,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 129,
+      "token": "näkökulmia",
+      "start": 48.216,
+      "end": 49.178,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 130,
+      "token": "timo",
+      "start": 49.198,
+      "end": 49.418,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 131,
+      "token": "ja",
+      "start": 49.458,
+      "end": 49.558,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 132,
+      "token": "virpi",
+      "start": 49.839,
+      "end": 50.099,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 133,
+      "token": "myller",
+      "start": 50.139,
+      "end": 50.48,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 134,
+      "token": "oikoja",
+      "start": 50.48,
+      "end": 50.641,
+      "time_source": "interpolated"
+    },
+    {
+      "idx": 135,
+      "token": "virpi",
+      "start": 50.641,
+      "end": 50.801,
+      "time_source": "interpolated"
+    },
+    {
+      "idx": 136,
+      "token": "keskustelevat",
+      "start": 50.801,
+      "end": 52.564,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 137,
+      "token": "sitten",
+      "start": 52.604,
+      "end": 52.824,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 138,
+      "token": "siitä",
+      "start": 53.345,
+      "end": 54.287,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 139,
+      "token": "aiheesta",
+      "start": 54.347,
+      "end": 54.728,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 140,
+      "token": "ja",
+      "start": 54.748,
+      "end": 54.788,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 141,
+      "token": "miten",
+      "start": 54.808,
+      "end": 54.968,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 142,
+      "token": "sitä",
+      "start": 55.008,
+      "end": 55.169,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 143,
+      "token": "voidaan",
+      "start": 55.189,
+      "end": 55.469,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 144,
+      "token": "preproteettisesti",
+      "start": 55.65,
+      "end": 56.511,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 145,
+      "token": "hyödyntää",
+      "start": 56.551,
+      "end": 58.355,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 146,
+      "token": "teorian",
+      "start": 58.375,
+      "end": 58.655,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 147,
+      "token": "lopuksi",
+      "start": 58.695,
+      "end": 59.056,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 148,
+      "token": "on",
+      "start": 59.597,
+      "end": 59.737,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 149,
+      "token": "lopputentti",
+      "start": 59.797,
+      "end": 60.378,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 150,
+      "token": "ja",
+      "start": 60.399,
+      "end": 60.479,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 151,
+      "token": "sen",
+      "start": 60.499,
+      "end": 60.639,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 152,
+      "token": "suorittamalla",
+      "start": 60.679,
+      "end": 61.26,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 153,
+      "token": "sitten",
+      "start": 61.28,
+      "end": 61.561,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 154,
+      "token": "se",
+      "start": 61.901,
+      "end": 62.062,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 155,
+      "token": "ajokortin",
+      "start": 62.542,
+      "end": 63.003,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 156,
+      "token": "osa",
+      "start": 63.084,
+      "end": 63.324,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 157,
+      "token": "yksi",
+      "start": 63.384,
+      "end": 63.604,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 158,
+      "token": "on",
+      "start": 63.645,
+      "end": 63.745,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 159,
+      "token": "tehty",
+      "start": 63.925,
+      "end": 64.446,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 160,
+      "token": "ajokortin",
+      "start": 65.388,
+      "end": 65.989,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 161,
+      "token": "osa",
+      "start": 65.82,
+      "end": 65.92,
+      "time_source": "openai_whisper-1"
+    },
+    {
+      "idx": 162,
+      "token": "kaksi",
+      "start": 66.009,
+      "end": 66.369,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 163,
+      "token": "komponentit",
+      "start": 66.649,
+      "end": 67.17,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 164,
+      "token": "tutuksi",
+      "start": 67.31,
+      "end": 67.75,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 165,
+      "token": "päivä",
+      "start": 67.77,
+      "end": 68.111,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 166,
+      "token": "helsingissä",
+      "start": 68.431,
+      "end": 69.051,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 167,
+      "token": "clarion",
+      "start": 69.572,
+      "end": 69.892,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 168,
+      "token": "hotellissa",
+      "start": 69.912,
+      "end": 70.953,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 169,
+      "token": "se",
+      "start": 70.973,
+      "end": 71.033,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 170,
+      "token": "alkaa",
+      "start": 71.053,
+      "end": 71.293,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 171,
+      "token": "peterin",
+      "start": 71.333,
+      "end": 71.734,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 172,
+      "token": "kertausluennolla",
+      "start": 71.774,
+      "end": 72.835,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 173,
+      "token": "vähän",
+      "start": 72.855,
+      "end": 73.055,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 174,
+      "token": "näitä",
+      "start": 73.075,
+      "end": 73.215,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 175,
+      "token": "perusasioita",
+      "start": 73.255,
+      "end": 73.816,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 176,
+      "token": "kerrataan",
+      "start": 73.836,
+      "end": 74.236,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 177,
+      "token": "siihen",
+      "start": 74.276,
+      "end": 74.496,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 178,
+      "token": "alkuun",
+      "start": 74.556,
+      "end": 75.257,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 179,
+      "token": "pohjalle",
+      "start": 74.9,
+      "end": 75.26,
+      "time_source": "openai_whisper-1"
+    },
+    {
+      "idx": 180,
+      "token": "ja",
+      "start": 75.758,
+      "end": 75.838,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 181,
+      "token": "sen",
+      "start": 76.018,
+      "end": 76.118,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 182,
+      "token": "jälkeen",
+      "start": 76.158,
+      "end": 76.358,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 183,
+      "token": "siellä",
+      "start": 76.398,
+      "end": 76.538,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 184,
+      "token": "on",
+      "start": 76.558,
+      "end": 76.618,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 185,
+      "token": "neljä",
+      "start": 76.638,
+      "end": 76.859,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 186,
+      "token": "implanttibrändiä",
+      "start": 76.899,
+      "end": 77.679,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 187,
+      "token": "mukana",
+      "start": 77.699,
+      "end": 78.28,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 188,
+      "token": "straumann",
+      "start": 78.3,
+      "end": 78.961,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 189,
+      "token": "densply",
+      "start": 78.981,
+      "end": 79.921,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 190,
+      "token": "sirona",
+      "start": 79.981,
+      "end": 80.882,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 191,
+      "token": "nobel",
+      "start": 80.882,
+      "end": 80.922,
+      "time_source": "interpolated"
+    },
+    {
+      "idx": 192,
+      "token": "biocare",
+      "start": 80.922,
+      "end": 80.962,
+      "time_source": "interpolated"
+    },
+    {
+      "idx": 193,
+      "token": "ja",
+      "start": 80.962,
+      "end": 81.062,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 194,
+      "token": "camlogconelog",
+      "start": 81.123,
+      "end": 81.963,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 195,
+      "token": "eli",
+      "start": 82.123,
+      "end": 82.324,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 196,
+      "token": "implantona",
+      "start": 82.384,
+      "end": 82.964,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 197,
+      "token": "oy",
+      "start": 83.024,
+      "end": 83.965,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 198,
+      "token": "tutustutaan",
+      "start": 83.985,
+      "end": 84.366,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 199,
+      "token": "heidän",
+      "start": 84.406,
+      "end": 84.626,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 200,
+      "token": "komponentteihin",
+      "start": 84.666,
+      "end": 85.487,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 201,
+      "token": "mitä",
+      "start": 85.567,
+      "end": 85.727,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 202,
+      "token": "mimmoisia",
+      "start": 85.847,
+      "end": 86.207,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 203,
+      "token": "osia",
+      "start": 86.387,
+      "end": 86.628,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 204,
+      "token": "siellä",
+      "start": 86.668,
+      "end": 86.908,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 205,
+      "token": "on",
+      "start": 86.968,
+      "end": 87.088,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 206,
+      "token": "miten",
+      "start": 87.188,
+      "end": 87.348,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 207,
+      "token": "ne",
+      "start": 87.368,
+      "end": 87.428,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 208,
+      "token": "eroavat",
+      "start": 87.468,
+      "end": 87.789,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 209,
+      "token": "toisistaan",
+      "start": 87.849,
+      "end": 88.349,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 210,
+      "token": "ja",
+      "start": 88.71,
+      "end": 88.75,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 211,
+      "token": "siellä",
+      "start": 88.77,
+      "end": 88.93,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 212,
+      "token": "on",
+      "start": 88.97,
+      "end": 89.01,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 213,
+      "token": "myös",
+      "start": 89.03,
+      "end": 89.17,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 214,
+      "token": "neljä",
+      "start": 89.21,
+      "end": 89.47,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 215,
+      "token": "eri",
+      "start": 89.49,
+      "end": 89.61,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 216,
+      "token": "skanneria",
+      "start": 89.65,
+      "end": 90.211,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 217,
+      "token": "sitten",
+      "start": 90.231,
+      "end": 90.491,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 218,
+      "token": "mukana",
+      "start": 90.531,
+      "end": 90.872,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 219,
+      "token": "elikkä",
+      "start": 90.892,
+      "end": 91.132,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 220,
+      "token": "päästään",
+      "start": 91.172,
+      "end": 91.492,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 221,
+      "token": "katsomaan",
+      "start": 91.532,
+      "end": 91.872,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 222,
+      "token": "miten",
+      "start": 91.892,
+      "end": 92.053,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 223,
+      "token": "skannereilla",
+      "start": 92.093,
+      "end": 92.633,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 224,
+      "token": "jäljennetään",
+      "start": 92.833,
+      "end": 93.374,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 225,
+      "token": "ja",
+      "start": 93.394,
+      "end": 94.635,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 226,
+      "token": "tosiaan",
+      "start": 94.615,
+      "end": 95.057,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 227,
+      "token": "päivän",
+      "start": 95.097,
+      "end": 95.538,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 228,
+      "token": "idea",
+      "start": 95.3,
+      "end": 95.58,
+      "time_source": "openai_whisper-1"
+    },
+    {
+      "idx": 229,
+      "token": "on",
+      "start": 95.558,
+      "end": 95.598,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 230,
+      "token": "se",
+      "start": 95.618,
+      "end": 95.679,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 231,
+      "token": "että",
+      "start": 95.699,
+      "end": 95.779,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 232,
+      "token": "tutustutaan",
+      "start": 95.819,
+      "end": 96.18,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 233,
+      "token": "näihin",
+      "start": 96.2,
+      "end": 96.441,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 234,
+      "token": "osiin",
+      "start": 96.501,
+      "end": 96.782,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 235,
+      "token": "tutustutaan",
+      "start": 96.963,
+      "end": 97.224,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 236,
+      "token": "skannereihin",
+      "start": 97.244,
+      "end": 97.786,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 237,
+      "token": "ja",
+      "start": 97.826,
+      "end": 97.906,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 238,
+      "token": "päästään",
+      "start": 97.946,
+      "end": 98.247,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 239,
+      "token": "vähän",
+      "start": 98.268,
+      "end": 98.428,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 240,
+      "token": "sen",
+      "start": 98.448,
+      "end": 98.609,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 241,
+      "token": "harjoittelemaan",
+      "start": 98.629,
+      "end": 99.13,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 242,
+      "token": "niillä",
+      "start": 99.171,
+      "end": 99.371,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 243,
+      "token": "myös",
+      "start": 99.391,
+      "end": 99.532,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 244,
+      "token": "siellä",
+      "start": 99.552,
+      "end": 99.753,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 245,
+      "token": "paikan",
+      "start": 100.034,
+      "end": 100.294,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 246,
+      "token": "päällä",
+      "start": 100.335,
+      "end": 100.596,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 247,
+      "token": "sitten",
+      "start": 100.636,
+      "end": 100.876,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 248,
+      "token": "jäljentämistä",
+      "start": 101.659,
+      "end": 102.803,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 249,
+      "token": "sitten",
+      "start": 104.048,
+      "end": 104.449,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 250,
+      "token": "sanoisin",
+      "start": 104.689,
+      "end": 105.009,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 251,
+      "token": "että",
+      "start": 105.029,
+      "end": 105.17,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 252,
+      "token": "tämän",
+      "start": 105.21,
+      "end": 105.37,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 253,
+      "token": "ajokortin",
+      "start": 105.47,
+      "end": 106.011,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 254,
+      "token": "pihvi",
+      "start": 106.051,
+      "end": 106.411,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 255,
+      "token": "on",
+      "start": 106.652,
+      "end": 106.752,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 256,
+      "token": "se",
+      "start": 106.772,
+      "end": 106.892,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 257,
+      "token": "osa",
+      "start": 107.132,
+      "end": 107.352,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 258,
+      "token": "kolme",
+      "start": 107.373,
+      "end": 107.693,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 259,
+      "token": "ja",
+      "start": 108.494,
+      "end": 108.594,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 260,
+      "token": "se",
+      "start": 108.915,
+      "end": 108.995,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 261,
+      "token": "on",
+      "start": 109.035,
+      "end": 109.095,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 262,
+      "token": "tämä",
+      "start": 109.115,
+      "end": 109.295,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 263,
+      "token": "pienryhmävalmennus",
+      "start": 109.335,
+      "end": 110.296,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 264,
+      "token": "mestarikisälli",
+      "start": 110.317,
+      "end": 111.358,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 265,
+      "token": "valmennus",
+      "start": 111.358,
+      "end": 111.378,
+      "time_source": "interpolated"
+    },
+    {
+      "idx": 266,
+      "token": "jossa",
+      "start": 111.378,
+      "end": 111.578,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 267,
+      "token": "sitten",
+      "start": 111.598,
+      "end": 111.859,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 268,
+      "token": "peter",
+      "start": 112.119,
+      "end": 112.459,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 269,
+      "token": "ottaa",
+      "start": 112.499,
+      "end": 112.76,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 270,
+      "token": "kopin",
+      "start": 112.8,
+      "end": 113.08,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 271,
+      "token": "enintään",
+      "start": 113.581,
+      "end": 113.941,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 272,
+      "token": "kymmenen",
+      "start": 113.981,
+      "end": 114.302,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 273,
+      "token": "mahtuu",
+      "start": 114.342,
+      "end": 114.662,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 274,
+      "token": "mukaan",
+      "start": 114.702,
+      "end": 115.043,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 275,
+      "token": "elikkä",
+      "start": 115.083,
+      "end": 115.343,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 276,
+      "token": "ne",
+      "start": 115.504,
+      "end": 115.624,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 277,
+      "token": "jotka",
+      "start": 115.664,
+      "end": 115.844,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 278,
+      "token": "tähän",
+      "start": 116.064,
+      "end": 116.245,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 279,
+      "token": "lähtee",
+      "start": 116.425,
+      "end": 116.825,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 280,
+      "token": "niin",
+      "start": 116.845,
+      "end": 116.925,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 281,
+      "token": "kannattaa",
+      "start": 117.686,
+      "end": 118.067,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 282,
+      "token": "nopsaan",
+      "start": 118.087,
+      "end": 118.387,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 283,
+      "token": "ilmoittautua",
+      "start": 118.428,
+      "end": 119.008,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 284,
+      "token": "että",
+      "start": 119.028,
+      "end": 119.169,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 285,
+      "token": "saa",
+      "start": 119.509,
+      "end": 119.729,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 286,
+      "token": "paikan",
+      "start": 119.769,
+      "end": 120.03,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 287,
+      "token": "sieltä",
+      "start": 120.05,
+      "end": 120.711,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 288,
+      "token": "tässä",
+      "start": 121.371,
+      "end": 121.652,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 289,
+      "token": "kohderyhmänä",
+      "start": 121.992,
+      "end": 122.593,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 290,
+      "token": "on",
+      "start": 122.633,
+      "end": 122.733,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 291,
+      "token": "valmistuneet",
+      "start": 122.773,
+      "end": 123.234,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 292,
+      "token": "yleishammaslääkärit",
+      "start": 123.274,
+      "end": 123.975,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 293,
+      "token": "joilla",
+      "start": 123.995,
+      "end": 124.215,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 294,
+      "token": "on",
+      "start": 124.235,
+      "end": 124.295,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 295,
+      "token": "vähän",
+      "start": 124.315,
+      "end": 124.556,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 296,
+      "token": "tai",
+      "start": 124.596,
+      "end": 124.736,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 297,
+      "token": "ei",
+      "start": 124.776,
+      "end": 124.896,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 298,
+      "token": "lainkaan",
+      "start": 124.916,
+      "end": 125.237,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 299,
+      "token": "kokemusta",
+      "start": 125.257,
+      "end": 125.657,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 300,
+      "token": "implanttihoidoista",
+      "start": 125.898,
+      "end": 127.66,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 301,
+      "token": "eli",
+      "start": 127.7,
+      "end": 127.88,
+      "time_source": "openai_whisper-1"
+    },
+    {
+      "idx": 302,
+      "token": "ehkä",
+      "start": 127.64,
+      "end": 127.96,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 303,
+      "token": "ei",
+      "start": 128.0,
+      "end": 128.141,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 304,
+      "token": "kaikista",
+      "start": 128.161,
+      "end": 128.461,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 305,
+      "token": "kovimmille",
+      "start": 128.862,
+      "end": 129.242,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 306,
+      "token": "konkareille",
+      "start": 129.282,
+      "end": 129.803,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 307,
+      "token": "mutta",
+      "start": 129.823,
+      "end": 130.023,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 308,
+      "token": "hekin",
+      "start": 130.063,
+      "end": 130.203,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 309,
+      "token": "ovat",
+      "start": 130.244,
+      "end": 130.324,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 310,
+      "token": "toki",
+      "start": 130.344,
+      "end": 130.544,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 311,
+      "token": "tervetulleita",
+      "start": 130.584,
+      "end": 131.265,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 312,
+      "token": "tähän",
+      "start": 131.285,
+      "end": 132.206,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 313,
+      "token": "tiivistettynä",
+      "start": 132.827,
+      "end": 133.328,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 314,
+      "token": "koostumus",
+      "start": 133.368,
+      "end": 133.788,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 315,
+      "token": "on",
+      "start": 133.828,
+      "end": 133.908,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 316,
+      "token": "aloituspäivä",
+      "start": 133.948,
+      "end": 134.569,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 317,
+      "token": "futudentin",
+      "start": 134.99,
+      "end": 135.41,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 318,
+      "token": "tiloissa",
+      "start": 135.43,
+      "end": 135.751,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 319,
+      "token": "helsingissä",
+      "start": 135.791,
+      "end": 136.832,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 320,
+      "token": "sitten",
+      "start": 136.852,
+      "end": 136.993,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 321,
+      "token": "on",
+      "start": 137.013,
+      "end": 137.113,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 322,
+      "token": "peterin",
+      "start": 137.153,
+      "end": 137.533,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 323,
+      "token": "työskentelyn",
+      "start": 137.553,
+      "end": 138.134,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 324,
+      "token": "seuraamista",
+      "start": 138.174,
+      "end": 138.735,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 325,
+      "token": "privaattivastaanotolla",
+      "start": 138.855,
+      "end": 140.077,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 326,
+      "token": "sitten",
+      "start": 140.097,
+      "end": 140.277,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 327,
+      "token": "on",
+      "start": 140.297,
+      "end": 140.377,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 328,
+      "token": "etäsessioita",
+      "start": 140.457,
+      "end": 141.118,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 329,
+      "token": "peterin",
+      "start": 141.158,
+      "end": 141.539,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 330,
+      "token": "kanssa",
+      "start": 141.579,
+      "end": 141.899,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 331,
+      "token": "ja",
+      "start": 142.3,
+      "end": 142.36,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 332,
+      "token": "lopussa",
+      "start": 142.4,
+      "end": 142.64,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 333,
+      "token": "vielä",
+      "start": 142.66,
+      "end": 142.82,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 334,
+      "token": "kokoonnutaan",
+      "start": 143.161,
+      "end": 143.381,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 335,
+      "token": "ja",
+      "start": 143.401,
+      "end": 143.501,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 336,
+      "token": "jaetaan",
+      "start": 143.521,
+      "end": 143.842,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 337,
+      "token": "kaikki",
+      "start": 143.982,
+      "end": 144.282,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 338,
+      "token": "todistukset",
+      "start": 144.703,
+      "end": 145.264,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 339,
+      "token": "ja",
+      "start": 145.284,
+      "end": 145.364,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 340,
+      "token": "digitaalinen",
+      "start": 145.544,
+      "end": 146.045,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 341,
+      "token": "semmoinen",
+      "start": 146.065,
+      "end": 146.345,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 342,
+      "token": "paketti",
+      "start": 146.425,
+      "end": 146.866,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 343,
+      "token": "kaikille",
+      "start": 147.106,
+      "end": 148.248,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 344,
+      "token": "kesto",
+      "start": 148.268,
+      "end": 148.528,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 345,
+      "token": "on",
+      "start": 148.48,
+      "end": 148.56,
+      "time_source": "openai_whisper-1"
+    },
+    {
+      "idx": 346,
+      "token": "noin",
+      "start": 148.548,
+      "end": 148.708,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 347,
+      "token": "kuusiyhdeksän",
+      "start": 148.728,
+      "end": 149.349,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 348,
+      "token": "kuukautta",
+      "start": 149.389,
+      "end": 149.71,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 349,
+      "token": "mutta",
+      "start": 149.73,
+      "end": 149.87,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 350,
+      "token": "nyt",
+      "start": 149.89,
+      "end": 149.95,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 351,
+      "token": "minä",
+      "start": 149.97,
+      "end": 150.05,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 352,
+      "token": "annan",
+      "start": 150.07,
+      "end": 150.25,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 353,
+      "token": "peterille",
+      "start": 150.291,
+      "end": 150.771,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 354,
+      "token": "puheenvuoron",
+      "start": 150.971,
+      "end": 152.053,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 355,
+      "token": "kerro",
+      "start": 152.073,
+      "end": 152.333,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 356,
+      "token": "pikkuisen",
+      "start": 152.373,
+      "end": 152.694,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 357,
+      "token": "tuosta",
+      "start": 152.754,
+      "end": 153.014,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 358,
+      "token": "struktuurista",
+      "start": 153.535,
+      "end": 154.276,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 359,
+      "token": "siitä",
+      "start": 154.316,
+      "end": 154.516,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 360,
+      "token": "aloituspäivästä",
+      "start": 154.716,
+      "end": 155.397,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 361,
+      "token": "alkaen",
+      "start": 155.457,
+      "end": 155.858,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 362,
+      "token": "miten",
+      "start": 155.878,
+      "end": 156.038,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 363,
+      "token": "se",
+      "start": 156.078,
+      "end": 156.158,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 364,
+      "token": "menee",
+      "start": 156.339,
+      "end": 156.559,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 365,
+      "token": "tämä",
+      "start": 156.599,
+      "end": 156.759,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 366,
+      "token": "valmennus",
+      "start": 156.779,
+      "end": 157.36,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 367,
+      "token": "joo",
+      "start": 158.352,
+      "end": 158.733,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 368,
+      "token": "se",
+      "start": 158.753,
+      "end": 158.873,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 369,
+      "token": "koostuu",
+      "start": 158.913,
+      "end": 159.354,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 370,
+      "token": "teoriaosuudesta",
+      "start": 159.514,
+      "end": 160.496,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 371,
+      "token": "käydään",
+      "start": 161.257,
+      "end": 161.598,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 372,
+      "token": "muutamia",
+      "start": 161.838,
+      "end": 162.279,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 373,
+      "token": "asioita",
+      "start": 162.439,
+      "end": 162.9,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 374,
+      "token": "läpi",
+      "start": 163.04,
+      "end": 163.3,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 375,
+      "token": "tarkennetaan",
+      "start": 163.541,
+      "end": 164.102,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 376,
+      "token": "sitä",
+      "start": 164.142,
+      "end": 164.462,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 377,
+      "token": "advanced",
+      "start": 164.643,
+      "end": 165.204,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 378,
+      "token": "vaativan",
+      "start": 166.286,
+      "end": 166.766,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 379,
+      "token": "implanttiprotetiikan",
+      "start": 166.847,
+      "end": 167.868,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 380,
+      "token": "ja",
+      "start": 167.908,
+      "end": 168.049,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 381,
+      "token": "perusimplanttiprotetiikan",
+      "start": 168.329,
+      "end": 170.333,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 382,
+      "token": "rajapintaa",
+      "start": 170.393,
+      "end": 171.555,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 383,
+      "token": "että",
+      "start": 171.575,
+      "end": 171.655,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 384,
+      "token": "osataan",
+      "start": 171.675,
+      "end": 171.975,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 385,
+      "token": "tunnistaa",
+      "start": 171.995,
+      "end": 172.436,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 386,
+      "token": "pikkuisen",
+      "start": 172.456,
+      "end": 172.817,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 387,
+      "token": "paremmin",
+      "start": 172.857,
+      "end": 173.177,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 388,
+      "token": "tätä",
+      "start": 173.278,
+      "end": 173.498,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 389,
+      "token": "potilasvalintaa",
+      "start": 173.778,
+      "end": 174.8,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 390,
+      "token": "ja",
+      "start": 174.84,
+      "end": 174.94,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 391,
+      "token": "potilaita",
+      "start": 175.061,
+      "end": 175.702,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 392,
+      "token": "joita",
+      "start": 175.722,
+      "end": 175.922,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 393,
+      "token": "me",
+      "start": 175.962,
+      "end": 176.042,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 394,
+      "token": "hoidamme",
+      "start": 176.082,
+      "end": 177.184,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 395,
+      "token": "ja",
+      "start": 177.204,
+      "end": 177.324,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 396,
+      "token": "sitten",
+      "start": 177.505,
+      "end": 177.785,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 397,
+      "token": "toinen",
+      "start": 177.825,
+      "end": 178.046,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 398,
+      "token": "osa",
+      "start": 178.106,
+      "end": 178.326,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 399,
+      "token": "on",
+      "start": 178.386,
+      "end": 178.547,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 400,
+      "token": "tämä",
+      "start": 178.587,
+      "end": 178.827,
+      "time_source": "hh_whisperx_fi"
+    },
+    {
+      "idx": 401,
+      "token": "handson",
+      "start": 179.047,
+      "end": 179.989,
+      "time_source": "hh_whisperx_fi"
+    }
+  ],
+  "gt_sentences": [
+    {
+      "idx": 0,
+      "text": "Suojärven Timon luento potilasvahingot protetiikassa.",
+      "start": 0.031,
+      "end": 3.797,
+      "token_start": 0,
+      "token_end": 5
+    },
+    {
+      "idx": 1,
+      "text": "Siinä tulee hyvin laajasti protetiikkaa yleensä vähän vaikeusasteen arviointia ja muuta.",
+      "start": 3.817,
+      "end": 8.483,
+      "token_start": 5,
+      "token_end": 16
+    },
+    {
+      "idx": 2,
+      "text": "Sitten on parodontologi Martta Martolan luento perimplantiitista ja sitten Implantticaseja, semmoinen vodcast, jossa Peterin kanssa käydään läpi näitä yleisiä ongelmia, tai yleisimpiä ongelmia, mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan.",
+      "start": 8.503,
+      "end": 22.444,
+      "token_start": 16,
+      "token_end": 54
+    },
+    {
+      "idx": 3,
+      "text": "Viimeisenä on vielä sitten semmoinen osio missä on tärkeää tunnistaa, nämä eivät ole missään nimessä sellaisia mitä kannattaa ensimmäisenä lähteä tekemään, elikkä siellä on Implantologiaa Advanced -webinaarisarja, Timo Suojärven ja Ilkka Pallosen.",
+      "start": 22.508,
+      "end": 33.128,
+      "token_start": 54,
+      "token_end": 86
+    },
+    {
+      "idx": 4,
+      "text": "Siinä tehdään sitten semmoista niin kuin sanotaanko high-end-implanttihoitoa etualueen ja esteettisen alueen ja tosi vaativia temppuja, mutta ne on tärkeää tunnistaa kun itse tekee, että milloin missä menee se raja, että milloin työ voi muuttuakin yhtäkkiä todella hankalaksi.",
+      "start": 33.168,
+      "end": 45.811,
+      "token_start": 86,
+      "token_end": 124
+    },
+    {
+      "idx": 5,
+      "text": "Ja sitten on myös oikomishoidollisia näkökulmia.",
+      "start": 45.811,
+      "end": 49.178,
+      "token_start": 124,
+      "token_end": 130
+    },
+    {
+      "idx": 6,
+      "text": "Timo ja Virpi Myller, oikoja Virpi, keskustelevat sitten siitä aiheesta ja miten sitä voidaan pre-proteettisesti hyödyntää.",
+      "start": 49.198,
+      "end": 58.355,
+      "token_start": 130,
+      "token_end": 146
+    },
+    {
+      "idx": 7,
+      "text": "Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty.",
+      "start": 58.375,
+      "end": 64.446,
+      "token_start": 146,
+      "token_end": 160
+    },
+    {
+      "idx": 8,
+      "text": "Ajokortin osa kaksi, Komponentit Tutuksi -päivä Helsingissä Clarion hotellissa.",
+      "start": 65.388,
+      "end": 70.953,
+      "token_start": 160,
+      "token_end": 169
+    },
+    {
+      "idx": 9,
+      "text": "Se alkaa Peterin kertausluennolla, vähän näitä perusasioita kerrataan siihen alkuun pohjalle ja sen jälkeen siellä on neljä implanttibrändiä mukana.",
+      "start": 70.973,
+      "end": 78.28,
+      "token_start": 169,
+      "token_end": 188
+    },
+    {
+      "idx": 10,
+      "text": "Straumann, Densply Sirona, Nobel Biocare ja Camlog-Conelog eli Implantona Oy.",
+      "start": 78.3,
+      "end": 83.965,
+      "token_start": 188,
+      "token_end": 198
+    },
+    {
+      "idx": 11,
+      "text": "Tutustutaan heidän komponentteihin, mitä mimmoisia osia siellä on, miten ne eroavat toisistaan ja siellä on myös neljä eri skanneria sitten mukana, elikkä päästään katsomaan miten skannereilla jäljennetään ja tosiaan päivän idea on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähän sen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä.",
+      "start": 83.985,
+      "end": 102.803,
+      "token_start": 198,
+      "token_end": 249
+    },
+    {
+      "idx": 12,
+      "text": "Sitten sanoisin, että tämän ajokortin pihvi on se osa kolme ja se on tämä pienryhmävalmennus, mestari-kisälli -valmennus, jossa sitten Peter ottaa kopin.",
+      "start": 104.048,
+      "end": 113.08,
+      "token_start": 249,
+      "token_end": 271
+    },
+    {
+      "idx": 13,
+      "text": "Enintään kymmenen mahtuu mukaan, elikkä ne jotka tähän lähtee, niin kannattaa nopsaan ilmoittautua, että saa paikan sieltä.",
+      "start": 113.581,
+      "end": 120.711,
+      "token_start": 271,
+      "token_end": 288
+    },
+    {
+      "idx": 14,
+      "text": "Tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista.",
+      "start": 121.371,
+      "end": 127.66,
+      "token_start": 288,
+      "token_end": 301
+    },
+    {
+      "idx": 15,
+      "text": "Eli ehkä ei kaikista kovimmille konkareille, mutta hekin ovat toki tervetulleita tähän.",
+      "start": 127.7,
+      "end": 132.206,
+      "token_start": 301,
+      "token_end": 313
+    },
+    {
+      "idx": 16,
+      "text": "Tiivistettynä koostumus on aloituspäivä Futudentin tiloissa Helsingissä, sitten on Peterin työskentelyn seuraamista privaattivastaanotolla, sitten on etäsessioita Peterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille.",
+      "start": 132.827,
+      "end": 148.248,
+      "token_start": 313,
+      "token_end": 344
+    },
+    {
+      "idx": 17,
+      "text": "Kesto on noin kuusi-yhdeksän kuukautta, mutta nyt minä annan Peterille puheenvuoron.",
+      "start": 148.268,
+      "end": 152.053,
+      "token_start": 344,
+      "token_end": 355
+    },
+    {
+      "idx": 18,
+      "text": "Kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus.",
+      "start": 152.073,
+      "end": 157.36,
+      "token_start": 355,
+      "token_end": 367
+    },
+    {
+      "idx": 19,
+      "text": "Joo, se koostuu teoriaosuudesta.",
+      "start": 158.352,
+      "end": 160.496,
+      "token_start": 367,
+      "token_end": 371
+    },
+    {
+      "idx": 20,
+      "text": "Käydään muutamia asioita läpi.",
+      "start": 161.257,
+      "end": 163.3,
+      "token_start": 371,
+      "token_end": 375
+    },
+    {
+      "idx": 21,
+      "text": "Tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perusimplanttiprotetiikan rajapintaa, että osataan tunnistaa pikkuisen paremmin tätä potilasvalintaa ja potilaita, joita me hoidamme.",
+      "start": 163.541,
+      "end": 177.184,
+      "token_start": 375,
+      "token_end": 395
+    },
+    {
+      "idx": 22,
+      "text": "Ja sitten toinen osa on tämä hands-on,",
+      "start": 177.204,
+      "end": 179.989,
+      "token_start": 395,
+      "token_end": 402
+    }
+  ],
+  "gt_audit": {
+    "systems": [
+      "openai_gpt-transcribe",
+      "openai_gpt-4o-transcribe",
+      "openai_gpt-4o-mini-transcribe",
+      "openai_whisper-1",
+      "hh_whisperx_fi",
+      "vertex_gemini-3.1-pro",
+      "vertex_gemini-3.5-flash"
+    ],
+    "threshold": 4,
+    "flags": [
+      {
+        "flag_id": 1,
+        "ref_start": 20,
+        "ref_end": 21,
+        "gt_text": "martolan",
+        "start_s": 9.805,
+        "end_s": 10.206,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "martola",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_whisper-1",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "marto",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "martoon",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "marttola",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 2,
+        "ref_start": 25,
+        "ref_end": 26,
+        "gt_text": "implantticaseja",
+        "start_s": 13.671,
+        "end_s": 13.771,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "implanttikeissejä",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "implantticase ja",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "implanttikeissiä",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          },
+          {
+            "text": "implanttikeissä ja",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 3,
+        "ref_start": 78,
+        "ref_end": 79,
+        "gt_text": "implantologiaa",
+        "start_s": 29.641,
+        "end_s": 29.701,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "implantologia",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "implantologia ja",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "implanttologia",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          },
+          {
+            "text": "implanttologian",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 4,
+        "ref_start": 93,
+        "ref_end": 95,
+        "gt_text": "highendimplanttihoitoa etualueen",
+        "start_s": 35.212,
+        "end_s": 36.895,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          },
+          {
+            "text": "estettisellä alueella",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "high end",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "highend implanttihoito",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "highend implanttihoitoa",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "highend implanttinhoitoa",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "highendimplanttihoitoa",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 5,
+        "ref_start": 96,
+        "ref_end": 99,
+        "gt_text": "esteettisen alueen ja",
+        "start_s": 37.035,
+        "end_s": 38.157,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "estetisellä alueella tosi",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "etualue esteettisalue ja",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "etualueella esteettiselle alueella ja",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "etualueella esteettisellä alueella",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "etualueella ja estetisalueella",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 6,
+        "ref_start": 194,
+        "ref_end": 195,
+        "gt_text": "camlogconelog",
+        "start_s": 81.123,
+        "end_s": 81.963,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "camlog conelog",
+            "arms": [
+              "openai_gpt-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "camlock",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "camlock conellog",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "camlock connect",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "camlog",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "kamlochkonelloch",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 7,
+        "ref_start": 264,
+        "ref_end": 266,
+        "gt_text": "mestarikisälli valmennus",
+        "start_s": 110.317,
+        "end_s": 111.378,
+        "n_systems": 7,
+        "n_disagree": 7,
+        "strength": "unanimous",
+        "alternatives": [
+          {
+            "text": "mestarikisällivalmennus",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "mestarikisällinvalmennus",
+            "arms": [
+              "openai_whisper-1",
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "mestarikesälli valmennus",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 8,
+        "ref_start": 29,
+        "ref_end": 30,
+        "gt_text": "peterin",
+        "start_s": 14.873,
+        "end_s": 15.173,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "peeterin",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "peetterin",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "petteri",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "petterin",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 9,
+        "ref_start": 82,
+        "ref_end": 83,
+        "gt_text": "suojärven",
+        "start_s": 31.885,
+        "end_s": 32.326,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "suojärvi",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "suojarvi",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "suojärve",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 10,
+        "ref_start": 85,
+        "ref_end": 86,
+        "gt_text": "pallosen",
+        "start_s": 33.088,
+        "end_s": 33.128,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "pallonen",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "kallos ja",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "pallas",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          },
+          {
+            "text": "pallo",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "pallos ja",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 11,
+        "ref_start": 133,
+        "ref_end": 135,
+        "gt_text": "myller oikoja",
+        "start_s": 50.139,
+        "end_s": 50.641,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "müller oikoja",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "myller",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "myller oikoa",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "müller",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "müller oiko ja",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 12,
+        "ref_start": 171,
+        "ref_end": 172,
+        "gt_text": "peterin",
+        "start_s": 71.333,
+        "end_s": 71.734,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "peeterin",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "peetterin",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "petterin",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 13,
+        "ref_start": 189,
+        "ref_end": 190,
+        "gt_text": "densply",
+        "start_s": 78.981,
+        "end_s": 79.921,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "dentsply",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "denzbleysirona",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "niden",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "nobellcare",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 14,
+        "ref_start": 196,
+        "ref_end": 197,
+        "gt_text": "implantona",
+        "start_s": 82.384,
+        "end_s": 82.964,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "implanttoona",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_whisper-1",
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "implanttona",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "implanttioina",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 15,
+        "ref_start": 268,
+        "ref_end": 269,
+        "gt_text": "peter",
+        "start_s": 112.119,
+        "end_s": 112.459,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "peeter",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "peetter",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          },
+          {
+            "text": "petter",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "petteri",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 16,
+        "ref_start": 322,
+        "ref_end": 323,
+        "gt_text": "peterin",
+        "start_s": 137.153,
+        "end_s": 137.533,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "peeterin",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "petterin",
+            "arms": [
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "peetterin",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 17,
+        "ref_start": 329,
+        "ref_end": 330,
+        "gt_text": "peterin",
+        "start_s": 141.158,
+        "end_s": 141.539,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "peeterin",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "petterin",
+            "arms": [
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "peetterin",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 18,
+        "ref_start": 347,
+        "ref_end": 348,
+        "gt_text": "kuusiyhdeksän",
+        "start_s": 148.728,
+        "end_s": 149.349,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "kuusi vai yhdeksän",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "69",
+            "arms": [
+              "openai_gpt-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "yhdeksän",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 19,
+        "ref_start": 351,
+        "ref_end": 352,
+        "gt_text": "minä",
+        "start_s": 149.97,
+        "end_s": 150.05,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "mä",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 20,
+        "ref_start": 353,
+        "ref_end": 354,
+        "gt_text": "peterille",
+        "start_s": 150.291,
+        "end_s": 150.771,
+        "n_systems": 7,
+        "n_disagree": 6,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "peeterille",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "petterille",
+            "arms": [
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "peetterille",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 21,
+        "ref_start": 22,
+        "ref_end": 23,
+        "gt_text": "perimplantiitista",
+        "start_s": 10.587,
+        "end_s": 11.688,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "periimplantiitista",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "periimplanttiitista",
+            "arms": [
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "perriimplantiitista",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 22,
+        "ref_start": 65,
+        "ref_end": 66,
+        "gt_text": "eivät",
+        "start_s": 25.173,
+        "end_s": 25.273,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "ei",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 23,
+        "ref_start": 90,
+        "ref_end": 92,
+        "gt_text": "niin kuin",
+        "start_s": 34.791,
+        "end_s": 34.971,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "niinku",
+            "arms": [
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "etualueelle esteettiselle",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          },
+          {
+            "text": "highend implanttihointoja",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 24,
+        "ref_start": 124,
+        "ref_end": 125,
+        "gt_text": "ja",
+        "start_s": 45.811,
+        "end_s": 46.272,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1",
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 25,
+        "ref_start": 167,
+        "ref_end": 169,
+        "gt_text": "clarion hotellissa",
+        "start_s": 69.572,
+        "end_s": 70.953,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "clarionhotellissa siellä",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "clarion hotelissa",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          },
+          {
+            "text": "clarionhotellissa",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "klarion hotellissa",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 26,
+        "ref_start": 202,
+        "ref_end": 203,
+        "gt_text": "mimmoisia",
+        "start_s": 85.847,
+        "end_s": 86.207,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "mimmosia",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 27,
+        "ref_start": 228,
+        "ref_end": 229,
+        "gt_text": "idea",
+        "start_s": 95.3,
+        "end_s": 95.58,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "ideana",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 28,
+        "ref_start": 288,
+        "ref_end": 288,
+        "gt_text": "",
+        "start_s": 120.711,
+        "end_s": 121.371,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "ja",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "hh_whisperx_fi",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": true
+      },
+      {
+        "flag_id": 29,
+        "ref_start": 309,
+        "ref_end": 310,
+        "gt_text": "ovat",
+        "start_s": 130.244,
+        "end_s": 130.324,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "on",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 30,
+        "ref_start": 386,
+        "ref_end": 387,
+        "gt_text": "pikkuisen",
+        "start_s": 172.456,
+        "end_s": 172.817,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "pikkasen",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_whisper-1",
+              "vertex_gemini-3.1-pro"
+            ]
+          },
+          {
+            "text": "pikkaisen",
+            "arms": [
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "pikkusen",
+            "arms": [
+              "openai_gpt-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 31,
+        "ref_start": 394,
+        "ref_end": 395,
+        "gt_text": "hoidamme",
+        "start_s": 176.082,
+        "end_s": 177.184,
+        "n_systems": 7,
+        "n_disagree": 5,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "hoidetaan",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 32,
+        "ref_start": 27,
+        "ref_end": 28,
+        "gt_text": "vodcast",
+        "start_s": 14.132,
+        "end_s": 14.592,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "podcast",
+            "arms": [
+              "openai_gpt-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          },
+          {
+            "text": "vodkasti",
+            "arms": [
+              "openai_gpt-4o-transcribe"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 33,
+        "ref_start": 35,
+        "ref_end": 36,
+        "gt_text": "ongelmia",
+        "start_s": 16.996,
+        "end_s": 17.316,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_whisper-1",
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 34,
+        "ref_start": 68,
+        "ref_end": 69,
+        "gt_text": "nimessä",
+        "start_s": 25.654,
+        "end_s": 25.774,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "edes",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "niissä",
+            "arms": [
+              "hh_whisperx_fi"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 35,
+        "ref_start": 75,
+        "ref_end": 76,
+        "gt_text": "elikkä",
+        "start_s": 27.818,
+        "end_s": 28.018,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "eli",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 36,
+        "ref_start": 219,
+        "ref_end": 220,
+        "gt_text": "elikkä",
+        "start_s": 90.892,
+        "end_s": 91.132,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "eli",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 37,
+        "ref_start": 275,
+        "ref_end": 276,
+        "gt_text": "elikkä",
+        "start_s": 115.083,
+        "end_s": 115.343,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "eli",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "openai_whisper-1"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 38,
+        "ref_start": 313,
+        "ref_end": 313,
+        "gt_text": "",
+        "start_s": 132.206,
+        "end_s": 132.827,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "ja",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": true
+      },
+      {
+        "flag_id": 39,
+        "ref_start": 332,
+        "ref_end": 333,
+        "gt_text": "lopussa",
+        "start_s": 142.4,
+        "end_s": 142.64,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "lopuksi",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.1-pro",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 40,
+        "ref_start": 341,
+        "ref_end": 342,
+        "gt_text": "semmoinen",
+        "start_s": 146.065,
+        "end_s": 146.345,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "sellainen",
+            "arms": [
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe"
+            ]
+          },
+          {
+            "text": "",
+            "arms": [
+              "openai_whisper-1"
+            ]
+          },
+          {
+            "text": "semmonen",
+            "arms": [
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 41,
+        "ref_start": 356,
+        "ref_end": 357,
+        "gt_text": "pikkuisen",
+        "start_s": 152.373,
+        "end_s": 152.694,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "pikkusen",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_whisper-1",
+              "vertex_gemini-3.1-pro"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": false
+      },
+      {
+        "flag_id": 42,
+        "ref_start": 402,
+        "ref_end": 402,
+        "gt_text": "",
+        "start_s": 179.989,
+        "end_s": 180.0,
+        "n_systems": 7,
+        "n_disagree": 4,
+        "strength": "majority",
+        "alternatives": [
+          {
+            "text": "jossa",
+            "arms": [
+              "openai_gpt-transcribe",
+              "openai_gpt-4o-transcribe",
+              "openai_gpt-4o-mini-transcribe",
+              "vertex_gemini-3.5-flash"
+            ]
+          }
+        ],
+        "formatting_only": false,
+        "gt_missing": true
+      }
+    ]
+  }
+}

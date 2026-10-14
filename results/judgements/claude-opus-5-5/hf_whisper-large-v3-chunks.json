@@ -1,0 +1,168 @@
+{
+  "arm_id": "hf_whisper-large-v3-chunks",
+  "label": "Whisper large-v3, chunked",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "8a32e28cdb8bc681d857557823c72b2881392b4917f6d049e10665c72770d0e1",
+  "created_at_utc": "2026-10-13T16:55:21+00:00",
+  "latency_s": 21.3,
+  "usage": {
+    "input_tokens": 5130,
+    "output_tokens": 2189
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 1.74,
+    "error_counts": {
+      "critical": 0,
+      "major": 0,
+      "minor": 7
+    },
+    "entities": {
+      "correct": 10,
+      "variant": 4,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 92
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "potilasvaihingot",
+        "explanation": "Lecture title misspelled into a non-word; still recognisable as 'patient injuries'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeissä",
+        "explanation": "'Implant cases' garbled into a form that reads as a locative; the intended meaning is only partly clear."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään edes",
+        "explanation": "The idiom 'by no means' is garbled; the negative sense survives."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "implantologia ja advanced webinaarisarja",
+        "explanation": "The series name is split with an inserted 'ja', so it reads as two items."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Virpi Myller",
+        "transcript_span": "Virpi Müller",
+        "explanation": "Surname misspelled but recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "pre-proteettisesti",
+        "transcript_span": "reproteettisesti",
+        "explanation": "'Pre-prosthetically' becomes 'reprosthetically', which slightly distorts the term."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog eli Implantona Oy",
+        "transcript_span": "Camlock Conelog eli implanttoona Oy",
+        "explanation": "Brand and company names misspelled but recognisable."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon / Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin (once 'Peeterin')"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallosen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotelissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin / Ajokortiosa"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand; the transcript has the canonical spelling."
+      }
+    ],
+    "usability": 92,
+    "summary": "The transcript is very close to the reference. All numbers (10 participants, 6–9 months, four brands, four scanners, parts 1–3), places and most names are correct. Remaining issues are minor: misspelled names (Müller, Camlock, implanttoona), a few garbled terms (potilasvaihingot, implanttikeissä, reproteettisesti), and the Advanced webinar series name being split."
+  }
+}

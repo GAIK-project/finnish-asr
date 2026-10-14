@@ -1,0 +1,175 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best-chunks",
+  "label": "Fine-tuned whisper-large-v3-fi-skn-lamurre-best, chunked",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "dfa6ddd546552daca2938220ae1b62bcb89c9ad5ceeda2a0b69378471dc11fc4",
+  "created_at_utc": "2026-10-13T16:59:19+00:00",
+  "latency_s": 23.4,
+  "usage": {
+    "input_tokens": 5191,
+    "output_tokens": 2447
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 2.99,
+    "error_counts": {
+      "critical": 0,
+      "major": 1,
+      "minor": 7
+    },
+    "entities": {
+      "correct": 8,
+      "variant": 6,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 84
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi",
+        "transcript_span": "Pardojen tolki",
+        "explanation": "The speaker's profession (periodontist) is garbled into nonsense."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marttojen",
+        "explanation": "The surname is misspelled but still recognisable alongside the first name."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Palos",
+        "explanation": "The surname is truncated or misspelled but recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "eivät ole missään nimessä",
+        "transcript_span": "ei ole missään edes",
+        "explanation": "The idiom 'by no means' is garbled, though the negation survives."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "implantologia ja advanced webinaarisarja",
+        "explanation": "The series title is split with an added 'ja'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Kesto on noin kuusi-yhdeksän kuukautta",
+        "transcript_span": "Kesti on noin kuusi vai yhdeksän kuukautta",
+        "explanation": "The range 6–9 becomes '6 or 9' and the verb is in the past tense, so the duration is slightly muddled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kovimmille konkareille",
+        "transcript_span": "kovin mene konkareille",
+        "explanation": "Garbled wording, but the meaning is still recoverable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "mestari-kisälli -valmennus",
+        "transcript_span": "mestarikisällävalmennus",
+        "explanation": "The training name is slightly garbled."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Timo Suojärven"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marttojen"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Palos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotelissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Nobelbiocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camblog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "Implanttona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand; the transcript has the correct spelling."
+      }
+    ],
+    "usability": 84,
+    "summary": "The transcript is close to the reference overall, and the course structure, numbers and most names are intact. Its main flaw is the garbled 'parodontologi' and Martola surname. It also has minor slips in Pallonen and in several brand names, and renders the 6–9 month duration as '6 or 9'."
+  }
+}

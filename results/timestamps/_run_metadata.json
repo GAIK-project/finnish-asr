@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T08:44:23+00:00",
+  "gaik_evals_commit": "d5c59a0d08852c1a6fc4d717dccbaea1ef2b31fe",
+  "gaik_evals_dirty": true,
+  "app_under_test": "Finnish dialect ASR: timestamps and long-form decoding",
+  "runner_path": "projects/finnish-asr-models/scripts/eval_timestamps.py",
+  "dataset_path": "projects/finnish-asr-models/results/labels/skn_longform.jsonl",
+  "dataset_git_object": "d0e813edfc83b4d3d842af4331a047b73b78c0fe",
+  "model_or_deployment": [
+    "openai/whisper-large-v3",
+    "GAIK-project/whisper-large-v3-fi-dialects"
+  ],
+  "cli_args": [
+    "score"
+  ],
+  "env": {},
+  "extra": {
+    "arms": [
+      "hf_whisper-large-v3",
+      "hub_whisper-large-v3-fi-dialects"
+    ],
+    "decoded_on": {
+      "hf_whisper-large-v3": "AMD Instinct MI250X",
+      "hub_whisper-large-v3-fi-dialects": "AMD Instinct MI250X"
+    },
+    "chunks": {
+      "min_s": 15.0,
+      "max_s": 25.0,
+      "window_s": 0.1
+    },
+    "generate": {
+      "language": "fi",
+      "task": "transcribe"
+    }
+  }
+}

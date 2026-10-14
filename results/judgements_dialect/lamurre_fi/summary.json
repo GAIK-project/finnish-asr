@@ -1,0 +1,43 @@
+{
+  "generated_utc": "2026-10-13T16:54:05+00:00",
+  "benchmark": "lamurre_fi",
+  "judge": "claude-opus-5-5",
+  "prompt_version": "dialect-judge-v1",
+  "segments": 564,
+  "ref_words": 16949,
+  "usage": {
+    "input_tokens": 699580,
+    "output_tokens": 285943
+  },
+  "arms": {
+    "hf_whisper-large-v3": {
+      "critical": 41,
+      "major": 527,
+      "minor": 798,
+      "error_points_per_100w": 22.67,
+      "segments_without_errors": 55,
+      "segments_best_or_tied": 175
+    },
+    "ft_whisper-large-v3-fi-skn": {
+      "critical": 16,
+      "major": 309,
+      "minor": 654,
+      "error_points_per_100w": 13.92,
+      "segments_without_errors": 108,
+      "segments_best_or_tied": 400
+    },
+    "hf_whisper-large-finnish-v3": {
+      "critical": 38,
+      "major": 482,
+      "minor": 864,
+      "error_points_per_100w": 21.56,
+      "segments_without_errors": 49,
+      "segments_best_or_tied": 182
+    }
+  },
+  "arms_judged_together": [
+    "hf_whisper-large-v3",
+    "ft_whisper-large-v3-fi-skn",
+    "hf_whisper-large-finnish-v3"
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "arm_id": "hf_orukeet",
+  "label": "Orukeet (Parakeet v3 fine-tune)",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "e87c6ac1b85d73e2822106ea2d340d624f0ef44f2c93d46c39ef225162d762ab",
+  "created_at_utc": "2026-10-12T08:23:38+00:00",
+  "latency_s": 28.1,
+  "usage": {
+    "input_tokens": 5094,
+    "output_tokens": 3142
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.22,
+    "error_counts": {
+      "critical": 0,
+      "major": 2,
+      "minor": 15
+    },
+    "entities": {
+      "correct": 3,
+      "variant": 10,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot protetiikassa",
+        "transcript_span": "potilasvahingossa protetiikassa",
+        "explanation": "Lecture title inflection garbled; the topic is still recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "hyvin laajasti",
+        "transcript_span": "hyvin laajaista",
+        "explanation": "Non-word, but the meaning ('broadly') is guessable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "parodontologi Martta Martolan",
+        "transcript_span": "parodantulakin Martta Martola",
+        "explanation": "The professional title 'parodontologi' is garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeississä",
+        "explanation": "Wrong inflection; 'implant cases' is still recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Viimeisenä on vielä sitten",
+        "transcript_span": "Viimeisenä ovia",
+        "explanation": "Garbled verb phrase."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään ole",
+        "explanation": "The idiom 'by no means' is garbled, but the negation survives."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timo Suojaro ja Ilkka Pallos",
+        "explanation": "Speaker surnames are misspelled in the advanced series credit, though still recognisable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "esteettisen alueen",
+        "transcript_span": "estettisoluea",
+        "explanation": "'Aesthetic zone' is garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Virpi Myller",
+        "transcript_span": "Virpi Müller",
+        "explanation": "Surname misspelled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Clarion hotellissa",
+        "transcript_span": "Klarion hotellissa",
+        "explanation": "Hotel name misspelled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Bajare",
+        "explanation": "Brand name garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Straumann, Densply Sirona",
+        "transcript_span": "Straumanni, Densplai Sirona",
+        "explanation": "Brand names misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog eli Implantona Oy",
+        "transcript_span": "Camlock Conelog, eli implanttuona Oy",
+        "explanation": "Brand and company names misspelled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin tiloissa",
+        "transcript_span": "futurentitiloissa",
+        "explanation": "Venue company name misspelled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "yleishammaslääkärit, joilla on",
+        "transcript_span": "yleishammaslääkärtyy olla",
+        "explanation": "Garbled phrase describing the target group."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "lopussa vielä kokoonnutaan",
+        "transcript_span": "lopussi vielä kokoonnut",
+        "explanation": "Garbled inflection."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "hands-on",
+        "transcript_span": "Hanson",
+        "explanation": "The 'hands-on' course component became a name-like word; its meaning is lost."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetter"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Klarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Straumanni"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densplai Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Bajare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttuona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "futurentitiloissa"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplai Sirona",
+        "explanation": "The canonical brand name is Dentsply Sirona; the reference is misspelled too."
+      }
+    ],
+    "usability": 75,
+    "summary": "The structure and all numbers (parts 1–3, four brands, four scanners, max ten participants, 6–9 months) are preserved. Many names are misspelled but mostly recognisable. Nobel Biocare is garbled, and 'hands-on' became 'Hanson'. Numerous minor inflection garbles appear, with no hallucinations or major omissions."
+  }
+}

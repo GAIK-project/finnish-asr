@@ -1,0 +1,219 @@
+---
+language:
+- fi
+license: apache-2.0
+base_model: openai/whisper-large-v3
+base_model_relation: finetune
+pipeline_tag: automatic-speech-recognition
+library_name: transformers
+tags:
+- whisper
+- finnish
+- dialects
+- speech-recognition
+- lora
+datasets:
+- GAIK-project/skn-finnish-dialects-asr
+- google/fleurs
+- facebook/voxpopuli
+model-index:
+- name: whisper-large-v3-fi-dialects
+  results:
+  - task:
+      type: automatic-speech-recognition
+    dataset:
+      name: SKN dialect test (10 held-out municipalities)
+      type: GAIK-project/skn-finnish-dialects-asr
+      split: test
+    metrics:
+    - type: wer
+      value: 21.1
+    - type: cer
+      value: 8.6
+  - task:
+      type: automatic-speech-recognition
+    dataset:
+      name: FLEURS Finnish
+      type: google/fleurs
+      config: fi_fi
+      split: test
+    metrics:
+    - type: wer
+      value: 7.6
+  - task:
+      type: automatic-speech-recognition
+    dataset:
+      name: VoxPopuli Finnish
+      type: facebook/voxpopuli
+      config: fi
+      split: test
+    metrics:
+    - type: wer
+      value: 10.8
+---
+
+# Whisper large-v3, fine-tuned for Finnish dialects
+
+Speech-to-text for **Finnish dialect speech**: it hears dialect and writes standard Finnish with
+punctuation. A LoRA fine-tune of [openai/whisper-large-v3](https://huggingface.co/openai/whisper-large-v3),
+trained at Haaga-Helia University of Applied Sciences in the [GAIK project](https://gaik.ai/)
+(Generative AI-enhanced Knowledge Management in Business), a research project led by Haaga-Helia
+with the University of Helsinki and Tampere University, co-funded by the European Union (ERDF).
+
+🌐 [gaik.ai](https://gaik.ai/) · 💻 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) ·
+📊 [code, method and results](https://github.com/GAIK-project/finnish-asr) ·
+🗂️ [training dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
+
+| Test | Whisper large-v3 | This model |
+|---|--:|--:|
+| SKN dialect interviews, 10 municipalities not in training, WER % | 40.4 | **21.1** |
+| LA-murre dialect interviews, another corpus, meaning-error points per 100 words (blind LLM judge; critical 10, major 5, minor 1) | 25.9 | **13.6** |
+| FLEURS Finnish, read sentences, WER % | 7.4 | 7.6 |
+| VoxPopuli Finnish, parliament speech, WER % | 12.7 | 10.8 |
+| A 180 s Finnish dental webinar, WER % (both decoded in chunks) | 15.7 | 13.9 |
+
+WER after lower-casing and removing punctuation. The ready-made Finnish fine-tunes trained on
+read speech score 48–57 % on the same dialect test.
+
+## Use it
+
+You need Python with **transformers 5 or newer** (older versions cannot read this repository's
+tokenizer files) and preferably a GPU:
+
+```bash
+pip install "transformers>=5" torch soundfile
+```
+
+The audio must be **16 kHz mono**. Whisper listens to at most 30 seconds at a time, so cut longer
+audio into 15–25 s pieces at its quietest moments and transcribe each piece. The code below does
+that and prints each piece with the time it starts at:
+
+```python
+import numpy as np
+import soundfile as sf
+from transformers import pipeline
+
+SR = 16000
+asr = pipeline(
+    "automatic-speech-recognition", model="GAIK-project/whisper-large-v3-fi-dialects", dtype="float16", device="cuda"
+)  # without a GPU: device="cpu" and no dtype (slow)
+
+
+def quiet_chunks(audio, min_s=15, max_s=25, win_s=0.1):
+    """Split at the quietest 100 ms between min_s and max_s into each piece."""
+    win, start, pieces = int(win_s * SR), 0, []
+    while len(audio) - start > max_s * SR:
+        lo, hi = start + int(min_s * SR), start + int(max_s * SR)
+        frames = (hi - lo) // win
+        energy = (audio[lo : lo + frames * win].reshape(frames, win) ** 2).mean(axis=1)
+        cut = lo + int(np.argmin(energy)) * win + win // 2
+        pieces.append(audio[start:cut])
+        start = cut
+    return pieces + [audio[start:]]
+
+
+audio, sr = sf.read("interview.wav", dtype="float32")  # 16 kHz mono; resample first if it is not
+pieces = quiet_chunks(audio)  # a clip of 25 s or less stays one piece
+out = asr(
+    [{"raw": p, "sampling_rate": SR} for p in pieces],
+    batch_size=8,
+    generate_kwargs={"language": "fi", "task": "transcribe"},
+)
+start = 0.0
+for piece, o in zip(pieces, out):
+    print(f"[{start:6.1f} s] {o['text'].strip()}")
+    start += len(piece) / SR
+```
+
+### Settings to avoid
+
+Measured on a 180 s Finnish webinar (402 words), with the model downloaded from this repository:
+
+| Decoding | WER % | |
+|---|--:|---|
+| `quiet_chunks` above | **13.7** | recommended |
+| pipeline `chunk_length_s=20` | 14.7 | works |
+| pipeline `chunk_length_s=30` | 52.5 | **repeats one phrase over and over**: do not use |
+| pipeline `chunk_length_s=30`, `no_repeat_ngram_size=6` | 14.4 | the guard stops the repeating |
+
+Do not use `return_timestamps=True` either. In that mode Whisper keeps its place in long audio by
+writing time marks as it goes. This model was trained on text without those time marks, so its times
+are wrong and on long audio it can lose its place and repeat itself. Measured on SKN's dialect test
+(600 segments, 791 sentence starts), only 0.8 % of the sentence starts had a time mark within 0.5 s
+(plain Whisper large-v3: 53.5 %), and on ten 4-minute dialect recordings Whisper's own long-form mode
+gave 21.5 % WER with one recording repeating a phrase, against 17.3 % for the pieces above
+([details](https://github.com/GAIK-project/finnish-asr#timestamps-and-long-form-audio)). If you need times, use the piece start times printed
+above; they are exact to the cut points.
+
+The 13.9 % in the first table is the same model before upload, decoded one piece at a time like the
+base model's row; this repository's copy with the code above (`batch_size=8`) gives 13.7 %, one word
+of 402 apart.
+
+## Where it is weaker
+
+- **Rare names and technical terms** in standard-Finnish audio: on the webinar, two blind LLM
+  judges found more name and term errors than for plain Whisper large-v3 ("Nobelbayer" for Nobel
+  Biocare), although its WER was lower. For standard Finnish full of brand names, plain Whisper
+  large-v3 is the safer choice.
+- The dialect data are 1960s–70s interviews with elderly speakers; today's regional speech
+  was not tested.
+- Output is standard Finnish, not a phonetic dialect transcript.
+
+## How it was trained
+
+![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, round 1 22.2, this model 21.1, internal model with LA-murre 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, this model 13.6, internal model with LA-murre 11.4.](dialect-finetune.svg)
+
+"Round 2, publishable" in the chart is this model. The model with LA-murre was trained on
+no-derivatives data and is not shared.
+
+1. 🎙️ **Dialect speech.** Interviews from [Suomen kielen näytteitä](https://www.kielipankki.fi/corpora/skn/)
+   (SKN) were cut into 2–25 s segments and split **by municipality**: 38 for training (15 042
+   segments, 62 h), 2 for validation, 10 for the test, so no test interviewee is heard in training. The
+   segments are published as [GAIK-project/skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr).
+2. 📚 **Standard Finnish beside it.** [FLEURS](https://huggingface.co/datasets/google/fleurs) `fi_fi`
+   train (2 704 read sentences) and [VoxPopuli](https://huggingface.co/datasets/facebook/voxpopuli)
+   `fi` train (7 504 parliament segments) keep the model's standard Finnish in place. 25 250
+   training segments in all.
+3. ✍️ **Target text.** The target is SKN's human transcript in standard Finnish word forms, so the
+   model hears dialect and writes standard Finnish. That text has no punctuation, so an LLM
+   (Claude Opus 5.5, text only) added punctuation and capitals. An answer was kept only if its
+   words were identical to the human transcript (15 024 of 15 042); the rest kept the plain text.
+4. ⚙️ **Fine-tuning.** LoRA rank 64, alpha 128, dropout 0.05, on the attention `q_proj` and `v_proj`
+   (about 2 % of the weights); AdamW, learning rate 1e-4 with 5 % warm-up and linear decay,
+   batch 8, bf16. Three epochs, keeping the one with the lowest validation loss (epoch 2: 0.206,
+   base model 0.538). The adapter is merged into the weights published here.
+5. 🖥️ **Compute.** 3 h 14 min on one AMD MI250X GPU on the [LUMI](https://www.lumi-supercomputer.eu/)
+   supercomputer.
+
+## How it was measured
+
+- 📏 **Word error rate** on test sets with a standard-Finnish reference: the SKN test (600
+  segments from 10 municipalities not in training), FLEURS and VoxPopuli test, and a webinar clip.
+- ⚖️ **A blind LLM judge** on a second dialect corpus, the Finnish Dialect Corpus of the Syntax Archive
+  ([LA-murre](https://www.kielipankki.fi/corpora/la-murre/), CC BY-ND 4.0): 583 segments from 10
+  localities outside SKN, not used for training this model. Its reference is in dialect spelling,
+  so WER would charge a model for writing standard Finnish. Claude Opus 5.5 instead read the
+  reference and every model's transcript of a segment, unlabelled and in shuffled order, and
+  counted meaning errors: critical 10, major 5, minor 1 points, summed and divided by the
+  reference words, per 100 words. Dialect against standard forms, punctuation and fillers are
+  not errors.
+
+One training run and one seed. The main judge is one model, Claude Opus 5.5; an open model on CSC's
+Aitta service (gpt-oss-120b), run as a second judge on all 583 segments, puts the four models in the
+same order. Code, method, all results and a comparison with 20 other set-ups:
+[GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr); summaries in gaik-toolkit:
+[finnish_dialect_asr](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/finnish_dialect_asr) and
+[transcription_eval](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval#october-2026-current-models-and-an-llm-judge).
+
+## Credits and licences
+
+- Developed by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of Applied Sciences, in the [GAIK project](https://gaik.ai/).
+- Weights: Apache 2.0, as the base model [openai/whisper-large-v3](https://huggingface.co/openai/whisper-large-v3).
+- **Suomen kielen näytteitä (SKN)**, Kotimaisten kielten keskus (Kotus), via Kielipankki – The
+  Language Bank of Finland, CC BY 4.0, [urn:nbn:fi:lb-2020112937](http://urn.fi/urn:nbn:fi:lb-2020112937).
+  Download: [kielipankki.fi/download/SKN](https://www.kielipankki.fi/download/SKN/).
+- **FLEURS**, Google, CC BY 4.0. **VoxPopuli**, Meta, CC0.
+- Test only, not in the training data: **Lauseopin arkiston murrekorpus (LA-murre)**, University of Turku
+  and Kotus, via Kielipankki, CC BY-ND 4.0, [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935).
+- Computing: LUMI, through CSC – IT Center for Science, Finland.
+- Made in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).

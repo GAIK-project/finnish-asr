@@ -1,0 +1,68 @@
+{
+  "arm_id": "google_chirp-3",
+  "stage": "asr",
+  "provider": "google-speech-v2",
+  "model": "chirp_3",
+  "text": "koulutusta. Suojärven Timon luento potilasvahingot protetiikassa. Siinä tulee hyvin niinku laajasti protetiikkaa yleensä vähän vaikeusasteen arviointi ja muuta. Sit on parodontologi Marta Martolan luento peri-implanttiitista ja sitten implanttikeissejä semmonen podcast, jossa Peetterin kanssa käydään läpi näitä yleisiä ongelmia, mitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan. Viimeisenä on vielä sit semmonen osio, missä on tärkeä tunnistaa. Nää ei oo missään nimessä sellaisia, mitä kannattaa ensimmäisenä lähtee tekemään, elikkä siellä on implantologia advanced webinaarisarja Timo Suoja ja Ilkka Pallos ja siinä tehdään sit semmosta niinku sanotaanko high end implanttihoitoa etualueella, esteettisellä alueella ja tosi tosi vaativia temppuja, mutta ne on tärkeä tunnistaa. Kuitenkin, että milloin missä menee se raja, että milloin työ voi muuttua yhtäkkiä todella hankalaksi ja sit on myös oikomishoidollisia näkökulmia. Timo ja Virpi Müller, oikoja Virpi, Virpi niin keskusteleva sitten siitä, siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty. Ajokortti osa 2 Komponentit tutuksi -päivä Helsingissä Clarion-hotellissa. Se alkaa Peetterin kertausluennolla. Vähän näitä perusasioita kerrataan siihen alkuun pohjalle ja sen jälkeen siellä on neljä implanttibrändiä mukana: Straumann, Dentsply Sirona, Nobel Biocare ja Camlog, Conelog eli Implantona Oy. tutustua heidän komponentteihin, mitä mmosia osia siellä on, miten ne eroavat toisistaan ja siellä on myös neljä eri skanneria sitten mukana, elikkä päästään katsomaan miten skannereilla jäljennetään ja tosiaan päivän idea on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähäsen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tän ajokortin pihvi on se osa kolme. Ja se on tää pienryhmävalmennus mestarikisällivalmennus, jossa sitten Peetter ottaa kopin. Enintään 10 mahtuu mukaan, elikkä ne, jotka tähän lähtee, niin kannattaa nopsaan ilmoittautua, että saa saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Eli ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Ja Tiivistettynä koostumus on aloituspäivä Futurentin tiloissa Helsingissä. Sitten on Peetterin työskentelyn seuraamista privaattivastaanotolla. Sitten on etäsessioita Peetterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kesto noin 6-9 kuukautta, mutta nyt mä annan Peetterille puheenvuoron. Kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus. Joo se koostuu teoriaosuudesta. Käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perus implanttiprotetiikan rajapintaa, et osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä hands-on, jossa",
+  "params": {
+    "language_codes": [
+      "fi-FI"
+    ],
+    "location": "eu",
+    "punctuation": true,
+    "input": "16 kHz WAV chunks"
+  },
+  "input_ref": "data/ajokortti/Ajokortti.mp3",
+  "source": "run",
+  "label": "Google Chirp 3",
+  "notes": "",
+  "words": null,
+  "latency_s": 19.47,
+  "usage": null,
+  "created_at_utc": "2026-10-12T07:59:22+00:00",
+  "raw": {
+    "segments": [
+      {
+        "start": 0.0,
+        "end": 21.85,
+        "text": "koulutusta. Suojärven Timon luento potilasvahingot protetiikassa. Siinä tulee hyvin niinku laajasti protetiikkaa yleensä vähän vaikeusasteen arviointi ja muuta. Sit on parodontologi Marta Martolan luento peri-implanttiitista ja sitten implanttikeissejä semmonen podcast, jossa Peetterin kanssa käydään läpi näitä yleisiä ongelmia, mitä yleisimpiä ongelmia, mitä implanttien kanssa voi tulla ja ne on hyvä tunnistaa ja tietää miten ne ratkaistaan."
+      },
+      {
+        "start": 21.85,
+        "end": 41.4,
+        "text": "Viimeisenä on vielä sit semmonen osio, missä on tärkeä tunnistaa. Nää ei oo missään nimessä sellaisia, mitä kannattaa ensimmäisenä lähtee tekemään, elikkä siellä on implantologia advanced webinaarisarja Timo Suoja ja Ilkka Pallos ja siinä tehdään sit semmosta niinku sanotaanko high end implanttihoitoa etualueella, esteettisellä alueella ja tosi tosi vaativia temppuja, mutta ne on tärkeä tunnistaa."
+      },
+      {
+        "start": 41.4,
+        "end": 64.55,
+        "text": "Kuitenkin, että milloin missä menee se raja, että milloin työ voi muuttua yhtäkkiä todella hankalaksi ja sit on myös oikomishoidollisia näkökulmia. Timo ja Virpi Müller, oikoja Virpi, Virpi niin keskusteleva sitten siitä, siitä aiheesta ja miten sitä voidaan preproteettisesti hyödyntää. Teorian lopuksi on lopputentti ja sen suorittamalla sitten se ajokortin osa yksi on tehty."
+      },
+      {
+        "start": 64.55,
+        "end": 83.9,
+        "text": "Ajokortti osa 2 Komponentit tutuksi -päivä Helsingissä Clarion-hotellissa. Se alkaa Peetterin kertausluennolla. Vähän näitä perusasioita kerrataan siihen alkuun pohjalle ja sen jälkeen siellä on neljä implanttibrändiä mukana: Straumann, Dentsply Sirona, Nobel Biocare ja Camlog, Conelog eli Implantona Oy."
+      },
+      {
+        "start": 83.9,
+        "end": 107.95,
+        "text": "tutustua heidän komponentteihin, mitä mmosia osia siellä on, miten ne eroavat toisistaan ja siellä on myös neljä eri skanneria sitten mukana, elikkä päästään katsomaan miten skannereilla jäljennetään ja tosiaan päivän idea on se, että tutustutaan näihin osiin, tutustutaan skannereihin ja päästään vähäsen harjoittelemaan niillä myös siellä paikan päällä sitten jäljentämistä. Sitten sanoisin, että tän ajokortin pihvi on se osa kolme."
+      },
+      {
+        "start": 107.95,
+        "end": 132.6,
+        "text": "Ja se on tää pienryhmävalmennus mestarikisällivalmennus, jossa sitten Peetter ottaa kopin. Enintään 10 mahtuu mukaan, elikkä ne, jotka tähän lähtee, niin kannattaa nopsaan ilmoittautua, että saa saa paikan sieltä. Ja tässä kohderyhmänä on valmistuneet yleishammaslääkärit, joilla on vähän tai ei lainkaan kokemusta implanttihoidoista. Eli ehkä ei kaikista kovimmille konkareille, mutta hekin on toki tervetulleita tähän. Ja"
+      },
+      {
+        "start": 132.6,
+        "end": 157.45,
+        "text": "Tiivistettynä koostumus on aloituspäivä Futurentin tiloissa Helsingissä. Sitten on Peetterin työskentelyn seuraamista privaattivastaanotolla. Sitten on etäsessioita Peetterin kanssa ja lopussa vielä kokoonnutaan ja jaetaan kaikki todistukset ja digitaalinen semmoinen paketti kaikille. Kesto noin 6-9 kuukautta, mutta nyt mä annan Peetterille puheenvuoron. Kerro pikkuisen tuosta struktuurista siitä aloituspäivästä alkaen, miten se menee tämä valmennus."
+      },
+      {
+        "start": 157.45,
+        "end": 180.0,
+        "text": "Joo se koostuu teoriaosuudesta. Käydään muutamia asioita läpi, tarkennetaan sitä advanced vaativan implanttiprotetiikan ja perus implanttiprotetiikan rajapintaa, et osataan tunnistaa pikkasen paremmin tätä potilasvalintaa ja potilaita, joita me hoidetaan. Ja sitten toinen osa on tämä hands-on, jossa"
+      }
+    ]
+  },
+  "repeat": 1
+}

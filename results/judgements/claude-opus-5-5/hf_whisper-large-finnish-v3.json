@@ -1,0 +1,182 @@
+{
+  "arm_id": "hf_whisper-large-finnish-v3",
+  "label": "whisper-large-finnish-v3",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "6b8154ce7fa6ad914f1170f368428baf05db954b0478bc951fa48872b258ab8a",
+  "created_at_utc": "2026-10-12T08:24:26+00:00",
+  "latency_s": 20.3,
+  "usage": {
+    "input_tokens": 5152,
+    "output_tokens": 2535
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 5.22,
+    "error_counts": {
+      "critical": 0,
+      "major": 3,
+      "minor": 6
+    },
+    "entities": {
+      "correct": 8,
+      "variant": 5,
+      "wrong": 1,
+      "missing": 0
+    },
+    "entities_ok": 13,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 78
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "ensimmäisenä lähteä tekemään, elikkä siellä on Implantologiaa Advanced -webinaarisarja",
+        "transcript_span": "ensimmäisen lähteen tekemään.webinaarisarja",
+        "explanation": "The webinar series name 'Implantologiaa Advanced' is missing, and the surrounding phrase is garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen",
+        "transcript_span": "Timo Suojärve ja Ilkka Pallos",
+        "explanation": "Both surnames are truncated but still recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marttolan",
+        "explanation": "The surname is misspelled but recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobelbacher",
+        "explanation": "The brand name is garbled; 'Biocare' is lost."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Denzbley-Sirona",
+        "explanation": "Phonetic misspelling of Dentsply Sirona, still recognisable."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Camlog-Conelog eli Implantona Oy",
+        "transcript_span": "Kamloch-Konelloch eli implanttoona Oy",
+        "explanation": "Phonetic misspellings of the brand and company names."
+      },
+      {
+        "category": "omission",
+        "severity": "major",
+        "reference_span": "osia siellä on, miten ne eroavat toisistaan",
+        "transcript_span": "osia siellä on,toisistaan",
+        "explanation": "The clause 'miten ne eroavat' (how they differ) is missing."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoontunuttaa",
+        "explanation": "The verb is garbled into a non-word."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja, semmoinen vodcast",
+        "transcript_span": "ImplanttiCase ja semmoinen vodcast",
+        "explanation": "The word is split into 'Case ja', which reads as two separate items."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Martta Marttolan"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Denzbley-Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobelbacher"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Kamloch-Konelloch"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Denzbley-Sirona",
+        "explanation": "The reference misspells the brand; the canonical form is Dentsply Sirona."
+      }
+    ],
+    "usability": 78,
+    "summary": "The transcript is largely faithful. The main losses are the missing course name 'Implantologiaa Advanced' and the dropped clause 'miten ne eroavat'. Several brand names are phonetically garbled, and Nobel Biocare is barely recognisable. Numbers (four brands, four scanners, ten participants, 6-9 months) are all correct."
+  }
+}

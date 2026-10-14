@@ -1,0 +1,180 @@
+{
+  "arm_id": "gaik_gpt-4o-transcribe",
+  "label": "gaik Transcriber: gpt-4o-transcribe",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "720c667fbc5aa206a50be0994d4a36a9f941e4f9aec62e631672ec905786ad10",
+  "created_at_utc": "2026-10-12T08:28:10+00:00",
+  "latency_s": 57.5,
+  "usage": {
+    "input_tokens": 3190,
+    "output_tokens": 1382
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.97,
+    "error_counts": {
+      "critical": 0,
+      "major": 5,
+      "minor": 3
+    },
+    "entities": {
+      "correct": 4,
+      "variant": 6,
+      "wrong": 4,
+      "missing": 0
+    },
+    "entities_ok": 10,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Marta Marto",
+        "explanation": "The speaker's name is garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "ja esteettisen alueen",
+        "transcript_span": ", estetisalueelle",
+        "explanation": "The word for 'aesthetic' is garbled into a non-word 'estetisalueelle', though it is still recognizable."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kun itse tekee",
+        "transcript_span": "kuin itse tekijät",
+        "explanation": "The meaning changes from 'when you do it yourself' to 'than the makers themselves'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "oikoja Virpi",
+        "transcript_span": "Oikojan Virpi",
+        "explanation": "The grammatical case changes 'orthodontist Virpi' to 'the orthodontist's Virpi'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaissirona",
+        "explanation": "The company name Dentsply Sirona is split and completely garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel, Pajaker",
+        "explanation": "The company name Nobel Biocare is severely garbled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Futudentin",
+        "transcript_span": "Futurentin",
+        "explanation": "The company name is transcribed incorrectly."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "minor",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi tai yhdeksän",
+        "explanation": "The transcript changes a range (six to nine) into an alternative (six or nine)."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Suojaarven Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Marta Marto"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallonen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Strauman"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "wrong",
+        "transcript_form": "Niden, Splaissirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel, Pajaker"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Kamlog, Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "Futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "periimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "periimplantiitista",
+        "explanation": "The transcript correctly uses the prefix 'peri-', whereas the reference seems to misspell the medical term."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Niden, Splaissirona",
+        "explanation": "The reference misspelled the company name 'Dentsply Sirona' as 'Densply'."
+      }
+    ],
+    "usability": 75,
+    "summary": "The transcript successfully captures the structure and contents of the educational program, but the ASR system struggles significantly with foreign company and product names (Dentsply Sirona, Nobel Biocare, Futudent), garbling them heavily. One speaker's name and a few descriptive phrases are also mistranscribed, causing minor shifts in meaning."
+  }
+}

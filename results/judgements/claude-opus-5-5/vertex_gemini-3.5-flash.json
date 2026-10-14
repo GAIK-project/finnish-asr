@@ -1,0 +1,145 @@
+{
+  "arm_id": "vertex_gemini-3.5-flash",
+  "label": "Gemini 3.5 Flash",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "ffd79e91ec7299fd62f95e6e1c44d31351358d4e20791cd04aeb791191cf36c4",
+  "created_at_utc": "2026-10-12T08:24:54+00:00",
+  "latency_s": 16.5,
+  "usage": {
+    "input_tokens": 5210,
+    "output_tokens": 1755
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 0.75,
+    "error_counts": {
+      "critical": 0,
+      "major": 0,
+      "minor": 3
+    },
+    "entities": {
+      "correct": 13,
+      "variant": 1,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 93
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "semmoinen vodcast",
+        "transcript_span": "semmoinen podcast",
+        "explanation": "The reference has a vodcast (video); the transcript has a podcast. The format detail differs slightly."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Peterin kanssa",
+        "transcript_span": "Petteri kanssa",
+        "explanation": "The trainer Peter is consistently rendered as 'Petteri' throughout. The name is still recognisable but misspelled."
+      },
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "Suojärven Timon luento",
+        "transcript_span": "koulutusta. Suojärven Timon luento",
+        "explanation": "There is an extra word at the start of the segment that is not in the reference. It is likely boundary spillover."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon / Timo Suojärvi"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Petteri"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallonen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "correct",
+        "transcript_form": "Virpi Myller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "correct",
+        "transcript_form": "Camlog Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "Implantona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "peri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand; the transcript has the correct spelling."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "peri-implantiitista",
+        "explanation": "The reference's spelling of the clinical term is malformed; the transcript has the standard form."
+      }
+    ],
+    "usability": 93,
+    "summary": "The transcript is very close to the reference. All course parts, brands, durations, numbers and the target group are preserved. The only issues are 'Peter' rendered as 'Petteri' throughout, 'vodcast' heard as 'podcast', and an extra boundary word at the start. The reference itself misspells Dentsply and peri-implantiitti."
+  }
+}

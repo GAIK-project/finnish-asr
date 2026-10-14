@@ -1,0 +1,201 @@
+{
+  "arm_id": "hf_orukeet",
+  "label": "Orukeet (Parakeet v3 fine-tune)",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "e87c6ac1b85d73e2822106ea2d340d624f0ef44f2c93d46c39ef225162d762ab",
+  "created_at_utc": "2026-10-12T08:26:57+00:00",
+  "latency_s": 81.1,
+  "usage": {
+    "input_tokens": 3171,
+    "output_tokens": 1609
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 10.7,
+    "error_counts": {
+      "critical": 0,
+      "major": 8,
+      "minor": 3
+    },
+    "entities": {
+      "correct": 3,
+      "variant": 8,
+      "wrong": 3,
+      "missing": 0
+    },
+    "entities_ok": 11,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "potilasvahingossa",
+        "explanation": "Incorrect grammatical case changes the phrase slightly from 'patient injuries' to 'in a patient injury'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "parodontologi",
+        "transcript_span": "parodantulakin",
+        "explanation": "The clinical title is heavily garbled."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Implantticaseja,",
+        "transcript_span": "implanttikeississä ja",
+        "explanation": "The word case is altered and 'ja' is added, changing the grammatical structure."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "on vielä sitten",
+        "transcript_span": "ovia",
+        "explanation": "The verb phrase is misinterpreted as the word for 'doors', disrupting the sentence meaning."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "missään nimessä",
+        "transcript_span": "missään ole",
+        "explanation": "The common idiom 'missään nimessä' is slightly garbled to 'missään ole'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Timo Suojärven ja Ilkka Pallosen.",
+        "transcript_span": "Timo Suojaro ja Ilkka Pallos.",
+        "explanation": "Both names are corrupted."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "esteettisen alueen",
+        "transcript_span": "estettisoluea",
+        "explanation": "The anatomical/clinical term is garbled into a non-word."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Nobel Biocare",
+        "transcript_span": "Nobel Bajare",
+        "explanation": "The brand name is garbled beyond easy recognition."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "yleishammaslääkärit, joilla on",
+        "transcript_span": "yleishammaslääkärtyy olla",
+        "explanation": "The phrase structure is broken and the meaning is muddled."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Futudentin",
+        "transcript_span": "futurenti",
+        "explanation": "The company name is misspelled significantly."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "hands-on,",
+        "transcript_span": "Hanson,",
+        "explanation": "The term for practical training is mistranscribed as a name."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Suojärven Timo, Timo Suojaro"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin, Peetter, Peetterille"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "wrong",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller, virpi"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "variant",
+        "transcript_form": "Klarion"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Straumanni"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densplai Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "wrong",
+        "transcript_form": "Nobel Bajare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttuona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "wrong",
+        "transcript_form": "futurentitiloissa"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin, Aiokorttiosa"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densplai Sirona",
+        "explanation": "The correct company name is Dentsply Sirona, but it is misspelled in the reference."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perimplantiitista",
+        "explanation": "The canonical spelling is peri-implantiitti, but the reference captures the casual spoken form 'perimplantiitti' which is typical in speech."
+      }
+    ],
+    "usability": 75,
+    "summary": "The transcript captures the general flow and content decently well, but it contains several major errors regarding names (Ilkka Pallonen, Futudent, Nobel Biocare) and clinical terms (parodontologi, hands-on, esteettinen alue). While a reader with domain knowledge could deduce the intended meaning in most cases, these garbled segments make the text notably less usable than the reference."
+  }
+}

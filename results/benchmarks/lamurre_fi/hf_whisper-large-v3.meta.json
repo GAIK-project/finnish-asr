@@ -1,0 +1,18 @@
+{
+  "arm_id": "hf_whisper-large-v3",
+  "model": "openai/whisper-large-v3",
+  "recipe": "whisper",
+  "benchmark": "LA-murre dialect test: 10 localities outside SKN, dialect text (prepare_lamurre.py)",
+  "utterances": 583,
+  "batch_size": 16,
+  "load_s": 78.3,
+  "transcribe_s": 792.0,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005033",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22759683"
+}

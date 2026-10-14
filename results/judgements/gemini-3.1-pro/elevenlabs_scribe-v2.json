@@ -1,0 +1,185 @@
+{
+  "arm_id": "elevenlabs_scribe-v2",
+  "label": "ElevenLabs Scribe v2",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "7b4fed51ba6e216c29e0aa85da88ac4ed9cd14e97ade57aa0e93731fb11278c8",
+  "created_at_utc": "2026-10-12T08:04:31+00:00",
+  "latency_s": 82.1,
+  "usage": {
+    "input_tokens": 3200,
+    "output_tokens": 1621
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 6.97,
+    "error_counts": {
+      "critical": 0,
+      "major": 5,
+      "minor": 3
+    },
+    "entities": {
+      "correct": 11,
+      "variant": 1,
+      "wrong": 2,
+      "missing": 0
+    },
+    "entities_ok": 12,
+    "entities_total": 14,
+    "ref_doubts": 3,
+    "usability": 85
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "addition",
+        "severity": "minor",
+        "reference_span": "",
+        "transcript_span": "Koulutusta. ",
+        "explanation": "The transcript adds the word 'Koulutusta.' at the beginning of the text."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Martta Martolan",
+        "transcript_span": "Martta Marton",
+        "explanation": "The surname 'Martola' is incorrectly transcribed as 'Martto' (in genitive 'Marton'), which is a different name."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja, semmoinen vodcast",
+        "transcript_span": "implantti case ja semmonen podcast",
+        "explanation": "The plural partitive 'caseja' is incorrectly split into a singular 'case' and the conjunction 'ja', changing the structure of the list. 'vodcast' is also changed to 'podcast'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "etualueen ja esteettisen alueen ja tosi",
+        "transcript_span": "etualue, esteettistä aluetta. Tosi tosi",
+        "explanation": "The transcript loses the genitive cases and the conjunction 'ja', fragmenting the sentence and slightly garbling the meaning."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Virpi Myller, oikoja Virpi",
+        "transcript_span": "Virpi Müller Oikojan Virpi Virpi",
+        "explanation": "The surname 'Myller' is misspelled as 'Müller', and 'oikoja' is changed to the genitive 'Oikojan' alongside an extra repetition of 'Virpi'."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "major",
+        "reference_span": "Camlog-Conelog",
+        "transcript_span": "Camlog Connectlog",
+        "explanation": "The implant brand name 'Conelog' is incorrectly transcribed as 'Connectlog'."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "Tutustutaan",
+        "transcript_span": "tutustua",
+        "explanation": "The passive form 'Tutustutaan' is changed to the infinitive 'tutustua', causing a minor grammatical error."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "The transcript changes a duration range ('six to nine') into two discrete options ('six or nine'), altering the factual meaning."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timon"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "wrong",
+        "transcript_form": "Martta Marton"
+      },
+      {
+        "entity": "Peter",
+        "status": "correct",
+        "transcript_form": "Peterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "correct",
+        "transcript_form": "Ilkka Pallosen"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "wrong",
+        "transcript_form": "Camlog Connectlog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "Implantona OY"
+      },
+      {
+        "entity": "Futudent",
+        "status": "correct",
+        "transcript_form": "Futudentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "correct",
+        "transcript_form": "peri-implantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "peri-implantiitista",
+        "explanation": "The reference has a typo; the correct medical term is 'peri-implantiitti', which the transcript captured accurately."
+      },
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the company name 'Dentsply Sirona', missing the 't'. The transcript has the correct spelling."
+      },
+      {
+        "reference_span": "vähän sen",
+        "transcript_span": "vähäsen",
+        "explanation": "The reference likely contains an error here; 'vähäsen' (a little bit) makes much more sense in context than 'vähän sen'."
+      }
+    ],
+    "usability": 85,
+    "summary": "The transcript is generally accurate and captures the structure of the course well. However, it contains a few significant errors: one speaker's name is misspelled ('Martta Marton' instead of 'Martola'), one product name is incorrectly recognized ('Connectlog' instead of 'Conelog'), and a duration range ('six to nine') is changed to an 'or' statement ('six or nine'). Some minor grammatical breakages also occur, but overall the core information remains intact. The transcript even correctly spelled a few specialized terms that were misspelled in the reference."
+  }
+}

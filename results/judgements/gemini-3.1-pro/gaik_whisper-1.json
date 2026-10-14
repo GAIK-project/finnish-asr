@@ -1,0 +1,180 @@
+{
+  "arm_id": "gaik_whisper-1",
+  "label": "gaik Transcriber: whisper-1",
+  "judge_id": "gemini-3.1-pro",
+  "judge_model": "gemini-3.1-pro-preview",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "e591764bcd64a65854d18708696a447de2b35a31231ca7259220bed13d1c1d86",
+  "created_at_utc": "2026-10-12T08:29:14+00:00",
+  "latency_s": 87.0,
+  "usage": {
+    "input_tokens": 3134,
+    "output_tokens": 1564
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 7.21,
+    "error_counts": {
+      "critical": 1,
+      "major": 3,
+      "minor": 4
+    },
+    "entities": {
+      "correct": 4,
+      "variant": 10,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 2,
+    "usability": 75
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "critical",
+        "reference_span": "potilasvahingot",
+        "transcript_span": "potilasvaiheena",
+        "explanation": "The transcript replaces 'potilasvahingot' (patient injuries/malpractice) with 'potilasvaiheena' (as a patient phase), drastically altering the topic of the lecture."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "Implantticaseja",
+        "transcript_span": "implanttikeissä ja",
+        "explanation": "The transcript misinterprets 'Implantticaseja' (implant cases) as 'implanttikeissä ja' (in implant cases and), breaking the structure of the sentence and changing a noun into a garbled clause."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Ilkka Pallosen.",
+        "transcript_span": "Ilkka Pallos ja",
+        "explanation": "The transcript clips the suffix of the name and adds a conjunction, mildly garbling the name, though it remains recognizable."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": ", oikoja Virpi,",
+        "transcript_span": "",
+        "explanation": "The transcript omits the speaker's profession ('oikoja', orthodontist), which loses a minor piece of context."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin tiloissa",
+        "transcript_span": "Futurentitiloissa",
+        "explanation": "The company name 'Futudent' is slightly misspelled as 'Futurenti'. The error is minor because it is phonetically close and recognizable in context."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "kokoonnutaan",
+        "transcript_span": "kokoontaa",
+        "explanation": "The transcript produces the grammatically incorrect active form 'kokoontaa' instead of the passive 'kokoonnutaan' (we gather/gather together)."
+      },
+      {
+        "category": "wrong_number",
+        "severity": "major",
+        "reference_span": "kuusi-yhdeksän",
+        "transcript_span": "kuusi vai yhdeksän",
+        "explanation": "The transcript changes the duration range '6-9' (kuusi-yhdeksän) into a choice between two specific numbers '6 or 9' (kuusi vai yhdeksän)."
+      },
+      {
+        "category": "wrong_word",
+        "severity": "major",
+        "reference_span": "hands-on,",
+        "transcript_span": "Hanson.",
+        "explanation": "The transcript mistakes the common clinical training term 'hands-on' for a proper name 'Hanson', garbling the meaning entirely."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "correct",
+        "transcript_form": "Suojärven Timo"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "correct",
+        "transcript_form": "Martta Martola"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peeterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion Hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "variant",
+        "transcript_form": "Straumani"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "variant",
+        "transcript_form": "Densply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "variant",
+        "transcript_form": "Noble Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "variant",
+        "transcript_form": "Camlock Conellog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "variant",
+        "transcript_form": "implanttoona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "Futurenti"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "perimplantiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti",
+        "status": "correct",
+        "transcript_form": "ajokortin"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Densply Sirona",
+        "explanation": "The reference misspelled the official brand name 'Dentsply Sirona' as 'Densply', which the transcript also reproduced."
+      },
+      {
+        "reference_span": "perimplantiitista",
+        "transcript_span": "perimplantiitista",
+        "explanation": "The reference misspells 'peri-implantiitti' by missing a letter and a hyphen, creating 'perimplantiitti', which is mirrored in the transcript."
+      }
+    ],
+    "usability": 75,
+    "summary": "The transcript effectively captures the core structure and most of the event details. However, it struggles with English terminology and specific dental expressions, resulting in some critical and major errors (e.g., misinterpreting 'potilasvahingot' as 'potilasvaiheena', 'hands-on' as 'Hanson', and changing a numeric range to an 'or' statement). Many names and dental brands are transcribed phonetically leading to variants (Peeter, Straumani, Camlock, Futurenti), but they remain largely identifiable in context."
+  }
+}

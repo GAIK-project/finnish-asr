@@ -1,0 +1,154 @@
+{
+  "arm_id": "google_chirp-3",
+  "label": "Google Chirp 3",
+  "judge_id": "claude-opus-5-5",
+  "judge_model": "claude-opus-5-5",
+  "prompt_version": "asr-judge-v1",
+  "prompt_sha256": "92125640f9be00ae0c575e1c5a886562d7729121acb1fbeee3e6fbf618bbe14f",
+  "text_sha256": "ace49e1f3fc319cf75fc0bc584071bb5238b6ebc1baa5ad8bf203603a8510c3e",
+  "created_at_utc": "2026-10-12T08:23:29+00:00",
+  "latency_s": 19.0,
+  "usage": {
+    "input_tokens": 5181,
+    "output_tokens": 1972
+  },
+  "attempts": 1,
+  "scores": {
+    "error_points_per_100w": 1.24,
+    "error_counts": {
+      "critical": 0,
+      "major": 0,
+      "minor": 5
+    },
+    "entities": {
+      "correct": 7,
+      "variant": 7,
+      "wrong": 0,
+      "missing": 0
+    },
+    "entities_ok": 14,
+    "entities_total": 14,
+    "ref_doubts": 1,
+    "usability": 92
+  },
+  "judgement": {
+    "errors": [
+      {
+        "category": "wrong_word",
+        "severity": "minor",
+        "reference_span": "vodcast",
+        "transcript_span": "podcast",
+        "explanation": "Video podcast is rendered as a plain podcast. The format changes slightly; the meaning is mostly kept."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Timo Suojärven",
+        "transcript_span": "Timo Suoja",
+        "explanation": "The surname is truncated to 'Suoja' in the advanced webinar series credit. It is still recognisable from context."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Ilkka Pallosen",
+        "transcript_span": "Ilkka Pallos",
+        "explanation": "The surname is slightly garbled but recognisable."
+      },
+      {
+        "category": "omission",
+        "severity": "minor",
+        "reference_span": "kun itse tekee, että",
+        "transcript_span": "Kuitenkin, että",
+        "explanation": "The clause 'when doing it yourself' is replaced by 'kuitenkin'. A small nuance is lost."
+      },
+      {
+        "category": "wrong_name",
+        "severity": "minor",
+        "reference_span": "Futudentin",
+        "transcript_span": "Futurentin",
+        "explanation": "The company name is misspelled but recognisable."
+      }
+    ],
+    "entities": [
+      {
+        "entity": "Timo Suojärvi",
+        "status": "variant",
+        "transcript_form": "Suojärven Timon / Timo Suoja"
+      },
+      {
+        "entity": "Martta Martola",
+        "status": "variant",
+        "transcript_form": "Marta Martolan"
+      },
+      {
+        "entity": "Peter",
+        "status": "variant",
+        "transcript_form": "Peetterin"
+      },
+      {
+        "entity": "Ilkka Pallonen",
+        "status": "variant",
+        "transcript_form": "Ilkka Pallos"
+      },
+      {
+        "entity": "Virpi Myller",
+        "status": "variant",
+        "transcript_form": "Virpi Müller"
+      },
+      {
+        "entity": "Clarion (hotelli)",
+        "status": "correct",
+        "transcript_form": "Clarion-hotellissa"
+      },
+      {
+        "entity": "Straumann",
+        "status": "correct",
+        "transcript_form": "Straumann"
+      },
+      {
+        "entity": "Dentsply Sirona",
+        "status": "correct",
+        "transcript_form": "Dentsply Sirona"
+      },
+      {
+        "entity": "Nobel Biocare",
+        "status": "correct",
+        "transcript_form": "Nobel Biocare"
+      },
+      {
+        "entity": "Camlog-Conelog",
+        "status": "correct",
+        "transcript_form": "Camlog, Conelog"
+      },
+      {
+        "entity": "Implantona Oy",
+        "status": "correct",
+        "transcript_form": "Implantona Oy"
+      },
+      {
+        "entity": "Futudent",
+        "status": "variant",
+        "transcript_form": "Futurentin"
+      },
+      {
+        "entity": "peri-implantiitti",
+        "status": "variant",
+        "transcript_form": "peri-implanttiitista"
+      },
+      {
+        "entity": "implanttiajokortti / ajokortti (kurssin nimi)",
+        "status": "correct",
+        "transcript_form": "ajokortin / Ajokortti"
+      }
+    ],
+    "ref_doubts": [
+      {
+        "reference_span": "Densply Sirona",
+        "transcript_span": "Dentsply Sirona",
+        "explanation": "The reference misspells the brand; the transcript has the correct spelling."
+      }
+    ],
+    "usability": 92,
+    "summary": "The transcript is very close to the reference. All numbers (parts 1–3, four brands, four scanners, max 10 participants, 6–9 months) and all brands are correct. Minor issues are a few name slips (Suoja, Pallos, Futurent, Peetter, Müller), 'podcast' for 'vodcast', and a small lost phrase ('kun itse tekee')."
+  }
+}
