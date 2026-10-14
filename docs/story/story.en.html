@@ -415,7 +415,7 @@ Judge each transcript on its own; the labels carry no information.</pre>
   </div>
   <div class="col stack callout">
     <p><b>When to use it.</b> When you need sentence times, or want to give it long audio without cutting it yourself: load the <code>timestamps</code> revision of the same Hugging Face model and always use OpenAI's temperature fallback, which decodes a stretch again when its text starts to repeat (the model card has the settings). Without the fallback it looped in 3 of the 10 interviews (25.2 % WER).</p>
-    <p class="note">It did not replace the published model: VoxPopuli got 0.4 points worse and the webinar in pieces 0.5–1.3 points worse, which broke the rule agreed before the run. On LA-murre the blind judge could not tell the two apart (fewer points in 98 segments, more in 100).</p>
+    <p class="note">It did not replace the published model. The rule set before the run allowed SKN to get at most about 0.5 points worse and FLEURS and VoxPopuli no worse; VoxPopuli got 0.4 points worse, and the webinar in pieces was also 0.5–1.3 points worse. On LA-murre the blind judge could not tell the two apart (fewer points in 98 segments, more in 100).</p>
   </div>
 </section>
 

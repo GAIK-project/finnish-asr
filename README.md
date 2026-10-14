@@ -517,9 +517,10 @@ published model and the variant together on 577 of the 583 LA-murre segments: 24
 points. The variant has fewer points than the published model in 98 segments and more in 100 (sign
 test p = 0.94): no difference.
 
-**Decision.** The published model stays the main model: the variant did not pass the rule agreed
-before the run for replacing it, because VoxPopuli got 0.4 points worse and the clip in pieces 0.5–1.3
-points worse. The variant is published as the `timestamps` revision of
+**Decision.** The published model stays the main model. The rule set before the run was that the
+variant replaces it only if SKN gets at most about 0.5 points worse, FLEURS and VoxPopuli get no
+worse, and the timestamps are usable. VoxPopuli got 0.4 points worse, so the variant did not pass; the
+clip in pieces was also 0.5–1.3 points worse. The variant is published as the `timestamps` revision of
 [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/tree/timestamps)
 (card: [`release/TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md)), and the main model is tagged
 `v1.0`. Use the variant when you need sentence timestamps, or long audio transcribed without cutting

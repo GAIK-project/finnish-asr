@@ -91,8 +91,9 @@ SKN's own annotation; when the variant finds a sentence start, the median distan
 webinar, against the reference a listener checked at its 42 disputed spans, the variant gives 16.2 %
 in one go and 14.5 % in pieces (main model 14.0 % in pieces).
 
-The variant did not replace the main model: VoxPopuli got 0.4 points worse and the webinar in pieces
-0.5–1.3 points worse, which broke the rule agreed before the run. On the dialect tests the two are
+The variant did not replace the main model. The rule set before the run allowed SKN to get at most
+about 0.5 points worse and FLEURS and VoxPopuli no worse; VoxPopuli got 0.4 points worse, and the
+webinar in pieces was also 0.5–1.3 points worse. On the dialect tests the two are
 level: a blind LLM judge on LA-murre gave the variant fewer meaning-error points than the main model
 in 98 segments and more in 100.
 
