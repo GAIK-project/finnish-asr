@@ -105,7 +105,9 @@ def download_data() -> None:
         name = f"{i:04d}.wav"  # the original names contain colons
         (d / "test" / name).write_bytes(row["audio"]["bytes"])
         rows.append({"id": name, "audio_id": row["audio_id"], "ref": row["raw_text"] or row["normalized_text"]})
-    (d / "test.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8")
+    (d / "test.jsonl").write_text(
+        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8", newline="\n"
+    )
     for bench in ("fleurs_fi", "voxpopuli_fi"):
         print(f"{bench}: {len(load_items(bench))} utterances in {DATA_ROOT / bench}")
 
@@ -247,7 +249,7 @@ def main() -> int:
             run = make_transcriber(arm_id)
             load_s = time.perf_counter() - t0
             t1 = time.perf_counter()
-            with open(out, "a", encoding="utf-8") as f:
+            with open(out, "a", encoding="utf-8", newline="\n") as f:
                 for i in range(0, len(todo), BATCH):
                     chunk = todo[i : i + BATCH]
                     tb = time.perf_counter()
@@ -273,7 +275,9 @@ def main() -> int:
                 "versions": versions,
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
             }
-            (out_dir / f"{arm_id}.meta.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+            (out_dir / f"{arm_id}.meta.json").write_text(
+                json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n"
+            )
             print(f"[ ok ] {arm_id}: {meta['transcribe_s']} s for {len(todo)} utterances", flush=True)
         except Exception as exc:  # noqa: BLE001 - one model failing must not stop the others
             failures += 1

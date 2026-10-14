@@ -175,7 +175,7 @@ def main() -> int:
                     (DATA / "skn_fi" / split / r["id"]).unlink(missing_ok=True)
             part = keep
         (DATA / "skn_fi" / f"{split}.jsonl").write_text(
-            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in part), encoding="utf-8"
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in part), encoding="utf-8", newline="\n"
         )
         stats[split] = {
             "segments": len(part),
@@ -184,7 +184,7 @@ def main() -> int:
         }
         print(f"{split}: {stats[split]['segments']} segments, {stats[split]['hours']} h", flush=True)
     (DATA / "skn_fi" / "stats.json").write_text(
-        json.dumps(stats, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        json.dumps(stats, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n"
     )
     return 0
 

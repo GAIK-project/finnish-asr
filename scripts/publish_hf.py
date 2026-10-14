@@ -6,14 +6,19 @@ dataset are public on the Hub. model, dataset and check run on the LUMI login no
 internet and the files), in the hf environment:
 
     python scripts/publish_hf.py model      # weights, processor, card -> GAIK-project/whisper-large-v3-fi-dialects
+    python scripts/publish_hf.py model --revision timestamps   # the timestamp variant -> its "timestamps" branch
     python scripts/publish_hf.py dataset    # SKN segments, parquet with audio -> GAIK-project/skn-finnish-dialects-asr
     python scripts/publish_hf.py check      # the model, downloaded back from the Hub, on a few SKN test segments
-    uv run --extra hub python scripts/publish_hf.py cards              # the two cards and the chart (anywhere)
+    uv run --extra hub python scripts/publish_hf.py cards              # the three cards and the chart (anywhere)
     uv run --extra hub python scripts/publish_hf.py dialect <eaf dir>  # fill text_dialect in the parquet shards
 
 Repositories are created PRIVATE; making them public is a separate, manual decision. The cards come
-from release/. The internal LA-murre model is backed up to a private repository by GAIK's internal
-copy of this script; nothing here uploads LA-murre material.
+from release/: MODEL_CARD.md is the README of the model's main branch, TIMESTAMPS_CARD.md the README of
+its "timestamps" branch (the model trained with timestamp tokens, finetune_whisper.py --timestamps 0.5),
+and DATASET_CARD.md the dataset's. "model --revision timestamps" first tags main as v1.0 (the model
+published on 13 Oct 2026), then creates the branch and uploads the variant there. The internal
+LA-murre model is backed up to a private repository by GAIK's internal copy of this script; nothing
+here uploads LA-murre material.
 """
 
 from __future__ import annotations
@@ -35,14 +40,24 @@ ORG = "GAIK-project"
 MODEL_REPO = f"{ORG}/whisper-large-v3-fi-dialects"
 DATASET_REPO = f"{ORG}/skn-finnish-dialects-asr"
 MODEL_DIR = MODELS / "whisper-large-v3-fi-skn-punct-best"
+# revision -> (model directory, card); None is the main branch
+REVISIONS = {
+    None: (MODEL_DIR, "MODEL_CARD.md"),
+    "timestamps": (MODELS / "whisper-large-v3-fi-skn-punct-ts", "TIMESTAMPS_CARD.md"),
+}
+MAIN_TAG = "v1.0"
 SHARD_ROWS = 1500
 
 
-def publish_model() -> None:
+def publish_model(revision: str | None = None) -> None:
     from huggingface_hub import HfApi
 
+    model_dir, card = REVISIONS[revision]
     api = HfApi()
     api.create_repo(MODEL_REPO, private=True, exist_ok=True)
+    if revision:
+        api.create_tag(MODEL_REPO, tag=MAIN_TAG, tag_message="The published model of 13 Oct 2026", exist_ok=True)
+        api.create_branch(MODEL_REPO, branch=revision, exist_ok=True)
     files = [
         "config.json",
         "generation_config.json",
@@ -53,19 +68,27 @@ def publish_model() -> None:
         "train_log.json",
     ]
     for name in files:
-        api.upload_file(path_or_fileobj=str(MODEL_DIR / name), path_in_repo=name, repo_id=MODEL_REPO)
+        api.upload_file(path_or_fileobj=str(model_dir / name), path_in_repo=name, repo_id=MODEL_REPO, revision=revision)
         print(f"uploaded {name}", flush=True)
-    api.upload_file(path_or_fileobj=str(RELEASE / "MODEL_CARD.md"), path_in_repo="README.md", repo_id=MODEL_REPO)
-    print(f"done: https://huggingface.co/{MODEL_REPO} (private)")
+    api.upload_file(
+        path_or_fileobj=str(RELEASE / card), path_in_repo="README.md", repo_id=MODEL_REPO, revision=revision
+    )
+    print(f"done: https://huggingface.co/{MODEL_REPO} ({revision or 'main'}, private)")
 
 
 def publish_cards() -> None:
+    """The chart and MODEL_CARD.md to the model's main branch, TIMESTAMPS_CARD.md to its timestamps branch,
+    DATASET_CARD.md to the dataset."""
     from huggingface_hub import HfApi
 
     api = HfApi()
     chart = RELEASE.parent / "docs" / "img" / "dialect-finetune.svg"
     api.upload_file(path_or_fileobj=str(chart), path_in_repo=chart.name, repo_id=MODEL_REPO)
-    api.upload_file(path_or_fileobj=str(RELEASE / "MODEL_CARD.md"), path_in_repo="README.md", repo_id=MODEL_REPO)
+    for revision, (_, card) in REVISIONS.items():
+        api.upload_file(
+            path_or_fileobj=str(RELEASE / card), path_in_repo="README.md", repo_id=MODEL_REPO, revision=revision
+        )
+        print(f"uploaded {card} -> {MODEL_REPO} ({revision or 'main'})", flush=True)
     api.upload_file(
         path_or_fileobj=str(RELEASE / "DATASET_CARD.md"),
         path_in_repo="README.md",
@@ -241,12 +264,15 @@ def main() -> int:
     parser.add_argument("cmd", choices=["model", "dataset", "check", "cards", "dialect"])
     parser.add_argument("eaf_dir", nargs="?", type=Path, help="For dialect: the directory with SKN's *_full.eaf files.")
     parser.add_argument("--files-only", action="store_true", help="For check: only list the files on the Hub.")
+    parser.add_argument(
+        "--revision", choices=[r for r in REVISIONS if r], help="For model: upload this variant to its branch."
+    )
     args = parser.parse_args()
     if not os.environ.get("HF_TOKEN"):
         print("HF_TOKEN is not set")
         return 1
     if args.cmd == "model":
-        publish_model()
+        publish_model(args.revision)
     elif args.cmd == "dataset":
         publish_dataset()
     elif args.cmd == "check":

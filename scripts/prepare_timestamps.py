@@ -134,10 +134,10 @@ def main() -> int:
         raise SystemExit(f"{len(missing)} published segments not found, e.g. {missing[:3]}")
     LABELS.mkdir(parents=True, exist_ok=True)
     (LABELS / "skn_parts.jsonl").write_text(
-        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in parts_rows), encoding="utf-8"
+        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in parts_rows), encoding="utf-8", newline="\n"
     )
     (LABELS / "skn_longform.jsonl").write_text(
-        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in long_rows), encoding="utf-8"
+        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in long_rows), encoding="utf-8", newline="\n"
     )
     multi = sum(1 for r in parts_rows if len(r["parts"]) > 1)
     print(f"skn_parts.jsonl: {len(parts_rows)} segments, {multi} with more than one part")

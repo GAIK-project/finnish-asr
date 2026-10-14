@@ -16,7 +16,10 @@ as in judge_asr.py), and how often the arm had the fewest points of the segment.
 
 Rounds: the default round judges base Whisper, round 1 and Finnish-NLP. --round NAME --arms A,B,..
 judges another set of up to six arms in one call per segment; each round has its own cache and
-summary, so rounds are compared through the arms they share.
+summary, so rounds are compared through the arms they share. The committed rounds: the default
+(summary.json: Whisper large-v3, round 1, Finnish-NLP), r2 (summary-r2*.json: Whisper large-v3,
+round 1, the published model, the internal model; also judged by open models on Aitta) and r3
+(summary-r3.json: Whisper large-v3, the published model, the model trained with timestamp tokens).
 
 Cache: results/judgements_dialect/lamurre_fi/<judge>[-<round>].jsonl, one line per segment;
 summary[-<round>].json for Claude, summary[-<round>]-<judge>.json for any other judge.
@@ -27,11 +30,14 @@ so its verdicts can be compared segment by segment with Claude's (judge_agreemen
 AITTA_API_TOKEN. Aitta's terms forbid personal or sensitive data; the LA-murre texts are a
 published research corpus.
 
-Prompt versions: every LA-murre judgement in results/ was made with dialect-judge-v1 (prompt_sha256
-10a38347...). Its three example word pairs in the first paragraph were taken from the LA-murre
-corpus, which this repository may not share (CC BY-ND 4.0), so this public copy, dialect-judge-v2,
-gives example pairs from SKN instead (segment SKN45a_Heinola_0097, CC BY 4.0) and is otherwise
-identical. Its prompt hash differs, so it does not reuse v1 caches.
+Prompt versions: every LA-murre judgement in results/ was made with dialect-judge-v1. The recorded
+prompt_sha256 covers the prompt and the answer schema, and the schema lists the labels, so it
+depends on the number of arms: 8489bd83... for the three-arm rounds (the default round and r3) and
+10a38347... for the four-arm round r2 (Claude and the Aitta judges alike). v1's three example word
+pairs in the first paragraph were taken from the LA-murre corpus, which this repository may not
+share (CC BY-ND 4.0), so this public copy, dialect-judge-v2, gives example pairs from SKN instead
+(segment SKN45a_Heinola_0097, CC BY 4.0) and is otherwise identical. Its prompt hashes differ, so it
+does not reuse v1 caches.
 
 Inputs and outputs stay local. The input is results/benchmarks/lamurre_fi/<arm>.jsonl
 (prepare_lamurre.py, then run_benchmark.py --bench lamurre_fi) and every cache line quotes the
@@ -322,7 +328,7 @@ def main() -> int:
         todo = []
     print(f"{len(sample)} segments in the sample, {len(todo)} to judge")
     failures = 0
-    with ThreadPoolExecutor(args.workers) as pool, cache_path.open("a", encoding="utf-8") as cache:
+    with ThreadPoolExecutor(args.workers) as pool, cache_path.open("a", encoding="utf-8", newline="\n") as cache:
         for fut in as_completed({pool.submit(judge, i): i for i in todo}):
             try:
                 row = fut.result()

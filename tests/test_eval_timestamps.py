@@ -39,12 +39,41 @@ def test_quiet_bounds_cut_long_audio_into_15_to_25_second_pieces() -> None:
     assert abs(bounds[0][1] / et.SR - 20.05) < 0.06
 
 
+ARMS = ["ft_whisper-large-v3-fi-skn-punct-ts", "hf_whisper-large-v3", "hub_whisper-large-v3-fi-dialects"]
+
+
 def test_score_reproduces_the_committed_timestamp_results(monkeypatch: pytest.MonkeyPatch, tmp_path) -> None:
-    for name in ("hf_whisper-large-v3.json", "hub_whisper-large-v3-fi-dialects.json"):
-        shutil.copy(et.OUT / name, tmp_path / name)
+    for arm in ARMS:
+        shutil.copy(et.OUT / f"{arm}.json", tmp_path / f"{arm}.json")
     committed = json.loads((et.OUT / "scores.json").read_text(encoding="utf-8"))
     monkeypatch.setattr(et, "OUT", tmp_path)
     assert et.score() == 0
     assert json.loads((tmp_path / "scores.json").read_text(encoding="utf-8")) == committed
     meta = json.loads((tmp_path / "_run_metadata.json").read_text(encoding="utf-8"))
-    assert meta["extra"]["arms"] == ["hf_whisper-large-v3", "hub_whisper-large-v3-fi-dialects"]
+    assert meta["extra"]["arms"] == ARMS
+    assert meta["model_or_deployment"][0] == "whisper-large-v3-fi-skn-punct-ts"  # a name, never a scratch path
+
+
+def test_committed_timestamp_numbers_are_the_ones_the_docs_quote() -> None:
+    s = json.loads((et.OUT / "scores.json").read_text(encoding="utf-8"))
+    base, pub, ts = (s[a] for a in ("hf_whisper-large-v3", "hub_whisper-large-v3-fi-dialects", ARMS[0]))
+    within_1s = [round(x["test_segments"]["boundaries"]["within_1s"] * 100) for x in (base, pub, ts)]
+    assert within_1s == [61, 1, 58]
+    assert ts["test_segments"]["boundaries"]["median_s"] == 0.04
+    lf = [x["longform"] for x in (base, pub, ts)]
+    assert [round(x["sequential"]["wer"], 1) for x in lf] == [37.5, 21.5, 25.2]
+    assert [x["sequential"]["windows_with_loop"] for x in lf] == [0, 1, 3]
+    assert [round(x["sequential_fallback"]["wer"], 1) for x in lf] == [37.5, 19.8, 18.1]
+    assert [x["sequential_fallback"]["windows_with_loop"] for x in lf] == [0, 0, 0]
+    assert [round(x["sequential_fallback"]["boundaries"]["within_1s"] * 100) for x in lf] == [63, 19, 49]
+    assert [round(x["chunks"]["wer"], 1) for x in lf] == [39.4, 17.3, 17.1]
+
+
+def test_raw_records_carry_the_fallback_settings_and_record_models_by_name() -> None:
+    expected = {k: list(v) if isinstance(v, tuple) else v for k, v in et.KW_FALLBACK.items()}
+    for arm in ARMS:
+        d = json.loads((et.OUT / f"{arm}.json").read_text(encoding="utf-8"))
+        assert d["arm"] == arm
+        assert d["model"] in {"openai/whisper-large-v3", "GAIK-project/whisper-large-v3-fi-dialects", arm[3:]}
+        assert d["settings"]["generate_fallback"] == expected
+        assert all(set(w) >= {"sequential", "sequential_fallback", "chunks"} for w in d["longform"].values())

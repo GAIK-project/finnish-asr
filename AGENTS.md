@@ -35,3 +35,5 @@ is public, so the publication rules below come first.
 - README layout: TL;DR, results sections, What's in this folder, How it works, Run it again, Caveats.
   `score_benchmark.py` and `make_readme_table.py` write between the README's table markers.
 - GPU dependencies are pinned only in `lumi/setup.sh`; `pyproject.toml` covers the local scripts.
+- Text files are LF (`.gitattributes`); every writer in `scripts/` passes `newline="\n"`
+  (`tests/test_line_endings.py` checks both).

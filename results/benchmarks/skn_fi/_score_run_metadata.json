@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T12:19:03+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR public benchmarks: SKN dialect test, 10 held-out municipalities",
+  "runner_path": "scripts/score_benchmark.py",
+  "dataset_path": "results/benchmarks/skn_fi",
+  "dataset_git_object": "2b683895fa7d365335b8fbd02527486d1bc97f63",
+  "model_or_deployment": [
+    "whisper-large-v3-fi-skn-lamurre",
+    "whisper-large-v3-fi-skn-lamurre-best",
+    "whisper-large-v3-fi-skn-punct",
+    "whisper-large-v3-fi-skn-punct-best",
+    "whisper-large-v3-fi-skn-r64e4",
+    "whisper-large-v3-fi-skn-punct-ts",
+    "whisper-large-v3-fi-skn",
+    "openai/whisper-large-v3",
+    "openai/whisper-large-v3-turbo",
+    "nvidia/canary-1b-v2",
+    "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+    "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+    "Finnish-NLP/whisper-large-finnish-v3",
+    "Qwen/Qwen3-ASR-1.7B"
+  ],
+  "cli_args": [],
+  "env": {},
+  "extra": {
+    "arms": [
+      "ft_whisper-large-v3-fi-skn-lamurre",
+      "ft_whisper-large-v3-fi-skn-lamurre-best",
+      "ft_whisper-large-v3-fi-skn-punct",
+      "ft_whisper-large-v3-fi-skn-punct-best",
+      "ft_whisper-large-v3-fi-skn-r64e4",
+      "ft_whisper-large-v3-fi-skn-punct-ts",
+      "ft_whisper-large-v3-fi-skn",
+      "hf_whisper-large-v3",
+      "hf_whisper-large-v3-turbo",
+      "nemo_canary-1b-v2",
+      "nemo_rasmus-canary-fi-v2-kenlm",
+      "nemo_rasmus-canary-fi-v2",
+      "hf_whisper-large-finnish-v3",
+      "qwen_qwen3-asr-1.7b"
+    ],
+    "utterances": [
+      600
+    ]
+  }
+}

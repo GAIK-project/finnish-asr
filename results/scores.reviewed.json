@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-14T11:24:25+00:00",
+  "generated_utc": "2026-10-14T12:18:28+00:00",
   "reference": "data/ajokortti/reference.reviewed.txt",
   "normalization": "HY error_analysis.py: jiwer ToLowerCase, RemovePunctuation (every Unicode P* character, hyphens included), RemoveMultipleSpaces (runs of 2+ whitespace -> one space), Strip, split on ' '. CER uses the same steps with a character split (spaces count). CER_nospace also removes all whitespace. A single line break is not collapsed, so it glues two words into one token, as in HY's scorer; see each arm's whitespace_merge.",
   "arms": [
@@ -229,6 +229,33 @@
       "WER_against_hy": 14.93
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts-chunks",
+      "label": "Fine-tuned whisper-large-v3-fi-skn-punct-ts, chunked",
+      "model": "whisper-large-v3-fi-skn-punct-ts",
+      "provider": "huggingface-gpu",
+      "origin": "this project",
+      "metrics": {
+        "WER": 14.46,
+        "CER": 5.28,
+        "SUB": 10.29,
+        "DEL": 1.47,
+        "INS": 2.7,
+        "spelling_rate": 5.64,
+        "CER_nospace": 5.3,
+        "hits": 360,
+        "substitutions": 42,
+        "deletions": 6,
+        "insertions": 11,
+        "ref_words": 408,
+        "hyp_words": 413
+      },
+      "WER_nl": 14.46,
+      "runs": 1,
+      "WER_range": null,
+      "latency_s": 41.75,
+      "WER_against_hy": 15.17
+    },
+    {
       "arm_id": "openai_gpt-4o-transcribe",
       "label": "OpenAI gpt-4o-transcribe",
       "model": "gpt-4o-transcribe",
@@ -341,6 +368,33 @@
       ],
       "latency_s": 12.94,
       "WER_against_hy": 11.94
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+      "label": "Fine-tuned whisper-large-v3-fi-skn-punct-ts",
+      "model": "whisper-large-v3-fi-skn-punct-ts",
+      "provider": "huggingface-gpu",
+      "origin": "this project",
+      "metrics": {
+        "WER": 16.18,
+        "CER": 4.92,
+        "SUB": 11.52,
+        "DEL": 2.45,
+        "INS": 2.21,
+        "spelling_rate": 6.37,
+        "CER_nospace": 4.81,
+        "hits": 351,
+        "substitutions": 47,
+        "deletions": 10,
+        "insertions": 9,
+        "ref_words": 408,
+        "hyp_words": 407
+      },
+      "WER_nl": 16.18,
+      "runs": 1,
+      "WER_range": null,
+      "latency_s": 150.52,
+      "WER_against_hy": 16.67
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best-chunks",

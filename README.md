@@ -16,9 +16,10 @@ Face.
 Developed by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of
 Applied Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).
 
-The clip is **Ajokortti**: 180 s of a Finnish dental-education webinar, two speakers, standard
-spoken Finnish with many names and brand names. It and the University of Helsinki (HY) team's
-reference transcript are published in gaik-toolkit's
+The clip is **Ajokortti**: a 180 s excerpt of a public QAdental dental-education webinar (QAdental,
+Suomen Kotilääkäripalvelu Oy, is a GAIK project partner), two speakers, standard spoken Finnish with
+many names and brand names. It and the University of Helsinki (HY) team's reference transcript are
+published in gaik-toolkit's
 [transcription_eval](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval);
 [`get_clip.py`](scripts/get_clip.py) downloads them from there, they are not copied here. Some
 transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of this clip. The clip is
@@ -59,25 +60,28 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   meaning-error points per 100 words against 25.9 for base Whisper (round-2 judging),
   better in all 10 localities.
 - 🛠️ **Our own model, round 2: punctuation back, and more dialect speech helps.** An LLM
-  added punctuation to the training text (round 1 wrote none), and a second run added
+  added punctuation to the training text (round 1 wrote almost none), and a second run added
   56 h of LA-murre interviews rewritten in standard Finnish. The published model keeps
   round 1's dialect accuracy (SKN 21.1 % WER, judge 13.6 against base Whisper's 25.9) and
   writes sentences. The internal one with LA-murre is the best on both dialect tests
   (19.7 %, 11.4 points), but LA-murre's no-derivatives licence keeps it private. On the webinar
   clip all of them spell rare names and dental terms worse than base Whisper
   ([Our dialect model](#our-dialect-model)).
-- ⚖️ **An open judge agrees.** gpt-oss-120b on CSC's Aitta service, given the same blind task on
-  all 583 LA-murre segments, puts the four models in Claude's order and gives the published model
-  fewer points than base Whisper in 275 segments, more in 105
-  ([How far the LLM judges can be trusted](#how-far-the-llm-judges-can-be-trusted)).
-- ⏱️ **Do not trust the fine-tune's own timestamps; decode it in pieces.** Only 0.8 % of SKN
-  sentence starts get a timestamp from it within 0.5 s (base Whisper: 53.5 %). On ten 4-minute
-  dialect recordings, 15–25 s pieces cut at quiet points give 17.3 % WER against 21.5 % for
-  Whisper's own long-form mode, which looped once
+- ⚖️ **Three open judges agree.** Given the same blind task on CSC's Aitta service, gpt-oss-120b
+  (all 583 LA-murre segments) puts the four models in Claude's order and prefers the same model as
+  Claude in 81 % of the pairs; Gemma 4 31B and Qwen3.6 27B, on a sample, in 92–93 %. Every judge
+  ranks the internal model first, the published model and round 1 about level, and base Whisper
+  clearly last ([Second opinions](#second-opinions-open-model-judges-on-csc-aitta)).
+- ⏱️ **Timestamps: a second variant.** The published model's own timestamps are unusable (1 % of
+  SKN sentence starts get one within 1 s; base Whisper 61 %), so decode it in pieces. The same recipe
+  trained with Whisper's timestamp tokens finds 58 %, keeps the dialect accuracy (SKN 21.4 %
+  against 21.1 %) and, with OpenAI's temperature fallback, transcribes 4-minute dialect interviews
+  in one go at 18.1 % WER without loops. It is published as the `timestamps` revision; the main
+  model stays as it was
   ([Timestamps and long-form audio](#timestamps-and-long-form-audio)).
 - 🤗 **Published 13 Oct 2026:** the model
   [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
-  (Apache 2.0) and its SKN segments
+  (Apache 2.0, tag `v1.0`; the timestamp variant on its `timestamps` branch) and its SKN segments
   [GAIK-project/skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
   (CC BY 4.0). This repository holds the method, the code and the results behind them.
 
@@ -101,7 +105,7 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
 | This project, round 1: Whisper large-v3 + LoRA on SKN dialects, FLEURS and VoxPopuli | open | 17.9 | 5.6 | 4.5 | 9.4 | 13 / 12 of 14 |
 | OpenAI gpt-4o-mini-transcribe | API | 13.9 (13.9–14.7) | 4.4 | 3.2 | 11.4 | 13 / 10 of 14 |
 | Orukeet (Parakeet v3 fine-tune) | open | 26.4 | 10.2 | 6.2 | 10.7 | 13 / 11 of 14 |
-| This project, round 2 (publishable), chunked decoding | open | 13.9 | 5.2 | 6.7 | 10.9 | 11 / 10 of 14 |
+| This project, round 2 (published), chunked decoding | open | 13.9 | 5.2 | 6.7 | 10.9 | 11 / 10 of 14 |
 | RASMUS Finnish-ASR-Canary-v2, greedy | open | 23.9 | 8.1 | 6.5 | 13.7 | 11 / 8 of 14 |
 | RASMUS Finnish-ASR-Canary-v2 + KenLM | open | 22.1 | 8.5 | 8.5 | 15.4 | 11 / 7 of 14 |
 | Gemini 3.1 Pro | API | 22.4 (15.4–22.4) | 9.3 | 7.0 | 18.4 | 12 / 10 of 14 |
@@ -162,8 +166,9 @@ The clip above is one recording. Four open Finnish test sets:
   split of the [published dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr).
 - **LA-murre dialects**: 583 segments (2.3 h) from 10 localities that are not in SKN,
   cut from the Finnish Dialect Syntax Archive (University of Turku / Kotus, Kielipankki,
-  CC BY-ND 4.0) by [`prepare_lamurre.py`](scripts/prepare_lamurre.py). Test only. Its
-  reference is a **dialect** transcript, so WER here charges a model for writing standard
+  CC BY-ND 4.0) by [`prepare_lamurre.py`](scripts/prepare_lamurre.py). No published model was
+  trained on any of LA-murre; only the internal model was, on recordings from other localities,
+  never these 10. Its reference is a **dialect** transcript, so WER here charges a model for writing standard
   Finnish: every model lands at 52–73 %. Read this column with the
   [meaning judge](#a-second-corpus-la-murre), not on its own. Only the numbers are published
   ([`results/benchmarks/lamurre_fi/scores.json`](results/benchmarks/lamurre_fi/scores.json)): the
@@ -183,7 +188,8 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | 3.1 | 0.18 |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | 6.2 | 1.50 |
 | **This project, round 2 internal: + LA-murre** †‡§¶ | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
-| **This project, round 2: + punctuated SKN targets (publishable)** †‡§ | 21.1 | 58.1 | 7.6 | 10.8 | 1.6 | 0.98 |
+| **This project, round 2: + punctuated SKN targets (published)** †‡§ | 21.1 | 58.1 | 7.6 | 10.8 | 1.6 | 0.98 |
+| **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§ | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
 | **This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** †‡§ | 22.2 | 58.0 | 7.8 | 10.6 | 1.9 | 0.96 |
 | Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 1.7 | 0.98 |
 | Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | 2.2 | 0.19 |
@@ -231,8 +237,8 @@ with other settings.
 
 > **Walk-through for readers new to this:** [`docs/story/story.en.html`](docs/story/story.en.html)
 > (English) and [`story.fi.html`](docs/story/story.fi.html) (Finnish) explain the data, the four
-> places where Claude Opus 5.5 was used, the training and both measurements, with two audio
-> examples. Download either file and open it in a browser; it works offline. To listen to the
+> places where Claude Opus 5.5 was used, the training, both measurements, the three open judges, the
+> checked webinar reference and the timestamp variant, with two audio examples. Download either file and open it in a browser; it works offline. To listen to the
 > models side by side, build the listening page locally with
 > [`build_compare.py`](scripts/build_compare.py) (it embeds the clip, so it is not committed).
 
@@ -256,7 +262,8 @@ may contain an interviewer's voice heard in training. The target is the normalis
 so the model learns to write standard Finnish from dialect speech.
 
 **Training.** The same LoRA recipe as the pilot (rank 32, 2 epochs, learning rate 1e-4)
-on SKN plus FLEURS and VoxPopuli train: 25 250 segments, 2 h 7 min on one MI250X.
+on SKN plus FLEURS and VoxPopuli train: 25 250 segments, 2 h 2 min on one MI250X (training with
+per-epoch validation, from its `train_log.json`).
 Validation loss (SKN and the open sets together) fell from 0.55 to 0.21.
 
 | Test | Whisper large-v3 | Pilot (open data) | + SKN dialects |
@@ -352,7 +359,7 @@ Round 1 showed that dialect data is what moves dialect accuracy. Round 2 asked w
 else helps, with the same base model and method, and picked the model to keep by validation
 loss, never by test scores.
 
-![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, ours round 1 22.2, round 2 publishable 21.1, round 2 with LA-murre 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, round 2 publishable 13.6, round 2 with LA-murre 11.4.](docs/img/dialect-finetune.svg)
+![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, ours round 1 22.2, round 2 published 21.1, round 2 with LA-murre 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, round 2 published 13.6, round 2 with LA-murre 11.4.](docs/img/dialect-finetune.svg)
 
 ```mermaid
 flowchart LR
@@ -368,8 +375,8 @@ flowchart LR
 ```
 
 **1. Training text with punctuation.** SKN's standard-Finnish text has no punctuation and
-almost no capitals, so round 1 learned to write none (0 % of its SKN test outputs have a
-full stop or comma; base Whisper 100 %). [`prepare_targets.py`](scripts/prepare_targets.py)
+almost no capitals, so round 1 learned to write almost none (1 of its 600 SKN test outputs has a
+full stop or comma; base Whisper 97.5 %). [`prepare_targets.py`](scripts/prepare_targets.py)
 had Claude Opus 5.5 add punctuation and capitals to every training and validation segment,
 20 per call, and threw away any answer whose words were not exactly the input's: 15 024 of
 15 042 passed, the other 18 kept their plain text. The text-only LLM never hears audio and
@@ -387,8 +394,8 @@ and its rewritten texts are not published.
 weights), learning rate 1e-4, batch 8, on one MI250X. A four-epoch run showed overfitting:
 validation loss was lowest after epoch 2 and rose after it (0.206, 0.208, 0.215), so the
 final runs train three epochs and merge the epoch with the lowest validation loss, which
-was epoch 2 in both. Published model: 25 250 segments, 3 h 14 min. Internal model:
-40 779 segments, 5 h 2 min.
+was epoch 2 in both. Published model: 25 250 segments, 3 h 8 min. Internal model:
+40 779 segments, 4 h 57 min (training with per-epoch validation, from the `train_log.json` files).
 
 | Model | Training data | SKN WER | LA-murre judge pts | FLEURS | VoxPopuli | Clip WER (chunked) | Clip Claude / Gemini pts |
 |---|---|--:|--:|--:|--:|--:|--:|
@@ -424,14 +431,23 @@ better on SKN and worse on VoxPopuli.
   Whisper ("Nobelbayer" for Nobel Biocare, "Densplay-sirvana" for Dentsply Sirona); round 1
   matches base Whisper on Claude's name check (14 of 14) and trails by one on Gemini's. For webinar
   audio with brand names, base Whisper large-v3 remains the better choice; for dialect speech, ours.
-- **Decode in chunks.** Whisper's own long-form loop made a round-2 model repeat one phrase
-  about 40 times at the end of the clip (38.8 % WER). Feeding 15–25 s chunks cut at quiet
-  points (`run_open_models.py`, recipe `whisper_chunks`) removes it; the model card says so.
+- **Decode in chunks.** Whisper's own long-form loop made the round-2 models repeat one phrase over
+  and over at the end of the clip (38.8 % WER for the four-epoch run, 62.7 % for the published
+  model). Feeding 15–25 s chunks cut at quiet points (`run_open_models.py`, recipe `whisper_chunks`)
+  removes it. The model card's table of decoding settings is the published model downloaded back
+  from the Hub and run on the clip six ways
+  ([`results/clip/decoding_check.json`](results/clip/decoding_check.json), scored by
+  `score_asr.py --decoding` into [`decoding_scores.json`](results/clip/decoding_scores.json)):
+  quiet-point pieces 13.7 % WER, the pipeline's `chunk_length_s=20` 14.7 %, `chunk_length_s=30`
+  52.5 % (it loops) and 14.4 % with `no_repeat_ngram_size=6`; against the reviewed reference 13.5,
+  13.5, 51.5 and 14.2 %.
 
 **Cost.** Opus 5.5 for the training text, about 100 USD (punctuation 52, LA-murre rewriting
-49); the blind judging of both rounds about 25 USD; about 40 GCD-hours of LUMI GPU time for every
-job in both rounds (about 20 billed GPU-hours). The published model and its SKN segments are on
-Hugging Face ([model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects),
+49); the blind judging of rounds 1 and 2 about 25 USD (round 3, for the timestamp variant below, used
+about as many tokens as each of them); about 40 GCD-hours of LUMI GPU time for every job in both
+rounds (about 20 billed GPU-hours). The published model (tag `v1.0`), its timestamp variant (branch
+`timestamps`) and its SKN segments are on Hugging Face
+([model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects),
 [dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)); their cards are
 in [`release/`](release/) and [`publish_hf.py`](scripts/publish_hf.py) uploads them. The internal
 LA-murre model is not published: it is kept in the private Hugging Face repository
@@ -444,64 +460,160 @@ and Kotus, via Kielipankki, CC BY-ND 4.0, used for testing and for the internal 
 ## Timestamps and long-form audio
 
 The published model was trained on text without Whisper's timestamp tokens. Does that break its
-timestamps and its long-form decoding? [`eval_timestamps.py`](scripts/eval_timestamps.py) measured
-it against SKN's own sentence times ([`prepare_timestamps.py`](scripts/prepare_timestamps.py)):
+timestamps and its long-form decoding, and does training with them help?
+[`eval_timestamps.py`](scripts/eval_timestamps.py) measured both against SKN's own sentence times
+([`prepare_timestamps.py`](scripts/prepare_timestamps.py)):
 
 - **Boundaries:** the 600 SKN test segments decoded with `return_timestamps=True`. For each of the
   791 sentence starts inside a segment (after its first sentence), the distance to the nearest
   timestamp the model wrote there.
 - **Long-form:** from each of the 10 test municipalities about 4 minutes of one interview
   ([`results/labels/skn_longform.jsonl`](results/labels/skn_longform.jsonl), window edges in pauses
-  no sentence crosses), decoded twice: Whisper's own sequential long-form mode with timestamps, and
-  15–25 s pieces cut at the quietest 100 ms (the model card's code). A decode counts as a loop when
-  one 5-word sequence occurs four times or more and more often than in the reference.
+  no sentence crosses), decoded three ways: Whisper's own sequential long-form mode with timestamps;
+  the same with OpenAI's temperature fallback (temperatures 0.0–1.0, compression-ratio threshold
+  1.35, log-probability threshold −1.0, no-speech threshold 0.6, `condition_on_prev_tokens=False`),
+  which decodes a 30 s window again at a higher temperature when its text compresses too well or its
+  log-probability is too low; and 15–25 s pieces cut at the quietest 100 ms (the model card's code).
+  A decode counts as a loop when one 5-word sequence occurs four times or more and more often than
+  in the reference.
 
-| Model | Sentence starts within 0.5 s / 1 s | Median distance | Long-form WER, sequential | Windows that loop | Long-form WER, pieces |
-|---|--:|--:|--:|--:|--:|
-| Whisper large-v3 | 53.5 % / 60.8 % | 0.18 s | 37.5 % | 0 of 10 | 39.4 % |
-| Published model | 0.8 % / 0.8 % | 5.33 s | 21.5 % | 1 of 10 | **17.3 %** |
+| Model | SKN sentence starts within 0.5 s / 1 s | Median distance | Long-form WER, sequential (loops) | Long-form WER, with fallback (loops) | Long-form starts within 1 s, with fallback | Long-form WER, pieces |
+|---|--:|--:|--:|--:|--:|--:|
+| Whisper large-v3 | 53.5 % / 60.8 % | 0.18 s | 37.5 % (0 of 10) | 37.5 % (0) | 62.6 % | 39.4 % |
+| Published model | 0.8 % / 0.8 % | 5.33 s | 21.5 % (1 of 10) | 19.8 % (0) | 18.9 % | 17.3 % |
+| Timestamp variant | 56.4 % / 57.8 % | 0.04 s | 25.2 % (3 of 10) | **18.1 %** (0) | 49.0 % | **17.1 %** |
 
 The published model's timestamps are unusable: it writes them, but almost never where a sentence
-starts. Its text is still good, and in pieces it is the best decode of the four (17.3 % against base
-Whisper's 37.5 %). So decode in pieces and take times from the cut points, as the model card's code
-does. WER with timestamps on the short segments is 21.2 % (base 41.0 %), level with the scores above.
+starts. Its text is still good, and in pieces it is far ahead of base Whisper (17.3 % against
+39.4 %). So decode it in pieces and take times from the cut points, as the model card's code does.
+WER with timestamps on the short segments is 21.2 % (base 41.0 %), level with the scores above.
 Results: [`results/timestamps/scores.json`](results/timestamps/scores.json), raw decodes beside it.
 
-**Next experiment: training with timestamp tokens.** `finetune_whisper.py --timestamps 0.5` trains
-half of the SKN items, drawn again every epoch, with one timestamp pair per SKN sentence
-(`<|0.00|> text<|1.84|>`, times from [`results/labels/skn_parts.jsonl`](results/labels/skn_parts.jsonl)).
-A run with the published model's recipe has finished training
-([`train_log.json`](results/finetune/whisper-large-v3-fi-skn-punct-ts/train_log.json): epoch 2 kept,
-validation loss 0.216; not comparable with the published model's 0.206, because half of its
-validation segments carry timestamp tokens). Its timestamp and long-form evaluation has not been run
-yet, so it has no row here.
+### The timestamp variant
+
+Can training put the timestamps back? `finetune_whisper.py --timestamps 0.5` repeats the published
+model's recipe, but half of the SKN items, drawn again every epoch, carry one timestamp pair per SKN
+sentence (`<|0.00|> text<|1.84|>`, times from
+[`results/labels/skn_parts.jsonl`](results/labels/skn_parts.jsonl)); 15 040 of the 15 042 training
+items had usable times. Epoch 2 was kept, with validation loss 0.2158 (not comparable with the
+published model's 0.206, because half of its validation segments carry timestamp tokens), after 3 h
+6 min on one MI250X ([`train_log.json`](results/finetune/whisper-large-v3-fi-skn-punct-ts/train_log.json)).
+
+| Test | Whisper large-v3 | Published model | Timestamp variant |
+|---|--:|--:|--:|
+| SKN dialect test, WER % | 40.4 | **21.1** | 21.4 |
+| FLEURS, WER % | 7.4 | 7.6 | 7.4 |
+| VoxPopuli, WER % | 12.7 | **10.8** | 11.2 |
+| LA-murre, WER % (dialect reference) | 62.5 | 58.1 | 58.1 |
+| LA-murre, blind judge round 3, points per 100 words | 24.2 | 13.7 | 13.7 |
+| Clip, long-form with timestamps, WER % (HY's / reviewed reference) | 14.7 / 13.7 | 62.7 / 62.2 (loops) | 16.7 / 16.2 |
+| Clip, quiet-point pieces, WER % (HY's / reviewed reference) | 15.7 / 15.7 | **13.9 / 14.0** | 15.2 / 14.5 |
+| SKN sentence starts within 1 s | 60.8 % | 0.8 % | 57.8 % |
+| Long-form interviews with fallback, WER % | 37.5 | 19.8 | **18.1** |
+
+The blind judge's round 3 ([`judge_dialect.py`](scripts/judge_dialect.py) `--round r3`,
+[`summary-r3.json`](results/judgements_dialect/lamurre_fi/summary-r3.json)) judged base Whisper, the
+published model and the variant together on 577 of the 583 LA-murre segments: 24.18, 13.72 and 13.68
+points. The variant has fewer points than the published model in 98 segments and more in 100 (sign
+test p = 0.94): no difference.
+
+**Decision.** The published model stays the main model: the variant did not pass the rule agreed
+before the run for replacing it, because VoxPopuli got 0.4 points worse and the clip in pieces 0.5–1.3
+points worse. The variant is published as the `timestamps` revision of
+[GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/tree/timestamps)
+(card: [`release/TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md)), and the main model is tagged
+`v1.0`. Use the variant when you need sentence timestamps, or long audio transcribed without cutting
+it yourself, and always with the fallback settings: without them it looped in 3 of the 10 interviews.
+
+```python
+import soundfile as sf
+from transformers import pipeline
+
+asr = pipeline(
+    "automatic-speech-recognition",
+    model="GAIK-project/whisper-large-v3-fi-dialects",
+    revision="timestamps",
+    dtype="float16",
+    device="cuda",
+)
+audio, sr = sf.read("interview.wav", dtype="float32")  # 16 kHz mono, any length
+out = asr(
+    {"raw": audio, "sampling_rate": sr},
+    return_timestamps=True,
+    generate_kwargs={
+        "language": "fi",
+        "task": "transcribe",
+        "temperature": (0.0, 0.2, 0.4, 0.6, 0.8, 1.0),
+        "compression_ratio_threshold": 1.35,
+        "logprob_threshold": -1.0,
+        "no_speech_threshold": 0.6,
+        "condition_on_prev_tokens": False,
+    },
+)
+for chunk in out["chunks"]:
+    print(f"[{chunk['timestamp'][0]:7.2f} s] {chunk['text'].strip()}")
+```
 
 ## How far the LLM judges can be trusted
 
-The judges are language models and they are noisy. On the clip, two arms with an identical transcript
-got 4.5 and 3.5 points from Claude and 8.7 and 10.2 from Gemini, so read differences under about
-2 points as ties. Gemini is stricter throughout. Gemini also judges Gemini's own transcripts; Claude,
-which made no transcript, puts Gemini 3.5 Flash first as well.
+The judges are language models and they are noisy. On the clip, two arms with an identical
+transcript, the Haaga-Helia WhisperX server's and HY's own run of the same set-up (a transcript HY
+has not published, so it is not in this repository), got 4.5 and 3.5 points from Claude and 8.7 and
+10.2 from Gemini, so read differences under about 2 points as ties. The same shows in this
+repository on LA-murre: the same transcripts judged again in round 3, in other company and on 577 of
+the 583 segments, got 24.2 instead of 25.9 points (base Whisper) and 13.7 instead of 13.6 (the
+published model)
+([`summary-r2.json`](results/judgements_dialect/lamurre_fi/summary-r2.json),
+[`summary-r3.json`](results/judgements_dialect/lamurre_fi/summary-r3.json)). Gemini is stricter
+throughout. Gemini also judges Gemini's own transcripts; Claude, which made no transcript, puts
+Gemini 3.5 Flash first as well.
 
-On LA-murre, open models served by CSC's Aitta service judged round 2 again
-with the same prompt, answer schema, labels and order as Claude
-([`judge_dialect.py --provider aitta`](scripts/judge_dialect.py), compared by
-[`judge_agreement.py`](scripts/judge_agreement.py) in
+## Second opinions: open-model judges on CSC Aitta
+
+Is the LA-murre result Claude's opinion only? Open models served by CSC's Aitta service (CSC's
+OpenAI-compatible LLM API for Finnish research) judged round 2 again with the same prompt, answer
+schema, labels and order as Claude ([`judge_dialect.py --provider aitta`](scripts/judge_dialect.py),
+compared by [`judge_agreement.py`](scripts/judge_agreement.py) in
 [`agreement-r2.json`](results/judgements_dialect/lamurre_fi/agreement-r2.json)):
 
 | Judge | Segments | Whisper large-v3 | Round 1 | Published | Internal | Published vs base (fewer / more points) | Same preference as Claude |
 |---|--:|--:|--:|--:|--:|--:|--:|
 | Claude Opus 5.5 (reference) | 583 | 25.9 | 13.8 | 13.6 | 11.4 | 398 / 89 | – |
 | gpt-oss-120b (Aitta) | 583 | 20.5 | 13.4 | 13.2 | 12.9 | 275 / 105 | 80.7 % of 1 535 pairs |
-| Gemma 4 31B (Aitta), partial | 100 | 15.6 | 9.3 | 9.2 | 7.5 | 47 / 13 | 90.4 % of 271 pairs |
-| Qwen3.6 27B (Aitta), partial | 65 | 18.3 | 9.3 | 9.6 | 7.0 | 36 / 6 | 93.5 % of 201 pairs |
+| Gemma 4 31B (Aitta), sample | 213 | 17.2 | 10.1 | 10.4 | 8.6 | 107 / 29 | 92.2 % of 586 pairs |
+| Qwen3.6 27B (Aitta), sample | 148 | 19.4 | 10.3 | 10.2 | 8.7 | 85 / 21 | 93.0 % of 458 pairs |
 
 Points are meaning-error points per 100 reference words. "Same preference" counts the pairs of
 models in a segment where both judges see a difference, and how often they prefer the same one.
-gpt-oss-120b gives the four models Claude's order and finds the published model clearly better than
-base Whisper (sign test p < 0.001); it separates the three fine-tunes less than Claude does. The
-absolute scale differs between judges, so compare models within one judge. The Gemma and Qwen runs
-cover only 100 and 65 of the 583 segments; Qwen puts round 1 just ahead of the published model.
+All four judges rank the models the same way: the internal model best, the published model and round
+1 about level, base Whisper far behind; gpt-oss-120b also finds the published model clearly better
+than base Whisper (sign test p < 0.001) and separates the three fine-tunes less than Claude does.
+Gemma 4 31B and Qwen3.6 27B were run on a sample, not on all 583 segments: the table holds the 213
+and 148 segments they had judged when `agreement-r2.json` was made (the Qwen run was still going), and
+Gemma puts round 1 just ahead of the published model. Point scales differ between judges, so compare
+models within one judge.
+
+## Dialect data and next steps
+
+This clip cannot say how the models handle dialects. What it does show is the method:
+a dialect test needs dialect audio with a transcript a person has checked, and a
+decision on whether the transcript should keep the dialect forms or normalise them,
+because WER punishes whichever the model does not do. The LLM judge is built to ignore
+that difference and count only meaning.
+
+Data that could serve as a dialect test set and as fine-tuning data:
+
+| Dataset | What | Access |
+|---|---|---|
+| Lahjoita puhetta (Donate Speech) | About 3 600 h of spontaneous Finnish from over 20 000 speakers across Finland, part of it transcribed, with dialect metadata | Kielipankki; licence agreement, a fee for commercial use |
+| Suomen kielen näytteitä (SKN) | Dialect recordings from 50 localities, with both dialect and normalised transcripts | Kielipankki, CC BY 4.0: **used here** for the dialect test and fine-tune |
+| Lauseopin arkiston murrekorpus (LA-murre) | 142 dialect samples from 132 localities, dialect transcripts only | Kielipankki, CC BY-ND 4.0: **used here** as the second dialect test and for the internal model |
+| Common Voice, FLEURS, VoxPopuli (Finnish) | Read or formal speech, the sets the RASMUS model card reports | Open |
+
+Next steps: (1) a larger dialect corpus under a licence that allows sharing a model, since the
+internal model shows that more dialect speech helps; Lahjoita puhetta is CLARIN RES (an application,
+no commercial use); (2) spontaneous standard Finnish with names and terms, the kind of speech the
+webinar clip has, where every dialect fine-tune here is weaker than base Whisper.
 
 ## What's in this folder
 
@@ -510,18 +622,18 @@ cover only 100 and 65 of the 583 segments; Qwen puts round 1 just ahead of the p
 | [`scripts/`](scripts/) | Runners, scorer, judges, table and chart builders (see [Run it again](#run-it-again)). [`provenance.py`](scripts/provenance.py) writes each run's `_run_metadata*.json`; [`asr_scoring.py`](scripts/asr_scoring.py) is the clip scorer with HY's normalisation; [`get_clip.py`](scripts/get_clip.py) fetches the clip. |
 | [`tests/`](tests/) | Offline tests (`uv run pytest`): no keys, no downloads, no GPU. |
 | [`lumi/`](lumi/) | How the open models were run and trained on LUMI: environment setup, Slurm jobs, and stubs that hide three container libraries NeMo cannot use. |
-| [`release/`](release/) | The Hugging Face model and dataset cards, uploaded by [`publish_hf.py`](scripts/publish_hf.py). |
+| [`release/`](release/) | The Hugging Face cards, uploaded by [`publish_hf.py`](scripts/publish_hf.py): [`MODEL_CARD.md`](release/MODEL_CARD.md) (the main model), [`TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md) (its `timestamps` revision) and [`DATASET_CARD.md`](release/DATASET_CARD.md). |
 | [`docs/`](docs/) | [`DIALECT-EXAMPLES.md`](docs/DIALECT-EXAMPLES.md) (20 SKN test segments side by side and WER per municipality), [`story/`](docs/story/) (the walk-through pages, one self-contained HTML file per language, built from `story/src/`) and [`img/`](docs/img/) (the dialect chart). |
 | [`results/transcriptions/`](results/transcriptions/) | One JSON per model and run on the clip: transcript, settings, library versions, timing. [`qad1/`](results/transcriptions/qad1/) holds GAIK's earlier QAD-1 runs (OpenAI, Gemini, the gaik transcriber, the Haaga-Helia WhisperX server, Whisper on CSC Roihu). |
 | [`results/judgements/`](results/judgements/) | Per judge and model: every meaning error quoted from the reference and the transcript, the name checks, reference doubts, scores. |
 | [`results/scores.json`](results/scores.json), [`scores.reviewed.json`](results/scores.reviewed.json) | WER, CER and error counts for every clip transcript, against HY's and the reviewed reference. |
-| [`results/clip/gt_alignment.json`](results/clip/gt_alignment.json) | The reference's sentences, word times and QAD-1's 42 reference doubts, frozen from QAD-1 for the listening page. |
+| [`results/clip/`](results/clip/) | [`gt_alignment.json`](results/clip/gt_alignment.json): the reference's sentences, word times and QAD-1's 42 reference doubts, frozen from QAD-1 for the listening page. [`decoding_check.json`](results/clip/decoding_check.json) and [`decoding_scores.json`](results/clip/decoding_scores.json): the published model from the Hub decoded six ways, the model card's settings table. |
 | [`results/benchmarks/`](results/benchmarks/) | SKN, FLEURS and VoxPopuli: one line per recording (reference, transcript, seconds) and `scores.json`. LA-murre: `scores.json` and run metadata only. |
-| [`results/judgements_dialect/`](results/judgements_dialect/) | The LA-murre meaning judges: `summary*.json`, `agreement-r2.json` and run metadata (numbers only). |
+| [`results/judgements_dialect/`](results/judgements_dialect/) | The LA-murre meaning judges: `summary*.json` (rounds 1–3 and the Aitta judge), `agreement-r2.json` and run metadata (numbers only). |
 | [`results/finetune/`](results/finetune/) | The training log of every fine-tune: per-epoch validation loss, data counts, the epoch kept. No weights. |
 | [`results/labels/`](results/labels/) | SKN training targets with LLM punctuation, SKN sentence times per segment, the long-form windows; for LA-murre only the statistics. |
-| [`results/timestamps/`](results/timestamps/) | Raw decodes with timestamps and long-form windows, and their scores. |
-| [`results/gpu_run/`](results/gpu_run/) | GPU, host and library versions of the clip jobs on LUMI. |
+| [`results/timestamps/`](results/timestamps/) | Raw decodes with timestamps and long-form windows (base Whisper, the published model, the timestamp variant), and their scores. |
+| [`results/gpu_run/`](results/gpu_run/) | GPU, host and library versions of the last clip job per environment (hf, nemo, qwen) on LUMI. |
 
 Not here, on purpose: the clip and its references (download them from gaik-toolkit with
 `get_clip.py`; `data/` is gitignored), any LA-murre text (per-segment benchmark files, judge records,
@@ -556,14 +668,21 @@ loop and keeps the epoch with the lowest validation loss.
 
 **The LA-murre judge.** `judge_dialect.py` gives one judge the dialect reference and every model's
 transcript of a segment at once, labelled with letters in an order shuffled per segment, and counts
-meaning errors only. Rounds judge different sets of models; `--provider aitta` runs the same judgement
-on an open model on CSC Aitta, and `judge_agreement.py` compares judges segment by segment. The
+meaning errors only. Rounds judge different sets of models (round 1: base Whisper, round 1's model,
+Finnish-NLP; round 2: base Whisper and our three round-1 and round-2 models; round 3: base Whisper,
+the published model and the timestamp variant); `--provider aitta` runs the same judgement on an open
+model on CSC Aitta, and `judge_agreement.py` compares judges segment by segment. The
 published scores were made with prompt `dialect-judge-v1`; this repository's copy is `v2`, identical
 except that its three example word pairs come from SKN instead of LA-murre (the docstring explains).
 
 **Timestamps.** `prepare_timestamps.py` turns SKN's sentence annotation into sentence times inside
-every published segment and into the 10 long-form windows; `eval_timestamps.py` decodes on LUMI and
-scores locally.
+every published segment and into the 10 long-form windows; `finetune_whisper.py --timestamps 0.5`
+trains with them; `eval_timestamps.py` decodes on LUMI (`--fallback` adds the temperature-fallback
+decode) and scores locally.
+
+**Decoding settings.** `score_asr.py --decoding` scores the published model's six decodings of the
+clip in `results/clip/decoding_check.json` against both references; the model card's table of
+settings to avoid comes from it.
 
 **Provenance.** Every runner that writes results writes a secret-free `_run_metadata*.json` beside
 them: commit, runner, dataset path, models, arguments, and which keys were set (never their values).
@@ -586,6 +705,7 @@ uv run python scripts/get_clip.py --prepare-audio     # the clip and both refere
 # the clip: API models, scores, judges, the README table
 uv run python scripts/run_api_asr.py --repeats 3      # ElevenLabs, Chirp 3
 uv run python scripts/score_asr.py                    # WER/CER, no keys; --reviewed for the reviewed reference
+uv run python scripts/score_asr.py --decoding         # the model card's decoding-settings table
 uv run python scripts/judge_asr.py                    # both judges (--claude-provider api for an Anthropic key)
 uv run python scripts/make_readme_table.py            # the clip table above
 
@@ -614,6 +734,13 @@ uv run python scripts/build_compare.py                # results/compare.html (gi
 # timestamps and long-form (prepare_timestamps.py needs SKN's *_full.eaf files)
 uv run python scripts/prepare_timestamps.py <dir with SKN *_full.eaf>
 bash $L push-labels && bash $L run timestamps hf --arm hf_whisper-large-v3 --arm hub_whisper-large-v3-fi-dialects
+
+# the timestamp variant: training, its tests, and the timestamp evaluation with the fallback decode
+bash $L run train hf --name whisper-large-v3-fi-skn-punct-ts --data skn+open --skn-text punct --epochs 3 --lora-r 64 --timestamps 0.5
+bash $L run clip hf --arm ft_whisper-large-v3-fi-skn-punct-ts --arm ft_whisper-large-v3-fi-skn-punct-ts-chunks
+for b in skn_fi fleurs_fi voxpopuli_fi; do bash $L run bench hf --bench $b --arm ft_whisper-large-v3-fi-skn-punct-ts; done
+bash $L run timestamps hf --arm ft_whisper-large-v3-fi-skn-punct-ts
+bash $L run timestamps hf --fallback --arm hf_whisper-large-v3 --arm hub_whisper-large-v3-fi-dialects --arm ft_whisper-large-v3-fi-skn-punct-ts
 bash $L fetch && uv run python scripts/eval_timestamps.py score
 
 # LA-murre (CC BY-ND): downloaded from Kielipankki; every per-segment output stays local (gitignored)
@@ -621,6 +748,7 @@ bash $L prepare lamurre && bash $L run bench hf --bench lamurre_fi && bash $L fe
 uv run python scripts/judge_dialect.py --round r2 --arms hf_whisper-large-v3,ft_whisper-large-v3-fi-skn,ft_whisper-large-v3-fi-skn-punct-best,ft_whisper-large-v3-fi-skn-lamurre-best
 uv run python scripts/judge_dialect.py --round r2 --arms <the same> --provider aitta --judge-model openai/gpt-oss-120b
 uv run python scripts/judge_agreement.py --round r2
+uv run python scripts/judge_dialect.py --round r3 --arms hf_whisper-large-v3,ft_whisper-large-v3-fi-skn-punct-best,ft_whisper-large-v3-fi-skn-punct-ts
 ```
 
 Each step skips what it has already done; `--force` redoes it (`bash $L run clip hf --force`).
@@ -629,28 +757,6 @@ and run `push`, `download` and `run` for its environment. `bash $L clean` remove
 project from LUMI's scratch when the work is over. Keys go in a `.env` at the repo root;
 [`.env.example`](.env.example) lists their names per script. `publish_hf.py` needs a GAIK-project
 write token and is for maintainers.
-
-## Dialect data and next steps
-
-This clip cannot say how the models handle dialects. What it does show is the method:
-a dialect test needs dialect audio with a transcript a person has checked, and a
-decision on whether the transcript should keep the dialect forms or normalise them,
-because WER punishes whichever the model does not do. The LLM judge is built to ignore
-that difference and count only meaning.
-
-Data that could serve as a dialect test set and as fine-tuning data:
-
-| Dataset | What | Access |
-|---|---|---|
-| Lahjoita puhetta (Donate Speech) | About 3 600 h of spontaneous Finnish from over 20 000 speakers across Finland, part of it transcribed, with dialect metadata | Kielipankki; licence agreement, a fee for commercial use |
-| Suomen kielen näytteitä (SKN) | Dialect recordings from 50 localities, with both dialect and normalised transcripts | Kielipankki, CC BY 4.0: **used here** for the dialect test and fine-tune |
-| Lauseopin arkiston murrekorpus (LA-murre) | 142 dialect samples from 132 localities, dialect transcripts only | Kielipankki, CC BY-ND 4.0: **used here** as the second dialect test and for the internal model |
-| Common Voice, FLEURS, VoxPopuli (Finnish) | Read or formal speech, the sets the RASMUS model card reports | Open |
-
-Next steps: (1) a larger dialect corpus under a licence that allows sharing a model, since the
-internal model shows that more dialect speech helps; Lahjoita puhetta is CLARIN RES (an application,
-no commercial use); (2) spontaneous standard Finnish with names and terms, the kind of speech the
-webinar clip has; (3) the timestamp evaluation of the model trained with timestamp tokens.
 
 ## Caveats
 
@@ -662,7 +768,7 @@ webinar clip has; (3) the timestamp evaluation of the model trained with timesta
 - **The reference is reviewed only at its 42 disputed spans.** On 14 Oct 2026 a listener checked
   them and corrected 14 (gaik-toolkit's `reference.reviewed.txt`; see
   [Reviewed reference](#reviewed-reference)); the rest is HY's unverified text. The judges flag
-  1–3 reference doubts per transcript.
+  0–3 reference doubts per transcript.
 - **Each open model ran once**, with greedy or default decoding. The Finnish-NLP
   wav2vec2 model ran without its KenLM language model (it would not build in the
   container), which costs it accuracy. The RASMUS model ran with this project's energy
@@ -680,10 +786,10 @@ webinar clip has; (3) the timestamp evaluation of the model trained with timesta
   rebuilding the test from Kielipankki (`prepare_lamurre.py`) and rerunning the models and the judge
   reproduces them. The public judge prompt differs from the one that made them in three example
   word pairs.
-- **The Aitta judges are partly incomplete.** gpt-oss-120b judged all 583 segments; Gemma 4 31B and
-  Qwen3.6 27B only 100 and 65.
-- **The timestamp results cover one model pair and ten windows**, and the timestamp-trained model is
-  not evaluated yet.
+- **Two of the Aitta judges saw only a sample.** gpt-oss-120b judged all 583 segments; Gemma 4 31B
+  and Qwen3.6 27B 213 and 148 in `agreement-r2.json` (the Qwen run was still going).
+- **The timestamp results rest on SKN's own sentence times and ten 4-minute windows**, and the
+  timestamp variant, like every fine-tune here, was trained once with one seed.
 - **The training texts are partly LLM-written.** Punctuation (SKN) and standard spellings
   (LA-murre, internal model) come from Opus 5.5 with a word-level check, not from a person. The tests
   are not touched: their references are the corpora's human transcripts.
@@ -693,23 +799,43 @@ webinar clip has; (3) the timestamp evaluation of the model trained with timesta
 
 ## Licences, attribution and credits
 
-**Code:** MIT ([`LICENSE`](LICENSE)). The data in `results/` keeps the licence of its source:
-
-- **Suomen kielen näytteitä (SKN)**, Kotimaisten kielten keskus (Kotus), via Kielipankki – The
-  Language Bank of Finland, CC BY 4.0, [urn:nbn:fi:lb-2020112937](http://urn.fi/urn:nbn:fi:lb-2020112937).
-  Changes: cut into segments; punctuation and capitals added to the training and validation targets
-  by Claude Opus 5.5 (words unchanged).
-- **FLEURS**, Google, CC BY 4.0. **VoxPopuli**, Meta, CC0.
-- **The Ajokortti clip and its references**: published in
-  [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval)
-  under the terms stated there; this repository holds model transcripts of the clip and quotes from
-  the reference for evaluation, not the clip itself.
-- **Lauseopin arkiston murrekorpus (LA-murre)**, University of Turku and Kotus, via Kielipankki,
-  CC BY-ND 4.0, [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935): used for testing
-  and for the internal model only; no LA-murre text is in this repository.
-- The published **model** is Apache 2.0 (as its base, openai/whisper-large-v3) and the **dataset**
-  CC BY 4.0. The story pages' illustration is AI-generated (GPT Image 2.5), their two audio clips are
-  SKN segments, and their icons are [Lucide](https://lucide.dev/) (ISC licence).
+- **Code** (`scripts/`, `tests/`, `lumi/`): MIT, [`LICENSE`](LICENSE), copyright Haaga-Helia
+  University of Applied Sciences (GAIK project).
+- **Results, figures and documentation created by the GAIK project** (scores, judge records,
+  training logs and model transcripts in `results/`, the chart, the story pages and these texts):
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Credit: GAIK project, Haaga-Helia
+  University of Applied Sciences.
+- **Data from other sources keep their licences:**
+  - **Suomen kielen näytteitä (SKN)**, Kotimaisten kielten keskus (Kotus), via Kielipankki – The
+    Language Bank of Finland, [urn:nbn:fi:lb-2020112937](http://urn.fi/urn:nbn:fi:lb-2020112937),
+    [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: cut into 2–25 s segments;
+    punctuation and capitals added to the training and validation targets by Claude Opus 5.5 (words
+    unchanged).
+  - **FLEURS**, Google, [google/fleurs](https://huggingface.co/datasets/google/fleurs),
+    [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Conneau et al., "FLEURS: Few-shot
+    Learning Evaluation of Universal Representations of Speech", IEEE SLT 2022
+    ([arXiv:2205.12446](https://arxiv.org/abs/2205.12446)).
+  - **VoxPopuli**, Meta, [facebook/voxpopuli](https://huggingface.co/datasets/facebook/voxpopuli),
+    [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). Wang et al., "VoxPopuli: A
+    Large-Scale Multilingual Speech Corpus for Representation Learning, Semi-Supervised Learning and
+    Interpretation", ACL 2021 ([arXiv:2101.00390](https://arxiv.org/abs/2101.00390)).
+  - **Lauseopin arkiston murrekorpus (LA-murre)**, University of Turku and Kotus, via Kielipankki,
+    [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935),
+    [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/): the test set for every model
+    here; only the internal model, which is not published, was also trained on it (other
+    localities). No LA-murre text is in this repository, only numbers made from it.
+- **Model weights**: the published model and its `timestamps` revision are
+  [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), as the base model
+  openai/whisper-large-v3; the published dataset is CC BY 4.0.
+- **The Ajokortti clip** is an excerpt of a public QAdental webinar; QAdental (Suomen
+  Kotilääkäripalvelu Oy) is a GAIK project partner. The audio is not stored here and is not covered
+  by this repository's licences; [`get_clip.py`](scripts/get_clip.py) downloads it, with its
+  reference transcripts (by the University of Helsinki team, and the reviewed one), from
+  [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval),
+  where they are public.
+- **Story pages**: the illustration is AI-generated (GPT Image 2.5), the two audio clips are SKN
+  segments (CC BY 4.0), and the icons are [Lucide](https://lucide.dev/) (ISC licence); the database
+  and link icons are derived from [Feather](https://feathericons.com/) (MIT licence).
 
 Details in [`NOTICE.md`](NOTICE.md).
 
@@ -717,4 +843,8 @@ Developed by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Heli
 Applied Sciences, in the [GAIK project](https://gaik.ai/) (Generative AI-enhanced Knowledge
 Management in Business), led by Haaga-Helia with the University of Helsinki and Tampere University,
 co-funded by the European Union (ERDF). The Ajokortti reference transcript was made by the University
-of Helsinki team. Computing on LUMI through CSC – IT Center for Science, Finland.
+of Helsinki team.
+
+**LUMI.** We acknowledge CSC – IT Center for Science, Finland for awarding this project access to
+the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI
+consortium through CSC – IT Center for Science, Finland.

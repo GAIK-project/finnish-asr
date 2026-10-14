@@ -1,36 +1,36 @@
 {
-  "generated_utc": "2026-10-14T09:07:11+00:00",
+  "generated_utc": "2026-10-14T12:03:59+00:00",
   "round": "r2",
   "reference_judge": "claude-opus-5-5",
   "judges": {
     "aitta-gemma-4-31b-it": {
-      "segments": 100,
+      "segments": 213,
       "points_per_100w": {
-        "hf_whisper-large-v3": 15.59,
-        "ft_whisper-large-v3-fi-skn-punct-best": 9.22,
-        "ft_whisper-large-v3-fi-skn": 9.31,
-        "ft_whisper-large-v3-fi-skn-lamurre-best": 7.49
+        "hf_whisper-large-v3": 17.23,
+        "ft_whisper-large-v3-fi-skn-punct-best": 10.43,
+        "ft_whisper-large-v3-fi-skn": 10.08,
+        "ft_whisper-large-v3-fi-skn-lamurre-best": 8.58
       },
       "order_best_first": [
         "ft_whisper-large-v3-fi-skn-lamurre-best",
-        "ft_whisper-large-v3-fi-skn-punct-best",
         "ft_whisper-large-v3-fi-skn",
+        "ft_whisper-large-v3-fi-skn-punct-best",
         "hf_whisper-large-v3"
       ],
       "published_vs_base": {
-        "fewer_points": 47,
-        "more_points": 13,
-        "sign_test_p": 1.2146708022957309e-05
+        "fewer_points": 107,
+        "more_points": 29,
+        "sign_test_p": 1.0531438510885944e-11
       },
       "against_reference": {
-        "segments_both_judged": 100,
-        "pairwise_same_preference": 0.904,
-        "pairs_compared": 271,
+        "segments_both_judged": 213,
+        "pairwise_same_preference": 0.922,
+        "pairs_compared": 586,
         "spearman_per_arm": {
-          "hf_whisper-large-v3": 0.744,
-          "ft_whisper-large-v3-fi-skn-punct-best": 0.734,
-          "ft_whisper-large-v3-fi-skn": 0.715,
-          "ft_whisper-large-v3-fi-skn-lamurre-best": 0.74
+          "hf_whisper-large-v3": 0.754,
+          "ft_whisper-large-v3-fi-skn-punct-best": 0.762,
+          "ft_whisper-large-v3-fi-skn": 0.733,
+          "ft_whisper-large-v3-fi-skn-lamurre-best": 0.766
         }
       }
     },
@@ -66,33 +66,33 @@
       }
     },
     "aitta-qwen3-6-27b": {
-      "segments": 65,
+      "segments": 148,
       "points_per_100w": {
-        "hf_whisper-large-v3": 18.26,
-        "ft_whisper-large-v3-fi-skn-punct-best": 9.61,
-        "ft_whisper-large-v3-fi-skn": 9.32,
-        "ft_whisper-large-v3-fi-skn-lamurre-best": 6.97
+        "hf_whisper-large-v3": 19.4,
+        "ft_whisper-large-v3-fi-skn-punct-best": 10.17,
+        "ft_whisper-large-v3-fi-skn": 10.33,
+        "ft_whisper-large-v3-fi-skn-lamurre-best": 8.68
       },
       "order_best_first": [
         "ft_whisper-large-v3-fi-skn-lamurre-best",
-        "ft_whisper-large-v3-fi-skn",
         "ft_whisper-large-v3-fi-skn-punct-best",
+        "ft_whisper-large-v3-fi-skn",
         "hf_whisper-large-v3"
       ],
       "published_vs_base": {
-        "fewer_points": 36,
-        "more_points": 6,
-        "sign_test_p": 2.8288777684792876e-06
+        "fewer_points": 85,
+        "more_points": 21,
+        "sign_test_p": 2.582673954792027e-10
       },
       "against_reference": {
-        "segments_both_judged": 65,
-        "pairwise_same_preference": 0.935,
-        "pairs_compared": 201,
+        "segments_both_judged": 148,
+        "pairwise_same_preference": 0.93,
+        "pairs_compared": 458,
         "spearman_per_arm": {
-          "hf_whisper-large-v3": 0.762,
-          "ft_whisper-large-v3-fi-skn-punct-best": 0.749,
-          "ft_whisper-large-v3-fi-skn": 0.748,
-          "ft_whisper-large-v3-fi-skn-lamurre-best": 0.69
+          "hf_whisper-large-v3": 0.747,
+          "ft_whisper-large-v3-fi-skn-punct-best": 0.752,
+          "ft_whisper-large-v3-fi-skn": 0.714,
+          "ft_whisper-large-v3-fi-skn-lamurre-best": 0.704
         }
       }
     },

@@ -27,6 +27,8 @@ BENCH = RESULTS_DIR / "benchmarks" / "skn_fi"
 BASE, OURS = "hf_whisper-large-v3", "ft_whisper-large-v3-fi-skn-punct-best"
 HF_MODEL = "https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects"
 HF_DATA = "https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr"
+SKN_URN = "urn:nbn:fi:lb-2020112937"
+CC_BY = "https://creativecommons.org/licenses/by/4.0/"
 
 
 def load(arm: str) -> dict[str, dict]:
@@ -102,8 +104,14 @@ def main() -> int:
     out.append(f"| **All** | {len(base)} | **{eb / n * 100:.1f}** | **{eo / n * 100:.1f}** |")
     out += ["", "## Examples", ""] + examples
     out += [
-        "Source: Suomen kielen näytteitä, Kotimaisten kielten keskus (Kotus), via Kielipankki – The Language",
-        "Bank of Finland, CC BY 4.0.",
+        "---",
+        "",
+        "**Attribution.** The human transcripts (and the audio in the dataset) come from *Suomen kielen",
+        "näytteitä* (SKN), Kotimaisten kielten keskus (Kotus), via Kielipankki – The Language Bank of Finland,",
+        f"[{SKN_URN}](http://urn.fi/{SKN_URN}), licensed under [CC BY 4.0]({CC_BY}). Changes: the",
+        "interviews were cut into 2–25 s segments, and each segment's transcript is SKN's standard-Finnish",
+        "(normalised) sentences joined with spaces, otherwise unchanged. The model transcripts and this page",
+        f"are by the GAIK project (Haaga-Helia University of Applied Sciences), [CC BY 4.0]({CC_BY}).",
     ]
     OUT.write_text("\n".join(out) + "\n", encoding="utf-8", newline="\n")
     print(f"wrote {OUT.relative_to(PROJECT_ROOT)}: {len(examples) // 8} examples")

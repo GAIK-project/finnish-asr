@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-14T11:24:25+00:00",
+  "generated_at_utc": "2026-10-14T12:18:26+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": null,
+  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
   "repo_dirty": true,
   "app_under_test": "Finnish ASR model comparison (Ajokortti clip, HY reference via gaik-toolkit)",
   "runner_path": "scripts/score_asr.py",
@@ -15,7 +15,7 @@
   "env": {},
   "extra": {
     "output": "results/scores.reviewed.json",
-    "arms": 36,
+    "arms": 38,
     "reference_sha256": "6b3f55a8fcfe2e8889ca59d974478da332918f55fcdba3a79835cc62c62a42a5"
   }
 }

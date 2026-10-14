@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T12:18:09+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, HY reference via gaik-toolkit): decoding settings of the published model",
+  "runner_path": "scripts/score_asr.py",
+  "dataset_path": "results/clip/decoding_check.json",
+  "dataset_git_object": null,
+  "model_or_deployment": "GAIK-project/whisper-large-v3-fi-dialects",
+  "cli_args": [
+    "--decoding"
+  ],
+  "env": {},
+  "extra": {
+    "output": "results/clip/decoding_scores.json",
+    "reference_sha256": {
+      "reference.txt": "30c4a98f17ed2cbaed00c2d0aace6184121be7ac25d35213bd2b189f2587f24d",
+      "reference.reviewed.txt": "6b3f55a8fcfe2e8889ca59d974478da332918f55fcdba3a79835cc62c62a42a5"
+    }
+  }
+}

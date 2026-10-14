@@ -187,5 +187,11 @@ audio and dialect-spelling transcript in the dataset viewer by its id. Written b
 | Whisper | Jos ne on sitten niin korkealla ollut, ettei haulit ole ottaneet aika muuta, mut ei kertaakaan et olisin saanut ja mä olen monta kutia ampunut niitä. | 6 / 27 |
 | Ours | Jos ne on sitten niin korkealla ollut, että ei haulit ole ottaneet tai muuta, mutta ei kertaakaan ne olisi saanut, ja minä olen monta kutia ampunut niitä. | 2 / 27 |
 
-Source: Suomen kielen näytteitä, Kotimaisten kielten keskus (Kotus), via Kielipankki – The Language
-Bank of Finland, CC BY 4.0.
+---
+
+**Attribution.** The human transcripts (and the audio in the dataset) come from *Suomen kielen
+näytteitä* (SKN), Kotimaisten kielten keskus (Kotus), via Kielipankki – The Language Bank of Finland,
+[urn:nbn:fi:lb-2020112937](http://urn.fi/urn:nbn:fi:lb-2020112937), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: the
+interviews were cut into 2–25 s segments, and each segment's transcript is SKN's standard-Finnish
+(normalised) sentences joined with spaces, otherwise unchanged. The model transcripts and this page
+are by the GAIK project (Haaga-Helia University of Applied Sciences), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

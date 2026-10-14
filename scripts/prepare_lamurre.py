@@ -206,7 +206,7 @@ def train(workers: int) -> int:
                     (DATA / "lamurre_fi" / split / r["id"]).unlink(missing_ok=True)
             part = keep
         (DATA / "lamurre_fi" / f"{split}.jsonl").write_text(
-            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in part), encoding="utf-8"
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in part), encoding="utf-8", newline="\n"
         )
         print(f"{split}: {len(part)} segments, {sum(r['seconds'] for r in part) / 3600:.2f} h", flush=True)
     return 0
@@ -253,7 +253,7 @@ def main() -> int:
             )
         print(f"{rec}: {len(segs)} segments, {len(kept)} usable, kept {min(CAP, len(kept))}", flush=True)
     (DATA / "lamurre_fi" / "test.jsonl").write_text(
-        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8"
+        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8", newline="\n"
     )
     print(f"test: {len(rows)} segments, {sum(r['seconds'] for r in rows) / 3600:.2f} h", flush=True)
     return 0

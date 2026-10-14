@@ -351,7 +351,7 @@ def main() -> int:
             best_loss, log["best_epoch"] = vl, epoch
             best_state = {k: v.detach().cpu().clone() for k, v in model.named_parameters() if v.requires_grad}
             model.save_pretrained(out_dir / "adapter")
-        (out_dir / "train_log.json").write_text(json.dumps(log, indent=2) + "\n", encoding="utf-8")
+        (out_dir / "train_log.json").write_text(json.dumps(log, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     with torch.no_grad():
         for k, v in model.named_parameters():
@@ -363,7 +363,7 @@ def main() -> int:
     processor.save_pretrained(out_dir)
     log["gpu"] = torch.cuda.get_device_name(0) if dev == "cuda" else None
     log["base"] = args.base
-    (out_dir / "train_log.json").write_text(json.dumps(log, indent=2) + "\n", encoding="utf-8")
+    (out_dir / "train_log.json").write_text(json.dumps(log, indent=2) + "\n", encoding="utf-8", newline="\n")
     from provenance import build_run_metadata, write_run_metadata  # standard library only
 
     write_run_metadata(

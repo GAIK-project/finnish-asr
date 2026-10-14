@@ -1,4 +1,44 @@
 {
+  "ft_whisper-large-v3-fi-skn-punct-ts": {
+    "test_segments": {
+      "segments": 600,
+      "wer_with_timestamps": 21.57,
+      "segments_with_timestamps": 600,
+      "boundaries": {
+        "sentence_starts": 791,
+        "within_0_5s": 0.564,
+        "within_1s": 0.578,
+        "median_s": 0.04
+      }
+    },
+    "longform": {
+      "sequential": {
+        "wer": 25.16,
+        "windows_with_loop": 3,
+        "boundaries": {
+          "sentence_starts": 302,
+          "within_0_5s": 0.351,
+          "within_1s": 0.45,
+          "median_s": 1.42
+        }
+      },
+      "sequential_fallback": {
+        "wer": 18.13,
+        "windows_with_loop": 0,
+        "boundaries": {
+          "sentence_starts": 302,
+          "within_0_5s": 0.394,
+          "within_1s": 0.49,
+          "median_s": 1.11
+        }
+      },
+      "chunks": {
+        "wer": 17.15,
+        "windows_with_loop": 0
+      },
+      "windows": 10
+    }
+  },
   "hf_whisper-large-v3": {
     "test_segments": {
       "segments": 600,
@@ -13,6 +53,16 @@
     },
     "longform": {
       "sequential": {
+        "wer": 37.52,
+        "windows_with_loop": 0,
+        "boundaries": {
+          "sentence_starts": 302,
+          "within_0_5s": 0.454,
+          "within_1s": 0.626,
+          "median_s": 0.6
+        }
+      },
+      "sequential_fallback": {
         "wer": 37.52,
         "windows_with_loop": 0,
         "boundaries": {
@@ -50,6 +100,16 @@
           "within_0_5s": 0.129,
           "within_1s": 0.172,
           "median_s": 5.96
+        }
+      },
+      "sequential_fallback": {
+        "wer": 19.75,
+        "windows_with_loop": 0,
+        "boundaries": {
+          "sentence_starts": 302,
+          "within_0_5s": 0.142,
+          "within_1s": 0.189,
+          "median_s": 5.74
         }
       },
       "chunks": {

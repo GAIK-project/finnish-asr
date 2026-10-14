@@ -1,13 +1,15 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-14T08:44:23+00:00",
-  "gaik_evals_commit": "d5c59a0d08852c1a6fc4d717dccbaea1ef2b31fe",
-  "gaik_evals_dirty": true,
+  "generated_at_utc": "2026-10-14T12:14:31+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
+  "repo_dirty": true,
   "app_under_test": "Finnish dialect ASR: timestamps and long-form decoding",
-  "runner_path": "projects/finnish-asr-models/scripts/eval_timestamps.py",
-  "dataset_path": "projects/finnish-asr-models/results/labels/skn_longform.jsonl",
+  "runner_path": "scripts/eval_timestamps.py",
+  "dataset_path": "results/labels/skn_longform.jsonl",
   "dataset_git_object": "d0e813edfc83b4d3d842af4331a047b73b78c0fe",
   "model_or_deployment": [
+    "whisper-large-v3-fi-skn-punct-ts",
     "openai/whisper-large-v3",
     "GAIK-project/whisper-large-v3-fi-dialects"
   ],
@@ -17,10 +19,12 @@
   "env": {},
   "extra": {
     "arms": [
+      "ft_whisper-large-v3-fi-skn-punct-ts",
       "hf_whisper-large-v3",
       "hub_whisper-large-v3-fi-dialects"
     ],
     "decoded_on": {
+      "ft_whisper-large-v3-fi-skn-punct-ts": "AMD Instinct MI250X",
       "hf_whisper-large-v3": "AMD Instinct MI250X",
       "hub_whisper-large-v3-fi-dialects": "AMD Instinct MI250X"
     },
@@ -32,6 +36,22 @@
     "generate": {
       "language": "fi",
       "task": "transcribe"
+    },
+    "generate_fallback": {
+      "language": "fi",
+      "task": "transcribe",
+      "temperature": [
+        0.0,
+        0.2,
+        0.4,
+        0.6,
+        0.8,
+        1.0
+      ],
+      "compression_ratio_threshold": 1.35,
+      "logprob_threshold": -1.0,
+      "no_speech_threshold": 0.6,
+      "condition_on_prev_tokens": false
     }
   }
 }

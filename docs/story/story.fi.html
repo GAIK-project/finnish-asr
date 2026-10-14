@@ -178,7 +178,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
     <div class="nums">
       <div class="num"><b>40,4 → 21,1 %</b><span>sanavirheitä murretestissä, Whisper large-v3 → oma malli</span></div>
       <div class="num"><b>25,9 → 13,6</b><span>merkitysvirhepisteitä / 100 sanaa toisella murrekorpuksella</span></div>
-      <div class="num"><b>3 h 14 min</b><span>koulutus yhdellä AMD MI250X -GPU:lla LUMIssa</span></div>
+      <div class="num"><b>3 h 8 min</b><span>koulutus yhdellä AMD MI250X -GPU:lla LUMIssa</span></div>
     </div>
   </div>
   <figure>
@@ -218,7 +218,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
 
   <div class="col stack callout">
     <p><b>Mitä <code>llm-punctuation</code> tarkoittaa datasetissä?</b> Se kertoo, että rivin <code>text</code>-kentän välimerkit ja isot alkukirjaimet on lisännyt Opus. Sanat ovat silti ihmisen: vastaus hyväksyttiin vain, jos sen sanat olivat täsmälleen samat kuin ihmisen yleiskielisessä litteraatissa. Arvo <span class="tag h">human</span> tarkoittaa, että <code>text</code> on ihmisen teksti sellaisenaan: niin on 18 koulutuspätkässä, joiden välimerkitys ei läpäissyt tarkistusta, ja koko testiosassa.</p>
-    <p class="note">Miksi välimerkit? SKN:n yleiskielisessä tekstissä niitä ei ole, joten ensimmäinen versio mallista oppi kirjoittamaan ilman yhtäkään pistettä tai pilkkua.</p>
+    <p class="note">Miksi välimerkit? SKN:n yleiskielisessä tekstissä niitä ei ole, joten ensimmäinen versio mallista oppi kirjoittamaan lähes ilman pisteitä ja pilkkuja: niitä oli vain yhdessä sen 600 testitulosteesta, Whisper large-v3:lla 97,5 %:ssa.</p>
   </div>
 
   <div class="tbl">
@@ -260,7 +260,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
       <p class="meta">kaikki 20+ mallia · <code>judge_asr.py</code></p>
     </article>
   </div>
-  <p class="note">Opuksen kulut koko työssä noin 125 USD. Testien vertailutekstit ovat kaikki ihmisten tekemiä, eikä mallin tulostetta käytetty koskaan oikeana vastauksena.</p>
+  <p class="note">Opuksen kulut koulutustekstiin ja kahteen ensimmäiseen arviointikierrokseen olivat noin 125 USD; aikaleimaversion kolmas kierros (kohta 08) käytti suunnilleen yhtä paljon tokeneita kuin kumpikin aiempi. Testien vertailutekstit ovat kaikki ihmisten tekemiä, eikä mallin tulostetta käytetty koskaan oikeana vastauksena.</p>
 </section>
 
 <section>
@@ -270,7 +270,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
     <ul class="plain">
       <li>Koulutusdataa 25 250 pätkää: SKN 15 042, FLEURS 2 704, VoxPopuli 7 504.</li>
       <li>LoRA rank 64 huomion <code>q_proj</code>- ja <code>v_proj</code>-kerroksissa, oppimisnopeus 1e-4, erä 8, kolme kierrosta (epookkia) koko datan yli.</li>
-      <li>Ajo: yksi AMD MI250X -GPU CSC:n LUMI-supertietokoneella, 3 h 14 min. Mallin valinta tehtiin validointikunnilla, ei koskaan testituloksilla.</li>
+      <li>Ajo: yksi AMD MI250X -GPU CSC:n LUMI-supertietokoneella, 3 h 8 min. Mallin valinta tehtiin validointikunnilla, ei koskaan testituloksilla.</li>
     </ul>
   </div>
   <figure>
@@ -361,22 +361,76 @@ compound spacing, dropped fillers or repetitions (&quot;niin niin&quot;, &quot;t
 Judge each transcript on its own; the labels carry no information.</pre>
     <p class="note">Tämä on julkinen versio, <code>dialect-judge-v2</code>. Yllä olevat pisteet tehtiin versiolla v1, joka eroaa vain ensimmäisen kappaleen kolmessa esimerkkisanaparissa: v1:n esimerkit olivat LA-murre-korpuksesta, nämä ovat SKN:stä.</p>
   </details>
-  <p class="note col">Rajoitus: tuomari on itsekin kielimalli ja ajettiin kerran. Yhden pisteen erot 100 sanaa kohden luetaan tasapeleiksi, ellei merkkitesti sano muuta. Julkaistun mallin ero Whisperiin on silti selvä: se sai vähemmän pisteitä 398 pätkässä ja enemmän 89:ssä (merkkitesti p &lt; 0,001). Ero kierroksen 1 malliin ei ole merkitsevä (p = 0,10).</p>
+  <p class="note col">Rajoitus: tuomari on itsekin kielimalli; kolme avointa mallia arvioi saman tehtävän uudelleen (seuraava kohta). Yhden pisteen erot 100 sanaa kohden luetaan tasapeleiksi, ellei merkkitesti sano muuta. Julkaistun mallin ero Whisperiin on silti selvä: se sai vähemmän pisteitä 398 pätkässä ja enemmän 89:ssä (merkkitesti p &lt; 0,001). Ero kierroksen 1 malliin ei ole merkitsevä (p = 0,10).</p>
 </section>
 
 <section>
-  <div class="sec-head"><span class="step">06</span><h2>Missä malli on heikompi</h2></div>
+  <div class="sec-head"><span class="step">06</span><h2>Kolme muuta tuomaria CSC:n Aitassa on samaa mieltä</h2></div>
+  <div class="col stack">
+    <p>Yksi tuomari on yksi mielipide. Siksi sama tehtävä samoilla ohjeilla, kirjaimilla ja järjestyksellä annettiin kolmelle avoimelle mallille, joita ajetaan CSC:n Aitta-palvelussa Suomessa. <b>gpt-oss-120b</b> arvioi kaikki 583 pätkää; <b>Gemma 4 31B</b> ja <b>Qwen3.6 27B</b> arvioivat otoksen pätkistä (tähän mennessä 213 ja 148).</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Tuomari</th><th class="n">Pätkiä</th><th class="n">Whisper large-v3</th><th class="n">Kierros 1</th><th class="n">Julkaistu</th><th class="n">Sisäinen</th><th class="n">Sama valinta kuin Opuksella</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">25,9</td><td class="n">13,8</td><td class="n">13,6</td><td class="n">11,4</td><td class="n">–</td></tr>
+        <tr><td>gpt-oss-120b</td><td class="n">583</td><td class="n">20,5</td><td class="n">13,4</td><td class="n">13,2</td><td class="n">12,9</td><td class="n">81 %</td></tr>
+        <tr><td>Gemma 4 31B (otos)</td><td class="n">213</td><td class="n">17,2</td><td class="n">10,1</td><td class="n">10,4</td><td class="n">8,6</td><td class="n">92 %</td></tr>
+        <tr><td>Qwen3.6 27B (otos)</td><td class="n">148</td><td class="n">19,4</td><td class="n">10,3</td><td class="n">10,2</td><td class="n">8,7</td><td class="n">93 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">Pisteet / 100 sanaa. "Sama valinta" laskee pätkän malliparit, joissa molemmat tuomarit näkevät eron, ja kuinka usein ne pitävät samaa mallia parempana. Kaikki neljä tuomaria asettavat mallit samaan järjestykseen: sisäinen malli ensin, julkaistu malli ja kierros 1 suunnilleen tasoissa, Whisper large-v3 selvästi viimeisenä. Jokaisella tuomarilla on oma asteikkonsa, joten malleja verrataan saman tuomarin sisällä, ei lukuja tuomarien välillä.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">07</span><h2>Ihmisen tarkistama vertailuteksti webinaarille</h2></div>
+  <div class="col stack">
+    <p>Webinaarileikkeen vertailuteksti on Helsingin yliopiston ryhmän tekemä, ja se näytti korjatulta WhisperX-luonnokselta, mikä suosisi Whisper-perheen malleja. Kehittäjä kuunteli 14.10.2026 ne <b>42 kohtaa</b>, joissa useimmat järjestelmät kuulivat jotain muuta, ja korjasi niistä 14: enimmäkseen puhekielisiä muotoja, jotka oli kirjoitettu yleiskielellä, kaksi puuttuvaa sanaa ja yhden brändinimen.</p>
+    <p>Tarkistettua tekstiä vasten kärkijoukko on noin prosenttiyksikön sisällä toisistaan: gpt-4o-mini-transcribe 13,2, Whisper large-v3 13,7, Gemini 3.5 Flash 13,7, julkaistu mallimme 14,0 ja ElevenLabs 14,2 % WER. WhisperX-pohjaiset ratkaisut menettävät etumatkansa (10,4 → 14,0 ja 11,9 → 15,7 %). Noin 400 sanan leike ei pysty erottamaan näin lähellä toisiaan olevia järjestelmiä.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">08</span><h2>Aikaleimaversio</h2></div>
+  <div class="col stack">
+    <p>Whisper kirjoittaa tavallisesti litteroidessaan aikamerkkejä ja pysyy niiden avulla mukana pitkässä äänessä. Julkaistu malli koulutettiin tekstillä, jossa niitä ei ollut, joten sen ajat ovat käyttökelvottomia: vain 1 % SKN:n lauseiden alkukohdista saa aikamerkin sekunnin tarkkuudella (Whisper large-v3: 61 %). Siksi mallikortin koodi pilkkoo pitkän äänen paloiksi.</p>
+    <p>Saman reseptin toisessa ajossa puolet SKN-pätkistä koulutettiin aikamerkeillä, jotka otettiin SKN:n omista lauseajoista (15 042 pätkästä 15 040:ssä ajat olivat käyttökelpoisia). Tämä versio osuu <b>58 %:iin</b> lauseiden alkukohdista sekunnin tarkkuudella (mediaani 0,04 s, kun osuma löytyy) ja säilyttää murretarkkuuden.</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Testi</th><th class="n">Whisper large-v3</th><th class="n">Julkaistu</th><th class="n">Aikaleimaversio</th></tr></thead>
+      <tbody>
+        <tr><td>SKN-murretesti, WER %</td><td class="n">40,4</td><td class="n"><b>21,1</b></td><td class="n">21,4</td></tr>
+        <tr><td>FLEURS, WER %</td><td class="n">7,4</td><td class="n">7,6</td><td class="n">7,4</td></tr>
+        <tr><td>VoxPopuli, WER %</td><td class="n">12,7</td><td class="n"><b>10,8</b></td><td class="n">11,2</td></tr>
+        <tr><td>LA-murre, tuomarin pisteet / 100 sanaa (kierros 3)</td><td class="n">24,2</td><td class="n">13,7</td><td class="n">13,7</td></tr>
+        <tr><td>SKN:n lauseiden alut sekunnin sisällä</td><td class="n">61 %</td><td class="n">1 %</td><td class="n"><b>58 %</b></td></tr>
+        <tr><td>Kymmenen 4 minuutin haastattelua kerralla, fallbackin kanssa, WER %</td><td class="n">37,5</td><td class="n">19,8</td><td class="n"><b>18,1</b></td></tr>
+        <tr><td>Webinaari kerralla aikamerkein, WER %</td><td class="n">14,7</td><td class="n">62,7 (silmukka)</td><td class="n">16,7</td></tr>
+        <tr><td>Webinaari 15–25 s paloina, WER %</td><td class="n">15,7</td><td class="n"><b>13,9</b></td><td class="n">15,2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col stack callout">
+    <p><b>Milloin sitä kannattaa käyttää?</b> Kun tarvitset lauseiden ajat tai haluat antaa pitkän äänen pilkkomatta sitä itse: lataa saman Hugging Face -mallin <code>timestamps</code>-revisio ja käytä aina OpenAI:n lämpötilavarmistusta (temperature fallback), joka litteroi jakson uudelleen, kun sen teksti alkaa toistaa itseään. Asetukset ovat mallikortissa. Ilman varmistusta malli jäi silmukkaan kolmessa haastattelussa kymmenestä (25,2 % WER).</p>
+    <p class="note">Versio ei korvannut julkaistua mallia: VoxPopuli heikkeni 0,4 ja paloiteltu webinaari 0,5–1,3 prosenttiyksikköä, mikä rikkoi ennen ajoa sovitun säännön. LA-murteella sokko tuomari ei erottanut malleja toisistaan (vähemmän pisteitä 98 pätkässä, enemmän 100:ssa).</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">09</span><h2>Missä malli on heikompi</h2></div>
   <ul class="plain col">
     <li><b>Harvinaiset nimet ja termit yleiskielisessä puheessa.</b> Webinaarissa tuomarit löysivät enemmän nimi- ja termivirheitä kuin perus-Whisperille (esimerkiksi "Nobelbayer", kun puhuttiin Nobel Biocaresta), vaikka WER oli pienempi. Brändinimiä täynnä olevaan yleiskieleen perus-Whisper on varmempi.</li>
     <li><b>Vanha puhe, ei kaikkia murteita.</b> Molemmat murrekorpukset ovat 1960–70-lukujen haastatteluja iäkkäiltä puhujilta. Nykypäivän alueellista puhetta ei testattu, eikä SKN-testissä ole pohjalaismurteita.</li>
     <li><b>Yleiskieli, ei foneettinen murretranskriptio.</b> Malli kirjoittaa sen, mitä sanotaan, yleiskielen sanamuodoin.</li>
-    <li><b>Pitkä ääni pitää pilkkoa.</b> Whisperin oma pitkän äänen silmukka sai mallin toistamaan yhtä fraasia. 15–25 s palat hiljaisista kohdista leikattuina toimivat (13,7 % WER webinaarissa); mallikortissa on valmis koodi.</li>
-    <li><b>Yksi koulutusajo ja yksi tuomari.</b> Luvut ovat yhdestä siemenestä.</li>
+    <li><b>Pitkä ääni pitää pilkkoa.</b> Whisperin oma pitkän äänen silmukka sai mallin toistamaan yhtä fraasia. 15–25 s palat hiljaisista kohdista leikattuina toimivat (13,7 % WER webinaarissa); mallikortissa on valmis koodi. Jos tarvitset lauseiden ajat tai haluat litteroida pitkän äänen kerralla, käytä aikaleimaversiota varmistusasetuksin (kohta 08).</li>
+    <li><b>Yksi koulutusajo mallia kohden.</b> Luvut ovat yhdestä siemenestä; päätuomarin arvion tarkisti kolme avointa mallia (kohta 06).</li>
   </ul>
 </section>
 
 <section>
-  <div class="sec-head"><span class="step">07</span><h2>Linkit</h2></div>
+  <div class="sec-head"><span class="step">10</span><h2>Linkit</h2></div>
   <div class="links">
     <a href="https://github.com/GAIK-project/finnish-asr"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg><span>Koodi, tulokset ja menetelmä: GAIK-project/finnish-asr</span></a>
     <a href="https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0zM22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></g></svg><span>Malli Hugging Facessa: GAIK-project/whisper-large-v3-fi-dialects</span></a>
@@ -386,7 +440,8 @@ Judge each transcript on its own; the labels carry no information.</pre>
     <a href="https://www.kielipankki.fi/corpora/skn/"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g></svg><span>Alkuperäinen SKN-aineisto Kielipankissa</span></a>
     <a href="https://gaik.ai/"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></g></svg><span>GAIK-hanke (gaik.ai)</span></a>
   </div>
-  <p class="note">Suomen kielen näytteitä, Kotimaisten kielten keskus (Kotus), Kielipankin kautta, CC BY 4.0. Tekijä: Akseli Leskinen, Haaga-Helia, GAIK-hanke. Laskenta: LUMI, CSC – Tieteen tietotekniikan keskus.</p>
+  <p class="note">Suomen kielen näytteitä, Kotimaisten kielten keskus (Kotus), Kielipankin kautta, CC BY 4.0. Tekijä: Akseli Leskinen, Haaga-Helia, GAIK-hanke.</p>
+  <p class="note">Kuvitus: tekoälyn tekemä (GPT Image 2.5). Äänet: kaksi SKN-pätkää, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Kuvakkeet: <a href="https://lucide.dev/">Lucide</a> (ISC-lisenssi); tietokanta- ja linkkikuvake pohjautuvat <a href="https://feathericons.com/">Feather</a>-kuvakkeisiin (MIT-lisenssi). Tämä sivu: GAIK-hanke, Haaga-Helia, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. LUMIn edellyttämä kiitos: <i>We acknowledge CSC – IT Center for Science, Finland for awarding this project access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through CSC – IT Center for Science, Finland.</i></p>
 </section>
 
 </div>

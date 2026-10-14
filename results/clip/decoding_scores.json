@@ -1,0 +1,84 @@
+{
+  "generated_utc": "2026-10-14T12:18:10+00:00",
+  "model": "GAIK-project/whisper-large-v3-fi-dialects",
+  "model_revision": "main as of 13 Oct 2026 (tag v1.0)",
+  "references": {
+    "hy": "data/ajokortti/reference.txt",
+    "reviewed": "data/ajokortti/reference.reviewed.txt"
+  },
+  "normalization": "HY error_analysis.py: jiwer ToLowerCase, RemovePunctuation (every Unicode P* character, hyphens included), RemoveMultipleSpaces (runs of 2+ whitespace -> one space), Strip, split on ' '. CER uses the same steps with a character split (spaces count). CER_nospace also removes all whitespace. A single line break is not collapsed, so it glues two words into one token, as in HY's scorer; see each arm's whitespace_merge.",
+  "decodings": {
+    "quiet_chunks": {
+      "settings": "the model card's quiet_chunks code: 15-25 s pieces cut at the quietest 100 ms, batch_size=8",
+      "WER": {
+        "hy": 13.68,
+        "reviewed": 13.48
+      },
+      "CER": {
+        "hy": 5.06,
+        "reviewed": 4.73
+      },
+      "hyp_words": 413
+    },
+    "quiet_chunks_norepeat": {
+      "settings": "quiet_chunks with no_repeat_ngram_size=6",
+      "WER": {
+        "hy": 13.93,
+        "reviewed": 13.73
+      },
+      "CER": {
+        "hy": 5.09,
+        "reviewed": 4.76
+      },
+      "hyp_words": 413
+    },
+    "chunk20": {
+      "settings": "pipeline chunk_length_s=20",
+      "WER": {
+        "hy": 14.68,
+        "reviewed": 13.48
+      },
+      "CER": {
+        "hy": 4.8,
+        "reviewed": 4.21
+      },
+      "hyp_words": 416
+    },
+    "chunk20_norepeat": {
+      "settings": "pipeline chunk_length_s=20, no_repeat_ngram_size=6",
+      "WER": {
+        "hy": 14.68,
+        "reviewed": 13.48
+      },
+      "CER": {
+        "hy": 4.8,
+        "reviewed": 4.21
+      },
+      "hyp_words": 416
+    },
+    "chunk30": {
+      "settings": "pipeline chunk_length_s=30",
+      "WER": {
+        "hy": 52.49,
+        "reviewed": 51.47
+      },
+      "CER": {
+        "hy": 42.74,
+        "reviewed": 42.36
+      },
+      "hyp_words": 563
+    },
+    "chunk30_norepeat": {
+      "settings": "pipeline chunk_length_s=30, no_repeat_ngram_size=6",
+      "WER": {
+        "hy": 14.43,
+        "reviewed": 14.22
+      },
+      "CER": {
+        "hy": 4.99,
+        "reviewed": 4.57
+      },
+      "hyp_words": 412
+    }
+  }
+}

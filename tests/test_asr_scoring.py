@@ -83,3 +83,39 @@ def test_scores_json_reproduces_with_the_downloaded_references() -> None:
         assert hy[arm]["metrics"]["WER"] == wer
         assert reviewed[arm]["metrics"]["WER"] == wer_reviewed
         assert reviewed[arm]["WER_against_hy"] == wer
+
+
+def test_timestamp_variant_clip_numbers() -> None:
+    hy, reviewed = _scores("scores.json"), _scores("scores.reviewed.json")
+    for arm, wer, wer_reviewed in (
+        ("ft_whisper-large-v3-fi-skn-punct-ts", 16.67, 16.18),
+        ("ft_whisper-large-v3-fi-skn-punct-ts-chunks", 15.17, 14.46),
+        ("ft_whisper-large-v3-fi-skn-punct-best", 62.69, 62.25),
+        ("ft_whisper-large-v3-fi-skn-punct-best-chunks", 13.93, 13.97),
+    ):
+        assert hy[arm]["metrics"]["WER"] == wer
+        assert reviewed[arm]["metrics"]["WER"] == wer_reviewed
+
+
+def test_decoding_check_holds_the_six_decodings_of_the_model_card() -> None:
+    doc = json.loads(score_asr.DECODING_PATH.read_text(encoding="utf-8"))
+    assert doc["model"] == "GAIK-project/whisper-large-v3-fi-dialects"
+    names = {"quiet_chunks", "quiet_chunks_norepeat", "chunk20", "chunk20_norepeat", "chunk30", "chunk30_norepeat"}
+    assert set(doc["decodings"]) == names
+    scores = json.loads(score_asr.DECODING_SCORES_PATH.read_text(encoding="utf-8"))["decodings"]
+    card = {name: [round(scores[name]["WER"][ref], 1) for ref in ("hy", "reviewed")] for name in scores}
+    assert card["quiet_chunks"] == [13.7, 13.5]
+    assert card["chunk20"] == [14.7, 13.5]
+    assert card["chunk30"] == [52.5, 51.5]
+    assert card["chunk30_norepeat"] == [14.4, 14.2]
+
+
+@pytest.mark.skipif(
+    not (FI.GT_FI_PATH.exists() and FI.GT_REVIEWED_PATH.exists()),
+    reason="needs the references from gaik-toolkit: uv run python scripts/get_clip.py",
+)
+def test_decoding_scores_reproduce_with_the_downloaded_references() -> None:
+    committed = json.loads(score_asr.DECODING_SCORES_PATH.read_text(encoding="utf-8"))
+    fresh = score_asr.score_decoding()
+    assert fresh["decodings"] == committed["decodings"]
+    assert fresh["references"] == committed["references"]

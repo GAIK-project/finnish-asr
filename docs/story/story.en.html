@@ -177,7 +177,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
     <div class="nums">
       <div class="num"><b>40.4 → 21.1 %</b><span>word errors on the dialect test, Whisper large-v3 → our model</span></div>
       <div class="num"><b>25.9 → 13.6</b><span>meaning-error points per 100 words on a second dialect corpus</span></div>
-      <div class="num"><b>3 h 14 min</b><span>of training on one AMD MI250X GPU on LUMI</span></div>
+      <div class="num"><b>3 h 8 min</b><span>of training on one AMD MI250X GPU on LUMI</span></div>
     </div>
   </div>
   <figure>
@@ -218,7 +218,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
 
   <div class="col stack callout">
     <p><b>What does <code>llm-punctuation</code> mean in the dataset?</b> It says that the punctuation and capitals in the row's <code>text</code> field were added by Opus. The words are still the person's: an answer was accepted only if its words were exactly those of the human standard-Finnish transcript. The value <span class="tag h">human</span> means <code>text</code> is the human text as it is: that holds for the 18 training segments whose punctuation failed the check, and for the whole test split.</p>
-    <p class="note">Why punctuation? SKN's standard-Finnish text has none, so the first version of the model learned to write without a single full stop or comma.</p>
+    <p class="note">Why punctuation? SKN's standard-Finnish text has none, so the first version of the model learned to write almost without full stops or commas: 1 of its 600 test outputs had one, against 97.5 % for Whisper large-v3.</p>
   </div>
 
   <div class="tbl">
@@ -260,7 +260,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
       <p class="meta">all 20+ set-ups · <code>judge_asr.py</code></p>
     </article>
   </div>
-  <p class="note">Opus cost about USD 125 for the whole project. Every test reference was made by people, and no model output was ever used as the right answer.</p>
+  <p class="note">Opus cost about USD 125 for the training text and the first two judging rounds; a third round, for the timestamp variant (section 08), used about as many tokens as each of them. Every test reference was made by people, and no model output was ever used as the right answer.</p>
 </section>
 
 <section>
@@ -270,7 +270,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
     <ul class="plain">
       <li>25 250 training segments: SKN 15 042, FLEURS 2 704, VoxPopuli 7 504.</li>
       <li>LoRA rank 64 on the attention <code>q_proj</code> and <code>v_proj</code> layers, learning rate 1e-4, batch 8, three passes (epochs) over the data.</li>
-      <li>Run: one AMD MI250X GPU on CSC's LUMI supercomputer, 3 h 14 min. The model was chosen on the validation municipalities, never on test results.</li>
+      <li>Run: one AMD MI250X GPU on CSC's LUMI supercomputer, 3 h 8 min. The model was chosen on the validation municipalities, never on test results.</li>
     </ul>
   </div>
   <figure>
@@ -362,22 +362,76 @@ compound spacing, dropped fillers or repetitions (&quot;niin niin&quot;, &quot;t
 Judge each transcript on its own; the labels carry no information.</pre>
     <p class="note">This is the public version, <code>dialect-judge-v2</code>. The scores above were made with v1, which differs only in the three example word pairs of the first paragraph: v1's came from the LA-murre corpus, these come from SKN.</p>
   </details>
-  <p class="note col">Limitation: the judge is itself a language model and ran once. Differences of one point per 100 words are read as ties unless a sign test says otherwise. The gap between the published model and Whisper is still clear: it had fewer points in 398 segments and more in 89 (sign test p &lt; 0.001). The gap to the round-1 model is not significant (p = 0.10).</p>
+  <p class="note col">Limitation: the judge is itself a language model; three open models judged the same task again (next section). Differences of one point per 100 words are read as ties unless a sign test says otherwise. The gap between the published model and Whisper is still clear: it had fewer points in 398 segments and more in 89 (sign test p &lt; 0.001). The gap to the round-1 model is not significant (p = 0.10).</p>
 </section>
 
 <section>
-  <div class="sec-head"><span class="step">06</span><h2>Where the model is weaker</h2></div>
+  <div class="sec-head"><span class="step">06</span><h2>Three more judges on CSC Aitta agree</h2></div>
+  <div class="col stack">
+    <p>One judge is one opinion. So the same task, with the same instructions, letters and order, went to three open models running on CSC's Aitta service in Finland. <b>gpt-oss-120b</b> judged all 583 segments; <b>Gemma 4 31B</b> and <b>Qwen3.6 27B</b> judged a sample of the segments (213 and 148 so far).</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Judge</th><th class="n">Segments</th><th class="n">Whisper large-v3</th><th class="n">Round 1</th><th class="n">Published</th><th class="n">Internal</th><th class="n">Same preference as Opus</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">25.9</td><td class="n">13.8</td><td class="n">13.6</td><td class="n">11.4</td><td class="n">–</td></tr>
+        <tr><td>gpt-oss-120b</td><td class="n">583</td><td class="n">20.5</td><td class="n">13.4</td><td class="n">13.2</td><td class="n">12.9</td><td class="n">81 %</td></tr>
+        <tr><td>Gemma 4 31B (sample)</td><td class="n">213</td><td class="n">17.2</td><td class="n">10.1</td><td class="n">10.4</td><td class="n">8.6</td><td class="n">92 %</td></tr>
+        <tr><td>Qwen3.6 27B (sample)</td><td class="n">148</td><td class="n">19.4</td><td class="n">10.3</td><td class="n">10.2</td><td class="n">8.7</td><td class="n">93 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">Points per 100 words. "Same preference" counts the pairs of models in a segment where both judges see a difference, and how often they prefer the same one. All four judges give the same order: the internal model first, the published model and round 1 about level, Whisper large-v3 far behind. Each judge has its own scale, so compare models within one judge, not numbers across judges.</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">07</span><h2>A human-checked reference for the webinar clip</h2></div>
+  <div class="col stack">
+    <p>The webinar clip's reference transcript came from the University of Helsinki team, and it looked like a corrected WhisperX draft, which would favour Whisper-family output. On 14 October 2026 the developer listened to the <b>42 spots</b> where most systems heard something else and corrected 14 of them: mostly spoken forms that had been written in standard Finnish, two missing words and a brand name.</p>
+    <p>Against the checked text the leading systems sit within about one point of each other: gpt-4o-mini-transcribe 13.2, Whisper large-v3 13.7, Gemini 3.5 Flash 13.7, our published model 14.0 and ElevenLabs 14.2 % WER. The WhisperX-based set-ups lose their lead (10.4 → 14.0 and 11.9 → 15.7 %). A clip of about 400 words cannot separate systems that close.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">08</span><h2>The timestamp variant</h2></div>
+  <div class="col stack">
+    <p>Whisper normally writes time marks as it transcribes, and uses them to keep its place in long audio. The published model was trained on text without them, so its times are unusable: only 1 % of SKN's sentence starts get a time mark within one second (Whisper large-v3: 61 %). That is why its model card cuts long audio into pieces.</p>
+    <p>A second run of the same recipe trained half of the SKN segments with time marks taken from SKN's own sentence times (15 040 of the 15 042 had usable times). It puts <b>58 %</b> of the sentence starts within one second (median 0.04 s when it finds one) and keeps the dialect accuracy.</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Test</th><th class="n">Whisper large-v3</th><th class="n">Published</th><th class="n">Timestamp variant</th></tr></thead>
+      <tbody>
+        <tr><td>SKN dialect test, WER %</td><td class="n">40.4</td><td class="n"><b>21.1</b></td><td class="n">21.4</td></tr>
+        <tr><td>FLEURS, WER %</td><td class="n">7.4</td><td class="n">7.6</td><td class="n">7.4</td></tr>
+        <tr><td>VoxPopuli, WER %</td><td class="n">12.7</td><td class="n"><b>10.8</b></td><td class="n">11.2</td></tr>
+        <tr><td>LA-murre, judge points / 100 words (round 3)</td><td class="n">24.2</td><td class="n">13.7</td><td class="n">13.7</td></tr>
+        <tr><td>SKN sentence starts within 1 s</td><td class="n">61 %</td><td class="n">1 %</td><td class="n"><b>58 %</b></td></tr>
+        <tr><td>Ten 4-minute interviews in one go, with fallback, WER %</td><td class="n">37.5</td><td class="n">19.8</td><td class="n"><b>18.1</b></td></tr>
+        <tr><td>Webinar in one go with time marks, WER %</td><td class="n">14.7</td><td class="n">62.7 (loops)</td><td class="n">16.7</td></tr>
+        <tr><td>Webinar in 15–25 s pieces, WER %</td><td class="n">15.7</td><td class="n"><b>13.9</b></td><td class="n">15.2</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col stack callout">
+    <p><b>When to use it.</b> When you need sentence times, or want to give it long audio without cutting it yourself: load the <code>timestamps</code> revision of the same Hugging Face model and always use OpenAI's temperature fallback, which decodes a stretch again when its text starts to repeat (the model card has the settings). Without the fallback it looped in 3 of the 10 interviews (25.2 % WER).</p>
+    <p class="note">It did not replace the published model: VoxPopuli got 0.4 points worse and the webinar in pieces 0.5–1.3 points worse, which broke the rule agreed before the run. On LA-murre the blind judge could not tell the two apart (fewer points in 98 segments, more in 100).</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="step">09</span><h2>Where the model is weaker</h2></div>
   <ul class="plain col">
     <li><b>Rare names and terms in standard-Finnish speech.</b> On the webinar the judges found more name and term errors than for plain Whisper (for example "Nobelbayer" for Nobel Biocare), although its WER was lower. For standard Finnish full of brand names, plain Whisper is the safer choice.</li>
     <li><b>Old speech, not every dialect.</b> Both dialect corpora are interviews with elderly speakers from the 1960s and 70s. Today's regional speech was not tested, and the SKN test has no Ostrobothnian dialect.</li>
     <li><b>Standard Finnish, not a phonetic dialect transcript.</b> The model writes what is said, in standard Finnish word forms.</li>
-    <li><b>Long audio must be cut.</b> Whisper's own long-form loop made the model repeat one phrase. Pieces of 15–25 s cut at quiet points work (13.7 % WER on the webinar); the model card has the code.</li>
-    <li><b>One training run and one judge.</b> The numbers come from a single seed.</li>
+    <li><b>Long audio must be cut.</b> Whisper's own long-form loop made the model repeat one phrase. Pieces of 15–25 s cut at quiet points work (13.7 % WER on the webinar); the model card has the code. For sentence times, or long audio in one go, use the timestamp variant with the fallback settings (section 08).</li>
+    <li><b>One training run per model.</b> The numbers come from a single seed; the main judge was cross-checked by three open models (section 06).</li>
   </ul>
 </section>
 
 <section>
-  <div class="sec-head"><span class="step">07</span><h2>Links</h2></div>
+  <div class="sec-head"><span class="step">10</span><h2>Links</h2></div>
   <div class="links">
     <a href="https://github.com/GAIK-project/finnish-asr"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg><span>Code, results and method: GAIK-project/finnish-asr</span></a>
     <a href="https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0zM22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></g></svg><span>The model on Hugging Face: GAIK-project/whisper-large-v3-fi-dialects</span></a>
@@ -387,7 +441,8 @@ Judge each transcript on its own; the labels carry no information.</pre>
     <a href="https://www.kielipankki.fi/corpora/skn/"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g></svg><span>The original SKN corpus at Kielipankki</span></a>
     <a href="https://gaik.ai/"><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></g></svg><span>The GAIK project (gaik.ai)</span></a>
   </div>
-  <p class="note">Suomen kielen näytteitä, Institute for the Languages of Finland (Kotus), via Kielipankki – The Language Bank of Finland, CC BY 4.0. Developed by Akseli Leskinen, Haaga-Helia University of Applied Sciences, in the GAIK project. Computing: LUMI, through CSC – IT Center for Science, Finland.</p>
+  <p class="note">Suomen kielen näytteitä, Institute for the Languages of Finland (Kotus), via Kielipankki – The Language Bank of Finland, CC BY 4.0. Developed by Akseli Leskinen, Haaga-Helia University of Applied Sciences, in the GAIK project.</p>
+  <p class="note">Illustration: AI-generated (GPT Image 2.5). Audio: two SKN segments, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Icons: <a href="https://lucide.dev/">Lucide</a> (ISC licence); the database and link icons are derived from <a href="https://feathericons.com/">Feather</a> (MIT licence). This page: GAIK project, Haaga-Helia, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. We acknowledge CSC – IT Center for Science, Finland for awarding this project access to the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium through CSC – IT Center for Science, Finland.</p>
 </section>
 
 </div>

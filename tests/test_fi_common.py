@@ -12,18 +12,24 @@ import judge_asr
 def test_load_arms_has_this_repos_and_qad1_arms_and_no_hy_files() -> None:
     arms = FI.load_arms()
     ids = [a.arm_id for a in arms]
-    assert len(ids) == len(set(ids)) == 36
+    assert len(ids) == len(set(ids)) == 38
     assert not [i for i in ids if i.startswith("hy")]
     qad1 = {a.arm_id for a in arms if FI.QAD1_TAG in a.notes}
     assert qad1 == {p.stem for p in FI.QAD1_ASR_DIR.glob("*.json") if "__r" not in p.stem}
     assert len(qad1) == 11
-    assert {"elevenlabs_scribe-v2", "ft_whisper-large-v3-fi-skn-punct-best-chunks", "qwen_qwen3-asr-0.6b"} <= set(ids)
+    assert {
+        "elevenlabs_scribe-v2",
+        "ft_whisper-large-v3-fi-skn-punct-best-chunks",
+        "ft_whisper-large-v3-fi-skn-punct-ts",
+        "ft_whisper-large-v3-fi-skn-punct-ts-chunks",
+        "qwen_qwen3-asr-0.6b",
+    } <= set(ids)
     assert all(a.repeat == 1 for a in arms)
 
 
 def test_every_transcript_points_at_the_downloaded_clip() -> None:
     files = [p for p in FI.ASR_DIR.rglob("*.json") if not p.name.startswith("_")]
-    assert len(files) == 58  # 29 runs of this repository and 29 of QAD-1
+    assert len(files) == 60  # 31 runs of this repository and 29 of QAD-1
     for p in files:
         arm = FI.load_arm(p)
         assert arm.input_ref == "data/ajokortti/Ajokortti.mp3", p.name

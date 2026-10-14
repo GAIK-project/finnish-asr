@@ -1,4 +1,9 @@
-# Shell scripts and Slurm files run on LUMI: keep LF line endings on every checkout.
-*.sh text eol=lf
-*.sbatch text eol=lf
-*.py text eol=lf
+# Every text file is stored and checked out with LF line endings, on Windows too, so that a file
+# written on one machine diffs cleanly on another and the scorers' outputs reproduce byte for byte.
+* text=auto eol=lf
+
+# Binary assets (git would detect them, but say so explicitly)
+*.mp3 binary
+*.webp binary
+*.png binary
+*.parquet binary

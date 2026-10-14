@@ -321,7 +321,7 @@ def judge_one(judge_id: str, arm, gt: str, ref_words: int) -> dict:
             }
             path = out_path(judge_id, arm.arm_id)
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(json.dumps(rec, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            path.write_text(json.dumps(rec, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
             return rec
         except Exception as exc:  # noqa: BLE001 - retried, then reported
             last = exc

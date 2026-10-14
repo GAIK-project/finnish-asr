@@ -29,6 +29,7 @@ bash $L download train       # FLEURS and VoxPopuli training data
 bash $L run train hf --name <name> --data skn+open --skn-text punct --epochs 3 --lora-r 64
 bash $L fetch-model <name>   # its train_log.json (add --adapter for the LoRA weights, gitignored)
 bash $L run timestamps hf --arm hf_whisper-large-v3 --arm hub_whisper-large-v3-fi-dialects
+bash $L run timestamps hf --fallback --arm <arm>   # adds the temperature-fallback long-form decode
 bash $L prepare lamurre                              # LA-murre dialect test, 10 WAVs by HTTP range
 bash $L download lamurre && bash $L prepare lamurre-train   # all LA-murre audio, 69 GB, CPU job
 bash $L clean [--weights]    # remove the project from scratch when done

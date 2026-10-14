@@ -153,3 +153,59 @@ def test_dialect_judge_is_a_new_public_prompt_version_with_the_published_schema(
         "segments_without_errors": 0,
         "segments_best_or_tied": 1,
     }
+
+
+def test_round_3_summary_is_numbers_only_and_matches_the_docs() -> None:
+    d = FI.RESULTS_DIR / "judgements_dialect" / "lamurre_fi"
+    summary = json.loads((d / "summary-r3.json").read_text(encoding="utf-8"))
+    assert summary["prompt_version"] == "dialect-judge-v1" and summary["segments"] == 577
+    assert summary["arms_judged_together"] == [
+        "hf_whisper-large-v3",
+        "ft_whisper-large-v3-fi-skn-punct-best",
+        "ft_whisper-large-v3-fi-skn-punct-ts",
+    ]
+    pts = {a: s["error_points_per_100w"] for a, s in summary["arms"].items()}
+    assert pts == {
+        "hf_whisper-large-v3": 24.18,
+        "ft_whisper-large-v3-fi-skn-punct-best": 13.72,
+        "ft_whisper-large-v3-fi-skn-punct-ts": 13.68,
+    }
+    assert set(summary) == {
+        "generated_utc", "benchmark", "judge", "prompt_version", "segments", "ref_words", "usage", "arms",
+        "arms_judged_together",
+    }  # fmt: skip
+
+
+def test_readme_aitta_rows_match_the_committed_agreement_file() -> None:
+    """The README quotes agreement-r2.json; rerunning judge_agreement.py must come with a README update."""
+    data = json.loads(
+        (FI.RESULTS_DIR / "judgements_dialect" / "lamurre_fi" / "agreement-r2.json").read_text(encoding="utf-8")
+    )
+    readme = (FI.REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    arms = [ja.BASE, "ft_whisper-large-v3-fi-skn", ja.PUBLISHED, "ft_whisper-large-v3-fi-skn-lamurre-best"]
+    for judge, name in (
+        ("aitta-gpt-oss-120b", "gpt-oss-120b (Aitta)"),
+        ("aitta-gemma-4-31b-it", "Gemma 4 31B (Aitta), sample"),
+        ("aitta-qwen3-6-27b", "Qwen3.6 27B (Aitta), sample"),
+    ):
+        j = data["judges"][judge]
+        pts = " | ".join(f"{j['points_per_100w'][a]:.1f}" for a in arms)
+        vs = j["published_vs_base"]
+        ref = j["against_reference"]
+        pairs = f"{ref['pairs_compared']:,}".replace(",", " ")
+        row = (
+            f"| {name} | {j['segments']} | {pts} | {vs['fewer_points']} / {vs['more_points']} | "
+            f"{ref['pairwise_same_preference'] * 100:.1f} % of {pairs} pairs |"
+        )
+        assert row in readme, row
+
+
+def test_prompt_hashes_in_the_docstring_match_the_run_metadata() -> None:
+    d = FI.RESULTS_DIR / "judgements_dialect" / "lamurre_fi"
+    sha = {
+        name: json.loads((d / name).read_text(encoding="utf-8"))["extra"]["prompt_sha256"]
+        for name in ("_run_metadata.json", "_run_metadata-r2.json", "_run_metadata-r3.json")
+    }
+    assert sha["_run_metadata.json"] == sha["_run_metadata-r3.json"]  # both three-arm rounds: one schema
+    assert sha["_run_metadata.json"][:8] == "8489bd83" and sha["_run_metadata-r2.json"][:8] == "10a38347"
+    assert "8489bd83" in jd.__doc__ and "10a38347" in jd.__doc__

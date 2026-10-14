@@ -14,7 +14,11 @@ judge_dialect.py as text, without importing it.
 Assets: hero.webp was generated with openai/gpt-image-2.5-sunburst on Replicate (an
 illustration, no real place or person); the two clips are SKN segments from the public dataset
 GAIK-project/skn-finnish-dialects-asr (CC BY 4.0), re-encoded as 48 kbit/s MP3; the icons are
-Lucide (ISC licence) from Iconify.
+Lucide (ISC licence) from Iconify, and Lucide's database and link icons are derived from Feather (MIT
+licence). The footer of each page gets {{credits}} from CREDITS below: the asset credits, the page's
+licence and LUMI's acknowledgement, whose wording LUMI prescribes in English
+(https://lumi-supercomputer.eu/acknowledgement/, the template for awards by LUMI consortium countries,
+filled in for access through CSC).
 """
 
 from __future__ import annotations
@@ -43,6 +47,26 @@ WER = [
     ("Vihti", 32.8, 14.4),
     ("ALL", 40.4, 21.1),
 ]
+LUMI_ACK = (
+    "We acknowledge CSC – IT Center for Science, Finland for awarding this project access to the LUMI "
+    "supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI consortium "
+    "through CSC – IT Center for Science, Finland."
+)
+LUCIDE = '<a href="https://lucide.dev/">Lucide</a>'
+FEATHER = '<a href="https://feathericons.com/">Feather</a>'
+CC_BY = '<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>'
+CREDITS = {
+    "fi": (
+        f"Kuvitus: tekoälyn tekemä (GPT Image 2.5). Äänet: kaksi SKN-pätkää, {CC_BY}. Kuvakkeet: {LUCIDE} "
+        f"(ISC-lisenssi); tietokanta- ja linkkikuvake pohjautuvat {FEATHER}-kuvakkeisiin (MIT-lisenssi). "
+        f"Tämä sivu: GAIK-hanke, Haaga-Helia, {CC_BY}. LUMIn edellyttämä kiitos: <i>{LUMI_ACK}</i>"
+    ),
+    "en": (
+        f"Illustration: AI-generated (GPT Image 2.5). Audio: two SKN segments, {CC_BY}. Icons: {LUCIDE} "
+        f"(ISC licence); the database and link icons are derived from {FEATHER} (MIT licence). "
+        f"This page: GAIK project, Haaga-Helia, {CC_BY}. {LUMI_ACK}"
+    ),
+}
 TEXT = {
     "fi": {
         "lang": "fi",
@@ -157,6 +181,7 @@ def build(lang: str) -> Path:
     body = body.replace("{{audio:palkane}}", "data:audio/mpeg;base64," + b64(SRC / "assets" / "palkane_0021.mp3"))
     body = body.replace("{{audio:heinola}}", "data:audio/mpeg;base64," + b64(SRC / "assets" / "heinola_0097.mp3"))
     body = body.replace("{{prompt}}", html.escape(prompt))
+    body = body.replace("{{credits}}", CREDITS[lang])
     body = body.replace("{{chart:loss}}", loss_chart(t)).replace("{{chart:wer}}", wer_chart(t))
     left = re.findall(r"\{\{[^}]+\}\}", body)
     if left:

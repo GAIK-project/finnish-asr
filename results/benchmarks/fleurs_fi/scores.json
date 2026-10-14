@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-13T17:21:50+00:00",
+  "generated_utc": "2026-10-14T12:19:03+00:00",
   "benchmark": "google/fleurs fi_fi test",
   "arms": [
     {
@@ -48,6 +48,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+      "label": "**This project, round 2 + timestamp tokens (`timestamps` revision)** \u2020\u2021\u00a7",
+      "utterances": 918,
+      "WER": 7.44,
+      "CER": 1.67,
+      "SUB": 5.97,
+      "DEL": 0.69,
+      "INS": 0.78,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.981,
+      "model": "whisper-large-v3-fi-skn-punct-ts",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
       "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM \u2020\u2021",
       "utterances": 918,
@@ -64,7 +79,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**This project, round 2: + punctuated SKN targets (publishable)** \u2020\u2021\u00a7",
+      "label": "**This project, round 2: + punctuated SKN targets (published)** \u2020\u2021\u00a7",
       "utterances": 918,
       "WER": 7.61,
       "CER": 1.65,

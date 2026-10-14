@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-13T17:21:56+00:00",
+  "generated_utc": "2026-10-14T12:19:03+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -49,7 +49,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**This project, round 2: + punctuated SKN targets (publishable)** \u2020\u2021\u00a7",
+      "label": "**This project, round 2: + punctuated SKN targets (published)** \u2020\u2021\u00a7",
       "utterances": 600,
       "WER": 21.08,
       "CER": 8.63,
@@ -75,6 +75,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.333,
       "model": "whisper-large-v3-fi-skn-r64e4",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+      "label": "**This project, round 2 + timestamp tokens (`timestamps` revision)** \u2020\u2021\u00a7",
+      "utterances": 600,
+      "WER": 21.4,
+      "CER": 8.7,
+      "SUB": 16.17,
+      "DEL": 2.42,
+      "INS": 2.81,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.464,
+      "model": "whisper-large-v3-fi-skn-punct-ts",
       "gpu": "AMD Instinct MI250X"
     },
     {

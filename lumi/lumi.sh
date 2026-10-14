@@ -18,6 +18,7 @@
 #   lumi/lumi.sh prepare lamurre-train    cut LA-murre training segments (CPU job, prepare_lamurre.py --train)
 #   lumi/lumi.sh run train hf [args]      LoRA fine-tune of Whisper (finetune_whisper.py, 16 h limit)
 #   lumi/lumi.sh run timestamps hf --arm A  timestamps and long-form decoding on SKN (eval_timestamps.py, 3 h)
+#                                      (--fallback: add the temperature-fallback long-form decode)
 #   lumi/lumi.sh fetch-model <name> [--adapter]  copy a fine-tune's train_log.json (and with --adapter its
 #                                      LoRA adapter, gitignored) into results/finetune/<name>/
 #   lumi/lumi.sh status                this repository's jobs and the last lines of their logs

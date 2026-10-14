@@ -172,7 +172,7 @@ def main() -> int:
         return 1
     print(f"{len(rows)} segments, {len(todo)} to do in {len(batches)} calls", flush=True)
     failures = 0
-    with ThreadPoolExecutor(args.workers) as pool, cache_path.open("a", encoding="utf-8") as cache:
+    with ThreadPoolExecutor(args.workers) as pool, cache_path.open("a", encoding="utf-8", newline="\n") as cache:
         for n, fut in enumerate(as_completed([pool.submit(call, args.mode, b) for b in batches]), 1):
             try:
                 rec = fut.result()
@@ -197,7 +197,7 @@ def main() -> int:
         elif args.mode == "punct":  # keep the segment with its human text
             out_rows.append({**r, "target": r["ref"], "target_by": "source"})
     Path(f"{stem}.targets.jsonl").write_text(
-        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in out_rows), encoding="utf-8"
+        "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in out_rows), encoding="utf-8", newline="\n"
     )
     stats = {
         "generated_utc": now_utc(),
@@ -210,7 +210,7 @@ def main() -> int:
         "failed_calls": failures,
         "usage": usage,
     }
-    Path(f"{stem}.targets.stats.json").write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8")
+    Path(f"{stem}.targets.stats.json").write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8", newline="\n")
     if batches:
         write_run_metadata(
             src.parent,

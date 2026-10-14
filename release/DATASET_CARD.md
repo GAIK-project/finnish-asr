@@ -86,12 +86,20 @@ interviewer's voice that is also heard in training.
    human transcript's; 15 024 of 15 042 train segments passed, the others have
    `text_source = human`. **Test transcripts are untouched human text.**
 
-Scripts: [`prepare_skn.py`](https://github.com/GAIK-project/finnish-asr/blob/main/scripts/prepare_skn.py) and
-[`prepare_targets.py`](https://github.com/GAIK-project/finnish-asr/blob/main/scripts/prepare_targets.py) in
-[GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr), which also holds the method and all results (summary in
-[gaik-toolkit · finnish_dialect_asr](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/finnish_dialect_asr)). Its
-[`results/labels/skn_parts.jsonl`](https://github.com/GAIK-project/finnish-asr/blob/main/results/labels/skn_parts.jsonl) gives SKN's sentence
-times inside every segment, by `id`.
+The scripts that made it are public in [GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr),
+which also holds the method and all results (summary in
+[gaik-toolkit · finnish_dialect_asr](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/finnish_dialect_asr)):
+
+- [`prepare_skn.py`](https://github.com/GAIK-project/finnish-asr/blob/main/scripts/prepare_skn.py) cuts SKN into these segments and splits them by
+  municipality;
+- [`prepare_targets.py`](https://github.com/GAIK-project/finnish-asr/blob/main/scripts/prepare_targets.py) adds the punctuation and keeps an answer
+  only if its words are unchanged;
+- [`prepare_timestamps.py`](https://github.com/GAIK-project/finnish-asr/blob/main/scripts/prepare_timestamps.py) turns SKN's sentence annotation into
+  sentence times inside every segment, [`results/labels/skn_parts.jsonl`](https://github.com/GAIK-project/finnish-asr/blob/main/results/labels/skn_parts.jsonl)
+  (by `id`: each sentence's start, end and word count), and into ten windows of about 4 minutes, one
+  per test municipality, for long-form tests,
+  [`results/labels/skn_longform.jsonl`](https://github.com/GAIK-project/finnish-asr/blob/main/results/labels/skn_longform.jsonl). The `timestamps`
+  revision of the model was trained with the sentence times of the training segments.
 
 ## Caveats
 

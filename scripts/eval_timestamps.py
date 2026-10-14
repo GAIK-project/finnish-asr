@@ -3,12 +3,17 @@ r"""Timestamps and long-form decoding on dialect speech: does training with time
 Two steps:
 
     run    (GPU job on LUMI)  bash lumi/lumi.sh run timestamps hf --arm <arm> [--arm ...] [--force]
+           and then           bash lumi/lumi.sh run timestamps hf --fallback --arm <arm> [--arm ...]
     score  (anywhere)         uv run python scripts/eval_timestamps.py score
 
 run decodes, per arm, (A) the 600 SKN test segments with return_timestamps=True, and (B) the ten
 long-form windows of results/labels/skn_longform.jsonl (about 4 minutes each from the ten test
 municipalities, cut from SKN's WAVs) twice: Whisper's own sequential long-form decoding with
-timestamps, and the quiet-point chunks of the model card (15-25 s, no timestamps). Raw outputs go to
+timestamps, and the quiet-point chunks of the model card (15-25 s, no timestamps). --fallback adds a
+third decode of the windows to an arm's existing record: sequential long-form decoding with OpenAI's
+temperature fallback against loops (KW_FALLBACK: temperatures 0.0-1.0, compression-ratio threshold
+1.35, log-probability threshold -1.0, no-speech threshold 0.6, no conditioning on the previous
+window). Raw outputs go to
 results/timestamps/<arm>.json, with the GPU and library versions; nothing is scored on LUMI. On LUMI
 the test segments come from $FIASR_DATA/skn_fi (prepare_skn.py) and the windows from
 $FIASR_DATA/skn_longform.jsonl (lumi.sh push-labels copies results/labels/skn_longform.jsonl there).
@@ -24,7 +29,10 @@ Output: results/timestamps/scores.json, _run_metadata.json and a table. SKN is C
 via Kielipankki); the raw outputs quote only SKN test material.
 
 Arms: hf_whisper-large-v3 (base), hub_whisper-large-v3-fi-dialects (the published model, downloaded
-from the Hub on the login node first), and ft_<name> for any fine-tuned model in $FIASR_MODELS.
+from the Hub on the login node first), and ft_<name> for any fine-tuned model in $FIASR_MODELS
+(ft_whisper-large-v3-fi-skn-punct-ts: the model trained with timestamp tokens, finetune_whisper.py
+--timestamps 0.5, published as the "timestamps" revision of the Hub model). The committed records
+record a local model by its name only.
 """
 
 from __future__ import annotations
@@ -54,6 +62,17 @@ LABELS = PROJECT / "results" / "labels"
 SR = 16000
 CHUNK = {"min_s": 15.0, "max_s": 25.0, "window_s": 0.1}
 KW = {"language": "fi", "task": "transcribe"}
+# OpenAI's long-form recipe against repetition: when a 30 s window's text compresses too well (a loop)
+# or its mean log-probability is too low, decode that window again at the next temperature.
+KW_FALLBACK = {
+    **KW,
+    "temperature": (0.0, 0.2, 0.4, 0.6, 0.8, 1.0),
+    "compression_ratio_threshold": 1.35,
+    "logprob_threshold": -1.0,
+    "no_speech_threshold": 0.6,
+    "condition_on_prev_tokens": False,
+}
+MODES = ("sequential", "sequential_fallback", "chunks")
 
 
 def arms() -> dict[str, str]:
@@ -119,6 +138,39 @@ def chunks_of(res: dict) -> list[dict]:
     ]
 
 
+def windows_rows() -> list[dict]:
+    path = DATA / "skn_longform.jsonl" if (DATA / "skn_longform.jsonl").exists() else LABELS / "skn_longform.jsonl"
+    return [json.loads(x) for x in path.read_text(encoding="utf-8").splitlines()]
+
+
+def run_fallback(arm_ids: list[str]) -> int:
+    """Add a "sequential_fallback" decode of the long-form windows to each arm's existing record."""
+    import torch
+    from transformers import pipeline
+
+    table = arms()
+    windows = windows_rows()
+    for arm in arm_ids:
+        out_path = OUT / f"{arm}.json"
+        record = json.loads(out_path.read_text(encoding="utf-8"))
+        asr = pipeline("automatic-speech-recognition", model=table[arm], dtype=torch.float16, device="cuda")
+        for row in windows:
+            audio = longform_audio(row)
+            res = asr({"raw": audio, "sampling_rate": SR}, return_timestamps=True, generate_kwargs=KW_FALLBACK)
+            record["longform"][row["recording"]]["sequential_fallback"] = {
+                "text": res["text"].strip(),
+                "chunks": chunks_of(res),
+            }
+            print(f"[run] {arm}: {row['recording']} fallback done", flush=True)
+        record["settings"]["generate_fallback"] = {
+            k: list(v) if isinstance(v, tuple) else v for k, v in KW_FALLBACK.items()
+        }
+        out_path.write_text(json.dumps(record, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+        del asr
+        torch.cuda.empty_cache()
+    return 0
+
+
 def run(arm_ids: list[str], force: bool) -> int:
     import soundfile as sf
     import torch
@@ -128,8 +180,7 @@ def run(arm_ids: list[str], force: bool) -> int:
     table = arms()
     OUT.mkdir(parents=True, exist_ok=True)
     test = [json.loads(x) for x in (DATA / "skn_fi" / "test.jsonl").read_text(encoding="utf-8").splitlines()]
-    lf_path = DATA / "skn_longform.jsonl" if (DATA / "skn_longform.jsonl").exists() else LABELS / "skn_longform.jsonl"
-    windows = [json.loads(x) for x in lf_path.read_text(encoding="utf-8").splitlines()]
+    windows = windows_rows()
     for arm in arm_ids:
         out_path = OUT / f"{arm}.json"
         if out_path.exists() and not force:
@@ -179,7 +230,7 @@ def run(arm_ids: list[str], force: bool) -> int:
             "test_segments": segs,
             "longform": longform,
         }
-        out_path.write_text(json.dumps(record, ensure_ascii=False) + "\n", encoding="utf-8")
+        out_path.write_text(json.dumps(record, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
         del asr
         torch.cuda.empty_cache()
     write_run_metadata(
@@ -276,13 +327,14 @@ def score() -> int:
         }
         lf = d["longform"]
         recs = sorted(lf)
-        for mode in ("sequential", "chunks"):
+        modes = [m for m in MODES if all(m in lf[r] for r in recs)]  # the fallback decode only where it was run
+        for mode in modes:
             texts = [lf[r][mode]["text"] for r in recs]
             row = {
                 "wer": wer([windows[r]["ref"] for r in recs], texts),
                 "windows_with_loop": sum(loops(t, windows[r]["ref"]) for r, t in zip(recs, texts, strict=True)),
             }
-            if mode == "sequential":
+            if mode.startswith("sequential"):
                 dist = []
                 for r in recs:
                     pred = [c["start"] for c in lf[r][mode]["chunks"] if c["start"] is not None]
@@ -291,25 +343,34 @@ def score() -> int:
             entry["longform"][mode] = row
         entry["longform"]["windows"] = len(recs)
         result[d["arm"]] = entry
-    (OUT / "scores.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
-    write_run_metadata(
-        OUT,
-        build_run_metadata(
-            app_under_test="Finnish dialect ASR: timestamps and long-form decoding",
-            dataset_path=LABELS / "skn_longform.jsonl",
-            runner_path=Path(__file__),
-            model_or_deployment=[models[a] for a in result],
-            extra={"arms": list(result), "decoded_on": gpus, "chunks": CHUNK, "generate": KW},
-        ),
+    meta = build_run_metadata(  # before anything is written, so repo_dirty describes the inputs
+        app_under_test="Finnish dialect ASR: timestamps and long-form decoding",
+        dataset_path=LABELS / "skn_longform.jsonl",
+        runner_path=Path(__file__),
+        model_or_deployment=[models[a] for a in result],
+        extra={
+            "arms": list(result),
+            "decoded_on": gpus,
+            "chunks": CHUNK,
+            "generate": KW,
+            "generate_fallback": {k: list(v) if isinstance(v, tuple) else v for k, v in KW_FALLBACK.items()},
+        },
     )
-    head = ("segWER", "seg<1s", "LF seq WER", "loops", "LF<1s", "LF chunk WER")
+    (OUT / "scores.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8", newline="\n")
+    write_run_metadata(OUT, meta)
+    head = ("segWER", "seg<1s", "LF seq WER", "loops", "LF<1s", "LF fallback WER", "loops", "LF<1s", "LF chunk WER")
     print(f"{'arm':40s} " + " ".join(f"{h:>{max(6, len(h))}s}" for h in head))
     for arm, e in result.items():
-        t, s, c = e["test_segments"], e["longform"]["sequential"], e["longform"]["chunks"]
-        print(
-            f"{arm:40s} {t['wer_with_timestamps']:6.1f} {t['boundaries']['within_1s'] or 0:6.2f} "
-            f"{s['wer']:10.1f} {s['windows_with_loop']:5d} {s['boundaries']['within_1s'] or 0:6.2f} {c['wer']:12.1f}"
-        )
+        t, c = e["test_segments"], e["longform"]["chunks"]
+        cells = [f"{t['wer_with_timestamps']:6.1f}", f"{t['boundaries']['within_1s'] or 0:6.2f}"]
+        for mode, width in (("sequential", 10), ("sequential_fallback", 15)):
+            s = e["longform"].get(mode)
+            cells += (
+                [f"{s['wer']:{width}.1f}", f"{s['windows_with_loop']:6d}", f"{s['boundaries']['within_1s'] or 0:6.2f}"]
+                if s
+                else [f"{'-':>{width}s}", f"{'-':>6s}", f"{'-':>6s}"]
+            )
+        print(f"{arm:40s} " + " ".join(cells) + f" {c['wer']:12.1f}")
     return 0
 
 
@@ -318,10 +379,13 @@ def main() -> int:
     parser.add_argument("cmd", nargs="?", default="run", choices=["run", "score"])
     parser.add_argument("--arm", action="append", default=[])
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--fallback", action="store_true", help="run: add the temperature-fallback long-form decode.")
     parser.add_argument("--env", help="Ignored: lumi/job.sbatch passes it to every runner.")
     args = parser.parse_args()
     if args.cmd == "score":
         return score()
+    if args.fallback:
+        return run_fallback(args.arm or list(arms()))
     return run(args.arm or list(arms()), args.force)
 
 

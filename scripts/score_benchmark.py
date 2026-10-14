@@ -11,7 +11,9 @@ LA-murre's per-utterance files (lamurre_fi/*.jsonl) hold the corpus's texts, whi
 *.jsonl keeps its committed scores.json as it is. Rebuild the files with prepare_lamurre.py and
 run_benchmark.py --bench lamurre_fi to rescore it.
 
-Also writes one table with every test set between the benchmark-table markers in README.md.
+Also writes one table with every test set between the benchmark-table markers in README.md, and a
+secret-free _score_run_metadata.json beside each rescored scores.json (built before anything is
+written, so its repo_dirty says whether the inputs were committed).
 
 Usage: uv run python scripts/score_benchmark.py
 No API keys needed.
@@ -47,7 +49,8 @@ HIDDEN = {"ft_whisper-large-v3-fi-skn-r64e4", "ft_whisper-large-v3-fi-skn-punct"
 LABELS = {
     "ft_whisper-large-v3-fi-pilot": "**This project's pilot: Whisper large-v3 + LoRA** †‡",
     "ft_whisper-large-v3-fi-skn": "**This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** †‡§",
-    "ft_whisper-large-v3-fi-skn-punct-best": "**This project, round 2: + punctuated SKN targets (publishable)** †‡§",
+    "ft_whisper-large-v3-fi-skn-punct-best": "**This project, round 2: + punctuated SKN targets (published)** †‡§",
+    "ft_whisper-large-v3-fi-skn-punct-ts": "**This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§",
     "ft_whisper-large-v3-fi-skn-lamurre-best": "**This project, round 2 internal: + LA-murre** †‡§¶",
     "hf_whisper-large-v3": "Whisper large-v3",
     "hf_whisper-large-v3-turbo": "Whisper large-v3 turbo",
@@ -110,6 +113,27 @@ def score_rows(bench: str) -> list[dict]:
     return rows
 
 
+def score_metadata(bench: str, rows: list[dict]) -> dict:
+    out_dir = RESULTS_DIR / "benchmarks" / bench
+    return build_run_metadata(
+        app_under_test=f"Finnish ASR public benchmarks: {BENCHES[bench]}",
+        dataset_path=out_dir,
+        runner_path=Path(__file__),
+        model_or_deployment=[r["model"] for r in rows if r["model"]],
+        extra={"arms": [r["arm_id"] for r in rows], "utterances": sorted({r["utterances"] for r in rows})},
+    )
+
+
+def write_scores(bench: str, rows: list[dict], meta: dict) -> None:
+    out_dir = RESULTS_DIR / "benchmarks" / bench
+    (out_dir / "scores.json").write_text(
+        json.dumps({"generated_utc": now_utc(), "benchmark": BENCHES[bench], "arms": rows}, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    write_run_metadata(out_dir, meta, name="_score_run_metadata.json")
+
+
 def score(bench: str, write: bool = True) -> list[dict]:
     """Rescore a benchmark and write its scores.json; without *.jsonl, the committed scores.json rows."""
     out_dir = RESULTS_DIR / "benchmarks" / bench
@@ -118,28 +142,17 @@ def score(bench: str, write: bool = True) -> list[dict]:
         committed = out_dir / "scores.json"
         return json.loads(committed.read_text(encoding="utf-8"))["arms"] if committed.exists() else []
     if write:
-        (out_dir / "scores.json").write_text(
-            json.dumps({"generated_utc": now_utc(), "benchmark": BENCHES[bench], "arms": rows}, indent=2) + "\n",
-            encoding="utf-8",
-            newline="\n",
-        )
-        write_run_metadata(
-            out_dir,
-            build_run_metadata(
-                app_under_test=f"Finnish ASR public benchmarks: {BENCHES[bench]}",
-                dataset_path=out_dir,
-                runner_path=Path(__file__),
-                model_or_deployment=[r["model"] for r in rows if r["model"]],
-                extra={"arms": [r["arm_id"] for r in rows], "utterances": sorted({r["utterances"] for r in rows})},
-            ),
-            name="_score_run_metadata.json",
-        )
+        write_scores(bench, rows, score_metadata(bench, rows))
     return rows
 
 
 def main() -> int:
     argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter).parse_args()
-    scores = {b: {r["arm_id"]: r for r in score(b)} for b in BENCHES}
+    fresh = {b: score_rows(b) for b in BENCHES}
+    metas = {b: score_metadata(b, rows) for b, rows in fresh.items() if rows}  # all before the first write
+    for b, meta in metas.items():
+        write_scores(b, fresh[b], meta)
+    scores = {b: {r["arm_id"]: r for r in (fresh[b] or score(b, write=False))} for b in BENCHES}
     fl, vp, sk, la = scores["fleurs_fi"], scores["voxpopuli_fi"], scores["skn_fi"], scores["lamurre_fi"]
     arms = sorted((set(fl) | set(vp) | set(sk)) - HIDDEN, key=lambda a: (sk.get(a, fl.get(a, {})).get("WER", 999), a))
 

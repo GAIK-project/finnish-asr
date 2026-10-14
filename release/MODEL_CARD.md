@@ -61,7 +61,7 @@ trained at Haaga-Helia University of Applied Sciences in the [GAIK project](http
 with the University of Helsinki and Tampere University, co-funded by the European Union (ERDF).
 
 🌐 [gaik.ai](https://gaik.ai/) · 💻 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) ·
-📊 [code, method and results](https://github.com/GAIK-project/finnish-asr) ·
+📊 [code, method and results on GitHub: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr) ·
 🗂️ [training dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
 
 | Test | Whisper large-v3 | This model |
@@ -74,6 +74,18 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 
 WER after lower-casing and removing punctuation. The ready-made Finnish fine-tunes trained on
 read speech score 48–57 % on the same dialect test.
+
+## Variants
+
+- **`main`, tag `v1.0`: this model**, the one to use by default. `revision="v1.0"` pins it.
+- **`timestamps`: the same recipe trained with Whisper's timestamp tokens** on half of the SKN
+  segments. It writes usable sentence times (58 % of SKN sentence starts within 1 s; this model 1 %)
+  and transcribes long audio in one go with OpenAI's temperature fallback (18.1 % WER on ten 4-minute
+  dialect interviews, no loops; this model 19.8 %), at about the same dialect accuracy (SKN 21.4 %,
+  same LA-murre judge score) but slightly worse on VoxPopuli (11.2 %) and on the webinar in pieces
+  (15.2 %). Use it when you need sentence timestamps or long-form decoding without cutting the audio
+  yourself, always with its fallback settings: load it with `revision="timestamps"`; its card is on
+  [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/timestamps/README.md).
 
 ## Use it
 
@@ -127,23 +139,30 @@ for piece, o in zip(pieces, out):
 
 ### Settings to avoid
 
-Measured on a 180 s Finnish webinar (402 words), with the model downloaded from this repository:
+Measured on a 180 s Finnish webinar (402 words), with the model downloaded from this repository,
+against the University of Helsinki team's reference and against the version a listener checked at
+its 42 disputed spans:
 
-| Decoding | WER % | |
-|---|--:|---|
-| `quiet_chunks` above | **13.7** | recommended |
-| pipeline `chunk_length_s=20` | 14.7 | works |
-| pipeline `chunk_length_s=30` | 52.5 | **repeats one phrase over and over**: do not use |
-| pipeline `chunk_length_s=30`, `no_repeat_ngram_size=6` | 14.4 | the guard stops the repeating |
+| Decoding | WER % | WER %, checked reference | |
+|---|--:|--:|---|
+| `quiet_chunks` above | **13.7** | **13.5** | recommended |
+| pipeline `chunk_length_s=20` | 14.7 | 13.5 | works |
+| pipeline `chunk_length_s=30` | 52.5 | 51.5 | **repeats one phrase over and over**: do not use |
+| pipeline `chunk_length_s=30`, `no_repeat_ngram_size=6` | 14.4 | 14.2 | the guard stops the repeating |
 
-Do not use `return_timestamps=True` either. In that mode Whisper keeps its place in long audio by
-writing time marks as it goes. This model was trained on text without those time marks, so its times
-are wrong and on long audio it can lose its place and repeat itself. Measured on SKN's dialect test
+Source: the six decodings in [`results/clip/decoding_check.json`](https://github.com/GAIK-project/finnish-asr/blob/main/results/clip/decoding_check.json),
+scored by `score_asr.py --decoding` into [`decoding_scores.json`](https://github.com/GAIK-project/finnish-asr/blob/main/results/clip/decoding_scores.json).
+
+Do not use `return_timestamps=True` with this model either. In that mode Whisper keeps its place in
+long audio by writing time marks as it goes. This model was trained on text without those time marks,
+so its times are wrong and on long audio it can lose its place and repeat itself; the `timestamps`
+revision above was trained with them. Measured on SKN's dialect test
 (600 segments, 791 sentence starts), only 0.8 % of the sentence starts had a time mark within 0.5 s
 (plain Whisper large-v3: 53.5 %), and on ten 4-minute dialect recordings Whisper's own long-form mode
 gave 21.5 % WER with one recording repeating a phrase, against 17.3 % for the pieces above
-([details](https://github.com/GAIK-project/finnish-asr#timestamps-and-long-form-audio)). If you need times, use the piece start times printed
-above; they are exact to the cut points.
+([details](https://github.com/GAIK-project/finnish-asr#timestamps-and-long-form-audio)). If you need
+times, use the piece start times printed above, which are exact to the cut points, or the
+`timestamps` revision.
 
 The 13.9 % in the first table is the same model before upload, decoded one piece at a time like the
 base model's row; this repository's copy with the code above (`batch_size=8`) gives 13.7 %, one word
@@ -163,7 +182,7 @@ of 402 apart.
 
 ![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, round 1 22.2, this model 21.1, internal model with LA-murre 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, this model 13.6, internal model with LA-murre 11.4.](dialect-finetune.svg)
 
-"Round 2, publishable" in the chart is this model. The model with LA-murre was trained on
+"Ours, round 2 (published)" in the chart is this model. The model with LA-murre was trained on
 no-derivatives data and is not shared.
 
 1. 🎙️ **Dialect speech.** Interviews from [Suomen kielen näytteitä](https://www.kielipankki.fi/corpora/skn/)
@@ -182,8 +201,8 @@ no-derivatives data and is not shared.
    (about 2 % of the weights); AdamW, learning rate 1e-4 with 5 % warm-up and linear decay,
    batch 8, bf16. Three epochs, keeping the one with the lowest validation loss (epoch 2: 0.206,
    base model 0.538). The adapter is merged into the weights published here.
-5. 🖥️ **Compute.** 3 h 14 min on one AMD MI250X GPU on the [LUMI](https://www.lumi-supercomputer.eu/)
-   supercomputer.
+5. 🖥️ **Compute.** 3 h 8 min of training with per-epoch validation on one AMD MI250X GPU on the
+   [LUMI](https://www.lumi-supercomputer.eu/) supercomputer.
 
 ## How it was measured
 
@@ -198,9 +217,12 @@ no-derivatives data and is not shared.
   reference words, per 100 words. Dialect against standard forms, punctuation and fillers are
   not errors.
 
-One training run and one seed. The main judge is one model, Claude Opus 5.5; an open model on CSC's
-Aitta service (gpt-oss-120b), run as a second judge on all 583 segments, puts the four models in the
-same order. Code, method, all results and a comparison with 20 other set-ups:
+One training run and one seed. The main judge is one model, Claude Opus 5.5. Three open models on
+CSC's Aitta service, given the same blind task, agree: gpt-oss-120b on all 583 segments prefers the
+same model as Claude in 81 % of the pairs where both see a difference, and Gemma 4 31B and Qwen3.6 27B,
+on a sample, in 92–93 %. All four judges rank the internal LA-murre model first, this model and
+round 1 about level, and plain Whisper large-v3 clearly last; their point scales differ, so compare
+models within one judge. Code, method, all results and a comparison with 20 other set-ups:
 [GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr); summaries in gaik-toolkit:
 [finnish_dialect_asr](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/finnish_dialect_asr) and
 [transcription_eval](https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval#october-2026-current-models-and-an-llm-judge).
@@ -213,7 +235,10 @@ same order. Code, method, all results and a comparison with 20 other set-ups:
   Language Bank of Finland, CC BY 4.0, [urn:nbn:fi:lb-2020112937](http://urn.fi/urn:nbn:fi:lb-2020112937).
   Download: [kielipankki.fi/download/SKN](https://www.kielipankki.fi/download/SKN/).
 - **FLEURS**, Google, CC BY 4.0. **VoxPopuli**, Meta, CC0.
-- Test only, not in the training data: **Lauseopin arkiston murrekorpus (LA-murre)**, University of Turku
-  and Kotus, via Kielipankki, CC BY-ND 4.0, [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935).
-- Computing: LUMI, through CSC – IT Center for Science, Finland.
+- Used only to test this model, none of it in its training data: **Lauseopin arkiston murrekorpus
+  (LA-murre)**, University of Turku and Kotus, via Kielipankki, CC BY-ND 4.0,
+  [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935).
+- Computing on LUMI. We acknowledge CSC – IT Center for Science, Finland for awarding this project access to
+  the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI
+  consortium through CSC – IT Center for Science, Finland.
 - Made in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).

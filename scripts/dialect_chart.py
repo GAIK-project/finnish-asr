@@ -33,7 +33,7 @@ ARMS = {
     "hf_whisper-large-finnish-v3": ("Finnish-NLP whisper-large-finnish-v3", False),
     "hf_whisper-large-v3": ("Whisper large-v3", False),
     "ft_whisper-large-v3-fi-skn": ("Ours, round 1", True),
-    "ft_whisper-large-v3-fi-skn-punct-best": ("Ours, round 2 (publishable)", True),
+    "ft_whisper-large-v3-fi-skn-punct-best": ("Ours, round 2 (published)", True),
     "ft_whisper-large-v3-fi-skn-lamurre-best": ("Ours, round 2 + LA-murre (internal)", True),
 }
 W, ROW, TOP, LABEL_W, PANEL_W, GAP = 1000, 34, 92, 270, 290, 60

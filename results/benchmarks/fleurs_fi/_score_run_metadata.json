@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T12:19:02+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR public benchmarks: google/fleurs fi_fi test",
+  "runner_path": "scripts/score_benchmark.py",
+  "dataset_path": "results/benchmarks/fleurs_fi",
+  "dataset_git_object": "12d7ff192799fe05ba691d872932922bbd06fb75",
+  "model_or_deployment": [
+    "whisper-large-v3-fi-pilot",
+    "Finnish-NLP/whisper-large-finnish-v3",
+    "openai/whisper-large-v3",
+    "whisper-large-v3-fi-skn-punct-ts",
+    "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+    "whisper-large-v3-fi-skn-punct-best",
+    "whisper-large-v3-fi-skn-punct",
+    "whisper-large-v3-fi-skn",
+    "whisper-large-v3-fi-skn-lamurre-best",
+    "whisper-large-v3-fi-skn-r64e4",
+    "whisper-large-v3-fi-skn-lamurre",
+    "openai/whisper-large-v3-turbo",
+    "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+    "nvidia/canary-1b-v2",
+    "oruk/orukeet",
+    "nvidia/parakeet-tdt-0.6b-v3",
+    "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
+    "Qwen/Qwen3-ASR-1.7B"
+  ],
+  "cli_args": [],
+  "env": {},
+  "extra": {
+    "arms": [
+      "ft_whisper-large-v3-fi-pilot",
+      "hf_whisper-large-finnish-v3",
+      "hf_whisper-large-v3",
+      "ft_whisper-large-v3-fi-skn-punct-ts",
+      "nemo_rasmus-canary-fi-v2-kenlm",
+      "ft_whisper-large-v3-fi-skn-punct-best",
+      "ft_whisper-large-v3-fi-skn-punct",
+      "ft_whisper-large-v3-fi-skn",
+      "ft_whisper-large-v3-fi-skn-lamurre-best",
+      "ft_whisper-large-v3-fi-skn-r64e4",
+      "ft_whisper-large-v3-fi-skn-lamurre",
+      "hf_whisper-large-v3-turbo",
+      "nemo_rasmus-canary-fi-v2",
+      "nemo_canary-1b-v2",
+      "hf_orukeet",
+      "hf_parakeet-tdt-0.6b-v3",
+      "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+      "qwen_qwen3-asr-1.7b"
+    ],
+    "utterances": [
+      918
+    ]
+  }
+}

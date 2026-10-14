@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-14T11:24:23+00:00",
+  "generated_utc": "2026-10-14T12:18:25+00:00",
   "reference": "data/ajokortti/reference.txt",
   "normalization": "HY error_analysis.py: jiwer ToLowerCase, RemovePunctuation (every Unicode P* character, hyphens included), RemoveMultipleSpaces (runs of 2+ whitespace -> one space), Strip, split on ' '. CER uses the same steps with a character split (spaces count). CER_nospace also removes all whitespace. A single line break is not collapsed, so it glues two words into one token, as in HY's scorer; see each arm's whitespace_merge.",
   "arms": [
@@ -247,6 +247,32 @@
       "latency_s": 98.73
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts-chunks",
+      "label": "Fine-tuned whisper-large-v3-fi-skn-punct-ts, chunked",
+      "model": "whisper-large-v3-fi-skn-punct-ts",
+      "provider": "huggingface-gpu",
+      "origin": "this project",
+      "metrics": {
+        "WER": 15.17,
+        "CER": 5.8,
+        "SUB": 9.95,
+        "DEL": 1.24,
+        "INS": 3.98,
+        "spelling_rate": 4.48,
+        "CER_nospace": 5.67,
+        "hits": 357,
+        "substitutions": 40,
+        "deletions": 5,
+        "insertions": 16,
+        "ref_words": 402,
+        "hyp_words": 413
+      },
+      "WER_nl": 15.17,
+      "runs": 1,
+      "WER_range": null,
+      "latency_s": 41.75
+    },
+    {
       "arm_id": "hf_whisper-large-v3-chunks",
       "label": "Whisper large-v3, chunked",
       "model": "openai/whisper-large-v3",
@@ -297,6 +323,32 @@
       "runs": 1,
       "WER_range": null,
       "latency_s": 103.65
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+      "label": "Fine-tuned whisper-large-v3-fi-skn-punct-ts",
+      "model": "whisper-large-v3-fi-skn-punct-ts",
+      "provider": "huggingface-gpu",
+      "origin": "this project",
+      "metrics": {
+        "WER": 16.67,
+        "CER": 5.29,
+        "SUB": 10.95,
+        "DEL": 2.24,
+        "INS": 3.48,
+        "spelling_rate": 5.47,
+        "CER_nospace": 5.11,
+        "hits": 349,
+        "substitutions": 44,
+        "deletions": 9,
+        "insertions": 14,
+        "ref_words": 402,
+        "hyp_words": 407
+      },
+      "WER_nl": 16.67,
+      "runs": 1,
+      "WER_range": null,
+      "latency_s": 150.52
     },
     {
       "arm_id": "openai_gpt-4o-transcribe",
