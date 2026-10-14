@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-14T12:19:02+00:00",
+  "generated_at_utc": "2026-10-14T12:43:43+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
-  "repo_dirty": true,
+  "repo_commit": "89f1e37105482bfdb525daa96335586724762448",
+  "repo_dirty": false,
   "app_under_test": "Finnish ASR public benchmarks: google/fleurs fi_fi test",
   "runner_path": "scripts/score_benchmark.py",
   "dataset_path": "results/benchmarks/fleurs_fi",
-  "dataset_git_object": "12d7ff192799fe05ba691d872932922bbd06fb75",
+  "dataset_git_object": "93bd967aa6bc1bbf5c35c2d0bb283d8bf77b7c16",
   "model_or_deployment": [
     "whisper-large-v3-fi-pilot",
     "Finnish-NLP/whisper-large-finnish-v3",

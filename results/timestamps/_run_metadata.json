@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-14T12:14:31+00:00",
+  "generated_at_utc": "2026-10-14T12:44:03+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "3f79aeb9ed6ad4776d003c3a484e3655b2da60a3",
-  "repo_dirty": true,
+  "repo_commit": "89f1e37105482bfdb525daa96335586724762448",
+  "repo_dirty": false,
   "app_under_test": "Finnish dialect ASR: timestamps and long-form decoding",
   "runner_path": "scripts/eval_timestamps.py",
   "dataset_path": "results/labels/skn_longform.jsonl",
-  "dataset_git_object": "d0e813edfc83b4d3d842af4331a047b73b78c0fe",
+  "dataset_git_object": "998d56ad227e559464d2882900fee531f2858ef5",
   "model_or_deployment": [
     "whisper-large-v3-fi-skn-punct-ts",
     "openai/whisper-large-v3",
