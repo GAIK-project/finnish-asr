@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 432" width="1000" height="432" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="SKN dialect test word error rate: our model 21.1 %, the best other open model 40.4 %">
+<rect width="1000" height="432" rx="12" fill="#ffffff"/>
+<text x="24.0" y="36.0" font-size="19" font-weight="700" fill="#1f2328" text-anchor="start">Dialect test: our model against the other open models</text>
+<text x="24.0" y="60.0" font-size="14" font-weight="400" fill="#59636e" text-anchor="start">Word error rate %, 600 segments from 10 municipalities left out of our training. Lower is better.</text>
+<text x="24.0" y="80.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Paid API services were not run on the dialect test.</text>
+<line x1="342.0" y1="90" x2="342.0" y2="402" stroke="#d8dee4"/>
+<text x="342.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">0</text>
+<line x1="422.0" y1="90" x2="422.0" y2="402" stroke="#d8dee4"/>
+<text x="422.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">10</text>
+<line x1="502.0" y1="90" x2="502.0" y2="402" stroke="#d8dee4"/>
+<text x="502.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">20</text>
+<line x1="582.0" y1="90" x2="582.0" y2="402" stroke="#d8dee4"/>
+<text x="582.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">30</text>
+<line x1="662.0" y1="90" x2="662.0" y2="402" stroke="#d8dee4"/>
+<text x="662.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">40</text>
+<line x1="742.0" y1="90" x2="742.0" y2="402" stroke="#d8dee4"/>
+<text x="742.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">50</text>
+<line x1="822.0" y1="90" x2="822.0" y2="402" stroke="#d8dee4"/>
+<text x="822.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">60</text>
+<line x1="902.0" y1="90" x2="902.0" y2="402" stroke="#d8dee4"/>
+<text x="902.0" y="418.0" font-size="11" font-weight="400" fill="#59636e" text-anchor="middle">70</text>
+<text x="330.0" y="115.0" font-size="14" font-weight="700" fill="#1f2328" text-anchor="end">Ours (published)</text>
+<rect x="342" y="101" width="168.6" height="24" rx="3" fill="#2f6fb3"/>
+<text x="518.6" y="115.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">21.1</text>
+<text x="330.0" y="149.0" font-size="14" font-weight="700" fill="#1f2328" text-anchor="end">Ours, timestamps version</text>
+<rect x="342" y="135" width="171.2" height="24" rx="3" fill="#2f6fb3"/>
+<text x="521.2" y="149.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">21.4</text>
+<text x="330.0" y="183.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">Whisper large-v3 (OpenAI)</text>
+<rect x="342" y="169" width="323.0" height="24" rx="3" fill="#9aa4ae"/>
+<text x="673.0" y="183.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">40.4</text>
+<text x="330.0" y="217.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">Whisper large-v3 turbo (OpenAI)</text>
+<rect x="342" y="203" width="339.8" height="24" rx="3" fill="#9aa4ae"/>
+<text x="689.8" y="217.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">42.5</text>
+<text x="330.0" y="251.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">Canary 1B v2 (NVIDIA)</text>
+<rect x="342" y="237" width="365.2" height="24" rx="3" fill="#9aa4ae"/>
+<text x="715.2" y="251.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">45.6</text>
+<text x="330.0" y="285.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">Finnish Canary v2 + KenLM (RASMUS)</text>
+<rect x="342" y="271" width="380.8" height="24" rx="3" fill="#9aa4ae"/>
+<text x="730.8" y="285.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">47.6</text>
+<text x="330.0" y="319.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">Finnish Canary v2 (RASMUS)</text>
+<rect x="342" y="305" width="401.0" height="24" rx="3" fill="#9aa4ae"/>
+<text x="751.0" y="319.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">50.1</text>
+<text x="330.0" y="353.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">whisper-large-finnish-v3 (Finnish-NLP)</text>
+<rect x="342" y="339" width="453.0" height="24" rx="3" fill="#9aa4ae"/>
+<text x="803.0" y="353.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">56.6</text>
+<text x="330.0" y="387.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="end">Qwen3-ASR 1.7B (Alibaba)</text>
+<rect x="342" y="373" width="533.4" height="24" rx="3" fill="#9aa4ae"/>
+<text x="883.4" y="387.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">66.7</text>
+</svg>

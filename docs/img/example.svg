@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 404" width="1000" height="404" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="A Heinola test segment: Whisper large-v3 gets 8 of 19 words wrong, our model 1">
+<rect width="1000" height="404" rx="12" fill="#ffffff"/>
+<text x="24.0" y="38.0" font-size="19" font-weight="700" fill="#1f2328" text-anchor="start">One real test sentence, from a municipality the model never heard</text>
+<g transform="translate(24.0 56.0) scale(0.917)" fill="none" stroke="#1f2328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 10v3m4-7v11m4-14v18m4-13v7m4-10v13m4-8v3"/></g>
+<text x="54.0" y="73.0" font-size="14" font-weight="400" fill="#59636e" text-anchor="start">Heinola · SKN test segment SKN45a_Heinola_0097 · an older speaker&#x27;s dialect</text>
+<rect x="24" y="104" width="952" height="76" rx="10" fill="#f6f8fa" stroke="#59636e" stroke-width="1"/>
+<text x="42.0" y="130.0" font-size="14" font-weight="700" fill="#59636e" text-anchor="start">What was said (a person&#x27;s standard-Finnish transcript)</text>
+<text x="42.0" y="160.0" font-size="16" fill="#1f2328">vaikka minäkin välistä vien juomaakin sille niin ei se pure mutta se irvistää että luulisi että nyt se puree</text>
+<rect x="24" y="194" width="952" height="76" rx="10" fill="#ffffff" stroke="#9aa4ae" stroke-width="2"/>
+<text x="42.0" y="220.0" font-size="14" font-weight="700" fill="#9aa4ae" text-anchor="start">Whisper large-v3 (OpenAI), as it is</text>
+<text x="958.0" y="220.0" font-size="15" font-weight="700" fill="#b3402e" text-anchor="end">8 of 19 words wrong</text>
+<text x="42.0" y="250.0" font-size="16" fill="#1f2328"><tspan font-weight="700" fill="#b3402e">aika miekivälistäviä</tspan> juomaakin sille, niin ei se pure. <tspan font-weight="700" fill="#b3402e">Mut</tspan> se <tspan font-weight="700" fill="#b3402e">hirvisti</tspan>, että <tspan font-weight="700" fill="#b3402e">luulis</tspan>, että nyt se <tspan font-weight="700" fill="#b3402e">puri</tspan>.</text>
+<rect x="24" y="284" width="952" height="76" rx="10" fill="#ffffff" stroke="#2f6fb3" stroke-width="2"/>
+<text x="42.0" y="310.0" font-size="14" font-weight="700" fill="#2f6fb3" text-anchor="start">Our model</text>
+<text x="958.0" y="310.0" font-size="15" font-weight="700" fill="#2f6fb3" text-anchor="end">1 of 19 words wrong</text>
+<text x="42.0" y="340.0" font-size="16" fill="#1f2328">Vaikka minäkin välistä vien juomaakin sille, niin ei se pure, mutta se <tspan font-weight="700" fill="#b3402e">irvisti</tspan>, että luulisi, että nyt se puree.</text>
+<text x="24.0" y="386.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">In English: “Even when I sometimes bring it something to drink, it doesn&#x27;t bite, but it grimaces so you&#x27;d think it bites now.”</text>
+</svg>

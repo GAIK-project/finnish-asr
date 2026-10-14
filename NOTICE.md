@@ -60,17 +60,22 @@ where they are public. This repository holds model transcripts of the clip (`res
 transcripts (`results/judgements/`), and the reference's tokens and sentences with word times
 (`results/clip/gt_alignment.json`), for evaluation.
 
-## Assets of the story pages
+## Assets of the story pages and the README
 
-- `docs/story/src/assets/hero.webp`: an AI-generated illustration (GPT Image 2.5), no real place or
-  person.
+- `docs/story/src/assets/hero.webp` and `docs/img/banner.webp`: AI-generated illustrations (GPT
+  Image 2.5; the banner made with the hero as a style reference), no real place or person.
 - `docs/story/src/assets/icons/*.svg`: [Lucide](https://lucide.dev/) icons (audio-lines, chart-column,
-  cpu, database, file-text, graduation-cap, link, map-pin, pencil-line, scale, shield-check,
+  cpu, database, file-text, graduation-cap, link, map-pin, package, pencil-line, scale, shield-check,
   sparkles), ISC licence, Copyright (c) 2026 Lucide Icons and Contributors; `database` and `link` are
   derived from [Feather](https://feathericons.com/), MIT licence, Copyright (c) 2013-present Cole
   Bemis. The full licence text is in
   [`docs/story/src/assets/icons/LICENSE.lucide.txt`](docs/story/src/assets/icons/LICENSE.lucide.txt).
-  The built pages (`docs/story/story.*.html`) carry the same credit in their footer.
+  The built pages (`docs/story/story.*.html`) carry the same credit in their footer, and the README's
+  figures in `docs/img/` (drawn by `scripts/readme_figures.py`) use the same icons.
+- `docs/img/logos/*.svg`: the logos of Google, Meta, OpenAI, Hugging Face and Claude (Anthropic), from
+  [svgl](https://svgl.app/). They are their owners' trademarks, used in the README's figures only to
+  name the data sources and tools; no endorsement is implied, and they are not covered by this
+  repository's licences.
 
 ## Vendored code
 

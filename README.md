@@ -1,4 +1,125 @@
-# Finnish speech-to-text: 20+ models compared, and a Whisper fine-tune for dialects
+<p align="center">
+  <img src="docs/img/banner.webp" alt="An old reel-to-reel tape recorder and a laptop showing a sound wave and a transcript, on a farmhouse kitchen table" width="100%">
+</p>
+
+# Finnish dialect speech-to-text
+
+**We taught OpenAI's Whisper to understand Finnish dialects.** On dialect speech it now gets about
+half as many words wrong (40 % → 21 %), and ordinary Finnish stays about as good as before. The model
+and its training data are free to use on Hugging Face.
+
+🤗 [Model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects) ·
+🗂️ [Training data](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr) ·
+📖 The story, with audio: [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) ·
+[in English](https://gaik-project.github.io/finnish-asr/story/story.en.html) ·
+🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) ·
+🌐 [gaik.ai](https://gaik.ai/)
+
+Made by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of Applied
+Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).
+
+| | Whisper large-v3 | Our model |
+|---|--:|--:|
+| 🗣️ Dialect speech: words wrong | 40.4 % | **21.1 %** |
+| ⚖️ Another dialect corpus: meaning errors per 100 words | 25.9 | **13.6** |
+| 📖 Read Finnish (FLEURS): words wrong | 7.4 % | 7.6 % |
+| 🏛️ Parliament speech (VoxPopuli): words wrong | 12.7 % | **10.8 %** |
+
+## 1. What it does
+
+You give it Finnish speech, dialect or not. It writes standard Finnish, with punctuation.
+
+<img src="docs/img/example.svg" alt="A Heinola test sentence: Whisper large-v3 gets 8 of 19 words wrong, our model 1" width="100%">
+
+## 2. Where the data comes from
+
+<img src="docs/img/data-sources.svg" alt="Whisper large-v3 by OpenAI as the starting model; SKN, FLEURS by Google and VoxPopuli by Meta for training and testing; LA-murre for testing only" width="100%">
+
+- **Whisper large-v3**, OpenAI: the model we started from. [openai/whisper-large-v3](https://huggingface.co/openai/whisper-large-v3), Apache 2.0.
+- **SKN, Suomen kielen näytteitä**: dialect interviews from 50 municipalities, recorded in the
+  1960s–70s, each sentence written down by a person. Kotus, via
+  [Kielipankki](http://urn.fi/urn:nbn:fi:lb-2020112937), CC BY 4.0.
+- **FLEURS**, Google: Wikipedia sentences read aloud. [google/fleurs](https://huggingface.co/datasets/google/fleurs), CC BY 4.0.
+- **VoxPopuli**, Meta: European Parliament speeches. [facebook/voxpopuli](https://huggingface.co/datasets/facebook/voxpopuli), CC0.
+- **LA-murre**: dialect interviews from 10 other places, used only for testing. University of Turku
+  and Kotus, via [Kielipankki](http://urn.fi/urn:nbn:fi:lb-2020112935), CC BY-ND 4.0.
+
+## 3. What the language model did
+
+The audio and the words are people's work. A language model, Claude Opus 5.5, helped in two places:
+it added punctuation to the training text, and it judged the test results (step 5 below).
+
+<img src="docs/img/punctuation.svg" alt="Before: a transcript without punctuation. After: the same words with a question mark, a capital and a full stop" width="100%">
+
+## 4. How we made it
+
+<img src="docs/img/pipeline.svg" alt="Six steps: dialect speech, Opus adds punctuation, training on LUMI, word error test, blind LLM judge, published on Hugging Face" width="100%">
+
+Training ran on [LUMI](https://www.lumi-supercomputer.eu/), the EuroHPC supercomputer hosted by CSC
+in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-again) lists the commands.
+
+## 5. How we tested it
+
+The test municipalities were kept out of training, so the test is speech the model had never heard:
+
+<img src="docs/img/data-split.svg" alt="SKN's 50 municipalities: 38 for training, 2 for validation, 10 for the test; LA-murre as a second test" width="100%">
+
+We scored it in two ways. Word error rate counts every word that differs. The blind judge sees the
+transcripts without knowing which model wrote them and counts only errors that change the meaning:
+
+<img src="docs/img/two-measures.svg" alt="Word error rate counts every differing word; the blind judge counts only meaning errors" width="100%">
+
+Three open models on CSC's Aitta service repeated the judging and put the
+models in the same order ([Second opinions](#second-opinions-open-model-judges-on-csc-aitta)).
+
+## 6. How it compares
+
+**On dialects it is far ahead of every other open model we ran:**
+
+<img src="docs/img/dialect-ranking.svg" alt="Dialect test word error rate: ours 21.1 %, Whisper large-v3 40.4 %, other open models 42.5–66.7 %" width="100%">
+
+**On ordinary spoken Finnish it is not the best.** On a 180 s dental-education webinar full of brand
+names, Gemini 3.5 Flash makes the fewest meaning errors and plain Whisper large-v3 is the best open
+model. Our model spells rare names and dental terms worse:
+
+<img src="docs/img/clip-ranking.svg" alt="Webinar clip: Gemini 3.5 Flash first; our published model 18th of 26 set-ups" width="100%">
+
+So: use our model for dialect speech, and plain Whisper large-v3 or an API service for standard
+business Finnish. All 26 set-ups are in the [full table](#tldr).
+
+## 7. Why it got better
+
+- 🎧 **It practised the exact task.** 62 hours of dialect speech, each sentence paired with a
+  person's standard-Finnish transcript, from 38 municipalities.
+- 🧭 **It learned dialects, not voices.** The 10 test municipalities were kept out, and it improved in
+  all 10 of them.
+- 🧱 **It kept what it knew.** Read and parliament speech stayed in the training mix, so ordinary
+  Finnish did not get worse.
+- ✍️ **It writes sentences.** With punctuation added to the training text, its output reads like text.
+- ➕ **More dialect speech helps further.** An internal version that also heard 56 hours of LA-murre
+  interviews gets 19.7 %, but that corpus's licence does not allow publishing it.
+
+## 8. Use it
+
+<img src="docs/img/which-version.svg" alt="Use the main model by default; use the timestamps revision for sentence times or long audio" width="100%">
+
+```python
+import soundfile as sf
+from transformers import pipeline  # pip install "transformers>=5" torch soundfile
+
+asr = pipeline("automatic-speech-recognition", model="GAIK-project/whisper-large-v3-fi-dialects")
+audio, sr = sf.read("clip.wav", dtype="float32")  # 16 kHz mono, up to 30 s
+print(asr({"raw": audio, "sampling_rate": sr}, generate_kwargs={"language": "fi", "task": "transcribe"})["text"])
+```
+
+For longer audio, the [model card](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
+has code that cuts it into pieces at quiet moments.
+
+---
+
+# Full details
+
+Everything below is the full report: every model, every number, how each was measured, and the caveats.
 
 Organisations ask whether there are speech-to-text models that understand Finnish, dialects
 included, and can run locally. This repository runs 20 current speech-to-text set-ups, 12 of them
@@ -7,14 +128,6 @@ error rate, and two blind LLM judges that count only the errors that change the 
 measures the open models on four public test sets, two of them dialect corpora, and fine-tunes
 Whisper large-v3 for Finnish dialects: that model and its training data are published on Hugging
 Face.
-
-🤗 [Model: GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects) ·
-🗂️ [Dataset: GAIK-project/skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr) ·
-🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) ·
-🌐 [gaik.ai](https://gaik.ai/)
-
-Developed by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of
-Applied Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).
 
 The clip is **Ajokortti**: a 180 s excerpt of a public QAdental dental-education webinar (QAdental,
 Suomen Kotilääkäripalvelu Oy, is a GAIK project partner), two speakers, standard spoken Finnish with
@@ -235,10 +348,11 @@ with other settings.
 
 ## Our dialect model
 
-> **Walk-through for readers new to this:** [`docs/story/story.en.html`](docs/story/story.en.html)
-> (English) and [`story.fi.html`](docs/story/story.fi.html) (Finnish) explain the data, the four
-> places where Claude Opus 5.5 was used, the training, both measurements, the three open judges, the
-> checked webinar reference and the timestamp variant, with two audio examples. Download either file and open it in a browser; it works offline. To listen to the
+> **Walk-through for readers new to this:** the story page, [in English](https://gaik-project.github.io/finnish-asr/story/story.en.html)
+> and [suomeksi](https://gaik-project.github.io/finnish-asr/story/story.fi.html) (sources:
+> [`docs/story/`](docs/story/)), explains the data, the four places where Claude Opus 5.5 was used,
+> the training, both measurements, the three open judges, the checked webinar reference and the
+> timestamp variant, with two audio examples. The files also work offline. To listen to the
 > models side by side, build the listening page locally with
 > [`build_compare.py`](scripts/build_compare.py) (it embeds the clip, so it is not committed).
 
@@ -624,7 +738,7 @@ webinar clip has, where every dialect fine-tune here is weaker than base Whisper
 | [`tests/`](tests/) | Offline tests (`uv run pytest`): no keys, no downloads, no GPU. |
 | [`lumi/`](lumi/) | How the open models were run and trained on LUMI: environment setup, Slurm jobs, and stubs that hide three container libraries NeMo cannot use. |
 | [`release/`](release/) | The Hugging Face cards, uploaded by [`publish_hf.py`](scripts/publish_hf.py): [`MODEL_CARD.md`](release/MODEL_CARD.md) (the main model), [`TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md) (its `timestamps` revision) and [`DATASET_CARD.md`](release/DATASET_CARD.md). |
-| [`docs/`](docs/) | [`DIALECT-EXAMPLES.md`](docs/DIALECT-EXAMPLES.md) (20 SKN test segments side by side and WER per municipality), [`story/`](docs/story/) (the walk-through pages, one self-contained HTML file per language, built from `story/src/`) and [`img/`](docs/img/) (the dialect chart). |
+| [`docs/`](docs/) | [`DIALECT-EXAMPLES.md`](docs/DIALECT-EXAMPLES.md) (20 SKN test segments side by side and WER per municipality), [`story/`](docs/story/) (the walk-through pages, one self-contained HTML file per language, built from `story/src/`) and [`img/`](docs/img/) (the dialect chart from `dialect_chart.py`, the front page's figures from [`readme_figures.py`](scripts/readme_figures.py), the banner, an AI illustration made with GPT Image 2.5, and the sources' logos in `logos/`, their owners' trademarks, from [svgl](https://svgl.app/)). The story pages are also served at [gaik-project.github.io/finnish-asr](https://gaik-project.github.io/finnish-asr/). |
 | [`results/transcriptions/`](results/transcriptions/) | One JSON per model and run on the clip: transcript, settings, library versions, timing. [`qad1/`](results/transcriptions/qad1/) holds GAIK's earlier QAD-1 runs (OpenAI, Gemini, the gaik transcriber, the Haaga-Helia WhisperX server, Whisper on CSC Roihu). |
 | [`results/judgements/`](results/judgements/) | Per judge and model: every meaning error quoted from the reference and the transcript, the name checks, reference doubts, scores. |
 | [`results/scores.json`](results/scores.json), [`scores.reviewed.json`](results/scores.reviewed.json) | WER, CER and error counts for every clip transcript, against HY's and the reviewed reference. |

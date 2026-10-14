@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" width="1000" height="400" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Word error rate counts every differing word; the blind LLM judge counts only meaning errors">
+<rect width="1000" height="400" rx="12" fill="#ffffff"/>
+<text x="24.0" y="38.0" font-size="19" font-weight="700" fill="#1f2328" text-anchor="start">Two ways to score a transcript</text>
+<text x="976.0" y="38.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="end">illustration, not from the test data</text>
+<rect x="24" y="58" width="952" height="64" rx="10" fill="#f6f8fa" stroke="#d8dee4"/>
+<text x="44.0" y="84.0" font-size="13" font-weight="700" fill="#59636e" text-anchor="start">Reference (what was said)</text>
+<text x="44.0" y="108.0" font-size="18" font-weight="400" fill="#1f2328" text-anchor="start">Kyllä minä niin kauan osaan kun minä elän.</text><text x="956.0" y="108.0" font-size="14" font-weight="400" fill="#59636e" text-anchor="end">“Yes, I will know it as long as I live.”</text>
+<text x="560.0" y="156.0" font-size="15" font-weight="700" fill="#2f6fb3" text-anchor="start">Word error rate</text>
+<text x="780.0" y="156.0" font-size="15" font-weight="700" fill="#8a5a2b" text-anchor="start">Blind LLM judge</text>
+<circle cx="40" cy="194" r="13" fill="#1f2328"/>
+<text x="40.0" y="199.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">A</text>
+<text x="64.0" y="200.0" font-size="18" fill="#1f2328">Kyllä <tspan font-weight="700" fill="#b3402e">mä</tspan> niin kauan osaan kun <tspan font-weight="700" fill="#b3402e">mä</tspan> elän.</text>
+<text x="560.0" y="196.0" font-size="22" font-weight="700" fill="#2f6fb3" text-anchor="start">25 %</text>
+<text x="560.0" y="218.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">2 of 8 words differ</text>
+<text x="780.0" y="196.0" font-size="15" font-weight="700" fill="#3f8f5b" text-anchor="start">0 points</text>
+<text x="780.0" y="218.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Same meaning, spoken form</text>
+<circle cx="40" cy="272" r="13" fill="#1f2328"/>
+<text x="40.0" y="277.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">B</text>
+<text x="64.0" y="278.0" font-size="18" fill="#1f2328">Kyllä minä niin kauan osaan kun minä <tspan font-weight="700" fill="#b3402e">en</tspan>.</text>
+<text x="560.0" y="274.0" font-size="22" font-weight="700" fill="#2f6fb3" text-anchor="start">12.5 %</text>
+<text x="560.0" y="296.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">1 of 8 words differs</text>
+<text x="780.0" y="274.0" font-size="15" font-weight="700" fill="#b3402e" text-anchor="start">a critical error</text>
+<text x="780.0" y="296.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">Meaning lost</text>
+<text x="24.0" y="362.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">WER counts every word that differs, so A looks worse. The judge counts only changes in meaning:</text>
+<text x="24.0" y="384.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">critical 10, major 5, minor 1 point per 100 reference words. Lower is better for both.</text>
+</svg>
