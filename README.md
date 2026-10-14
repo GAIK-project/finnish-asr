@@ -69,8 +69,8 @@ transcripts without knowing which model wrote them and counts only errors that c
 
 <img src="docs/img/two-measures.svg" alt="Word error rate counts every differing word; the blind judge counts only meaning errors" width="100%">
 
-Three open models on CSC's Aitta service repeated the judging and put the
-models in the same order ([Second opinions](#second-opinions-open-model-judges-on-csc-aitta)).
+Three open models on CSC's Aitta service repeated the judging and agreed: every judge puts our
+models far ahead of base Whisper ([Second opinions](#second-opinions-open-model-judges-on-csc-aitta)).
 
 ## 6. How it compares
 
@@ -695,17 +695,17 @@ compared by [`judge_agreement.py`](scripts/judge_agreement.py) in
 |---|--:|--:|--:|--:|--:|--:|--:|
 | Claude Opus 5.5 (reference) | 583 | 25.9 | 13.8 | 13.6 | 11.4 | 398 / 89 | – |
 | gpt-oss-120b (Aitta) | 583 | 20.5 | 13.4 | 13.2 | 12.9 | 275 / 105 | 80.7 % of 1 535 pairs |
-| Gemma 4 31B (Aitta), sample | 213 | 17.2 | 10.1 | 10.4 | 8.6 | 107 / 29 | 92.2 % of 586 pairs |
-| Qwen3.6 27B (Aitta), sample | 148 | 19.4 | 10.3 | 10.2 | 8.7 | 85 / 21 | 93.0 % of 458 pairs |
+| Gemma 4 31B (Aitta), sample | 198 | 17.3 | 10.1 | 10.5 | 9.0 | 100 / 27 | 92.1 % of 544 pairs |
+| Qwen3.6 27B (Aitta), sample | 197 | 23.0 | 11.8 | 11.3 | 9.3 | 121 / 27 | 92.8 % of 643 pairs |
 
 Points are meaning-error points per 100 reference words. "Same preference" counts the pairs of
 models in a segment where both judges see a difference, and how often they prefer the same one.
 All four judges rank the models the same way: the internal model best, the published model and round
 1 about level, base Whisper far behind; gpt-oss-120b also finds the published model clearly better
 than base Whisper (sign test p < 0.001) and separates the three fine-tunes less than Claude does.
-Gemma 4 31B and Qwen3.6 27B were run on a sample, not on all 583 segments: the table holds the 213
-and 148 segments they had judged when `agreement-r2.json` was made (the Qwen run was still going), and
-Gemma puts round 1 just ahead of the published model. Point scales differ between judges, so compare
+Gemma 4 31B and Qwen3.6 27B were run on a sample, not on all 583 segments: both judged the same seeded
+sample of 200 segments (`--per-locality 20`: 20 per locality, seed 0; Gemma answered 198, Qwen 197),
+and Gemma puts round 1 just ahead of the published model. Point scales differ between judges, so compare
 models within one judge.
 
 ## Dialect data and next steps
@@ -902,7 +902,7 @@ write token and is for maintainers.
   reproduces them. The public judge prompt differs from the one that made them in three example
   word pairs.
 - **Two of the Aitta judges saw only a sample.** gpt-oss-120b judged all 583 segments; Gemma 4 31B
-  and Qwen3.6 27B 213 and 148 in `agreement-r2.json` (the Qwen run was still going).
+  and Qwen3.6 27B a seeded sample of 200 (198 and 197 answered), so their numbers carry more sampling noise.
 - **The timestamp results rest on SKN's own sentence times and ten 4-minute windows**, and the
   timestamp variant, like every fine-tune here, was trained once with one seed.
 - **The training texts are partly LLM-written.** Punctuation (SKN) and standard spellings

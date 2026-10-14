@@ -16,6 +16,9 @@ share, so they are not committed: to rerun this, rebuild the LA-murre test from 
 - against Claude, on the segments both judged: how often the two judges prefer the same arm in
   each pair of arms where both see a difference (pairwise agreement), and the rank correlation of
   their per-segment points for each arm (Spearman).
+
+Judges run on a sample (judge_dialect.py --per-locality N, see SAMPLED) count only the segments of
+that seeded draw, so their numbers do not depend on segments judged before a run was narrowed.
 """
 
 from __future__ import annotations
@@ -24,6 +27,7 @@ import argparse
 import itertools
 import json
 import math
+import random
 import sys
 from pathlib import Path
 
@@ -36,6 +40,16 @@ OUT_DIR = RESULTS_DIR / "judgements_dialect" / "lamurre_fi"
 POINTS = {"critical": 10, "major": 5, "minor": 1}
 REFERENCE = "claude-opus-5-5"
 BASE, PUBLISHED = "hf_whisper-large-v3", "ft_whisper-large-v3-fi-skn-punct-best"
+SAMPLED = {"aitta-gemma-4-31b-it": 20, "aitta-qwen3-6-27b": 20}  # judge -> its --per-locality
+
+
+def seeded_sample(ids: set[str], per_locality: int) -> set[str]:
+    """The segments judge_dialect.py --per-locality draws (seed 0), rebuilt from the reference judge's ids."""
+    by_loc: dict[str, list[str]] = {}
+    for seg in sorted(ids):
+        by_loc.setdefault(seg.rsplit("_", 1)[0], []).append(seg)
+    rng = random.Random(0)
+    return {seg for loc in sorted(by_loc) for seg in rng.sample(by_loc[loc], min(per_locality, len(by_loc[loc])))}
 
 
 def load(path: Path) -> dict[str, dict]:
@@ -119,6 +133,10 @@ def main() -> int:
     if REFERENCE not in judges:
         print(f"no {REFERENCE}-{args.round}.jsonl in {rel(OUT_DIR)} (the caches stay local)")
         return 1
+    for name, per_locality in SAMPLED.items():
+        if name in judges:
+            keep = seeded_sample(set(judges[REFERENCE]), per_locality)
+            judges[name] = {seg: row for seg, row in judges[name].items() if seg in keep}
     arms = list(next(iter(judges[REFERENCE].values()))["arms"])
     result = {"generated_utc": now_utc(), "round": args.round, "reference_judge": REFERENCE, "judges": {}}
     for name, rows in judges.items():

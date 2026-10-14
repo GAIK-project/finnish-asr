@@ -1,0 +1,52 @@
+{
+  "generated_utc": "2026-10-14T16:27:12+00:00",
+  "benchmark": "lamurre_fi",
+  "judge": "google/gemma-4-31b-it",
+  "prompt_version": "dialect-judge-v1",
+  "segments": 198,
+  "ref_words": 6058,
+  "usage": {
+    "input_tokens": 116820,
+    "output_tokens": 534765
+  },
+  "arms": {
+    "hf_whisper-large-v3": {
+      "critical": 36,
+      "major": 129,
+      "minor": 41,
+      "error_points_per_100w": 17.27,
+      "segments_without_errors": 31,
+      "segments_best_or_tied": 68
+    },
+    "ft_whisper-large-v3-fi-skn": {
+      "critical": 3,
+      "major": 106,
+      "minor": 52,
+      "error_points_per_100w": 10.1,
+      "segments_without_errors": 67,
+      "segments_best_or_tied": 137
+    },
+    "ft_whisper-large-v3-fi-skn-punct-best": {
+      "critical": 4,
+      "major": 109,
+      "minor": 52,
+      "error_points_per_100w": 10.52,
+      "segments_without_errors": 59,
+      "segments_best_or_tied": 132
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "critical": 4,
+      "major": 91,
+      "minor": 48,
+      "error_points_per_100w": 8.96,
+      "segments_without_errors": 75,
+      "segments_best_or_tied": 146
+    }
+  },
+  "arms_judged_together": [
+    "hf_whisper-large-v3",
+    "ft_whisper-large-v3-fi-skn",
+    "ft_whisper-large-v3-fi-skn-punct-best",
+    "ft_whisper-large-v3-fi-skn-lamurre-best"
+  ]
+}
