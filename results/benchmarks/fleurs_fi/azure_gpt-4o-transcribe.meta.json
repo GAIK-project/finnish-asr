@@ -1,0 +1,20 @@
+{
+  "arm_id": "azure_gpt-4o-transcribe",
+  "model": "gpt-4o-transcribe",
+  "provider": "azure-openai",
+  "params": {
+    "language": "fi",
+    "deployment": "gpt-4o-transcribe"
+  },
+  "benchmark": "FLEURS Finnish test, read Wikipedia sentences",
+  "utterances": 918,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 134.8,
+  "usage": {
+    "input_tokens": 118574,
+    "output_tokens": 39889,
+    "total_tokens": 158463
+  },
+  "gpu": null
+}

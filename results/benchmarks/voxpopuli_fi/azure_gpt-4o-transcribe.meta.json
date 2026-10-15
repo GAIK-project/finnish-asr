@@ -1,0 +1,20 @@
+{
+  "arm_id": "azure_gpt-4o-transcribe",
+  "model": "gpt-4o-transcribe",
+  "provider": "azure-openai",
+  "params": {
+    "language": "fi",
+    "deployment": "gpt-4o-transcribe"
+  },
+  "benchmark": "VoxPopuli Finnish test, European Parliament speech",
+  "utterances": 478,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 67.7,
+  "usage": {
+    "input_tokens": 47332,
+    "output_tokens": 20495,
+    "total_tokens": 67827
+  },
+  "gpu": null
+}

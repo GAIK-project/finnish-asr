@@ -1,0 +1,22 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+  "model": "whisper-large-v3-fi-skn-punct-ts",
+  "recipe": "whisper",
+  "params": {
+    "language": "fi",
+    "task": "transcribe",
+    "dtype": "float16",
+    "long_form": "sequential, return_timestamps=True"
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "transcribe_s": 496.0,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005059",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22870784"
+}

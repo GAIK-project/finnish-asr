@@ -24,7 +24,8 @@ round 1, the published model, the internal model; also judged by open models on 
 Cache: results/judgements_dialect/lamurre_fi/<judge>[-<round>].jsonl, one line per segment;
 summary[-<round>].json for Claude, summary[-<round>]-<judge>.json for any other judge.
 
-Second judges: --provider aitta --judge-model <id> runs an open model on CSC Aitta (CSC's
+Second judges: --provider azure --judge-model <deployment> runs an OpenAI model deployed in Azure
+(round r4: gpt-6.1-sol, through GAIK's Azure). --provider aitta --judge-model <id> runs an open model on CSC Aitta (CSC's
 OpenAI-compatible LLM service for Finnish research) with the same prompt, schema, labels and order,
 so its verdicts can be compared segment by segment with Claude's (judge_agreement.py). Needs
 AITTA_API_TOKEN. Aitta's terms forbid personal or sensitive data; the LA-murre texts are a
@@ -79,6 +80,7 @@ JUDGE_ID, JUDGE_MODEL = "claude-opus-5-5", "claude-opus-5-5"
 ENV = ("ANTHROPIC_FOUNDRY_RESOURCE", "ANTHROPIC_FOUNDRY_API_KEY")
 ENV_API = ("ANTHROPIC_API_KEY",)
 ENV_AITTA = ("AITTA_API_TOKEN",)
+ENV_AZURE = ("AZURE_ENDPOINT", "AZURE_API_KEY")
 AITTA_URL = "https://aitta-api.csc.fi/openai/v1"
 PROVIDER = "foundry"
 ROUND = ""
@@ -130,9 +132,9 @@ def _strict(schema: dict) -> dict:
 def configure(arms: list[str], round_name: str, provider: str, judge_model: str = "") -> None:
     global ARMS, LABELS, ROUND, PROVIDER, SegmentJudgement, JSON_SCHEMA, PROMPT_SHA, JUDGE_ID, JUDGE_MODEL
     ARMS, LABELS, ROUND, PROVIDER = arms, "ABCDEF"[: len(arms)], round_name, provider
-    if provider == "aitta":
+    if provider in ("aitta", "azure"):
         JUDGE_MODEL = judge_model
-        JUDGE_ID = "aitta-" + judge_model.split("/")[-1].lower().replace(".", "-")
+        JUDGE_ID = f"{provider}-" + judge_model.split("/")[-1].lower().replace(".", "-")
     SegmentJudgement = judgement_model(LABELS)
     JSON_SCHEMA = _strict(SegmentJudgement.model_json_schema())
     PROMPT_SHA = hashlib.sha256((SYSTEM_PROMPT + json.dumps(JSON_SCHEMA, sort_keys=True)).encode()).hexdigest()
@@ -185,7 +187,7 @@ def judge_once(item: dict) -> dict:
     )
     if len(labels) > 3:
         prompt += f"\n\nReturn exactly {len(labels)} verdicts, one for each of {', '.join(labels)}."
-    if PROVIDER == "aitta":
+    if PROVIDER in ("aitta", "azure"):
         return judge_aitta(item, labels, prompt)
     if PROVIDER == "api":
         client = anthropic.Anthropic(api_key=os.environ[ENV_API[0]], max_retries=3, timeout=300)
@@ -222,20 +224,23 @@ def judge_once(item: dict) -> dict:
 
 
 def judge_aitta(item: dict, labels: dict[str, str], prompt: str) -> dict:
-    """The same judgement on an open model served by CSC Aitta, with the answer schema enforced."""
+    """The same judgement on an open model served by CSC Aitta, or an OpenAI model deployed in Azure (its
+    v1 endpoint; the deployment name is the model), with the answer schema enforced."""
     from openai import OpenAI
 
-    client = OpenAI(base_url=AITTA_URL, api_key=os.environ[ENV_AITTA[0]], timeout=900, max_retries=5)
-    resp = client.chat.completions.create(
-        model=JUDGE_MODEL,
-        messages=[{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}],
-        response_format={
-            "type": "json_schema",
-            "json_schema": {"name": "SegmentJudgement", "schema": JSON_SCHEMA, "strict": True},
-        },
-        max_tokens=6000,
-        temperature=0,
-    )
+    schema = {"type": "json_schema", "json_schema": {"name": "SegmentJudgement", "schema": JSON_SCHEMA, "strict": True}}
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": prompt}]
+    if PROVIDER == "azure":  # a reasoning model: no temperature, and its reasoning counts toward the token limit
+        base = os.environ[ENV_AZURE[0]].rstrip("/") + "/openai/v1"
+        client = OpenAI(base_url=base, api_key=os.environ[ENV_AZURE[1]], timeout=900, max_retries=5)
+        resp = client.chat.completions.create(
+            model=JUDGE_MODEL, messages=messages, response_format=schema, max_completion_tokens=16000
+        )
+    else:
+        client = OpenAI(base_url=AITTA_URL, api_key=os.environ[ENV_AITTA[0]], timeout=900, max_retries=5)
+        resp = client.chat.completions.create(
+            model=JUDGE_MODEL, messages=messages, response_format=schema, max_tokens=6000, temperature=0
+        )
     choice = resp.choices[0]
     if choice.finish_reason != "stop":
         raise RuntimeError(f"finish_reason={choice.finish_reason}")
@@ -297,21 +302,21 @@ def main() -> int:
     parser.add_argument("--report", action="store_true", help="Only print the summary of cached judgements.")
     parser.add_argument("--round", default="", help="Name of a round with its own arms, cache and summary.")
     parser.add_argument("--arms", help="Comma-separated arms for --round (2 to 6).")
-    parser.add_argument("--provider", choices=["foundry", "api", "aitta"], default="foundry")
-    parser.add_argument("--judge-model", default="", help="Aitta model id for --provider aitta.")
+    parser.add_argument("--provider", choices=["foundry", "api", "aitta", "azure"], default="foundry")
+    parser.add_argument("--judge-model", default="", help="Aitta model id, or Azure deployment name.")
     parser.add_argument("--workers", type=int, default=4)
     args = parser.parse_args()
-    if args.provider == "aitta" and not args.judge_model:
-        parser.error("--provider aitta needs --judge-model")
+    if args.provider in ("aitta", "azure") and not args.judge_model:
+        parser.error(f"--provider {args.provider} needs --judge-model")
     if args.round:
         if not args.arms or not 2 <= len(args.arms.split(",")) <= 6:
             parser.error("--round needs --arms with 2 to 6 arm ids")
         configure(args.arms.split(","), args.round, args.provider, args.judge_model)
     else:
         configure(ARMS, "", args.provider, args.judge_model)
-    env = ENV_API if PROVIDER == "api" else ENV_AITTA if PROVIDER == "aitta" else ENV
+    env = {"api": ENV_API, "aitta": ENV_AITTA, "azure": ENV_AZURE}.get(PROVIDER, ENV)
     suffix = f"-{ROUND}" if ROUND else ""
-    judge_suffix = "" if PROVIDER != "aitta" else f"-{JUDGE_ID}"
+    judge_suffix = "" if PROVIDER not in ("aitta", "azure") else f"-{JUDGE_ID}"
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     cache_path = OUT_DIR / f"{JUDGE_ID}{suffix}.jsonl"

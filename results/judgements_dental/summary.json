@@ -1,0 +1,332 @@
+{
+  "generated_utc": "2026-10-15T17:22:05+00:00",
+  "prompt_sha256": "3b29089bd7ad8cd3d64194b86be593ae6dcfee3e2d5148e63287c4dc5c5a4ffa",
+  "judges": {
+    "claude-opus-5-5": {
+      "azure_gpt-4o-transcribe": {
+        "clips": 10,
+        "points_per_100w": 5.35,
+        "per_clip": {
+          "clip01": 6.97,
+          "clip02": 6.65,
+          "clip03": 3.04,
+          "clip04": 2.64,
+          "clip05": 2.03,
+          "clip06": 10.69,
+          "clip07": 5.19,
+          "clip08": 4.93,
+          "clip09": 5.95,
+          "clip10": 5.28
+        },
+        "critical": 5,
+        "major": 18,
+        "minor": 68,
+        "usage": {
+          "input_tokens": 47102,
+          "output_tokens": 21054
+        }
+      },
+      "elevenlabs_scribe-v2": {
+        "clips": 10,
+        "points_per_100w": 1.62,
+        "per_clip": {
+          "clip01": 1.49,
+          "clip02": 1.93,
+          "clip03": 0.0,
+          "clip04": 1.76,
+          "clip05": 2.33,
+          "clip06": 1.73,
+          "clip07": 0.55,
+          "clip08": 1.23,
+          "clip09": 5.14,
+          "clip10": 0.48
+        },
+        "critical": 0,
+        "major": 6,
+        "minor": 33,
+        "usage": {
+          "input_tokens": 48317,
+          "output_tokens": 14645
+        }
+      },
+      "ft_whisper-large-v3-fi-skn-all-chunks": {
+        "clips": 10,
+        "points_per_100w": 4.81,
+        "per_clip": {
+          "clip01": 4.98,
+          "clip02": 2.79,
+          "clip03": 3.97,
+          "clip04": 5.87,
+          "clip05": 2.03,
+          "clip06": 5.2,
+          "clip07": 6.28,
+          "clip08": 7.64,
+          "clip09": 7.03,
+          "clip10": 2.88
+        },
+        "critical": 1,
+        "major": 19,
+        "minor": 82,
+        "usage": {
+          "input_tokens": 48551,
+          "output_tokens": 20923
+        }
+      },
+      "ft_whisper-large-v3-fi-skn-punct-best-chunks": {
+        "clips": 10,
+        "points_per_100w": 5.1,
+        "per_clip": {
+          "clip01": 9.2,
+          "clip02": 2.15,
+          "clip03": 1.4,
+          "clip04": 6.74,
+          "clip05": 3.2,
+          "clip06": 8.38,
+          "clip07": 6.01,
+          "clip08": 4.68,
+          "clip09": 6.49,
+          "clip10": 4.08
+        },
+        "critical": 0,
+        "major": 24,
+        "minor": 78,
+        "usage": {
+          "input_tokens": 48542,
+          "output_tokens": 20968
+        }
+      },
+      "google_chirp-3": {
+        "clips": 10,
+        "points_per_100w": 2.32,
+        "per_clip": {
+          "clip01": 3.23,
+          "clip02": 1.07,
+          "clip03": 0.47,
+          "clip04": 1.17,
+          "clip05": 1.45,
+          "clip06": 3.47,
+          "clip07": 1.37,
+          "clip08": 5.42,
+          "clip09": 5.14,
+          "clip10": 0.72
+        },
+        "critical": 0,
+        "major": 8,
+        "minor": 50,
+        "usage": {
+          "input_tokens": 47808,
+          "output_tokens": 15882
+        }
+      },
+      "hf_whisper-large-v3": {
+        "clips": 10,
+        "points_per_100w": 3.6,
+        "per_clip": {
+          "clip01": 3.98,
+          "clip02": 1.5,
+          "clip03": 2.1,
+          "clip04": 2.35,
+          "clip05": 2.03,
+          "clip06": 4.62,
+          "clip07": 1.91,
+          "clip08": 9.61,
+          "clip09": 4.32,
+          "clip10": 3.6
+        },
+        "critical": 1,
+        "major": 10,
+        "minor": 80,
+        "usage": {
+          "input_tokens": 47136,
+          "output_tokens": 18047
+        }
+      },
+      "vertex_gemini-3.5-flash": {
+        "clips": 10,
+        "points_per_100w": 1.24,
+        "per_clip": {
+          "clip01": 0.75,
+          "clip02": 1.5,
+          "clip03": 0.47,
+          "clip04": 0.88,
+          "clip05": 1.16,
+          "clip06": 0.87,
+          "clip07": 1.09,
+          "clip08": 2.96,
+          "clip09": 2.16,
+          "clip10": 0.48
+        },
+        "critical": 0,
+        "major": 3,
+        "minor": 33,
+        "usage": {
+          "input_tokens": 48448,
+          "output_tokens": 14175
+        }
+      }
+    },
+    "gemini-3.1-pro": {
+      "azure_gpt-4o-transcribe": {
+        "clips": 10,
+        "points_per_100w": 9.11,
+        "per_clip": {
+          "clip01": 11.44,
+          "clip02": 9.23,
+          "clip03": 7.48,
+          "clip04": 8.21,
+          "clip05": 2.03,
+          "clip06": 15.61,
+          "clip07": 7.65,
+          "clip08": 9.85,
+          "clip09": 12.97,
+          "clip10": 6.71
+        },
+        "critical": 19,
+        "major": 28,
+        "minor": 24,
+        "usage": {
+          "input_tokens": 29266,
+          "output_tokens": 9106
+        }
+      },
+      "elevenlabs_scribe-v2": {
+        "clips": 10,
+        "points_per_100w": 2.83,
+        "per_clip": {
+          "clip01": 6.97,
+          "clip02": 3.65,
+          "clip03": 0.0,
+          "clip04": 2.93,
+          "clip05": 2.62,
+          "clip06": 1.73,
+          "clip07": 0.55,
+          "clip08": 2.71,
+          "clip09": 6.22,
+          "clip10": 0.96
+        },
+        "critical": 2,
+        "major": 14,
+        "minor": 20,
+        "usage": {
+          "input_tokens": 30081,
+          "output_tokens": 7007
+        }
+      },
+      "ft_whisper-large-v3-fi-skn-all-chunks": {
+        "clips": 10,
+        "points_per_100w": 9.65,
+        "per_clip": {
+          "clip01": 5.22,
+          "clip02": 6.87,
+          "clip03": 6.78,
+          "clip04": 11.73,
+          "clip05": 2.33,
+          "clip06": 11.85,
+          "clip07": 13.11,
+          "clip08": 14.04,
+          "clip09": 14.86,
+          "clip10": 10.55
+        },
+        "critical": 15,
+        "major": 38,
+        "minor": 35,
+        "usage": {
+          "input_tokens": 30142,
+          "output_tokens": 9716
+        }
+      },
+      "ft_whisper-large-v3-fi-skn-punct-best-chunks": {
+        "clips": 10,
+        "points_per_100w": 9.96,
+        "per_clip": {
+          "clip01": 9.95,
+          "clip02": 6.44,
+          "clip03": 3.27,
+          "clip04": 11.44,
+          "clip05": 4.94,
+          "clip06": 8.96,
+          "clip07": 14.48,
+          "clip08": 16.01,
+          "clip09": 15.14,
+          "clip10": 10.07
+        },
+        "critical": 13,
+        "major": 45,
+        "minor": 32,
+        "usage": {
+          "input_tokens": 30154,
+          "output_tokens": 10158
+        }
+      },
+      "google_chirp-3": {
+        "clips": 10,
+        "points_per_100w": 3.68,
+        "per_clip": {
+          "clip01": 4.98,
+          "clip02": 2.79,
+          "clip03": 0.47,
+          "clip04": 1.76,
+          "clip05": 2.33,
+          "clip06": 7.8,
+          "clip07": 0.82,
+          "clip08": 7.64,
+          "clip09": 5.68,
+          "clip10": 2.88
+        },
+        "critical": 3,
+        "major": 16,
+        "minor": 33,
+        "usage": {
+          "input_tokens": 29792,
+          "output_tokens": 7232
+        }
+      },
+      "hf_whisper-large-v3": {
+        "clips": 10,
+        "points_per_100w": 6.38,
+        "per_clip": {
+          "clip01": 7.21,
+          "clip02": 2.79,
+          "clip03": 3.04,
+          "clip04": 4.11,
+          "clip05": 3.2,
+          "clip06": 11.85,
+          "clip07": 3.28,
+          "clip08": 13.55,
+          "clip09": 7.84,
+          "clip10": 7.43
+        },
+        "critical": 6,
+        "major": 28,
+        "minor": 48,
+        "usage": {
+          "input_tokens": 29342,
+          "output_tokens": 9441
+        }
+      },
+      "vertex_gemini-3.5-flash": {
+        "clips": 10,
+        "points_per_100w": 2.14,
+        "per_clip": {
+          "clip01": 0.75,
+          "clip02": 3.43,
+          "clip03": 1.17,
+          "clip04": 1.76,
+          "clip05": 3.2,
+          "clip06": 0.87,
+          "clip07": 1.09,
+          "clip08": 5.42,
+          "clip09": 2.7,
+          "clip10": 0.72
+        },
+        "critical": 2,
+        "major": 6,
+        "minor": 33,
+        "usage": {
+          "input_tokens": 30247,
+          "output_tokens": 7750
+        }
+      }
+    }
+  }
+}

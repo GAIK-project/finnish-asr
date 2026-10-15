@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T10:58:56+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "fc421139db305e69cefa19bbecc64f3fd59fbbb7",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references, API services)",
+  "runner_path": "scripts/run_api_benchmark.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "gemini-3.5-flash",
+    "gemini-3.5-flash",
+    "gemini-3.1-pro-preview",
+    "whisper",
+    "scribe_v2",
+    "chirp_3"
+  ],
+  "cli_args": [
+    "--bench",
+    "dental10_fi",
+    "--workers",
+    "4",
+    "--arm",
+    "vertex_gemini-3.5-flash",
+    "--arm",
+    "vertex_gemini-3.5-flash-std",
+    "--arm",
+    "vertex_gemini-3.1-pro",
+    "--arm",
+    "google_chirp-3",
+    "--arm",
+    "azure_whisper",
+    "--arm",
+    "elevenlabs_scribe-v2"
+  ],
+  "env": {
+    "AZURE_API_KEY": "set",
+    "AZURE_API_VERSION": "set",
+    "AZURE_ENDPOINT": "set",
+    "ELEVENLABS_API_KEY": "set",
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  },
+  "extra": {
+    "bench": "dental10_fi",
+    "arms": [
+      "vertex_gemini-3.5-flash",
+      "vertex_gemini-3.5-flash-std",
+      "vertex_gemini-3.1-pro",
+      "azure_whisper",
+      "elevenlabs_scribe-v2",
+      "google_chirp-3"
+    ],
+    "limit": null
+  }
+}

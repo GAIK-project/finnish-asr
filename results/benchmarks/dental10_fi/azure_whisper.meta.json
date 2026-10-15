@@ -1,0 +1,16 @@
+{
+  "arm_id": "azure_whisper",
+  "model": "whisper",
+  "provider": "azure-openai",
+  "params": {
+    "language": "fi",
+    "deployment": "whisper"
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "failed_this_run": 0,
+  "workers": 4,
+  "transcribe_s": 132.5,
+  "usage": {},
+  "gpu": null
+}

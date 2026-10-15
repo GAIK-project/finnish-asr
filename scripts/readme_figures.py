@@ -514,34 +514,39 @@ def journey() -> str:
     return svg(W, H, "Training rounds: pilot, round 1 with dialect interviews, round 2 published, an internal version and a timestamps version", body)
 
 
-DIALECT_JUDGES = [
+DIALECT_JUDGES = [  # the judges of agreement-r4.json that are drawn, in this order
     ("claude-opus-5-5", "Claude Opus 5.5", "claude", "the main judge"),
+    ("azure-gpt-6-1-sol", "GPT-6.1-sol", "openai", "via Azure"),
     ("aitta-gpt-oss-120b", "gpt-oss-120b", "openai", "on CSC Aitta"),
     ("aitta-gemma-4-31b-it", "Gemma 4 31B", "google", "on CSC Aitta"),
     ("aitta-qwen3-6-27b", "Qwen3.6 27B", "qwen", "on CSC Aitta"),
 ]
-JUDGED = [
+JUDGED = [  # the fourth round: six transcripts of each LA-murre segment judged together
+    ("azure_gpt-4o-transcribe", "gpt-4o-transcribe", "#6b7280"),
+    ("vertex_gemini-3.5-flash-std", "Gemini 3.5 Flash", LLM),
     ("hf_whisper-large-v3", "Whisper large-v3", BASE),
-    ("ft_whisper-large-v3-fi-skn", "Ours, round 1", R1_SOFT),
     ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, published", OURS),
+    ("ft_whisper-large-v3-fi-skn-all", "Ours, all of SKN", R1_SOFT),
     ("ft_whisper-large-v3-fi-skn-lamurre-best", "Ours, internal", DEEP),
 ]
 
 
 def judges() -> str:
-    """Four blind judges on LA-murre, from results/judgements_dialect/lamurre_fi/agreement-r2.json."""
-    path = PROJECT_ROOT / "results" / "judgements_dialect" / "lamurre_fi" / "agreement-r2.json"
+    """Four blind judges on LA-murre, from results/judgements_dialect/lamurre_fi/agreement-r4.json."""
+    path = PROJECT_ROOT / "results" / "judgements_dialect" / "lamurre_fi" / "agreement-r4.json"
     data = json.loads(path.read_text(encoding="utf-8"))["judges"]
     W, H = 1000, 452
-    body = [text(24, 38, "Four judges, one verdict: our models make far fewer meaning errors", 19, 700)]
+    body = [text(24, 38, "Dialect speech, several judges: our models make far fewer meaning errors", 19, 700)]
     body.append(text(24, 62, "Meaning-error points per 100 words on the second dialect corpus (LA-murre), lower is better. Each judge is", 14, 400, MUTED))
-    body.append(text(24, 82, "stricter or milder, so compare bars inside one panel. All four put base Whisper far behind our models.", 14, 400, MUTED))
-    PW, gap, py, ph = 229, 14, 100, 300
-    vmax = 28.0
-    for i, (jid, name, lg, where) in enumerate(DIALECT_JUDGES):
+    body.append(text(24, 82, "stricter or milder, so compare bars inside one panel. Every judge puts the API services and base Whisper far behind ours.", 14, 400, MUTED))
+    drawn = [j for j in DIALECT_JUDGES if j[0] in data]
+    gap, py, ph = 14, 100, 300
+    PW = (W - 48 - gap * (len(drawn) - 1)) / len(drawn)
+    vmax = 40.0
+    for i, (jid, name, lg, where) in enumerate(drawn):
         x = 24 + i * (PW + gap)
         d = data[jid]
-        body.append(f'<rect x="{x}" y="{py}" width="{PW}" height="{ph}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
+        body.append(f'<rect x="{x:.1f}" y="{py}" width="{PW:.1f}" height="{ph}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
         m, w = mark(lg, x + 12, py + 12, 22, f"g{i}")
         body.append(m)
         body.append(text(x + 12 + (w + 8 if w else 0), py + 29, name, 15, 700, INK))
@@ -553,24 +558,25 @@ def judges() -> str:
         else:
             body.append(text(x + 12, py + 68, "the reference for the others", 12, 700, MUTED))
         base_y, top_y = py + ph - 28, py + 96
-        bw, bgap = 38, 14
+        bw, bgap = 26, 7
         for k, (arm, _, color) in enumerate(JUDGED):
             v = d["points_per_100w"][arm]
             hgt = (base_y - top_y) * v / vmax
-            bx = x + 22 + k * (bw + bgap)
-            body.append(f'<rect x="{bx}" y="{base_y - hgt:.1f}" width="{bw}" height="{hgt:.1f}" rx="3" fill="{color}"/>')
-            body.append(text(bx + bw / 2, base_y - hgt - 6, f"{v:.1f}", 13, 700, INK, "middle"))
-        body.append(f'<line x1="{x + 14}" y1="{base_y}" x2="{x + PW - 14}" y2="{base_y}" stroke="{MUTED}"/>')
+            bx = x + (PW - len(JUDGED) * bw - (len(JUDGED) - 1) * bgap) / 2 + k * (bw + bgap)
+            body.append(f'<rect x="{bx:.1f}" y="{base_y - hgt:.1f}" width="{bw}" height="{hgt:.1f}" rx="3" fill="{color}"/>')
+            body.append(text(bx + bw / 2, base_y - hgt - 6, f"{v:.0f}", 12, 700, INK, "middle"))
+        body.append(f'<line x1="{x + 14}" y1="{base_y}" x2="{x + PW - 14:.1f}" y2="{base_y}" stroke="{MUTED}"/>')
     lx = 24
     for _, label, color in JUDGED:
         body.append(f'<rect x="{lx}" y="{py + ph + 22}" width="14" height="14" rx="3" fill="{color}"/>')
         body.append(text(lx + 20, py + ph + 34, label, 13, 400, INK))
-        lx += 44 + 7.4 * len(label)
-    return svg(W, H, "Four blind judges rank base Whisper far behind our three fine-tuned models on LA-murre", body)
+        lx += 40 + 7.0 * len(label)
+    return svg(W, H, "Blind LLM judges on LA-murre: gpt-4o-transcribe, Gemini 3.5 Flash and base Whisper far behind our three fine-tuned models", body)
 
 
 MAKER = {  # arm id prefix -> logo file in docs/img/logos (or a Lucide icon); first match wins
     "vertex_gemini": "gemini", "vertex_": "google", "google_": "google", "elevenlabs_": "elevenlabs", "openai_": "openai",
+    "azure_": "openai",
     "hf_whisper-large-v3": "openai", "hf_whisper-large-finnish-v3": "hugging-face", "hh_whisperx": "hugging-face",
     "hf_orukeet": "hugging-face", "hf_wav2vec2": "hugging-face", "nemo_rasmus": "hugging-face",
     "nemo_canary": "nvidia", "hf_parakeet": "nvidia", "qwen_": "qwen", "ft_": "",
@@ -806,6 +812,126 @@ def leaderboard() -> str:
     return svg(W, y + 16, "Results at a glance: best models on dialect speech and on a standard-Finnish webinar", body)
 
 
+def bench_wer(bench: str) -> dict[str, float]:
+    path = PROJECT_ROOT / "results" / "benchmarks" / bench / "scores.json"
+    if not path.exists():
+        return {}
+    return {a["arm_id"]: a["WER"] for a in json.loads(path.read_text(encoding="utf-8"))["arms"]}
+
+
+DENTAL_LABELS = {  # arm -> (label, group); arms missing from dental10_fi/scores.json are left out
+    "ft_whisper-large-v3-fi-skn-punct-best-chunks": ("Ours, published (in pieces)", "ours"),
+    "ft_whisper-large-v3-fi-skn-all-chunks": ("Ours, all of SKN (in pieces)", "ours"),
+    "ft_whisper-large-v3-fi-skn-punct-ts-fallback": ("Ours, timestamps version (in one go)", "ours"),
+    "azure_gpt-4o-transcribe": ("OpenAI gpt-4o-transcribe", "API"),
+    "azure_whisper": ("OpenAI Whisper (API)", "API"),
+    "elevenlabs_scribe-v2": ("ElevenLabs Scribe v2", "API"),
+    "google_chirp-3": ("Google Chirp 3", "API"),
+    "vertex_gemini-3.5-flash": ("Gemini 3.5 Flash", "API"),
+    "vertex_gemini-3.1-pro": ("Gemini 3.1 Pro", "API"),
+    "hf_whisper-large-v3": ("Whisper large-v3", "open"),
+    "hf_whisper-large-v3-chunks": ("Whisper large-v3 (in pieces)", "open"),
+    "hf_whisper-large-v3-turbo": ("Whisper large-v3 turbo", "open"),
+    "hf_whisper-large-finnish-v3": ("Finnish-NLP whisper-large-finnish-v3", "open"),
+    "nemo_rasmus-canary-fi-v2-kenlm": ("RASMUS Finnish Canary v2 + KenLM", "open"),
+    "nemo_canary-1b-v2": ("NVIDIA Canary 1B v2", "open"),
+    "hf_orukeet": ("Orukeet (Parakeet v3 fine-tune)", "open"),
+    "hf_parakeet-tdt-0.6b-v3": ("NVIDIA Parakeet TDT 0.6B v3", "open"),
+    "hf_wav2vec2-xlsr-1b-finnish-lm-v2": ("Finnish-NLP wav2vec2 XLS-R 1B", "open"),
+    "qwen_qwen3-asr-1.7b": ("Qwen3-ASR 1.7B", "open"),
+}
+
+
+def dental_webinars() -> str:
+    """The ten dental-webinar clips: meaning-error points (mean of two blind judges) and WER side by side."""
+    summary = json.loads((PROJECT_ROOT / "results" / "judgements_dental" / "summary.json").read_text(encoding="utf-8"))["judges"]
+    wer = bench_wer("dental10_fi")
+    judged = set.intersection(*(set(arms) for arms in summary.values()))
+    rows = sorted((sum(summary[j][a]["points_per_100w"] for j in summary) / len(summary), wer[a], a)
+                  for a in judged if a in wer and a in DENTAL_LABELS)  # fmt: skip
+    best_pts, best_wer = min(r[0] for r in rows), min(r[1] for r in rows)
+    W, ROW, TOP, LX = 1000, 34, 128, 24
+    P1, P1W, P2, P2W = 370, 250, 690, 220
+    body = [text(24, 36, "Dental webinars: ten clips, 30 minutes of standard spoken Finnish", 19, 700)]
+    body.append(text(24, 60, "Against the University of Helsinki's transcripts, which leave out fillers (“niinku”, “tota”); so word error rate", 14, 400, MUTED))
+    body.append(text(24, 79, "favours models that drop them too. The judges ignore fillers and count only meaning. Lower is better in both.", 14, 400, MUTED))
+    body.append(text(P1, 102, "Meaning-error points per 100 words", 14, 700, LLM))
+    body.append(text(P1, 119, "two blind LLM judges (Claude, Gemini)", 12, 400, MUTED))
+    body.append(text(P2, 102, "Word error rate %", 14, 700, OURS))
+    body.append(text(P2, 119, "every differing word counts", 12, 400, MUTED))
+    vmax1, vmax2 = 8.0, 30.0
+    for i, (pts, w, arm) in enumerate(rows):
+        y = TOP + i * ROW
+        ours = arm.startswith("ft_")
+        if ours:
+            body.append(f'<rect x="12" y="{y - 2}" width="{W - 24}" height="{ROW}" rx="6" fill="{OURS_SOFT}"/>')
+        body.extend(label_with_logo(arm, DENTAL_LABELS[arm][0], LX, y + 20, ours, f"d{i}"))
+        for x0, pw, v, vmax, best, color in ((P1, P1W, pts, vmax1, best_pts, LLM), (P2, P2W, w, vmax2, best_wer, OURS)):
+            bw = max(pw * min(v, vmax) / vmax, 2)
+            top = round(v, 1) == round(best, 1)
+            body.append(f'<rect x="{x0}" y="{y + 7}" width="{bw:.1f}" height="{ROW - 14}" rx="3" fill="{color}" opacity="{1 if top else 0.55}"/>')
+            body.append(text(x0 + bw + 6, y + 21, f"{v:.1f}" + ("  best" if top else ""), 13, 700 if top else 400, INK))
+    bottom = TOP + len(rows) * ROW
+    body.append(text(24, bottom + 26, "Whisper-style models win on word error rate; Gemini 3.5 Flash and ElevenLabs make the fewest meaning errors. Our model is", 13, 400, INK))
+    body.append(text(24, bottom + 44, "built for dialects and is not the pick here. The transcripts were not checked by a listener (see the README).", 13, 400, INK))
+    return svg(W, bottom + 58, "Ten dental-webinar clips: meaning-error points and word error rate side by side", body)
+
+
+ACROSS = [  # arm per dataset, label, colour, logo
+    ({"*": "hf_whisper-large-v3"}, "Whisper large-v3 (OpenAI, open)", BASE, "openai"),
+    ({"*": "ft_whisper-large-v3-fi-skn-punct-best"}, "Ours, published", OURS, ""),
+    ({"*": "azure_gpt-4o-transcribe"}, "OpenAI gpt-4o-transcribe (API)", "#6b7280", "openai"),
+    ({"*": "vertex_gemini-3.5-flash", "skn_fi": "vertex_gemini-3.5-flash-std", "lamurre_fi": "vertex_gemini-3.5-flash-std"},
+     "Gemini 3.5 Flash (API)", LLM, "gemini"),
+]
+ACROSS_SETS = [
+    ("skn_fi", "Dialect interviews", "SKN, 600 segments"),
+    ("fleurs_fi", "Read sentences", "FLEURS, 918"),
+    ("voxpopuli_fi", "Parliament speech", "VoxPopuli, 478"),
+]
+
+
+def across_sets() -> str:
+    """Four models on three test sets, word error rate (LA-murre: judges.svg; the dental clips: dental-webinars.svg)."""
+    wer = {b: bench_wer(b) for b, _, _ in ACROSS_SETS}
+    W = 1000
+    body = [text(24, 36, "Four models, three kinds of Finnish speech", 19, 700)]
+    body.append(text(24, 60, "Word error rate %, lower is better. Gemini on the dialect set was asked for standard Finnish word forms.", 14, 400, MUTED))
+    GW, gap, gy, gh = 310, 15, 84, 270
+    vmax = 45.0
+    for gi, (bench, title, sub) in enumerate(ACROSS_SETS):
+        x = 24 + gi * (GW + gap)
+        body.append(f'<rect x="{x}" y="{gy}" width="{GW}" height="{gh}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
+        body.append(text(x + 12, gy + 26, title, 15, 700, INK))
+        body.append(text(x + 12, gy + 45, sub, 12, 400, MUTED))
+        base_y, top_y = gy + gh - 22, gy + 70
+        bw, bgap = 52, 16
+        vals = [wer[bench].get(arms.get(bench, arms["*"])) for arms, _, _, _ in ACROSS]
+        best = min(v for v in vals if v is not None) if any(v is not None for v in vals) else None
+        for k, ((_, _, color, _), v) in enumerate(zip(ACROSS, vals, strict=True)):
+            bx = x + 24 + k * (bw + bgap)
+            if v is None:
+                body.append(text(bx + bw / 2, base_y - 6, "–", 13, 400, MUTED, "middle"))
+                continue
+            hgt = (base_y - top_y) * min(v, vmax) / vmax
+            body.append(f'<rect x="{bx}" y="{base_y - hgt:.1f}" width="{bw}" height="{hgt:.1f}" rx="3" fill="{color}"/>')
+            body.append(text(bx + bw / 2, base_y - hgt - 6, f"{v:.1f}", 12.5, 700 if v == best else 400, INK, "middle"))
+        body.append(f'<line x1="{x + 12}" y1="{base_y}" x2="{x + GW - 12}" y2="{base_y}" stroke="{MUTED}"/>')
+    ly = gy + gh + 30
+    lx = 24
+    for i, (_, label, color, lg) in enumerate(ACROSS):
+        body.append(f'<rect x="{lx}" y="{ly - 12}" width="14" height="14" rx="3" fill="{color}"/>')
+        lx += 20
+        if lg:
+            m, w = mark(lg, lx, ly - 14, 16, f"a{i}")
+            body.append(m)
+            lx += w + 6
+        body.append(text(lx, ly, label, 13, 700 if color == OURS else 400, INK))
+        lx += 26 + 7.0 * len(label)
+    body.append(text(24, ly + 26, "The dialect test's municipalities were kept out of our training; the API services' training data is unknown.", 12.5, 400, MUTED))
+    return svg(W, ly + 40, "Whisper large-v3, our model, gpt-4o-transcribe and Gemini 3.5 Flash on three test sets", body)
+
+
 FIGURES = {
     "example.svg": example,
     "punctuation.svg": punctuation,
@@ -821,6 +947,8 @@ FIGURES = {
     "webinar.svg": webinar,
     "judge-example.svg": judge_example,
     "leaderboard.svg": leaderboard,
+    "dental-webinars.svg": dental_webinars,
+    "across-sets.svg": across_sets,
 }
 
 

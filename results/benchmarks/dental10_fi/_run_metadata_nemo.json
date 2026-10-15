@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T11:18:18+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": null,
+  "repo_dirty": false,
+  "app_under_test": "Finnish ASR model comparison (ten dental-webinar clips, open models)",
+  "runner_path": "scripts/run_open_models.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "nvidia/canary-1b-v2",
+    "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+    "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo"
+  ],
+  "cli_args": [
+    "--env",
+    "nemo",
+    "--bench",
+    "dental10_fi"
+  ],
+  "env": {},
+  "extra": {
+    "env": "nemo",
+    "arms": [
+      "nemo_canary-1b-v2",
+      "nemo_rasmus-canary-fi-v2",
+      "nemo_rasmus-canary-fi-v2-kenlm"
+    ],
+    "host": "nid005042",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0",
+      "nemo": "3.0.0"
+    },
+    "slurm_job_id": "22870807"
+  }
+}

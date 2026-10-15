@@ -1,0 +1,28 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2",
+  "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+  "recipe": "canary",
+  "params": {
+    "source_lang": "fi",
+    "target_lang": "fi",
+    "pnc": "yes",
+    "decoding": "greedy",
+    "chunks": {
+      "min_s": 15.0,
+      "max_s": 25.0,
+      "window_s": 0.1
+    }
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "transcribe_s": 116.2,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005042",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "slurm_job_id": "22870807"
+}

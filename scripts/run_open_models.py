@@ -24,11 +24,17 @@ The others get the same chunks: cut at the quietest 100 ms between 15 and 25 s i
 each chunk (energy based, no VAD model, so nothing has to be downloaded on the GPU
 node). The chunk boundaries are saved with each result.
 
+Several clips: --bench dental10_fi runs the arms on the ten 180 s dental-webinar clips of HY's QAD-1
+set A ($FIASR_DATA/dental10/<name>.16k.npy with <name>.txt, from `lumi.sh push-dental`), loading each
+model once, and writes results/benchmarks/dental10_fi/<arm>.jsonl ({"id", "ref", "hyp", "seconds"}),
+which score_benchmark.py scores like the other test sets.
+
 Usage:
     python run_open_models.py --list
     python run_open_models.py --download --env hf      # login node: weights into $HF_HOME
     python run_open_models.py --env hf                 # GPU node: every hf arm without a result
     python run_open_models.py --arm qwen_qwen3-asr-1.7b --force
+    python run_open_models.py --env hf --bench dental10_fi
 
 Output: results/transcriptions/<arm_id>.json and results/gpu_run/_run_metadata_<env>.json (GPU, host,
 library versions, Slurm job id).
@@ -37,6 +43,8 @@ library versions, Slurm job id).
 from __future__ import annotations
 
 import argparse
+import functools
+import json
 import os
 import platform
 import sys
@@ -62,8 +70,18 @@ SR = 16000
 RASMUS = "RASMUS/Finnish-ASR-Canary-v2"
 MODELS = Path(os.environ.get("FIASR_MODELS", Path(__file__).resolve().parents[1] / "models"))  # finetune_whisper.py
 
+DATA = Path(os.environ.get("FIASR_DATA", Path(__file__).resolve().parents[1] / "data"))
+BENCH_SETS = {"dental10_fi": "dental10"}  # --bench -> folder under $FIASR_DATA
+
 # arm_id -> (env, model, recipe, label)
 ARMS: dict[str, tuple[str, str, str, str]] = {
+    "hf_whisper-large-v3": ("hf", "openai/whisper-large-v3", "whisper", "Whisper large-v3"),
+    "hf_whisper-large-finnish-v3": (
+        "hf",
+        "Finnish-NLP/whisper-large-finnish-v3",
+        "whisper",
+        "Finnish-NLP whisper-large-finnish-v3",
+    ),
     "hf_whisper-large-v3-turbo": ("hf", "openai/whisper-large-v3-turbo", "whisper", "Whisper large-v3 turbo"),
     "ft_whisper-large-v3-fi-pilot": (
         "hf",
@@ -109,6 +127,14 @@ for _d in sorted(MODELS.glob("*/config.json")):
 ARMS["hf_whisper-large-v3-chunks"] = ("hf", "openai/whisper-large-v3", "whisper_chunks", "Whisper large-v3, chunked")
 for _a in [a for a in ARMS if a.startswith("ft_")]:
     ARMS[f"{_a}-chunks"] = ("hf", ARMS[_a][1], "whisper_chunks", f"{ARMS[_a][3]}, chunked")
+# The timestamp variant reads long audio in one go with OpenAI's temperature fallback (eval_timestamps.py).
+if "ft_whisper-large-v3-fi-skn-punct-ts" in ARMS:
+    ARMS["ft_whisper-large-v3-fi-skn-punct-ts-fallback"] = (
+        "hf",
+        ARMS["ft_whisper-large-v3-fi-skn-punct-ts"][1],
+        "whisper_fallback",
+        "Timestamp variant, sequential with temperature fallback",
+    )
 
 CHUNK = {"min_s": 15.0, "max_s": 25.0, "window_s": 0.1}
 
@@ -120,6 +146,17 @@ RECIPES = {
         "long_form": "sequential, return_timestamps=True",
     },
     "whisper_chunks": {"language": "fi", "task": "transcribe", "dtype": "float16", "chunks": CHUNK},
+    "whisper_fallback": {
+        "language": "fi",
+        "task": "transcribe",
+        "dtype": "float16",
+        "long_form": "sequential, return_timestamps=True, temperature fallback",
+        "temperature": [0.0, 0.2, 0.4, 0.6, 0.8, 1.0],
+        "compression_ratio_threshold": 1.35,
+        "logprob_threshold": -1.0,
+        "no_speech_threshold": 0.6,
+        "condition_on_prev_tokens": False,
+    },
     # The repo ships a KenLM for pyctcdecode, but kenlm does not build in LUMI's container, so greedy CTC.
     "ctc": {"decoder": "greedy CTC (the repo's KenLM is not used)", "chunks": CHUNK},
     "tdt": {
@@ -144,6 +181,8 @@ RECIPES = {
 }
 
 DOWNLOADS = {
+    "openai/whisper-large-v3": ["*.json", "*.txt", "model.safetensors"],
+    "Finnish-NLP/whisper-large-finnish-v3": ["*.json", "*.txt", "model.safetensors"],
     "openai/whisper-large-v3-turbo": ["*.json", "*.txt", "model.safetensors"],
     "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2": ["*.json", "*.txt", "model.safetensors", "language_model/*"],
     "nvidia/parakeet-tdt-0.6b-v3": ["*.json", "*.model", "model.safetensors"],
@@ -192,21 +231,25 @@ def _join(parts: list[str]) -> str:
     return " ".join(p.strip() for p in parts if p and p.strip())
 
 
-def run_whisper(model: str, audio) -> tuple[str, dict]:
+@functools.lru_cache(maxsize=1)
+def _pipe(model: str, half: bool):
+    """One model in memory at a time, so --bench loads each model once for all its clips."""
     import torch
     from transformers import pipeline
 
-    asr = pipeline(
-        "automatic-speech-recognition",
-        model=model,
-        dtype=torch.float16 if _device() == "cuda" else torch.float32,
-        device=_device(),
-    )
-    res = asr(
-        {"raw": audio, "sampling_rate": SR},
-        return_timestamps=True,
-        generate_kwargs={"language": "fi", "task": "transcribe"},
-    )
+    kw = {"dtype": torch.float16 if _device() == "cuda" else torch.float32} if half else {}
+    return pipeline("automatic-speech-recognition", model=model, device=_device(), **kw)
+
+
+def run_whisper(model: str, audio, fallback: bool = False) -> tuple[str, dict]:
+    asr = _pipe(model, True)
+    kw = {"language": "fi", "task": "transcribe"}
+    if fallback:
+        r = RECIPES["whisper_fallback"]
+        kw |= {k: r[k] for k in ("compression_ratio_threshold", "logprob_threshold", "no_speech_threshold",
+                                  "condition_on_prev_tokens")}  # fmt: skip
+        kw["temperature"] = tuple(r["temperature"])
+    res = asr({"raw": audio, "sampling_rate": SR}, return_timestamps=True, generate_kwargs=kw)
     chunks = [
         {"text": c["text"].strip(), "start": c["timestamp"][0], "end": c["timestamp"][1]} for c in res.get("chunks", [])
     ]
@@ -214,15 +257,7 @@ def run_whisper(model: str, audio) -> tuple[str, dict]:
 
 
 def run_whisper_chunks(model: str, audio) -> tuple[str, dict]:
-    import torch
-    from transformers import pipeline
-
-    asr = pipeline(
-        "automatic-speech-recognition",
-        model=model,
-        dtype=torch.float16 if _device() == "cuda" else torch.float32,
-        device=_device(),
-    )
+    asr = _pipe(model, True)
     segs = []
     for s, e in chunk_bounds(audio):
         res = asr({"raw": audio[s:e], "sampling_rate": SR}, generate_kwargs={"language": "fi", "task": "transcribe"})
@@ -231,9 +266,7 @@ def run_whisper_chunks(model: str, audio) -> tuple[str, dict]:
 
 
 def run_chunked_hf(model: str, audio) -> tuple[str, dict]:
-    from transformers import pipeline
-
-    asr = pipeline("automatic-speech-recognition", model=model, device=_device())
+    asr = _pipe(model, False)
     segs = []
     for s, e in chunk_bounds(audio):
         text = asr({"raw": audio[s:e], "sampling_rate": SR})["text"]
@@ -241,17 +274,22 @@ def run_chunked_hf(model: str, audio) -> tuple[str, dict]:
     return _join([x["text"] for x in segs]), {"segments": segs}
 
 
-def run_qwen(model: str, audio) -> tuple[str, dict]:
+@functools.lru_cache(maxsize=1)
+def _qwen(model: str):
     import torch
     from qwen_asr import Qwen3ASRModel
 
-    m = Qwen3ASRModel.from_pretrained(
+    return Qwen3ASRModel.from_pretrained(
         model,
         dtype=torch.bfloat16,
         device_map="cuda:0" if _device() == "cuda" else "cpu",
         max_inference_batch_size=8,
         max_new_tokens=RECIPES["qwen"]["max_new_tokens"],
     )
+
+
+def run_qwen(model: str, audio) -> tuple[str, dict]:
+    m = _qwen(model)
     res = m.transcribe(audio=(audio, SR), language="Finnish")
     return res[0].text.strip(), {"detected_language": getattr(res[0], "language", None)}
 
@@ -263,8 +301,8 @@ def _hf_file(spec: str) -> str:
     return hf_hub_download(repo, filename)
 
 
-def run_canary(model: str, audio, kenlm: bool) -> tuple[str, dict]:
-    import soundfile as sf
+@functools.lru_cache(maxsize=1)
+def _canary(model: str, kenlm: bool):
     from nemo.collections.asr.models import ASRModel, EncDecMultiTaskModel
 
     if ":" in model:
@@ -290,6 +328,13 @@ def run_canary(model: str, audio, kenlm: bool) -> tuple[str, dict]:
                 }
             )
         )
+    return asr
+
+
+def run_canary(model: str, audio, kenlm: bool) -> tuple[str, dict]:
+    import soundfile as sf
+
+    asr = _canary(model, kenlm)
     segs = []
     with tempfile.TemporaryDirectory() as tmp:
         for i, (s, e) in enumerate(chunk_bounds(audio)):
@@ -303,8 +348,8 @@ def run_canary(model: str, audio, kenlm: bool) -> tuple[str, dict]:
 
 def run_arm(arm_id: str, audio) -> tuple[str, dict]:
     _, model, recipe, _ = ARMS[arm_id]
-    if recipe == "whisper":
-        return run_whisper(model, audio)
+    if recipe in {"whisper", "whisper_fallback"}:
+        return run_whisper(model, audio, fallback=recipe == "whisper_fallback")
     if recipe == "whisper_chunks":
         return run_whisper_chunks(model, audio)
     if recipe in {"ctc", "tdt"}:
@@ -339,6 +384,84 @@ def lib_versions() -> dict:
     return out
 
 
+def run_bench(args, selected: list[str]) -> int:
+    """Every selected arm on every clip of the set, one model load per arm; one JSONL per arm."""
+    import numpy as np
+    import torch
+
+    clips = sorted((DATA / BENCH_SETS[args.bench]).glob("*.16k.npy"))
+    if not clips:
+        raise SystemExit(f"no clips in {DATA / BENCH_SETS[args.bench]}: run lumi.sh push-dental")
+    out_dir = RESULTS_DIR / "benchmarks" / args.bench
+    out_dir.mkdir(parents=True, exist_ok=True)
+    versions = lib_versions()
+    print(f"device={_device()} {versions} clips={len(clips)}", flush=True)
+    failures = 0
+    for arm_id in selected:
+        env, model, recipe, label = ARMS[arm_id]
+        out = out_dir / f"{arm_id}.jsonl"
+        if args.force and out.exists():
+            out.unlink()
+        done = {json.loads(x)["id"] for x in out.read_text(encoding="utf-8").splitlines()} if out.exists() else set()
+        todo = [c for c in clips if c.name.replace(".16k.npy", ".mp3") not in done]
+        if not todo:
+            print(f"[skip] {arm_id}: all {len(clips)} clips done")
+            continue
+        print(f"[run ] {arm_id}: {len(todo)} clips ...", flush=True)
+        t_arm = time.perf_counter()
+        try:
+            with out.open("a", encoding="utf-8", newline="\n") as f:
+                for clip in todo:
+                    name = clip.name.replace(".16k.npy", "")
+                    t0 = time.perf_counter()
+                    text, _ = run_arm(arm_id, np.load(clip).astype("float32"))
+                    row = {
+                        "id": name + ".mp3",
+                        "ref": (clip.parent / f"{name}.txt").read_text(encoding="utf-8").strip(),
+                        "hyp": text.strip(),
+                        "seconds": round(time.perf_counter() - t0, 2),
+                    }
+                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    f.flush()
+        except Exception as exc:  # noqa: BLE001 - one model failing must not stop the others
+            failures += 1
+            print(f"[FAIL] {arm_id}: {type(exc).__name__}: {str(exc)[:500]}", flush=True)
+            continue
+        finally:
+            for loader in (_pipe, _qwen, _canary):
+                loader.cache_clear()
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+        meta = {
+            "arm_id": arm_id,
+            "model": Path(model).name if arm_id.startswith("ft_") else model,
+            "recipe": recipe,
+            "params": RECIPES[recipe],
+            "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+            "utterances": len(clips),
+            "transcribe_s": round(time.perf_counter() - t_arm, 1),
+            "gpu": torch.cuda.get_device_name(0) if torch.cuda.is_available() else None,
+            "host": platform.node(),
+            "versions": versions,
+            "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
+        }
+        (out_dir / f"{arm_id}.meta.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n")
+        print(f"[ ok ] {arm_id}: {meta['transcribe_s']} s", flush=True)
+    write_run_metadata(
+        out_dir,
+        build_run_metadata(
+            app_under_test="Finnish ASR model comparison (ten dental-webinar clips, open models)",
+            dataset_path=None,
+            runner_path=Path(__file__),
+            model_or_deployment=[Path(ARMS[a][1]).name if a.startswith("ft_") else ARMS[a][1] for a in selected],
+            extra={"env": args.env, "arms": selected, "host": platform.node(), "versions": versions,
+                   "slurm_job_id": os.environ.get("SLURM_JOB_ID")},  # fmt: skip
+        ),
+        name=f"_run_metadata_{args.env or 'all'}.json",
+    )
+    return 1 if failures else 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--env", choices=["hf", "qwen", "nemo"], help="Only the arms of this environment.")
@@ -346,6 +469,7 @@ def main() -> int:
     parser.add_argument("--force", action="store_true", help="Re-run arms that already have a result file.")
     parser.add_argument("--list", action="store_true")
     parser.add_argument("--download", action="store_true", help="Fetch model weights into $HF_HOME and exit.")
+    parser.add_argument("--bench", choices=list(BENCH_SETS), help="Run on a set of long clips (see above).")
     args = parser.parse_args()
 
     selected = [a for a in ARMS if (not args.arm or a in args.arm) and (not args.env or ARMS[a][0] == args.env)]
@@ -362,6 +486,8 @@ def main() -> int:
 
     import torch
 
+    if args.bench:
+        return run_bench(args, selected)
     audio = load_audio()
     versions = lib_versions()
     print(

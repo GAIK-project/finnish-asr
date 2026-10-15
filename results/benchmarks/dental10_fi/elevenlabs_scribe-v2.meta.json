@@ -1,0 +1,19 @@
+{
+  "arm_id": "elevenlabs_scribe-v2",
+  "model": "scribe_v2",
+  "provider": "elevenlabs",
+  "params": {
+    "language_code": "fin",
+    "diarize": false,
+    "tag_audio_events": false
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "failed_this_run": 0,
+  "workers": 4,
+  "transcribe_s": 109.0,
+  "usage": {
+    "audio_duration_secs": 1800.0
+  },
+  "gpu": null
+}

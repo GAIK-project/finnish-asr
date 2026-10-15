@@ -1,0 +1,21 @@
+{
+  "arm_id": "vertex_gemini-3.5-flash",
+  "model": "gemini-3.5-flash",
+  "provider": "google-vertex",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech exactly as spoken, in Finnish. Do not translate, summarise or correct the speakers. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "benchmark": "VoxPopuli Finnish test, European Parliament speech",
+  "utterances": 478,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 638.8,
+  "usage": {
+    "candidates_token_count": 21462,
+    "prompt_token_count": 136213,
+    "total_token_count": 161859,
+    "thoughts_token_count": 4184
+  },
+  "gpu": null
+}

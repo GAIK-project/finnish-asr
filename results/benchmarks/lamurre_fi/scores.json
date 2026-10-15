@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-14T17:50:40+00:00",
+  "generated_utc": "2026-10-15T17:21:44+00:00",
   "benchmark": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
   "arms": [
     {
@@ -45,6 +45,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.37,
       "model": "whisper-large-v3-fi-skn-lamurre",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-skn-all",
+      "label": "**This project, trained on all of SKN (its test included, so no SKN score)** \u2020\u2021\u00a7",
+      "utterances": 583,
+      "WER": 57.7929,
+      "CER": 17.3027,
+      "SUB": 52.6355,
+      "DEL": 3.4894,
+      "INS": 1.6681,
+      "ref_words": 17625,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.37,
+      "model": "whisper-large-v3-fi-skn-all",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -138,6 +153,36 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "vertex_gemini-3.5-flash",
+      "label": "Gemini 3.5 Flash (API, asked to write as spoken)",
+      "utterances": 583,
+      "WER": 60.1645,
+      "CER": 21.1828,
+      "SUB": 51.3872,
+      "DEL": 7.1149,
+      "INS": 1.6624,
+      "ref_words": 17625,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 2.513,
+      "model": "gemini-3.5-flash",
+      "gpu": null
+    },
+    {
+      "arm_id": "vertex_gemini-3.5-flash-std",
+      "label": "Gemini 3.5 Flash (API, asked for standard Finnish)",
+      "utterances": 583,
+      "WER": 61.7929,
+      "CER": 22.2797,
+      "SUB": 52.8397,
+      "DEL": 7.3418,
+      "INS": 1.6113,
+      "ref_words": 17625,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 2.804,
+      "model": "gemini-3.5-flash",
+      "gpu": null
+    },
+    {
       "arm_id": "hf_whisper-large-v3",
       "label": "Whisper large-v3",
       "utterances": 583,
@@ -196,6 +241,21 @@
       "seconds_per_utterance": 0.341,
       "model": "nvidia/canary-1b-v2",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "azure_gpt-4o-transcribe",
+      "label": "OpenAI gpt-4o-transcribe (API, via Azure)",
+      "utterances": 583,
+      "WER": 72.6411,
+      "CER": 44.339,
+      "SUB": 31.8468,
+      "DEL": 40.4596,
+      "INS": 0.3348,
+      "ref_words": 17625,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.833,
+      "model": "gpt-4o-transcribe",
+      "gpu": null
     },
     {
       "arm_id": "qwen_qwen3-asr-1.7b",

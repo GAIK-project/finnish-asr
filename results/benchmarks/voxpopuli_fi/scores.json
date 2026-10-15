@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-14T17:50:40+00:00",
+  "generated_utc": "2026-10-15T17:21:44+00:00",
   "benchmark": "facebook/voxpopuli fi test",
   "arms": [
     {
@@ -46,6 +46,21 @@
       "seconds_per_utterance": 0.934,
       "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "elevenlabs_scribe-v2",
+      "label": "ElevenLabs Scribe v2 (API)",
+      "utterances": 478,
+      "WER": 9.0612,
+      "CER": 5.3193,
+      "SUB": 4.185,
+      "DEL": 2.6518,
+      "INS": 2.2245,
+      "ref_words": 7957,
+      "empty_hyps": 1,
+      "seconds_per_utterance": 2.819,
+      "model": "scribe_v2",
+      "gpu": null
     },
     {
       "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
@@ -123,6 +138,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "azure_gpt-4o-transcribe",
+      "label": "OpenAI gpt-4o-transcribe (API, via Azure)",
+      "utterances": 478,
+      "WER": 11.3611,
+      "CER": 5.8253,
+      "SUB": 5.1527,
+      "DEL": 4.7757,
+      "INS": 1.4327,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.847,
+      "model": "gpt-4o-transcribe",
+      "gpu": null
+    },
+    {
       "arm_id": "nemo_canary-1b-v2",
       "label": "NVIDIA Canary 1B v2",
       "utterances": 478,
@@ -150,6 +180,51 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.348,
       "model": "whisper-large-v3-fi-skn-lamurre-best",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "vertex_gemini-3.5-flash",
+      "label": "Gemini 3.5 Flash (API, asked to write as spoken)",
+      "utterances": 478,
+      "WER": 11.4616,
+      "CER": 5.4429,
+      "SUB": 5.5046,
+      "DEL": 3.7074,
+      "INS": 2.2496,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 3.177,
+      "model": "gemini-3.5-flash",
+      "gpu": null
+    },
+    {
+      "arm_id": "google_chirp-3",
+      "label": "Google Chirp 3 (API)",
+      "utterances": 478,
+      "WER": 11.6124,
+      "CER": 5.7297,
+      "SUB": 5.3915,
+      "DEL": 3.9336,
+      "INS": 2.2873,
+      "ref_words": 7957,
+      "empty_hyps": 3,
+      "seconds_per_utterance": 1.765,
+      "model": "chirp_3",
+      "gpu": null
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-skn-all",
+      "label": "**This project, trained on all of SKN (its test included, so no SKN score)** \u2020\u2021\u00a7",
+      "utterances": 478,
+      "WER": 11.8763,
+      "CER": 6.4976,
+      "SUB": 6.3592,
+      "DEL": 2.1868,
+      "INS": 3.3304,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.445,
+      "model": "whisper-large-v3-fi-skn-all",
       "gpu": "AMD Instinct MI250X"
     },
     {

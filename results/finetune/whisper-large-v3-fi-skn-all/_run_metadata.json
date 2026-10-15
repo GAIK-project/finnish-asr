@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T15:04:44+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": null,
+  "repo_dirty": false,
+  "app_under_test": "Finnish dialect ASR: LoRA fine-tune of Whisper",
+  "runner_path": "scripts/finetune_whisper.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "openai/whisper-large-v3"
+  ],
+  "cli_args": [
+    "--env",
+    "hf",
+    "--name",
+    "whisper-large-v3-fi-skn-all",
+    "--data",
+    "skn-all+open",
+    "--skn-text",
+    "punct",
+    "--epochs",
+    "3",
+    "--lora-r",
+    "64"
+  ],
+  "env": {},
+  "extra": {
+    "name": "whisper-large-v3-fi-skn-all",
+    "host": "nid005048",
+    "slurm_job_id": "22871318"
+  }
+}

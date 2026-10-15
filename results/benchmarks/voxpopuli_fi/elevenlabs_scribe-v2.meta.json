@@ -1,0 +1,19 @@
+{
+  "arm_id": "elevenlabs_scribe-v2",
+  "model": "scribe_v2",
+  "provider": "elevenlabs",
+  "params": {
+    "language_code": "fin",
+    "diarize": false,
+    "tag_audio_events": false
+  },
+  "benchmark": "VoxPopuli Finnish test, European Parliament speech",
+  "utterances": 478,
+  "failed_this_run": 0,
+  "workers": 4,
+  "transcribe_s": 337.9,
+  "usage": {
+    "audio_duration_secs": 4754.8613125
+  },
+  "gpu": null
+}

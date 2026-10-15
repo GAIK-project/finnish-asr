@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T11:33:02+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "fc421139db305e69cefa19bbecc64f3fd59fbbb7",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (LA-murre dialect test, 10 localities outside SKN, dialect reference, API services)",
+  "runner_path": "scripts/run_api_benchmark.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "gemini-3.5-flash",
+    "gemini-3.5-flash",
+    "gpt-4o-transcribe"
+  ],
+  "cli_args": [
+    "--workers",
+    "6",
+    "--bench",
+    "lamurre_fi",
+    "--arm",
+    "azure_gpt-4o-transcribe",
+    "--arm",
+    "vertex_gemini-3.5-flash",
+    "--arm",
+    "vertex_gemini-3.5-flash-std"
+  ],
+  "env": {
+    "AZURE_API_KEY": "set",
+    "AZURE_API_VERSION": "set",
+    "AZURE_ENDPOINT": "set",
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  },
+  "extra": {
+    "bench": "lamurre_fi",
+    "arms": [
+      "vertex_gemini-3.5-flash",
+      "vertex_gemini-3.5-flash-std",
+      "azure_gpt-4o-transcribe"
+    ],
+    "limit": null
+  }
+}

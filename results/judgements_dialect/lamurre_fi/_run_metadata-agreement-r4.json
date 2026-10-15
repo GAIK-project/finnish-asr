@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T17:19:49+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "fc421139db305e69cefa19bbecc64f3fd59fbbb7",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (LA-murre dialect test, judge agreement)",
+  "runner_path": "scripts/judge_agreement.py",
+  "dataset_path": "results/judgements_dialect/lamurre_fi",
+  "dataset_git_object": "f3cee17ed9c1b81f51c55058c0fa3a788bea2445",
+  "model_or_deployment": [
+    "aitta-gpt-oss-120b",
+    "azure-gpt-6-1-sol",
+    "claude-opus-5-5"
+  ],
+  "cli_args": [
+    "--round",
+    "r4"
+  ],
+  "env": {},
+  "extra": {
+    "round": "r4",
+    "segments": {
+      "aitta-gpt-oss-120b": 200,
+      "azure-gpt-6-1-sol": 583,
+      "claude-opus-5-5": 583
+    }
+  }
+}

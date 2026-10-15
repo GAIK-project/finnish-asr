@@ -1,0 +1,20 @@
+{
+  "arm_id": "azure_gpt-4o-transcribe",
+  "model": "gpt-4o-transcribe",
+  "provider": "azure-openai",
+  "params": {
+    "language": "fi",
+    "deployment": "gpt-4o-transcribe"
+  },
+  "benchmark": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
+  "utterances": 583,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 81.3,
+  "usage": {
+    "input_tokens": 81773,
+    "output_tokens": 22027,
+    "total_tokens": 103800
+  },
+  "gpu": null
+}

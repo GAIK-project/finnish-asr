@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T14:14:05+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "fc421139db305e69cefa19bbecc64f3fd59fbbb7",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (FLEURS Finnish test, read Wikipedia sentences, API services)",
+  "runner_path": "scripts/run_api_benchmark.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "chirp_3"
+  ],
+  "cli_args": [
+    "--bench",
+    "fleurs_fi",
+    "--arm",
+    "google_chirp-3",
+    "--workers",
+    "6"
+  ],
+  "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  },
+  "extra": {
+    "bench": "fleurs_fi",
+    "arms": [
+      "google_chirp-3"
+    ],
+    "limit": null
+  }
+}

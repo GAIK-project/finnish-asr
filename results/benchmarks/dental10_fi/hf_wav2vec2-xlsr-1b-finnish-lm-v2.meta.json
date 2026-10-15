@@ -1,0 +1,24 @@
+{
+  "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+  "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
+  "recipe": "ctc",
+  "params": {
+    "decoder": "greedy CTC (the repo's KenLM is not used)",
+    "chunks": {
+      "min_s": 15.0,
+      "max_s": 25.0,
+      "window_s": 0.1
+    }
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "transcribe_s": 140.6,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005059",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22870784"
+}

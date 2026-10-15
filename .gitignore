@@ -4,6 +4,7 @@
 # with them, judge records and LLM rewrites are produced locally by the public scripts and stay local.
 # ---------------------------------------------------------------------------
 results/benchmarks/lamurre_fi/*.jsonl
+results/benchmarks/dental10_fi/*.jsonl
 results/judgements_dialect/**/*.jsonl
 results/judgements_dialect/**/.meta*/
 results/labels/lamurre_*.jsonl
@@ -24,6 +25,7 @@ results/finetune/*/adapter/
 results/labels/*.cache.jsonl
 results/labels/skn_train.jsonl
 results/labels/skn_validation.jsonl
+results/labels/skn_heldout.jsonl
 # LUMI Slurm logs and archives (user names, project ids, scratch paths)
 results/gpu_run/*.tar.gz
 *.out
@@ -44,3 +46,4 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
+results/judgements_dental/*/

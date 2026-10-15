@@ -1,0 +1,21 @@
+{
+  "arm_id": "vertex_gemini-3.1-pro",
+  "model": "gemini-3.1-pro-preview",
+  "provider": "google-vertex",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech exactly as spoken, in Finnish. Do not translate, summarise or correct the speakers. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "failed_this_run": 0,
+  "workers": 4,
+  "transcribe_s": 64.9,
+  "usage": {
+    "candidates_token_count": 9140,
+    "prompt_token_count": 45360,
+    "total_token_count": 68251,
+    "thoughts_token_count": 13751
+  },
+  "gpu": null
+}

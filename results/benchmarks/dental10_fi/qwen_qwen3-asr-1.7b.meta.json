@@ -1,0 +1,23 @@
+{
+  "arm_id": "qwen_qwen3-asr-1.7b",
+  "model": "Qwen/Qwen3-ASR-1.7B",
+  "recipe": "qwen",
+  "params": {
+    "language": "Finnish",
+    "dtype": "bfloat16",
+    "max_new_tokens": 4096,
+    "backend": "transformers"
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "transcribe_s": 561.7,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005042",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "4.57.6",
+    "qwen_asr": "?"
+  },
+  "slurm_job_id": "22870789"
+}

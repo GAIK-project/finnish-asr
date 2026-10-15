@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T15:36:17+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "fc421139db305e69cefa19bbecc64f3fd59fbbb7",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR model comparison (ten dental-webinar clips, blind meaning judges)",
+  "runner_path": "scripts/judge_dental.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "claude-opus-5-5",
+    "gemini-3.1-pro-preview"
+  ],
+  "cli_args": [
+    "--arm",
+    "ft_whisper-large-v3-fi-skn-all-chunks"
+  ],
+  "env": {
+    "ANTHROPIC_FOUNDRY_API_KEY": "set",
+    "ANTHROPIC_FOUNDRY_RESOURCE": "set",
+    "GOOGLE_APPLICATION_CREDENTIALS": "set",
+    "GOOGLE_VERTEXAI_PROJECT": "set"
+  },
+  "extra": {
+    "prompt_sha256": "3b29089bd7ad8cd3d64194b86be593ae6dcfee3e2d5148e63287c4dc5c5a4ffa",
+    "arms": [
+      "ft_whisper-large-v3-fi-skn-all-chunks"
+    ],
+    "failed": 0
+  }
+}

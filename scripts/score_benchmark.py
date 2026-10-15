@@ -10,9 +10,12 @@ arms (run_api_benchmark.py) they are request wall time with 4 parallel workers, 
 LA-murre's per-utterance files (lamurre_fi/*.jsonl) hold the corpus's texts, which its licence
 (CC BY-ND 4.0) does not let this repository share, so they are not committed: a benchmark without
 *.jsonl keeps its committed scores.json as it is. Rebuild the files with prepare_lamurre.py and
-run_benchmark.py --bench lamurre_fi to rescore it.
+run_benchmark.py --bench lamurre_fi to rescore it. The same holds for the ten dental-webinar clips
+(dental10_fi/*.jsonl): their Finnish references are the University of Helsinki's, from a private
+repository, so only the numbers are committed.
 
-Also writes one table with every test set between the benchmark-table markers in README.md, and a
+Also writes one table with the public test sets between the benchmark-table markers in README.md, the
+dental clips' table (with the blind judges of judge_dental.py) between the dental-table markers, and a
 secret-free _score_run_metadata.json beside each rescored scores.json (built before anything is
 written, so its repo_dirty says whether the inputs were committed).
 
@@ -38,9 +41,11 @@ BENCHES = {
     "fleurs_fi": "google/fleurs fi_fi test",
     "voxpopuli_fi": "facebook/voxpopuli fi test",
     "skn_fi": "SKN dialect test, 10 held-out municipalities",
+    "dental10_fi": "Ten 180 s dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
     "lamurre_fi": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
 }
 START, END = "<!-- benchmark-table:start -->", "<!-- benchmark-table:end -->"
+DENTAL_START, DENTAL_END = "<!-- dental-table:start -->", "<!-- dental-table:end -->"
 # training-run variants kept in scores.json but not in the README table (the README's training section
 # compares them): 4-epoch runs, whose last epoch overfit, and the longer run on round 1's data
 HIDDEN = {"ft_whisper-large-v3-fi-skn-r64e4", "ft_whisper-large-v3-fi-skn-punct", "ft_whisper-large-v3-fi-skn-lamurre"}
@@ -64,6 +69,16 @@ LABELS = {
     "nemo_rasmus-canary-fi-v2": "RASMUS Finnish-ASR-Canary-v2, greedy †‡",
     "nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Finnish-ASR-Canary-v2 + KenLM †‡",
     "vertex_gemini-3.5-flash": "Gemini 3.5 Flash (API, asked to write as spoken)",
+    "vertex_gemini-3.1-pro": "Gemini 3.1 Pro (API)",
+    "azure_gpt-4o-transcribe": "OpenAI gpt-4o-transcribe (API, via Azure)",
+    "azure_whisper": "OpenAI Whisper (API, via Azure)",
+    "hf_whisper-large-v3-chunks": "Whisper large-v3, in 15–25 s pieces",
+    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "**This project, published, in 15–25 s pieces** †‡§",
+    "ft_whisper-large-v3-fi-skn-punct-ts-chunks": "**This project, `timestamps` revision, in pieces** †‡§",
+    "ft_whisper-large-v3-fi-skn-punct-ts-fallback": "**This project, `timestamps` revision, long audio in one go** †‡§",
+    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": "**This project, internal, in pieces** †‡§¶",
+    "ft_whisper-large-v3-fi-skn-all": "**This project, trained on all of SKN (its test included, so no SKN score)** †‡§",
+    "ft_whisper-large-v3-fi-skn-all-chunks": "**This project, all of SKN, in pieces** †‡§",
     "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash (API, asked for standard Finnish)",
     "google_chirp-3": "Google Chirp 3 (API)",
     "openai_gpt-transcribe": "OpenAI gpt-transcribe (API)",
@@ -91,6 +106,8 @@ def score_rows(bench: str) -> list[dict]:
     rows = []
     for path in sorted(out_dir.glob("*.jsonl")):
         recs = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        if not recs:  # a run that failed before its first item
+            continue
         refs = [r["ref"] for r in recs]
         hyps = [r["hyp"] if transform(False)(r["hyp"])[0] else "-" for r in recs]  # jiwer rejects an empty hypothesis
         w = jiwer.process_words(refs, hyps, transform(False), transform(False))
@@ -153,6 +170,22 @@ def score(bench: str, write: bool = True) -> list[dict]:
     return rows
 
 
+def dental_table(de: dict) -> str:
+    """The dental clips: WER, its inserted words, and the two blind judges' meaning-error points (judge_dental.py)."""
+    path = RESULTS_DIR / "judgements_dental" / "summary.json"
+    judges = json.loads(path.read_text(encoding="utf-8"))["judges"] if path.exists() else {}
+    names = {"claude-opus-5-5": "Claude Opus 5.5", "gemini-3.1-pro": "Gemini 3.1 Pro"}
+    head = " | ".join(f"Meaning points, {names.get(j, j)}" for j in judges)
+    lines = [f"| Model | WER % | Inserted words % | {head} |", "|---|--:|--:|" + "--:|" * len(judges)]
+    for a in sorted(set(de) - HIDDEN, key=lambda a: de[a]["WER"]):
+        pts = " | ".join(f"{judges[j][a]['points_per_100w']:.1f}" if a in judges[j] else "–" for j in judges)
+        label = LABELS.get(a, a)
+        if a.startswith("ft_") and not a.endswith(("-chunks", "-fallback")):
+            label += ", whole clip in one go"  # these repeat themselves on 180 s audio: the inserted words
+        lines.append(f"| {label} | {de[a]['WER']:.1f} | {de[a]['INS']:.1f} | {pts} |")
+    return "\n".join(lines)
+
+
 def main() -> int:
     argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter).parse_args()
     fresh = {b: score_rows(b) for b in BENCHES}
@@ -161,6 +194,7 @@ def main() -> int:
         write_scores(b, fresh[b], meta)
     scores = {b: {r["arm_id"]: r for r in (fresh[b] or score(b, write=False))} for b in BENCHES}
     fl, vp, sk, la = scores["fleurs_fi"], scores["voxpopuli_fi"], scores["skn_fi"], scores["lamurre_fi"]
+    de = scores["dental10_fi"]
     arms = sorted((set(fl) | set(vp) | set(sk)) - HIDDEN, key=lambda a: (sk.get(a, fl.get(a, {})).get("WER", 999), a))
 
     def cell(table: dict, arm: str, key: str) -> str:
@@ -178,12 +212,15 @@ def main() -> int:
             f"{cell(vp, a, 'WER')} | {cell(fl, a, 'CER')} | {speed} |"
         )
     block = "\n".join(lines)
+    dental = dental_table(de)
     readme = PROJECT_ROOT / "README.md"
     text = readme.read_text(encoding="utf-8")
-    if START in text:
-        a, b = text.index(START) + len(START), text.index(END)
-        readme.write_text(text[:a] + "\n" + block + "\n" + text[b:], encoding="utf-8", newline="\n")
-    print(block)
+    for start, end, body in ((START, END, block), (DENTAL_START, DENTAL_END, dental)):
+        if start in text:
+            a, b = text.index(start) + len(start), text.index(end)
+            text = text[:a] + "\n" + body + "\n" + text[b:]
+    readme.write_text(text, encoding="utf-8", newline="\n")
+    print(block + "\n\n" + dental)
     counts = {b: sorted({r["utterances"] for r in t.values()}) for b, t in scores.items()}
     print(f"\nutterances per arm: {counts}")
     return 0

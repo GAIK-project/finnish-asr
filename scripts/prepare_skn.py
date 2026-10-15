@@ -19,9 +19,15 @@ dialect groups (no Ostrobothnian or Peräpohjola municipality, all nine are in t
     train       the other 38
 
     python prepare_skn.py --raw $FIASR_DATA/skn_raw [--workers 16]
+    python prepare_skn.py --heldout       # the 12 test and validation municipalities, every segment
 
 Output: $FIASR_DATA/skn_fi/{train,validation,test}/<id>.wav and <split>.jsonl
 (id, ref = normalised text, orig = dialect text, municipality, seconds), and stats.json.
+
+--heldout cuts only the test and validation municipalities, without the cap, into skn_fi/heldout/ and
+heldout.jsonl (heldout_stats.json): the rest of SKN, for a model trained on all 50 municipalities
+(finetune_whisper.py --data skn-all+open). The other splits are left as they are. Such a model has
+heard the SKN test speakers, so the SKN test no longer measures it.
 """
 
 from __future__ import annotations
@@ -98,16 +104,16 @@ def segments(sents: list[dict]) -> list[dict]:
     return [g for g in segs if MIN_S <= g["end"] - g["start"] <= MAX_S and len(g["ref"].split()) >= MIN_WORDS]
 
 
-def process(job: tuple[str, str, str, str]) -> list[dict]:
-    """One recording: (zip path, wav member, eaf member, recording id) -> its segments, written to disk."""
+def process(job: tuple[str, str, str, str, bool]) -> list[dict]:
+    """One recording: (zip path, wav member, eaf member, recording id, heldout) -> its segments, written to disk."""
     import numpy as np
     import soundfile as sf
     import torch
     import torchaudio.functional as AF
 
-    zpath, wav_name, eaf_name, rec = job
+    zpath, wav_name, eaf_name, rec, heldout = job
     number = int(rec[3:5])
-    split = split_of(number)
+    split = "heldout" if heldout else split_of(number)
     with zipfile.ZipFile(zpath) as z:
         segs = segments(sentences(z.read(eaf_name)))
         if not segs:
@@ -143,6 +149,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--raw", type=Path, default=DATA / "skn_raw")
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--heldout", action="store_true", help="Only the test and validation municipalities, uncapped.")
     args = parser.parse_args()
 
     jobs = []
@@ -152,14 +159,30 @@ def main() -> int:
         for wav in (n for n in names if n.endswith(".wav") and "/Media/" in n):
             rec = Path(wav).stem  # SKN07a_Lappajarvi
             eaf = [n for n in names if n.endswith(f"/Annotations/{rec}_full.eaf")]
-            if eaf:
-                jobs.append((str(zpath), wav, eaf[0], rec))
+            if eaf and (not args.heldout or int(rec[3:5]) in TEST | VALIDATION):
+                jobs.append((str(zpath), wav, eaf[0], rec, args.heldout))
     print(f"{len(jobs)} recordings", flush=True)
     rows: list[dict] = []
     with ProcessPoolExecutor(args.workers) as pool:
         for job, res in zip(jobs, pool.map(process, jobs), strict=True):
             rows += res
             print(f"{job[3]}: {len(res)} segments", flush=True)
+
+    if args.heldout:
+        rows.sort(key=lambda r: r["id"])
+        (DATA / "skn_fi" / "heldout.jsonl").write_text(
+            "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows), encoding="utf-8", newline="\n"
+        )
+        stats = {
+            "segments": len(rows),
+            "hours": round(sum(r["seconds"] for r in rows) / 3600, 2),
+            "municipalities": sorted({r["municipality"] for r in rows}),
+        }
+        (DATA / "skn_fi" / "heldout_stats.json").write_text(
+            json.dumps(stats, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n"
+        )
+        print(f"heldout: {stats['segments']} segments, {stats['hours']} h", flush=True)
+        return 0
 
     random.seed(0)
     stats = {}

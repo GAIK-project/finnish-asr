@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T11:19:37+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": null,
+  "repo_dirty": false,
+  "app_under_test": "Finnish ASR model comparison (ten dental-webinar clips, open models)",
+  "runner_path": "scripts/run_open_models.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "Qwen/Qwen3-ASR-1.7B"
+  ],
+  "cli_args": [
+    "--env",
+    "qwen",
+    "--bench",
+    "dental10_fi",
+    "--arm",
+    "qwen_qwen3-asr-1.7b"
+  ],
+  "env": {},
+  "extra": {
+    "env": "qwen",
+    "arms": [
+      "qwen_qwen3-asr-1.7b"
+    ],
+    "host": "nid005042",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "4.57.6",
+      "qwen_asr": "?"
+    },
+    "slurm_job_id": "22870789"
+  }
+}

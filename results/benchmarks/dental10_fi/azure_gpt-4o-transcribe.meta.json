@@ -1,0 +1,20 @@
+{
+  "arm_id": "azure_gpt-4o-transcribe",
+  "model": "gpt-4o-transcribe",
+  "provider": "azure-openai",
+  "params": {
+    "language": "fi",
+    "deployment": "gpt-4o-transcribe"
+  },
+  "benchmark": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
+  "utterances": 10,
+  "failed_this_run": 0,
+  "workers": 5,
+  "transcribe_s": 25.6,
+  "usage": {
+    "input_tokens": 18000,
+    "output_tokens": 7758,
+    "total_tokens": 25758
+  },
+  "gpu": null
+}

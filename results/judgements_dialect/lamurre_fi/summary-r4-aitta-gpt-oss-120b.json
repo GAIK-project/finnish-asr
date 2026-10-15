@@ -1,0 +1,70 @@
+{
+  "generated_utc": "2026-10-15T16:51:42+00:00",
+  "benchmark": "lamurre_fi",
+  "judge": "openai/gpt-oss-120b",
+  "prompt_version": "dialect-judge-v2",
+  "segments": 200,
+  "ref_words": 6150,
+  "usage": {
+    "input_tokens": 141723,
+    "output_tokens": 371602
+  },
+  "arms": {
+    "hf_whisper-large-v3": {
+      "critical": 35,
+      "major": 124,
+      "minor": 36,
+      "error_points_per_100w": 16.36,
+      "segments_without_errors": 31,
+      "segments_best_or_tied": 88
+    },
+    "ft_whisper-large-v3-fi-skn-punct-best": {
+      "critical": 19,
+      "major": 91,
+      "minor": 48,
+      "error_points_per_100w": 11.27,
+      "segments_without_errors": 54,
+      "segments_best_or_tied": 128
+    },
+    "ft_whisper-large-v3-fi-skn-all": {
+      "critical": 19,
+      "major": 82,
+      "minor": 44,
+      "error_points_per_100w": 10.47,
+      "segments_without_errors": 65,
+      "segments_best_or_tied": 140
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "critical": 22,
+      "major": 80,
+      "minor": 47,
+      "error_points_per_100w": 10.85,
+      "segments_without_errors": 60,
+      "segments_best_or_tied": 133
+    },
+    "azure_gpt-4o-transcribe": {
+      "critical": 71,
+      "major": 120,
+      "minor": 17,
+      "error_points_per_100w": 21.58,
+      "segments_without_errors": 15,
+      "segments_best_or_tied": 51
+    },
+    "vertex_gemini-3.5-flash-std": {
+      "critical": 53,
+      "major": 114,
+      "minor": 26,
+      "error_points_per_100w": 18.31,
+      "segments_without_errors": 31,
+      "segments_best_or_tied": 74
+    }
+  },
+  "arms_judged_together": [
+    "hf_whisper-large-v3",
+    "ft_whisper-large-v3-fi-skn-punct-best",
+    "ft_whisper-large-v3-fi-skn-all",
+    "ft_whisper-large-v3-fi-skn-lamurre-best",
+    "azure_gpt-4o-transcribe",
+    "vertex_gemini-3.5-flash-std"
+  ]
+}

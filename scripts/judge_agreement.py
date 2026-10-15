@@ -40,7 +40,10 @@ OUT_DIR = RESULTS_DIR / "judgements_dialect" / "lamurre_fi"
 POINTS = {"critical": 10, "major": 5, "minor": 1}
 REFERENCE = "claude-opus-5-5"
 BASE, PUBLISHED = "hf_whisper-large-v3", "ft_whisper-large-v3-fi-skn-punct-best"
-SAMPLED = {"aitta-gemma-4-31b-it": 20, "aitta-qwen3-6-27b": 20}  # judge -> its --per-locality
+SAMPLED = {  # round -> judge -> its --per-locality
+    "r2": {"aitta-gemma-4-31b-it": 20, "aitta-qwen3-6-27b": 20},
+    "r4": {"aitta-gpt-oss-120b": 20},
+}
 
 
 def seeded_sample(ids: set[str], per_locality: int) -> set[str]:
@@ -133,7 +136,7 @@ def main() -> int:
     if REFERENCE not in judges:
         print(f"no {REFERENCE}-{args.round}.jsonl in {rel(OUT_DIR)} (the caches stay local)")
         return 1
-    for name, per_locality in SAMPLED.items():
+    for name, per_locality in SAMPLED.get(args.round, {}).items():
         if name in judges:
             keep = seeded_sample(set(judges[REFERENCE]), per_locality)
             judges[name] = {seg: row for seg, row in judges[name].items() if seg in keep}

@@ -1,0 +1,21 @@
+{
+  "arm_id": "vertex_gemini-3.5-flash",
+  "model": "gemini-3.5-flash",
+  "provider": "google-vertex",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech exactly as spoken, in Finnish. Do not translate, summarise or correct the speakers. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "benchmark": "FLEURS Finnish test, read Wikipedia sentences",
+  "utterances": 918,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 359.5,
+  "usage": {
+    "candidates_token_count": 40942,
+    "prompt_token_count": 330601,
+    "total_token_count": 374219,
+    "thoughts_token_count": 2676
+  },
+  "gpu": null
+}

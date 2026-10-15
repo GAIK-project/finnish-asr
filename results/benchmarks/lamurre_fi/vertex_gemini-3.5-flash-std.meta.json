@@ -1,0 +1,21 @@
+{
+  "arm_id": "vertex_gemini-3.5-flash-std",
+  "model": "gemini-3.5-flash",
+  "provider": "google-vertex",
+  "params": {
+    "thinking_level": "low",
+    "prompt": "Transcribe this Finnish speech in Finnish. The speaker may talk in a dialect: write every word in its standard Finnish form, in the order spoken. Do not translate, summarise, leave out or add words. Output only the transcript as plain text, without timestamps or speaker labels."
+  },
+  "benchmark": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
+  "utterances": 583,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 275.4,
+  "usage": {
+    "candidates_token_count": 34100,
+    "prompt_token_count": 238087,
+    "total_token_count": 364785,
+    "thoughts_token_count": 92598
+  },
+  "gpu": null
+}

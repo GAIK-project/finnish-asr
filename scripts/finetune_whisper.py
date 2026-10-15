@@ -20,6 +20,11 @@ place in long audio. Which items get timestamps is drawn again every epoch; for 
 fixed (every other segment by a hash of its id). FLEURS and VoxPopuli have no times and stay
 <|notimestamps|>.
 
+--data skn-all+open adds the rest of SKN (prepare_skn.py --heldout: every segment of the 12 test and
+validation municipalities, with heldout.targets.jsonl for --skn-text punct) to the training data, so the
+model hears all 50 municipalities. Its validation loss then comes from FLEURS and VoxPopuli only, and
+the SKN test no longer measures it.
+
 Their validation splits give the loss that is logged after each epoch. The test splits and
 the Ajokortti clip are never read here; run_benchmark.py and run_open_models.py score the
 result on them.
@@ -42,7 +47,7 @@ results/labels/ (`lumi.sh push-labels` copies them there; prepare_targets.py mad
 
     python finetune_whisper.py --download                  # login node: the training data
     python finetune_whisper.py --name whisper-large-v3-fi-pilot [--base openai/whisper-large-v3]
-        [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N] [--data open|skn|skn+open|skn+open+lamurre]
+        [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N] [--data open|skn|skn+open|skn-all+open|skn+open+lamurre]
         [--skn-text plain|punct] [--timestamps 0.5]
 
 Output: $FIASR_MODELS/<name>/ (merged model, processor, adapter/, train_log.json). `lumi.sh fetch-model
@@ -191,7 +196,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--download", action="store_true")
     parser.add_argument("--name", default="whisper-large-v3-fi-pilot")
-    parser.add_argument("--data", choices=["open", "skn", "skn+open", "skn+open+lamurre"], default="open")
+    parser.add_argument(
+        "--data", choices=["open", "skn", "skn+open", "skn-all+open", "skn+open+lamurre"], default="open"
+    )
     parser.add_argument("--skn-text", choices=["plain", "punct"], default="plain")
     parser.add_argument("--base", default="openai/whisper-large-v3")
     parser.add_argument("--epochs", type=int, default=2)
@@ -263,7 +270,9 @@ def main() -> int:
         return feats, labels[:, 1:]  # drop <|startoftranscript|>: the model prepends it when it shifts the labels
 
     train_items, val_items = [], []
-    if "skn" in args.data:
+    if args.data.startswith("skn-all"):  # all 50 municipalities; the SKN validation speakers are in training
+        train_items += skn("train", args.skn_text) + skn("heldout", args.skn_text)
+    elif "skn" in args.data:
         train_items += skn("train", args.skn_text)
         val_items += skn("validation", args.skn_text)
     if "lamurre" in args.data:

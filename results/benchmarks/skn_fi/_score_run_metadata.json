@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-14T17:50:38+00:00",
+  "generated_at_utc": "2026-10-15T17:21:41+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "fb590c29f7e4550b6ae4cdcf79de09ca45da2159",
-  "repo_dirty": false,
+  "repo_commit": "fc421139db305e69cefa19bbecc64f3fd59fbbb7",
+  "repo_dirty": true,
   "app_under_test": "Finnish ASR public benchmarks: SKN dialect test, 10 held-out municipalities",
   "runner_path": "scripts/score_benchmark.py",
   "dataset_path": "results/benchmarks/skn_fi",
-  "dataset_git_object": "674a09ae042a2385b61ad519a4d68de243ead6b2",
+  "dataset_git_object": "e1879dc09ad5d611ba812291bc599754828980c6",
   "model_or_deployment": [
     "whisper-large-v3-fi-skn-lamurre",
     "whisper-large-v3-fi-skn-lamurre-best",
@@ -21,10 +21,12 @@
     "gemini-3.5-flash",
     "chirp_3",
     "openai/whisper-large-v3-turbo",
+    "scribe_v2",
     "nvidia/canary-1b-v2",
     "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
     "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
     "Finnish-NLP/whisper-large-finnish-v3",
+    "gpt-4o-transcribe",
     "Qwen/Qwen3-ASR-1.7B"
   ],
   "cli_args": [],
@@ -43,10 +45,12 @@
       "vertex_gemini-3.5-flash",
       "google_chirp-3",
       "hf_whisper-large-v3-turbo",
+      "elevenlabs_scribe-v2",
       "nemo_canary-1b-v2",
       "nemo_rasmus-canary-fi-v2-kenlm",
       "nemo_rasmus-canary-fi-v2",
       "hf_whisper-large-finnish-v3",
+      "azure_gpt-4o-transcribe",
       "qwen_qwen3-asr-1.7b"
     ],
     "utterances": [

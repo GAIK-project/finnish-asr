@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T15:25:35+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": null,
+  "repo_dirty": false,
+  "app_under_test": "Finnish ASR public benchmarks: google/fleurs fi_fi test",
+  "runner_path": "scripts/run_benchmark.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "whisper-large-v3-fi-skn-all"
+  ],
+  "cli_args": [
+    "--env",
+    "hf",
+    "--bench",
+    "fleurs_fi",
+    "--arm",
+    "ft_whisper-large-v3-fi-skn-all"
+  ],
+  "env": {},
+  "extra": {
+    "bench": "fleurs_fi",
+    "env": "hf",
+    "utterances": 918,
+    "host": "nid005052",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0"
+    },
+    "slurm_job_id": "22877191"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "arm_id": "google_chirp-3",
+  "model": "chirp_3",
+  "provider": "google-speech-v2",
+  "params": {
+    "language_codes": [
+      "fi-FI"
+    ],
+    "location": "eu",
+    "punctuation": true,
+    "long_items": "15-25 s quiet-point pieces"
+  },
+  "benchmark": "VoxPopuli Finnish test, European Parliament speech",
+  "utterances": 478,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 215.6,
+  "usage": {},
+  "gpu": null
+}

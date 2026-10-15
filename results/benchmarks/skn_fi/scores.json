@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-14T17:50:40+00:00",
+  "generated_utc": "2026-10-15T17:21:44+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -183,6 +183,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "elevenlabs_scribe-v2",
+      "label": "ElevenLabs Scribe v2 (API)",
+      "utterances": 600,
+      "WER": 44.9177,
+      "CER": 15.737,
+      "SUB": 38.8353,
+      "DEL": 3.8688,
+      "INS": 2.2136,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 3.663,
+      "model": "scribe_v2",
+      "gpu": null
+    },
+    {
       "arm_id": "nemo_canary-1b-v2",
       "label": "NVIDIA Canary 1B v2",
       "utterances": 600,
@@ -241,6 +256,21 @@
       "seconds_per_utterance": 1.452,
       "model": "Finnish-NLP/whisper-large-finnish-v3",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "azure_gpt-4o-transcribe",
+      "label": "OpenAI gpt-4o-transcribe (API, via Azure)",
+      "utterances": 600,
+      "WER": 62.4543,
+      "CER": 48.4523,
+      "SUB": 16.0794,
+      "DEL": 46.0195,
+      "INS": 0.3554,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.835,
+      "model": "gpt-4o-transcribe",
+      "gpu": null
     },
     {
       "arm_id": "qwen_qwen3-asr-1.7b",

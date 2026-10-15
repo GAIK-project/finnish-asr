@@ -1,0 +1,22 @@
+{
+  "arm_id": "azure_gpt-4o-transcribe",
+  "model": "gpt-4o-transcribe",
+  "provider": "azure-openai",
+  "params": {
+    "language": "fi",
+    "deployment": "gpt-4o-transcribe"
+  },
+  "benchmark": "SKN dialect test, 10 held-out municipalities, human standard-Finnish reference",
+  "dataset": "GAIK-project/skn-finnish-dialects-asr",
+  "revision": "ee98f5e16dcb0986a5514b787bee100962be3bf6",
+  "utterances": 600,
+  "failed_this_run": 0,
+  "workers": 6,
+  "transcribe_s": 83.7,
+  "usage": {
+    "input_tokens": 89288,
+    "output_tokens": 22801,
+    "total_tokens": 112089
+  },
+  "gpu": null
+}

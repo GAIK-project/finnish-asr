@@ -5,14 +5,23 @@
 #   lumi/lumi.sh push                  copy scripts/, lumi/ and the 16 kHz clip to scratch
 #   lumi/lumi.sh push-labels           copy the SKN training targets, sentence times and long-form windows
 #   lumi/lumi.sh fetch-labels          copy prepare_skn.py's segment lists back into results/labels/ (gitignored)
+#   lumi/lumi.sh push-dental           copy the ten dental-webinar clips (data/dental10/*.16k.npy + .txt, gitignored)
+#   lumi/lumi.sh fetch-audio <bench>   copy a test set's WAVs (fleurs_fi, voxpopuli_fi, lamurre_fi) into data/<bench>/
+#                                      (gitignored), for run_api_benchmark.py
 #   lumi/lumi.sh setup [hf|qwen|nemo]  build the Python environments (login node, ~15 min, once)
 #   lumi/lumi.sh download [clip|bench] fetch weights (and for bench the FLEURS test set) on the login node
-#   lumi/lumi.sh run clip  <env> [args]   the 180 s Ajokortti clip        (run_open_models.py, 45 min limit)
+#   lumi/lumi.sh download models [name...]  this project's published fine-tunes from Hugging Face into models/;
+#                                      the private internal model needs HF_TOKEN in the local environment
+#                                      (sent over ssh's stdin, never written to disk)
+#   lumi/lumi.sh run clip  <env> [args]   the 180 s Ajokortti clip        (run_open_models.py, 45 min limit);
+#                                         add --bench dental10_fi for the ten dental clips (3 h limit)
 #   lumi/lumi.sh run bench <env> [args]   FLEURS Finnish test, 918 clips  (run_benchmark.py, 3 h limit);
 #                                         add --bench voxpopuli_fi, skn_fi or lamurre_fi for the others
 #   lumi/lumi.sh download train           the open training data (FLEURS and VoxPopuli Finnish, train)
 #   lumi/lumi.sh download skn             Suomen kielen näytteitä (SKN) dialect corpus, 24 GB, CC BY 4.0
 #   lumi/lumi.sh prepare skn              cut SKN into segments and splits (CPU job, prepare_skn.py)
+#   lumi/lumi.sh prepare skn-heldout      every segment of the 12 test and validation municipalities (CPU job,
+#                                         prepare_skn.py --heldout), for training on all of SKN
 #   lumi/lumi.sh prepare lamurre          the LA-murre dialect test, 10 WAVs read by HTTP range (login node)
 #   lumi/lumi.sh download lamurre         all LA-murre audio, 69 GB, CC BY-ND (background; a DONE file when ready)
 #   lumi/lumi.sh prepare lamurre-train    cut LA-murre training segments (CPU job, prepare_lamurre.py --train)
@@ -55,14 +64,24 @@ case $cmd in
     echo "pushed to $H:$R" ;;
   push-labels)
     # what finetune_whisper.py (--skn-text punct, --timestamps) and eval_timestamps.py read from $FIASR_DATA
-    for split in train validation; do
-      copy_to results/labels/skn_$split.targets.jsonl data/skn_fi/$split.targets.jsonl
+    for split in train validation heldout; do
+      if [ -f results/labels/skn_$split.targets.jsonl ]; then copy_to results/labels/skn_$split.targets.jsonl data/skn_fi/$split.targets.jsonl; fi
     done
     copy_to results/labels/skn_parts.jsonl data/skn_fi/parts.jsonl
     copy_to results/labels/skn_longform.jsonl data/skn_longform.jsonl ;;
+  push-dental)
+    ls data/dental10/*.16k.npy >/dev/null || { echo "data/dental10/*.16k.npy missing"; exit 1; }
+    tar -cf - data/dental10/*.16k.npy data/dental10/*.txt | ssh "$H" "mkdir -p $R && tar -xf - -C $R"
+    echo "pushed $(ls data/dental10/*.16k.npy | wc -l) clips to $R/data/dental10" ;;
+  fetch-audio)
+    b=${1:?fleurs_fi, voxpopuli_fi or lamurre_fi}
+    mkdir -p data/$b
+    ssh "$H" "cd $R/data/$b/test && tar -cf - ." | tar -xf - -C data/$b
+    echo "fetched $(ls data/$b | wc -l) files into data/$b" ;;
   fetch-labels)
     # the input of prepare_targets.py punct and prepare_timestamps.py; regenerable, so gitignored
-    for split in train validation; do
+    for split in train validation heldout; do
+      ssh "$H" "test -f $R/data/skn_fi/$split.jsonl" || continue
       ssh "$H" "cat $R/data/skn_fi/$split.jsonl" > results/labels/skn_$split.jsonl
       echo "  $R/data/skn_fi/$split.jsonl -> results/labels/skn_$split.jsonl"
     done ;;
@@ -73,6 +92,11 @@ case $cmd in
       clip)  in_container "python scripts/run_open_models.py --download" | grep -E '^(downloading|done)' ;;
       bench) in_container "python scripts/run_benchmark.py --download" | grep -E '^(downloading|done|fleurs|voxpopuli)' ;;
       train) in_container "python scripts/finetune_whisper.py --download" | grep -E '^done' ;;
+      models)
+        shift  # the token, when set, goes over ssh's stdin into the job's environment only
+        printf '%s\n' "${HF_TOKEN:-}" | ssh "$H" "read -r T; cd $R && HF_TOKEN=\$T singularity exec -B /scratch/$LP $SIF \
+          bash -c '\$WITH_CONDA; source venv-hf/bin/activate; export HF_HOME=$S/hf-cache FIASR_MODELS=$R/models; \
+          python scripts/download_models.py $*'" ;;
       lamurre) ssh -f "$H" "mkdir -p $R/data/lamurre_raw && cd $R/data/lamurre_raw && nohup sh -c 'for p in hame-kai \
                kare-karp kess-pohe pohki-sate satl-som uusi-varp eaf; do f=la-murre_wav_\$p.zip; [ \$p = eaf ] && f=la-murre_eaf.zip; \
                wget -q -c https://www.kielipankki.fi/download/la-murre/audio/\$f; done; echo done > DONE' > download.log 2>&1 < /dev/null &" ;;
@@ -88,6 +112,7 @@ case $cmd in
       timestamps) script=eval_timestamps.py; limit=03:00:00 ;;
       *) echo "clip, bench, train or timestamps"; exit 2 ;;
     esac
+    case " $* " in *" --bench "*) [ $what = clip ] && limit=03:00:00 ;; esac   # ten 180 s clips per arm
     ssh "$H" "cd $R && sbatch --account=$LP --time=$limit --export=ALL,FIASR_SCRIPT=$script,LUMI_PROJECT=$LP lumi/job.sbatch $env $*" ;;
   status)
     ssh "$H" "squeue --me --name=fiasr -o '%.10i %.9T %.10M %.10l'; cd $R && for f in \$(ls -t fiasr-*.out 2>/dev/null | head -3); do echo \"== \$f\"; grep -E '^\[(run|FAIL| ok |skip)' \$f | cut -c1-300 | tail -8; done" ;;
@@ -97,6 +122,7 @@ case $cmd in
   prepare)
     case ${1:-skn} in
       skn)     ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP lumi/prep.sbatch" ;;
+      skn-heldout) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_skn.py --heldout' lumi/prep.sbatch" ;;
       lamurre) in_container "python scripts/prepare_lamurre.py" ;;
       lamurre-train) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_lamurre.py --train' lumi/prep.sbatch" ;;
     esac ;;
