@@ -250,9 +250,16 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   in one go at 18.1 % WER without loops. It is published as the `timestamps` revision; the main
   model stays as it was
   ([Timestamps and long-form audio](#timestamps-and-long-form-audio)).
+- 🆕 **15 Oct 2026: every service on every test set.** gpt-4o-transcribe, ElevenLabs Scribe v2,
+  Chirp 3 and Gemini 3.5 Flash also ran on FLEURS, VoxPopuli and SKN: on read and parliament speech
+  ElevenLabs is best (3.3 % and 9.1 %), on dialects every service is at 35–63 %. A fourth judging
+  round (Claude, GPT-6.1-sol, gpt-oss-120b) puts Gemini and gpt-4o-transcribe behind base Whisper on
+  LA-murre ([Do other AI judges agree?](#7-do-other-ai-judges-agree)), and on ten dental webinars
+  judged on meaning Gemini 3.5 Flash is first ([Ten dental webinars](#ten-dental-webinars-standard-spoken-finnish)).
+  A model trained on all of SKN is the `all-skn` branch ([next steps](#dialect-data-and-next-steps)).
 - 🤗 **Published 13 Oct 2026:** the model
   [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
-  (Apache 2.0, tag `v1.0`; the timestamp variant on its `timestamps` branch) and its SKN segments
+  (Apache 2.0, tag `v1.0`; variants on its `timestamps` and `all-skn` branches) and its SKN segments
   [GAIK-project/skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
   (CC BY 4.0). This repository holds the method, the code and the results behind them.
 
