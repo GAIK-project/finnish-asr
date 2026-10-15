@@ -21,15 +21,15 @@ names it gets more of the names wrong. The model and its training data are free 
 Made by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of Applied
 Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).
 
-<img src="docs/img/leaderboard.svg" alt="Results at a glance: on dialect speech our model is first with 21.1 % of words wrong; on a standard-Finnish webinar Gemini 3.5 Flash makes the fewest meaning errors and our model is 18th" width="100%">
+<img src="docs/img/leaderboard.svg" alt="Results at a glance: on dialect speech our model is first with 21.1 % of words wrong; on standard Finnish (FLEURS and VoxPopuli) ElevenLabs Scribe v2 is first with 5.4 % and our model is 8th with 8.8 %" width="100%">
 
 - 🗣️ **Dialect speech: our model, by far.** 21.1 % of words wrong. The next best is Gemini 3.5 Flash,
   34.7 % when asked for standard Finnish (40.8 % when asked to write as spoken); base Whisper large-v3
   gets 40.4 % and Google Chirp 3 41.3 % (35.0 % without one segment where it repeated “se on” 1 262
   times).
-- 🏢 **Standard Finnish full of brand names: Gemini 3.5 Flash.** On a dental webinar our model's word
-  error rate is near the top (13.9 %, shared 3rd), but its few errors hit brand names and dental terms,
-  so the meaning judges put it 18th of 26.
+- 🏢 **Standard Finnish: the commercial services.** On read and parliament speech (FLEURS and
+  VoxPopuli together) ElevenLabs Scribe v2 gets 5.4 % of words wrong, gpt-4o-transcribe 6.6 % and our
+  model 8.8 %, a little better than base Whisper.
 - ⚖️ **Four AI judges agree.** Claude and three open models on CSC's Aitta service all find far fewer
   meaning errors in our models' dialect transcripts than in base Whisper's.
 - 🔌 **The big API services do not fix dialects.** On the second dialect corpus a blind judge gives
@@ -112,10 +112,6 @@ Two scores: word error rate counts every word that differs, the blind judge only
 
 <img src="docs/img/dialect-ranking.svg" alt="Dialect test word error rate: ours 21.1 %; the best other model, Gemini 3.5 Flash asked for standard Finnish, 34.7 %; base Whisper 40.4 %" width="100%">
 
-On standard spoken Finnish the two scores pick different winners:
-
-<img src="docs/img/webinar.svg" alt="Webinar clip: Gemini 3.5 Flash makes the fewest meaning errors; our model's word error rate is shared 3rd but its meaning errors rank 18th" width="100%">
-
 Across the open test sets, our model leads on dialect speech and parliament speech; on read
 sentences gpt-4o-transcribe and Gemini are better:
 
@@ -126,7 +122,7 @@ Gemini 3.5 Flash and ElevenLabs make the fewest meaning errors.
 
 So: use our model for dialect speech, and Gemini 3.5 Flash or plain Whisper large-v3 for standard
 business Finnish with many names. 🔊 [Hear the differences](https://gaik-project.github.io/finnish-asr/listen.html) ·
-all 26 set-ups are in the [full table](#tldr).
+the single webinar clip and all 26 set-ups on it are in the [full details](#tldr).
 
 ## 7. Do other AI judges agree?
 

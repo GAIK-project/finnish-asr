@@ -762,17 +762,23 @@ def judge_example() -> str:
 
 
 def leaderboard() -> str:
-    """Results at a glance: the best models on dialect speech (SKN WER) and on the webinar (meaning errors)."""
-    skn = {a["arm_id"]: a["WER"] for a in json.loads((PROJECT_ROOT / "results" / "benchmarks" / "skn_fi" / "scores.json").read_text(encoding="utf-8"))["arms"]}
+    """Results at a glance: dialect speech (SKN WER) and standard Finnish (FLEURS + VoxPopuli, pooled WER)."""
+    def arms(bench: str) -> dict:
+        path = PROJECT_ROOT / "results" / "benchmarks" / bench / "scores.json"
+        return {a["arm_id"]: a for a in json.loads(path.read_text(encoding="utf-8"))["arms"]}
+    skn = {a: r["WER"] for a, r in arms("skn_fi").items()}
     left = sorted((skn[a], lab, grp, a) for a, (lab, grp) in DIALECT_SHORT.items() if a in skn and a != "ft_whisper-large-v3-fi-skn-punct-ts")
-    clip = []
-    for arm_id, (_, kind) in ROWS.items():
-        pts = sum(judge(j, arm_id)["error_points_per_100w"] for j in JUDGES) / len(JUDGES)
-        clip.append((pts, WEBINAR_LABELS.get(arm_id, SHORT[arm_id]), "ours" if arm_id.startswith("ft_") else kind, arm_id))
-    clip.sort()
-    ours_rank = next(i for i, r in enumerate(clip) if r[3] == "ft_whisper-large-v3-fi-skn-punct-best-chunks")
+    fl, vp = arms("fleurs_fi"), arms("voxpopuli_fi")
+    std = []
+    for a, (lab, grp) in DIALECT_SHORT.items():  # pooled: all errors over all reference words of both sets
+        if a in fl and a in vp and a != "ft_whisper-large-v3-fi-skn-punct-ts":
+            err = sum(t[a]["WER"] * t[a]["ref_words"] for t in (fl, vp))
+            std.append((err / (fl[a]["ref_words"] + vp[a]["ref_words"]), lab, grp, a))
+    std.sort()
     N = 6
-    right = clip[: N - 2] + [None, clip[ours_rank]]  # the published model; the other fine-tunes are in the full table
+    ours_rank = next(i for i, r in enumerate(std) if r[3] == "ft_whisper-large-v3-fi-skn-punct-best")
+    right = std[:N] if ours_rank < N else std[: N - 2] + [None, std[ours_rank]]
+    orank_right = None if ours_rank < N else ours_rank
     W, PW, ROW, TOP = 1000, 466, 34, 118
     short = {"nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Canary v2 + KenLM", "nemo_rasmus-canary-fi-v2": "RASMUS Canary v2",
              "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, published", "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash, std Finnish", "vertex_gemini-3.5-flash": "Gemini 3.5 Flash, as spoken",
@@ -781,7 +787,7 @@ def leaderboard() -> str:
     body = [text(24, 36, "Results at a glance", 19, 700)]
     panels = [
         (24, "Dialect speech", "words wrong, %: 600 interview segments", left[:N], 45.0, "{:.1f} %", None),
-        (24 + PW + 20, "Standard spoken Finnish", "meaning-error points per 100 words: a 180 s webinar", right, 10.0, "{:.1f}", ours_rank),
+        (24 + PW + 20, "Standard Finnish", "words wrong, %: FLEURS + VoxPopuli, 1 396 segments", right, 15.0, "{:.1f} %", orank_right),
     ]
     for px, title, sub, rows, vmax, fmt, orank in panels:
         body.append(f'<rect x="{px}" y="52" width="{PW}" height="{TOP - 52 + N * ROW + 26}" rx="10" fill="#f6f8fa" stroke="{LINE}"/>')
@@ -811,7 +817,9 @@ def leaderboard() -> str:
         body.append(text(lx + 20, y, name, 13, 400, INK))
         lx += 34 + 7.2 * len(name)
     body.append(text(W - 24, y, "lower is better in both", 13, 400, MUTED, "end"))
-    return svg(W, y + 16, "Results at a glance: best models on dialect speech and on a standard-Finnish webinar", body)
+    y += 24
+    body.append(text(24, y, "Standard Finnish: our model and the Finnish-NLP and RASMUS fine-tunes were trained on these sets' training splits.", 12.5, 400, MUTED))
+    return svg(W, y + 16, "Results at a glance: best models on dialect speech and on standard Finnish public test sets", body)
 
 
 def bench_wer(bench: str) -> dict[str, float]:
