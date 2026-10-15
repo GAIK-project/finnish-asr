@@ -219,6 +219,8 @@ DIALECT_SHORT = {  # arm -> (label, group); arms missing from scores.json are le
     "vertex_gemini-3.5-flash": ("Gemini 3.5 Flash, asked to write as spoken", "API"),
     "vertex_gemini-3.5-flash-std": ("Gemini 3.5 Flash, asked for standard Finnish", "API"),
     "google_chirp-3": ("Google Chirp 3", "API"),
+    "elevenlabs_scribe-v2": ("ElevenLabs Scribe v2", "API"),
+    "azure_gpt-4o-transcribe": ("OpenAI gpt-4o-transcribe", "API"),
     "hf_whisper-large-v3": ("Whisper large-v3", "open"),
     "hf_whisper-large-v3-turbo": ("Whisper large-v3 turbo", "open"),
     "nemo_canary-1b-v2": ("NVIDIA Canary 1B v2", "open"),
