@@ -80,13 +80,14 @@ def publish_model(revision: str | None = None) -> None:
 
 
 def publish_cards() -> None:
-    """The chart and MODEL_CARD.md to the model's main branch, TIMESTAMPS_CARD.md to its timestamps branch,
+    """The charts and MODEL_CARD.md to the model's main branch, TIMESTAMPS_CARD.md to its timestamps branch,
     DATASET_CARD.md to the dataset."""
     from huggingface_hub import HfApi
 
     api = HfApi()
-    chart = RELEASE.parent / "docs" / "img" / "dialect-finetune.svg"
-    api.upload_file(path_or_fileobj=str(chart), path_in_repo=chart.name, repo_id=MODEL_REPO)
+    for chart in ("dialect-finetune.svg", "dialect-ranking.svg"):
+        path = RELEASE.parent / "docs" / "img" / chart
+        api.upload_file(path_or_fileobj=str(path), path_in_repo=chart, repo_id=MODEL_REPO)
     for revision, (_, card) in REVISIONS.items():
         api.upload_file(
             path_or_fileobj=str(RELEASE / card), path_in_repo="README.md", repo_id=MODEL_REPO, revision=revision

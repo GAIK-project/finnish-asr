@@ -589,13 +589,25 @@ def maker(arm_id: str) -> str:
     return next((v for k, v in MAKER.items() if arm_id.startswith(k)), "")
 
 
+def gaik_mark(x: float, y: float, h: float) -> str:
+    """GAIK's letter mark (docs/img/logos/gaik-mark.png, from the GAIK brand files) embedded as a data URI."""
+    import base64
+    import struct
+
+    raw = (LOGOS / "gaik-mark.png").read_bytes()
+    pw, ph = struct.unpack(">II", raw[16:24])  # the PNG header's width and height
+    w = h * pw / ph
+    data = base64.b64encode(raw).decode()
+    return f'<image x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" href="data:image/png;base64,{data}"/>'
+
+
 def label_with_logo(arm_id: str, label: str, x: float, y: float, bold: bool, uid: str) -> list[str]:
     """A row label with the maker's logo in a column to its left (our models get a blue dot)."""
     out = [text(x + 30, y, label, 14, 700 if bold else 400, INK)]
     lx = x
     name = maker(arm_id)
-    if arm_id.startswith("ft_"):
-        out.append(f'<circle cx="{lx + 9:.1f}" cy="{y - 5:.1f}" r="6" fill="{OURS}"/>')
+    if arm_id.startswith("ft_"):  # this project: the GAIK mark
+        out.append(gaik_mark(lx, y - 15, 18))
     elif name:
         m, w = mark(name, lx, y - 15, 18, uid)
         out.append(m)

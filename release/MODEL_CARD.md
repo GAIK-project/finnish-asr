@@ -66,21 +66,26 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 
 📊 [code, method and all results: GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr) · 🧰 [gaik-toolkit](https://github.com/GAIK-project/gaik-toolkit) · 💻 [GAIK on GitHub](https://github.com/GAIK-project) · 🌐 [gaik.ai](https://gaik.ai/)
 
-| Test | Whisper large-v3 | This model |
-|---|--:|--:|
-| SKN dialect interviews, 10 municipalities not in training, WER % | 40.4 | **21.1** |
-| LA-murre dialect interviews, another corpus, meaning-error points per 100 words (blind LLM judge; critical 10, major 5, minor 1) | 25.9 | **13.6** |
-| FLEURS Finnish, read sentences, WER % | 7.4 | 7.6 |
-| VoxPopuli Finnish, parliament speech, WER % | 12.7 | 10.8 |
-| A 180 s Finnish dental webinar, WER % (both decoded in chunks) | 15.7 | 13.9 |
+| Test | Whisper large-v3 | This model | Best paid service |
+|---|--:|--:|--:|
+| 🗣️ Dialect interviews (SKN, 10 municipalities not in training), WER % | 40.4 | **21.1** | 34.7 (Gemini 3.5 Flash) |
+| 🗣️ Another dialect corpus (LA-murre), meaning-error points per 100 words ¹ | 25.0 | **14.2** | 27.2 (Gemini 3.5 Flash) |
+| 📖 Read sentences (FLEURS Finnish), WER % | 7.4 | 7.6 | **3.3** (ElevenLabs Scribe v2) |
+| 🏛️ Parliament speech (VoxPopuli Finnish), WER % | 12.7 | 10.8 | **9.1** (ElevenLabs Scribe v2) |
 
-WER after lower-casing and removing punctuation. The ready-made Finnish fine-tunes trained on
-read speech score 48–57 % on the same dialect test, and the paid Gemini 3.5 Flash 34.7 % when asked
-for standard Finnish ([listen and compare](https://gaik-project.github.io/finnish-asr/listen.html)).
-In a later judging round with six models on all 583 LA-murre segments, the judge gives this model 14.2
-points, base Whisper 25.0, Gemini 3.5 Flash 27.2 and OpenAI's gpt-4o-transcribe 34.2. On read and
-parliament speech the commercial services are ahead (ElevenLabs Scribe v2: FLEURS 3.3 %, VoxPopuli
-9.1 %); all results are in [GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr).
+![Dialect test word error rate of every model: this model 21.1 %, Gemini 3.5 Flash 34.7 %, Whisper large-v3 40.4 %, ElevenLabs 44.9 %, gpt-4o-transcribe 62.5 %](dialect-ranking.svg)
+
+**Use it for dialect speech**, the way people talk outside the big cities and older speakers above all:
+it makes about half the errors of Whisper large-v3 and fewer than every paid service tested (Gemini
+3.5 Flash, Google Chirp 3, ElevenLabs Scribe v2, OpenAI gpt-4o-transcribe). On standard Finnish it stays at
+Whisper's level, and the paid services are better.
+
+WER after lower-casing and removing punctuation. ¹ LA-murre's reference is written in dialect, so a
+blind LLM judge (Claude Opus 5.5) counted only errors that change the meaning (critical 10, major 5,
+minor 1), all six models of a segment judged together; GPT-6.1-sol and gpt-oss-120b as judges give the
+same order. Gemini was asked for standard Finnish on the dialect tests. 9.9 h of test audio in all;
+every model and result: [GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr) ·
+🔊 [listen and compare](https://gaik-project.github.io/finnish-asr/listen.html).
 
 ## Variants
 
