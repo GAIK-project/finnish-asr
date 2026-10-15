@@ -775,10 +775,26 @@ Data that could serve as a dialect test set and as fine-tuning data:
 | Lauseopin arkiston murrekorpus (LA-murre) | 142 dialect samples from 132 localities, dialect transcripts only | Kielipankki, CC BY-ND 4.0: **used here** as the second dialect test and for the internal model |
 | Common Voice, FLEURS, VoxPopuli (Finnish) | Read or formal speech, the sets the RASMUS model card reports | Open |
 
-Next steps: (1) a larger dialect corpus under a licence that allows sharing a model, since the
-internal model shows that more dialect speech helps; Lahjoita puhetta is CLARIN RES (an application,
-no commercial use); (2) spontaneous standard Finnish with names and terms, the kind of speech the
-webinar clip has, where every dialect fine-tune here is weaker than base Whisper.
+What was held out: the published model trained on all of the 38 training municipalities' segments.
+The 2 validation and 10 test municipalities stayed out of training entirely, and the test uses 60
+segments from each test municipality, so the rest of those 12 interviews (roughly 15–20 h) was not
+used at all.
+
+Next steps:
+
+1. **All of SKN.** Train once more on all 50 municipalities and test on what that model has not
+   heard: LA-murre (blind judges), FLEURS and VoxPopuli. The SKN test can no longer be used then.
+   The internal model's gain from 56 more hours (21.1 → 19.7 %) suggests a small gain.
+2. **LA-murre for the published model.** Permission to publish a model trained on LA-murre's
+   standard-Finnish rewrites has been asked from the rightholders (University of Turku and Kotus,
+   via FIN-CLARIN). Before that, measure how well Opus rewrites dialect: run the same prompt on SKN's
+   dialect transcripts and score it against SKN's human standard-Finnish text.
+3. **A larger dialect corpus** under a licence that allows sharing a model, since more dialect
+   speech helps; Lahjoita puhetta is CLARIN RES (an application, no commercial use).
+4. **Names and terms.** Spontaneous standard Finnish with brand names and terms, the kind of speech
+   the webinar clip has, where every dialect fine-tune here is weaker than base Whisper.
+5. **The other API services on the dialect test.** OpenAI's gpt-4o-transcribe is available through
+   GAIK's Azure; ElevenLabs Scribe was not run.
 
 ## What's in this folder
 
