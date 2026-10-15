@@ -942,6 +942,53 @@ def across_sets() -> str:
     return svg(W, ly + 40, "Whisper large-v3, our model, gpt-4o-transcribe and Gemini 3.5 Flash on three test sets", body)
 
 
+def all_sets() -> str:
+    """Every model with all three public test sets: one row each, WER per set side by side (best per set bold)."""
+    def wer(bench: str) -> dict[str, float]:
+        return bench_wer(bench)
+    sets = [("skn_fi", "Dialect interviews", "SKN, 600 segments", 70.0),
+            ("fleurs_fi", "Read sentences", "FLEURS, 918", 30.0),
+            ("voxpopuli_fi", "Parliament speech", "VoxPopuli, 478", 30.0)]
+    w = {b: wer(b) for b, *_ in sets}
+    labels = {a: lab for a, (lab, _) in DIALECT_SHORT.items()}
+    labels.update({"hf_wav2vec2-xlsr-1b-finnish-lm-v2": "Finnish-NLP wav2vec2 XLS-R 1B", "hf_parakeet-tdt-0.6b-v3": "NVIDIA Parakeet TDT 0.6B v3",
+                   "hf_orukeet": "Orukeet (Parakeet v3 fine-tune)", "ft_whisper-large-v3-fi-skn-punct-best": "Ours, published"})
+    group = {a: g for a, (_, g) in DIALECT_SHORT.items()}
+    rows = [a for a in labels if all(a in w[b] for b, *_ in sets) and a != "ft_whisper-large-v3-fi-skn-punct-ts"]
+    rows.sort(key=lambda a: w["skn_fi"][a])
+    best = {b: min(w[b][a] for a in rows) for b, *_ in sets}
+    colors = {"API": API, "open": OPEN, "ours": OURS}
+    W, ROW, TOP, LX, CX, CW = 1000, 30, 128, 24, 360, 200
+    body = [text(24, 36, "Every model on the three public test sets", 19, 700),
+            text(24, 60, "Word error rate %, lower is better; sorted by the dialect test. Bold: best on that set.", 14, 400, MUTED)]
+    for k, (b, title, sub, vmax) in enumerate(sets):
+        x = CX + k * (CW + 10)
+        body.append(text(x, 92, title, 14, 700, INK))
+        body.append(text(x, 109, sub, 12, 400, MUTED))
+    for i, a in enumerate(rows):
+        y = TOP + i * ROW
+        grp = "ours" if a.startswith("ft_") else group.get(a, "open")
+        if grp == "ours":
+            body.append(f'<rect x="12" y="{y}" width="{W - 24}" height="{ROW}" rx="6" fill="{OURS_SOFT}"/>')
+        body.extend(label_with_logo(a, labels[a], LX, y + 20, grp == "ours", f"s{i}"))
+        for k, (b, _, _, vmax) in enumerate(sets):
+            x = CX + k * (CW + 10)
+            v = w[b][a]
+            bw = (CW - 52) * min(v, vmax) / vmax
+            body.append(f'<rect x="{x}" y="{y + 9}" width="{bw:.1f}" height="{ROW - 18}" rx="3" fill="{colors[grp]}"/>')
+            top = round(v, 1) == round(best[b], 1)
+            body.append(text(x + bw + 5, y + 20, f"{v:.1f}", 12.5, 700 if top else 400, INK))
+    bottom = TOP + len(rows) * ROW
+    y = bottom + 30
+    lx = 24
+    for name, color in (("paid API service", API), ("open model, runs on your own GPU", OPEN), ("this project", OURS)):
+        body.append(f'<rect x="{lx}" y="{y - 12}" width="14" height="14" rx="3" fill="{color}"/>')
+        body.append(text(lx + 20, y, name, 13, 400, INK))
+        lx += 34 + 7.2 * len(name)
+    body.append(text(24, y + 24, "Our model and the Finnish-NLP and RASMUS fine-tunes were trained on FLEURS and VoxPopuli training data. Gemini as spoken here; asked for standard Finnish it gets 34.7 % on SKN.", 12, 400, MUTED))
+    return svg(W, y + 38, "Word error rate of every model on SKN dialects, FLEURS and VoxPopuli", body)
+
+
 FIGURES = {
     "example.svg": example,
     "punctuation.svg": punctuation,
@@ -959,6 +1006,7 @@ FIGURES = {
     "leaderboard.svg": leaderboard,
     "dental-webinars.svg": dental_webinars,
     "across-sets.svg": across_sets,
+    "all-sets.svg": all_sets,
 }
 
 

@@ -355,6 +355,8 @@ The clip above is one recording. Four open Finnish test sets:
 FLEURS and VoxPopuli are prepared or read speech, the sets model cards report; SKN is
 spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 
+<img src="docs/img/all-sets.svg" alt="Word error rate of every model on SKN dialects, FLEURS and VoxPopuli: ours best on dialects, ElevenLabs best on FLEURS, Finnish-NLP best on VoxPopuli" width="100%">
+
 <!-- benchmark-table:start -->
 | Model | SKN dialects WER % | LA-murre dialects WER % | FLEURS WER % | VoxPopuli WER % | FLEURS CER % | s / clip |
 |---|--:|--:|--:|--:|--:|--:|
