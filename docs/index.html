@@ -12,6 +12,7 @@
   p { margin: 0 0 20px; color: #5b6662; }
   a.card { display: block; padding: 16px 18px; margin: 0 0 12px; border: 1px solid #d9dfdb; border-radius: 10px; background: #fff; color: inherit; text-decoration: none; }
   a.card b { color: #1f5c4a; }
+  video { width: 100%; border-radius: 10px; margin: 0 0 20px; background: #000; }
   @media (prefers-color-scheme: dark) {
     body { background: #141917; color: #e7ece9; } p { color: #a3afaa; }
     a.card { background: #1c2320; border-color: #2f3a36; } a.card b { color: #7cc4a8; }
@@ -22,6 +23,10 @@
 <main>
   <h1>Finnish dialect speech-to-text</h1>
   <p>How the GAIK project taught Whisper large-v3 to understand Finnish dialects: the data, the training, and how it was measured.</p>
+  <video controls preload="metadata" poster="video/promo.en.jpg">
+    <source src="video/promo.en.mp4" type="video/mp4">
+    <track kind="captions" src="video/promo.en.vtt" srclang="en" label="English">
+  </video>
   <a class="card" href="story/story.fi.html"><b>Murremallin tarina</b> · suomeksi</a>
   <a class="card" href="story/story.en.html"><b>The dialect model story</b> · in English</a>
   <a class="card" href="listen.html"><b>Listen and compare</b> · models side by side, with audio</a>
