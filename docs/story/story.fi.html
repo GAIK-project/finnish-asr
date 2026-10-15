@@ -381,6 +381,20 @@ Judge each transcript on its own; the labels carry no information.</pre>
     </table>
   </div>
   <p class="note col">Pisteet / 100 sanaa. "Sama valinta" laskee pätkän malliparit, joissa molemmat tuomarit näkevät eron, ja kuinka usein ne pitävät samaa mallia parempana. Kaikki neljä tuomaria asettavat mallit samaan järjestykseen: sisäinen malli ensin, julkaistu malli ja kierros 1 suunnilleen tasoissa, Whisper large-v3 selvästi viimeisenä. Jokaisella tuomarilla on oma asteikkonsa, joten malleja verrataan saman tuomarin sisällä, ei lukuja tuomarien välillä.</p>
+  <div class="col stack">
+    <p><b>Neljäs kierros 15.10.2026</b> toi mukaan kaksi maksullista palvelua, koko SKN:llä opetetun mallin ja uuden tuomarin: OpenAI:n <b>GPT-6.1-sol</b> GAIKin Azuren kautta. Jokaisen pätkän kuusi litterointia arvioitiin yhdessä. Kaikki kolme tuomaria asettavat maksulliset palvelut murrepuheessa tavallisen Whisperin taakse ja meidän mallit selvästi edelle.</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Tuomari</th><th class="n">Pätkiä</th><th class="n">gpt-4o-transcribe</th><th class="n">Gemini 3.5 Flash</th><th class="n">Whisper large-v3</th><th class="n">Julkaistu</th><th class="n">Koko SKN</th><th class="n">Sisäinen</th><th class="n">Sama valinta kuin Opuksella</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">34,2</td><td class="n">27,2</td><td class="n">25,0</td><td class="n">14,2</td><td class="n">13,1</td><td class="n">11,6</td><td class="n">–</td></tr>
+        <tr><td>GPT-6.1-sol (Azure)</td><td class="n">583</td><td class="n">35,6</td><td class="n">30,3</td><td class="n">26,3</td><td class="n">16,3</td><td class="n">15,5</td><td class="n">14,9</td><td class="n">92 %</td></tr>
+        <tr><td>gpt-oss-120b (otos)</td><td class="n">200</td><td class="n">21,6</td><td class="n">18,3</td><td class="n">16,4</td><td class="n">11,3</td><td class="n">10,5</td><td class="n">10,8</td><td class="n">86 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">Geminiä pyydettiin kirjoittamaan yleiskieltä. Vertaa saman kierroksen sisällä: neljännen kierroksen pisteet poikkeavat hieman aiemmista, koska tuomari näki kuusi litterointia kerralla.</p>
 </section>
 
 <section>

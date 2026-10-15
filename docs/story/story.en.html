@@ -382,6 +382,20 @@ Judge each transcript on its own; the labels carry no information.</pre>
     </table>
   </div>
   <p class="note col">Points per 100 words. "Same preference" counts the pairs of models in a segment where both judges see a difference, and how often they prefer the same one. All four judges give the same order: the internal model first, the published model and round 1 about level, Whisper large-v3 far behind. Each judge has its own scale, so compare models within one judge, not numbers across judges.</p>
+  <div class="col stack">
+    <p><b>A fourth round, 15 October 2026,</b> added two paid services and a model trained on all of SKN, and a new judge: OpenAI's <b>GPT-6.1-sol</b> through GAIK's Azure. Six transcripts of each segment were judged together. All three judges put the paid services behind plain Whisper on dialect speech, and our models far ahead.</p>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Judge</th><th class="n">Segments</th><th class="n">gpt-4o-transcribe</th><th class="n">Gemini 3.5 Flash</th><th class="n">Whisper large-v3</th><th class="n">Published</th><th class="n">All of SKN</th><th class="n">Internal</th><th class="n">Same preference as Opus</th></tr></thead>
+      <tbody>
+        <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">34.2</td><td class="n">27.2</td><td class="n">25.0</td><td class="n">14.2</td><td class="n">13.1</td><td class="n">11.6</td><td class="n">–</td></tr>
+        <tr><td>GPT-6.1-sol (Azure)</td><td class="n">583</td><td class="n">35.6</td><td class="n">30.3</td><td class="n">26.3</td><td class="n">16.3</td><td class="n">15.5</td><td class="n">14.9</td><td class="n">92 %</td></tr>
+        <tr><td>gpt-oss-120b (sample)</td><td class="n">200</td><td class="n">21.6</td><td class="n">18.3</td><td class="n">16.4</td><td class="n">11.3</td><td class="n">10.5</td><td class="n">10.8</td><td class="n">86 %</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note col">Gemini was asked for standard Finnish. Compare within one round: the fourth round's points differ a little from the earlier rounds' because the judge saw six transcripts at a time.</p>
 </section>
 
 <section>
