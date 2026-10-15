@@ -3,15 +3,9 @@
     uv run --extra hub python scripts/build_listen.py
 
 Writes docs/listen.html (served at https://gaik-project.github.io/finnish-asr/listen.html) and
-docs/listen/*.mp3. Two parts:
-
-- dialect speech: a few SKN test segments (municipalities kept out of our training). Their audio is
-  cut from the published dataset's test split (CC BY 4.0, Kotus via Kielipankki); each model's text
-  comes from results/benchmarks/skn_fi/<arm>.jsonl, with the words that word error rate counts as
-  wrong marked;
-- standard Finnish: a few VoxPopuli test segments (European Parliament speech, CC0, Meta); audio from
-  data/voxpopuli_fi/ (lumi.sh fetch-audio voxpopuli_fi), each model's text from
-  results/benchmarks/voxpopuli_fi/<arm>.jsonl, marked the same way.
+docs/listen/*.mp3: a few SKN dialect test segments (municipalities kept out of our training), their
+audio cut from the published dataset's test split (CC BY 4.0, Kotus via Kielipankki), and each model's
+text from results/benchmarks/skn_fi/<arm>.jsonl with the words that word error rate counts as wrong marked.
 
 No keys. Needs ffmpeg on PATH for the mp3s.
 """
@@ -39,6 +33,9 @@ SEGMENTS = [  # id, place, English gloss
     ("SKN45a_Heinola_0097", "Heinola", "Even when I sometimes bring it something to drink, it doesn't bite, but it grimaces so you'd think it bites now."),
     ("SKN50a_Eurajoki_0203", "Eurajoki", ""),
     ("SKN25a_Alastaro_0156", "Alastaro", ""),
+    ("SKN15a_Rautu_0072", "Rautu", "The bus went in the mornings, and in the evenings you could already come back on the same bus."),
+    ("SKN20b_Ikaalinen_0245", "Ikaalinen", "And they must be different medicines, then; they are not like the medicines for people."),
+    ("SKN35a_Artjarvi_0081", "Artjärvi", ""),
 ]
 DIALECT_ARMS = [  # arm, label, kind
     ("hf_whisper-large-v3", "Whisper large-v3 (OpenAI), as it is", "open"),
@@ -47,22 +44,6 @@ DIALECT_ARMS = [  # arm, label, kind
     ("google_chirp-3", "Google Chirp 3", "api"),
     ("azure_gpt-4o-transcribe", "OpenAI gpt-4o-transcribe", "api"),
     ("elevenlabs_scribe-v2", "ElevenLabs Scribe v2", "api"),
-    ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "ours"),
-]
-
-VOX = PROJECT_ROOT / "results" / "benchmarks" / "voxpopuli_fi"
-VOX_AUDIO = PROJECT_ROOT / "data" / "voxpopuli_fi"
-# VoxPopuli test segments: id, English gloss
-STANDARD = [
-    ("0424", "Unfortunately, in regions of high unemployment, those who lose their jobs often stay unemployed longer than people living in regions of low unemployment."),
-    ("0364", "Indonesia, the world's largest Muslim-majority country, still has laws in force against blasphemy, desecration and heresy."),
-    ("0125", "So these have been loopholes that companies have ruthlessly used to exploit posted workers."),
-]
-STANDARD_ARMS = [  # arm, label, kind
-    ("elevenlabs_scribe-v2", "ElevenLabs Scribe v2", "api"),
-    ("azure_gpt-4o-transcribe", "OpenAI gpt-4o-transcribe", "api"),
-    ("vertex_gemini-3.5-flash", "Gemini 3.5 Flash (Google)", "api"),
-    ("hf_whisper-large-v3", "Whisper large-v3 (OpenAI), as it is", "open"),
     ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "ours"),
 ]
 
@@ -137,38 +118,13 @@ def dialect_card(seg: str, place: str, gloss: str) -> str:
     return "\n".join(out)
 
 
-def standard_card(seg: str, gloss: str) -> str:
-    rows = {}
-    for arm, _, _ in STANDARD_ARMS:
-        path = VOX / f"{arm}.jsonl"
-        if path.exists():
-            rows[arm] = next((json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if json.loads(x)["id"] == seg + ".wav"), None)
-    ref = rows["hf_whisper-large-v3"]["ref"]
-    AUDIO.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(VOX_AUDIO / f"{seg}.wav"), "-ac", "1", "-b:a", "64k",
-                    str(AUDIO / f"vox_{seg}.mp3")], check=True)  # fmt: skip
-    out = [f'<div class="card"><h3>European Parliament <span>· VoxPopuli test segment {seg}</span></h3>',
-           f'<audio controls preload="none" src="listen/vox_{seg}.mp3"></audio>',
-           f'<div class="ref"><span class="k">What was said (the parliament&rsquo;s transcript)</span>{escape(ref)}</div>']
-    for arm, label, kind in STANDARD_ARMS:
-        row = rows.get(arm)
-        if not row:
-            continue
-        html, errs, n = marked_html(ref, row["hyp"])
-        good = errs <= n * 0.15
-        out.append(f'<div class="row {kind}"><span class="k">{escape(label)}<span class="score {"good" if good else "bad"}">'
-                   f'{errs} of {n} words wrong</span></span>{html}</div>')
-    out.append(f'<p class="en">In English: “{escape(gloss)}”</p></div>')
-    return "\n".join(out)
-
-
 def main() -> int:
     argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter).parse_args()
     cut_mp3s([s for s, _, _ in SEGMENTS])
     body = [
         "<h1>Listen and compare</h1>",
         '<p class="lede">Short real recordings, and what each model wrote. Red words are wrong or extra; the count also includes words the model left out. '
-        "Our model is a Whisper large-v3 fine-tuned on Finnish dialect interviews by the GAIK project.</p>",
+        "Our model is a Whisper large-v3 fine-tuned on Finnish dialect interviews by the GAIK project. The examples were picked to show where the models differ on dialect speech; every model's full scores, standard Finnish included, are in the <a href=\"https://github.com/GAIK-project/finnish-asr\">repository</a>.</p>",
         '<nav><a href="https://github.com/GAIK-project/finnish-asr">Code and results</a>'
         '<a href="story/story.en.html">The story (English)</a><a href="story/story.fi.html">Tarina (suomeksi)</a>'
         '<a href="https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects">The model</a></nav>',
@@ -176,14 +132,9 @@ def main() -> int:
         '<p class="note">Interviews recorded in the 1960s–70s, from municipalities kept out of our training. The reference is a '
         "person's transcript in standard Finnish word forms, so a model is right when it hears the dialect and writes standard Finnish.</p>",
         *[dialect_card(*s) for s in SEGMENTS],
-        "<h2>Standard Finnish: parliament speech</h2>",
-        '<p class="note">European Parliament speeches from the VoxPopuli test set. Here the commercial services lead; our model, '
-        "trained for dialects, stays at about plain Whisper's level or better.</p>",
-        *[standard_card(*s) for s in STANDARD],
         '<footer>Dialect audio: Suomen kielen näytteitä (SKN), Kotus, via <a href="http://urn.fi/urn:nbn:fi:lb-2020112937">Kielipankki</a>, '
         'CC BY 4.0, from the test split of <a href="https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr">'
-        'GAIK-project/skn-finnish-dialects-asr</a>. Parliament speech: VoxPopuli (Meta), '
-        '<a href="https://huggingface.co/datasets/facebook/voxpopuli">facebook/voxpopuli</a>, CC0. '
+        'GAIK-project/skn-finnish-dialects-asr</a>.'
         "Built by scripts/build_listen.py from the repository's results. "
         'GAIK project, Haaga-Helia University of Applied Sciences, co-funded by the European Union (ERDF).</footer>',
     ]
@@ -195,7 +146,7 @@ def main() -> int:
         + "\n</main>\n</body>\n</html>\n"
     )
     OUT.write_text(html, encoding="utf-8", newline="\n")
-    print(f"wrote {OUT.relative_to(PROJECT_ROOT)} and {len(SEGMENTS) + len(STANDARD)} mp3s in {AUDIO.relative_to(PROJECT_ROOT)}")
+    print(f"wrote {OUT.relative_to(PROJECT_ROOT)} and {len(SEGMENTS)} mp3s in {AUDIO.relative_to(PROJECT_ROOT)}")
     return 0
 
 

@@ -46,16 +46,15 @@ FORBIDDEN_PATHS = [
     "*.wav",
     "*.flac",
 ]
-ALLOWED_AUDIO = {  # SKN segments, CC BY 4.0: the story's two and the listening page's three (build_listen.py)
+ALLOWED_AUDIO = {  # SKN segments, CC BY 4.0: the story's two and the listening page's six (build_listen.py)
     "docs/story/src/assets/heinola_0097.mp3",
     "docs/story/src/assets/palkane_0021.mp3",
     "docs/listen/SKN45a_Heinola_0097.mp3",
     "docs/listen/SKN50a_Eurajoki_0203.mp3",
     "docs/listen/SKN25a_Alastaro_0156.mp3",
-    # VoxPopuli test segments (CC0, Meta): the listening page's parliament examples
-    "docs/listen/vox_0424.mp3",
-    "docs/listen/vox_0364.mp3",
-    "docs/listen/vox_0125.mp3",
+    "docs/listen/SKN15a_Rautu_0072.mp3",
+    "docs/listen/SKN20b_Ikaalinen_0245.mp3",
+    "docs/listen/SKN35a_Artjarvi_0081.mp3",
 }
 
 
