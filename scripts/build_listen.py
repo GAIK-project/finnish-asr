@@ -9,9 +9,9 @@ docs/listen/*.mp3. Two parts:
   cut from the published dataset's test split (CC BY 4.0, Kotus via Kielipankki); each model's text
   comes from results/benchmarks/skn_fi/<arm>.jsonl, with the words that word error rate counts as
   wrong marked;
-- standard spoken Finnish: spans of the Ajokortti webinar clip, played straight from gaik-toolkit (the
-  clip is not copied here), with each model's text for the span as stored in results/transcriptions/
-  and the two judges' verdicts (Claude Opus 5.5, Gemini 3.1 Pro) from results/judgements/. The span texts are checked against those files.
+- standard Finnish: a few VoxPopuli test segments (European Parliament speech, CC0, Meta); audio from
+  data/voxpopuli_fi/ (lumi.sh fetch-audio voxpopuli_fi), each model's text from
+  results/benchmarks/voxpopuli_fi/<arm>.jsonl, marked the same way.
 
 No keys. Needs ffmpeg on PATH for the mp3s.
 """
@@ -35,11 +35,6 @@ DOCS = PROJECT_ROOT / "docs"
 OUT, AUDIO = DOCS / "listen.html", DOCS / "listen"
 BENCH = PROJECT_ROOT / "results" / "benchmarks" / "skn_fi"
 DATASET, REVISION = "GAIK-project/skn-finnish-dialects-asr", "ee98f5e16dcb0986a5514b787bee100962be3bf6"
-CLIP_URL = (
-    "https://raw.githubusercontent.com/GAIK-project/gaik-toolkit/main/"
-    "evaluation_layer/eval_methods/transcription_eval/data/Ajokortti.mp3"
-)
-
 SEGMENTS = [  # id, place, English gloss
     ("SKN45a_Heinola_0097", "Heinola", "Even when I sometimes bring it something to drink, it doesn't bite, but it grimaces so you'd think it bites now."),
     ("SKN50a_Eurajoki_0203", "Eurajoki", ""),
@@ -55,50 +50,20 @@ DIALECT_ARMS = [  # arm, label, kind
     ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "ours"),
 ]
 
-# Ajokortti spans: start, end (s), title, reference text (HY), rows (label, kind, transcript file, text, verdict)
-SPANS = [
-    (75.5, 83.7, "Four implant brands",
-     "ja sen jälkeen siellä on neljä implanttibrändiä mukana. Straumann, Densply Sirona, Nobel Biocare ja Camlog-Conelog eli Implantona Oy.",
-     "",
-     [
-         ("Gemini 3.5 Flash (Google)", "api", "qad1/vertex_gemini-3.5-flash.json",
-          "Ja sen jälkeen siellä on neljä implanttibrändiä mukana: Straumann, Dentsply Sirona, Nobel Biocare ja Camlog Conelog eli Implantona Oy.",
-          "Both judges: no meaning errors. Both also note that the reference misspells “Dentsply”; “Camlog Conelog” is how the listener-reviewed reference writes it, so these red words are correct."),
-         ("Our model", "ours", "ft_whisper-large-v3-fi-skn-punct-best-chunks.json",
-          "ja sen jälkeen siellä on neljä implanttibrändiä mukana, Straumann, Densplay-sirvana, Nobelbayer, ja Camlock-Connellock eli implanttoona Oy.",
-          "Both judges: “Nobelbayer” is a major error (a different name). Claude rates the other brands minor (misspelled but recognisable); Gemini 3.1 Pro also rates “Densplay-sirvana” major."),
-         ("Whisper large-v3 (OpenAI)", "open", "qad1/hf_whisper-large-v3.json",
-          "Sen jälkeen siellä on neljä implanttebrändiä mukana, Straumanni, Dentsply Sirona, Noble Biocare ja Camlock Conelog, eli implanttoona OY.",
-          "Claude: one minor error, the names misspelled but recognisable. Gemini 3.1 Pro: no error here."),
-     ]),
-    (8.3, 15.5, "A lecturer and a profession",
-     "Sitten on parodontologi Martta Martolan luento perimplantiitista ja sitten Implantticaseja, semmoinen vodcast, jossa Peterin kanssa",
-     "",
-     [
-         ("Gemini 3.5 Flash (Google)", "api", "qad1/vertex_gemini-3.5-flash.json",
-          "Sitten on parodontologi Martta Martola luento peri-implantiitista. Ja sitten implanttikeissejä semmoinen podcast, jossa Petteri kanssa",
-          "Both judges: “podcast” and “Petteri” are minor slips. “peri-implantiitista” is the correct spelling; both judges note that the reference misspells it."),
-         ("Our model", "ours", "ft_whisper-large-v3-fi-skn-punct-best-chunks.json",
-          "Sitten on Pardentolki Martta Marttojen luento periimplanttiitista ja sitten ImplanttiCase ja semmoinen vodcast, jossa Peterin kanssa",
-          "Both judges: the surname “Marttojen” is a major error. “Pardentolki” (periodontist): minor for Claude, major for Gemini 3.1 Pro."),
-         ("Whisper large-v3 (OpenAI)", "open", "qad1/hf_whisper-large-v3.json",
-          "Sitten on parodontologi Martta Martola luento perimplantiitista ja sitten implanttikeissä ja semmoinen vodcast, jossa Peeterin kanssa",
-          "“implanttikeissä” for “Implantticaseja”: minor for Claude, major for Gemini 3.1 Pro."),
-     ]),
-    (147.9, 151.8, "“Six to nine months”",
-     "Kesto on noin kuusi-yhdeksän kuukautta, mutta nyt minä annan Peterille puheenvuoron.",
-     "A listener hears “kuusi viiva yhdeksän” and “mä” here; the reference writes “kuusi-yhdeksän” and “minä”.",
-     [
-         ("Gemini 3.5 Flash (Google)", "api", "qad1/vertex_gemini-3.5-flash.json",
-          "Kesto noin 6-9 kuukautta. Mutta nyt mä annan Petterille puheenvuoron.",
-          "Neither judge counts digits or the spoken “mä” as errors; WER does."),
-         ("Our model", "ours", "ft_whisper-large-v3-fi-skn-punct-best-chunks.json",
-          "Kesto on noin kuusi vai yhdeksän kuukautta, mutta nyt minä annan Peterille puheenvuoron,",
-          "“kuusi vai yhdeksän” (six or nine) for “kuusi-yhdeksän” (six to nine): minor for Claude, major for Gemini 3.1 Pro."),
-         ("Whisper large-v3 (OpenAI)", "open", "qad1/hf_whisper-large-v3.json",
-          "Kesto on noin 6-9 kuukautta, mutta nyt mä annan Peterille puheenvuoron.",
-          "No meaning error for either judge."),
-     ]),
+VOX = PROJECT_ROOT / "results" / "benchmarks" / "voxpopuli_fi"
+VOX_AUDIO = PROJECT_ROOT / "data" / "voxpopuli_fi"
+# VoxPopuli test segments: id, English gloss
+STANDARD = [
+    ("0424", "Unfortunately, in regions of high unemployment, those who lose their jobs often stay unemployed longer than people living in regions of low unemployment."),
+    ("0364", "Indonesia, the world's largest Muslim-majority country, still has laws in force against blasphemy, desecration and heresy."),
+    ("0125", "So these have been loopholes that companies have ruthlessly used to exploit posted workers."),
+]
+STANDARD_ARMS = [  # arm, label, kind
+    ("elevenlabs_scribe-v2", "ElevenLabs Scribe v2", "api"),
+    ("azure_gpt-4o-transcribe", "OpenAI gpt-4o-transcribe", "api"),
+    ("vertex_gemini-3.5-flash", "Gemini 3.5 Flash (Google)", "api"),
+    ("hf_whisper-large-v3", "Whisper large-v3 (OpenAI), as it is", "open"),
+    ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "ours"),
 ]
 
 CSS = """
@@ -172,22 +137,28 @@ def dialect_card(seg: str, place: str, gloss: str) -> str:
     return "\n".join(out)
 
 
-def span_card(start: float, end: float, title: str, ref: str, note: str, rows: list) -> str:
-    reference = (PROJECT_ROOT / "data" / "ajokortti" / "reference.txt").read_text(encoding="utf-8")
-    if ref not in reference:
-        raise SystemExit(f"span reference not in reference.txt: {ref[:60]}")
-    out = [f'<div class="card"><h3>{escape(title)} <span>· Ajokortti webinar, {start:.1f}–{end:.1f} s</span></h3>',
-           f'<audio controls preload="none" src="{CLIP_URL}#t={start},{end}"></audio>',
-           f'<div class="ref"><span class="k">Reference (University of Helsinki transcript)</span>{escape(ref)}'
-           + (f'<div class="verdict">{escape(note)}</div>' if note else "") + "</div>"]
-    for label, kind, path, hyp, verdict in rows:
-        stored = json.loads((PROJECT_ROOT / "results" / "transcriptions" / path).read_text(encoding="utf-8"))["text"]
-        if hyp not in stored:
-            raise SystemExit(f"span text not in {path}: {hyp[:60]}")
-        html, errs, n = marked_html(ref, hyp)
-        out.append(f'<div class="row {kind}"><span class="k">{escape(label)}<span class="score">{errs} of {n} words differ</span></span>'
-                   f'{html}<div class="verdict">{escape(verdict)}</div></div>')
-    out.append("</div>")
+def standard_card(seg: str, gloss: str) -> str:
+    rows = {}
+    for arm, _, _ in STANDARD_ARMS:
+        path = VOX / f"{arm}.jsonl"
+        if path.exists():
+            rows[arm] = next((json.loads(x) for x in path.read_text(encoding="utf-8").splitlines() if json.loads(x)["id"] == seg + ".wav"), None)
+    ref = rows["hf_whisper-large-v3"]["ref"]
+    AUDIO.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(VOX_AUDIO / f"{seg}.wav"), "-ac", "1", "-b:a", "64k",
+                    str(AUDIO / f"vox_{seg}.mp3")], check=True)  # fmt: skip
+    out = [f'<div class="card"><h3>European Parliament <span>· VoxPopuli test segment {seg}</span></h3>',
+           f'<audio controls preload="none" src="listen/vox_{seg}.mp3"></audio>',
+           f'<div class="ref"><span class="k">What was said (the parliament&rsquo;s transcript)</span>{escape(ref)}</div>']
+    for arm, label, kind in STANDARD_ARMS:
+        row = rows.get(arm)
+        if not row:
+            continue
+        html, errs, n = marked_html(ref, row["hyp"])
+        good = errs <= n * 0.15
+        out.append(f'<div class="row {kind}"><span class="k">{escape(label)}<span class="score {"good" if good else "bad"}">'
+                   f'{errs} of {n} words wrong</span></span>{html}</div>')
+    out.append(f'<p class="en">In English: “{escape(gloss)}”</p></div>')
     return "\n".join(out)
 
 
@@ -205,17 +176,15 @@ def main() -> int:
         '<p class="note">Interviews recorded in the 1960s–70s, from municipalities kept out of our training. The reference is a '
         "person's transcript in standard Finnish word forms, so a model is right when it hears the dialect and writes standard Finnish.</p>",
         *[dialect_card(*s) for s in SEGMENTS],
-        "<h2>Standard spoken Finnish: a dental webinar</h2>",
-        '<p class="note">The Ajokortti clip: 180 s of a public dental-education webinar with many names and brands. Here word errors '
-        "and meaning errors part ways: a model can spell many words differently and still keep the meaning, or miss one name and change it. "
-        "Meaning errors were rated by two LLM judges, Claude Opus 5.5 and Gemini 3.1 Pro, who read the reference and each "
-        "transcript without knowing which model wrote it (minor, major or critical).</p>",
-        *[span_card(*s) for s in SPANS],
+        "<h2>Standard Finnish: parliament speech</h2>",
+        '<p class="note">European Parliament speeches from the VoxPopuli test set. Here the commercial services lead; our model, '
+        "trained for dialects, stays at about plain Whisper's level or better.</p>",
+        *[standard_card(*s) for s in STANDARD],
         '<footer>Dialect audio: Suomen kielen näytteitä (SKN), Kotus, via <a href="http://urn.fi/urn:nbn:fi:lb-2020112937">Kielipankki</a>, '
         'CC BY 4.0, from the test split of <a href="https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr">'
-        'GAIK-project/skn-finnish-dialects-asr</a>. Webinar: QAdental (Suomen Kotilääkäripalvelu Oy), the Ajokortti clip in '
-        '<a href="https://github.com/GAIK-project/gaik-toolkit/tree/main/evaluation_layer/eval_methods/transcription_eval">gaik-toolkit</a>, '
-        "reference transcript by the University of Helsinki. Built by scripts/build_listen.py from the repository's results. "
+        'GAIK-project/skn-finnish-dialects-asr</a>. Parliament speech: VoxPopuli (Meta), '
+        '<a href="https://huggingface.co/datasets/facebook/voxpopuli">facebook/voxpopuli</a>, CC0. '
+        "Built by scripts/build_listen.py from the repository's results. "
         'GAIK project, Haaga-Helia University of Applied Sciences, co-funded by the European Union (ERDF).</footer>',
     ]
     html = (
@@ -226,7 +195,7 @@ def main() -> int:
         + "\n</main>\n</body>\n</html>\n"
     )
     OUT.write_text(html, encoding="utf-8", newline="\n")
-    print(f"wrote {OUT.relative_to(PROJECT_ROOT)} and {len(SEGMENTS)} mp3s in {AUDIO.relative_to(PROJECT_ROOT)}")
+    print(f"wrote {OUT.relative_to(PROJECT_ROOT)} and {len(SEGMENTS) + len(STANDARD)} mp3s in {AUDIO.relative_to(PROJECT_ROOT)}")
     return 0
 
 
