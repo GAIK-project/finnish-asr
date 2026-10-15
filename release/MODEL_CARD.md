@@ -77,6 +77,10 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 WER after lower-casing and removing punctuation. The ready-made Finnish fine-tunes trained on
 read speech score 48–57 % on the same dialect test, and the paid Gemini 3.5 Flash 34.7 % when asked
 for standard Finnish ([listen and compare](https://gaik-project.github.io/finnish-asr/listen.html)).
+In a later judging round with six models on all 583 LA-murre segments, the judge gives this model 14.2
+points, base Whisper 25.0, Gemini 3.5 Flash 27.2 and OpenAI's gpt-4o-transcribe 34.2. On read and
+parliament speech the commercial services are ahead (ElevenLabs Scribe v2: FLEURS 3.3 %, VoxPopuli
+9.1 %); all results are in [GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr).
 
 ## Variants
 
@@ -89,6 +93,11 @@ for standard Finnish ([listen and compare](https://gaik-project.github.io/finnis
   (15.2 %). Use it when you need sentence timestamps or long-form decoding without cutting the audio
   yourself, always with its fallback settings: load it with `revision="timestamps"`; its card is on
   [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/timestamps/README.md).
+- **`all-skn`: the same recipe trained on all 50 SKN municipalities** (81 h of dialect speech
+  instead of 62). Fewer meaning errors on LA-murre (13.1 against this model's 14.2 in the same judging
+  round), FLEURS level (7.5 %), VoxPopuli worse (11.9 %). For audio that is mostly dialect: load it
+  with `revision="all-skn"`; its card is on
+  [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/all-skn/README.md).
 
 ## Use it
 

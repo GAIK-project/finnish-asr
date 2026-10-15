@@ -31,6 +31,10 @@ Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Uni
   so the meaning judges put it 18th of 26.
 - ⚖️ **Four AI judges agree.** Claude and three open models on CSC's Aitta service all find far fewer
   meaning errors in our models' dialect transcripts than in base Whisper's.
+- 🔌 **The big API services do not fix dialects.** On the second dialect corpus a blind judge gives
+  Gemini 3.5 Flash 27.2 and OpenAI's gpt-4o-transcribe 34.2 meaning-error points per 100 words, more
+  than base Whisper (25.0); our model gets 14.2. On read and parliament speech the API services lead
+  ([four kinds of speech](#6-how-it-compares)).
 
 | Our model against the model it started from | Whisper large-v3 | Our model |
 |---|--:|--:|
@@ -111,16 +115,32 @@ On standard spoken Finnish the two scores pick different winners:
 
 <img src="docs/img/webinar.svg" alt="Webinar clip: Gemini 3.5 Flash makes the fewest meaning errors; our model's word error rate is shared 3rd but its meaning errors rank 18th" width="100%">
 
+Across the open test sets, our model leads on dialect speech and parliament speech; on read
+sentences gpt-4o-transcribe and Gemini are better:
+
+<img src="docs/img/across-sets.svg" alt="Word error rate of Whisper large-v3, our model, gpt-4o-transcribe and Gemini 3.5 Flash on SKN dialects, FLEURS and VoxPopuli" width="100%">
+
+On ten dental webinars (30 minutes), [the judges agree](#ten-dental-webinars-standard-spoken-finnish):
+Gemini 3.5 Flash and ElevenLabs make the fewest meaning errors.
+
 So: use our model for dialect speech, and Gemini 3.5 Flash or plain Whisper large-v3 for standard
 business Finnish with many names. 🔊 [Hear the differences](https://gaik-project.github.io/finnish-asr/listen.html) ·
 all 26 set-ups are in the [full table](#tldr).
 
 ## 7. Do other AI judges agree?
 
-Three open models on CSC's Aitta service repeated the blind judging of the second dialect corpus.
-Each judge is stricter or milder, but all four put our models far ahead of base Whisper:
+The fourth judging round put six transcripts of every segment of the second dialect corpus side by
+side: base Whisper, two API services and our three models. Claude Opus 5.5 and OpenAI's GPT-6.1-sol
+(through GAIK's Azure) judged all 583 segments, gpt-oss-120b on CSC's Aitta a seeded sample of 200.
+Each judge is stricter or milder, but all three put our models far ahead, and Gemini 3.5 Flash and
+gpt-4o-transcribe behind base Whisper:
 
-<img src="docs/img/judges.svg" alt="Four blind judges rank base Whisper far behind our three fine-tuned models on LA-murre" width="100%">
+<img src="docs/img/judges.svg" alt="Three blind judges on LA-murre: gpt-4o-transcribe, Gemini 3.5 Flash and base Whisper far behind our three fine-tuned models" width="100%">
+
+GPT-6.1-sol prefers the same transcript as Claude in 92 % of pairs, gpt-oss-120b in 86 %. The second
+round's open judges (Gemma 4 31B, Qwen3.6 27B) agreed with Claude in 92–93 % of pairs
+([below](#second-opinions-open-model-judges-on-csc-aitta)); in this round they were too slow on Aitta
+to finish and are left out.
 
 ## 8. Why it got better
 
@@ -335,6 +355,7 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | Model | SKN dialects WER % | LA-murre dialects WER % | FLEURS WER % | VoxPopuli WER % | FLEURS CER % | s / clip |
 |---|--:|--:|--:|--:|--:|--:|
 | **This project's pilot: Whisper large-v3 + LoRA** †‡ | – | – | 7.1 | 10.8 | 1.6 | 0.95 |
+| **This project, trained on all of SKN (its test included, so no SKN score)** †‡§ | – | 57.8 | 7.5 | 11.9 | 1.7 | 0.96 |
 | Orukeet (Parakeet v3 fine-tune) | – | – | 11.6 | 15.9 | 2.8 | 0.04 |
 | NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | 3.1 | 0.18 |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | 6.2 | 1.50 |
@@ -342,15 +363,17 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | **This project, round 2: + punctuated SKN targets (published)** †‡§ | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
 | **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§ | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
 | **This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** †‡§ | 22.2 | 57.9 | 7.8 | 10.6 | 1.9 | 0.96 |
-| Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | – | – | – | – | – |
+| Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | 61.8 | – | – | – | – |
 | Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 1.7 | 0.98 |
-| Gemini 3.5 Flash (API, asked to write as spoken) | 40.8 | – | – | – | – | – |
-| Google Chirp 3 (API) | 41.3 | – | – | – | – | – |
+| Gemini 3.5 Flash (API, asked to write as spoken) | 40.8 | 60.2 | 5.1 | 11.5 | 1.9 | 2.24 |
+| Google Chirp 3 (API) | 41.3 | – | 4.8 | 11.6 | 1.6 | 1.82 |
 | Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | 2.2 | 0.19 |
+| ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | 1.7 | 3.09 |
 | NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | 2.1 | 0.30 |
 | RASMUS Finnish-ASR-Canary-v2 + KenLM †‡ | 47.6 | 62.7 | 7.6 | 7.7 | 2.5 | 0.71 |
 | RASMUS Finnish-ASR-Canary-v2, greedy †‡ | 50.1 | 58.7 | 8.4 | 6.8 | 2.4 | 0.10 |
 | Finnish-NLP whisper-large-finnish-v3 † | 56.6 | 51.6 | 7.1 | 6.6 | 1.7 | 0.89 |
+| OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | 1.4 | 0.88 |
 | Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | 5.8 | 0.34 |
 <!-- benchmark-table:end -->
 
@@ -358,10 +381,10 @@ Corpus WER and CER after lower-casing and removing punctuation. Seconds per utte
 are FLEURS GPU time in batches of 16 on one AMD MI250X, model loading excluded. † trained
 on FLEURS training data, ‡ on VoxPopuli training data, § on SKN training data from
 other municipalities, ¶ on LA-murre training data from other localities (model cards, or this
-project), so those numbers are on familiar material. A dash: not run on that set. Two API services,
-Gemini 3.5 Flash and Google Chirp 3, ran on the SKN test only
-([`run_api_benchmark.py`](scripts/run_api_benchmark.py)), with the clip runs' models and settings, one
-request per segment; OpenAI's and ElevenLabs' services were not run on it. "As spoken" is the clip's
+project), so those numbers are on familiar material. A dash: not run on that set. The API services
+([`run_api_benchmark.py`](scripts/run_api_benchmark.py)) ran with the clip runs' models and settings,
+one request per segment; OpenAI's gpt-4o-transcribe through GAIK's Azure. Seconds per clip for them
+are request wall time, which varies with the service's load. "As spoken" is the clip's
 prompt (write exactly what is said); "standard Finnish" asks for standard word forms, which is what the
 SKN reference has. Chirp 3 returned 1 262 words of a repeated "se on" for one 50-word segment
 (SKN15b_Rautu_0133), which costs it 6.3 points (35.0 % without that segment), and heard no speech in 8
@@ -370,6 +393,63 @@ municipalities cannot be called held out.
 VoxPopuli references keep digits and abbreviations as the parliament wrote them, which costs every
 model some WER. The RASMUS model card reports 8.39 % (greedy) and 7.75 % (KenLM) on FLEURS; this run
 gives 8.4 % and 7.6 %.
+
+## Ten dental webinars: standard spoken Finnish
+
+The Ajokortti clip is one of ten. The other nine come from the same QAdental webinar material: ten
+180 s clips (30 minutes of speech), each with the University of Helsinki's Finnish
+transcript (QAD-1 set A in HY's study). The files were checked against HY's originals: the same audio
+and the same text byte for byte.
+
+<img src="docs/img/dental-webinars.svg" alt="Ten dental-webinar clips: Gemini 3.5 Flash makes the fewest meaning errors, Whisper large-v3 has the lowest word error rate; our model is last of six on meaning" width="100%">
+
+**Read the word error rate here with care.** HY's transcripts leave out fillers ("niinku", "tota",
+"no niin") and were not checked against the audio by a listener. A spot check found missing fillers,
+a wrong word form ("yrittäjien" where the speaker says "yrittäjän") and a word missing at a clip's
+start; the Ajokortti review above found the same. So models that also leave fillers out (Whisper,
+gpt-4o-transcribe) get about 2 % of inserted words, and models that write what is said (ElevenLabs,
+Chirp, Gemini, our model) 11–14 %. The blind judges of [`judge_dental.py`](scripts/judge_dental.py)
+(the Ajokortti prompt, Claude Opus 5.5 and Gemini 3.1 Pro) ignore fillers and count only what
+changes the meaning; on that measure Gemini 3.5 Flash and ElevenLabs Scribe v2 are best, and our
+model, built for dialects, is last of the six judged.
+
+<!-- dental-table:start -->
+| Model | WER % | Inserted words % | Meaning points, Claude Opus 5.5 | Meaning points, Gemini 3.1 Pro |
+|---|--:|--:|--:|--:|
+| Whisper large-v3 | 15.7 | 2.7 | 3.6 | 6.4 |
+| Whisper large-v3, in 15–25 s pieces | 17.4 | 2.2 | – | – |
+| OpenAI gpt-4o-transcribe (API, via Azure) | 19.1 | 2.4 | 5.3 | 9.1 |
+| Whisper large-v3 turbo | 19.2 | 2.2 | – | – |
+| OpenAI Whisper (API, via Azure) | 22.1 | 2.6 | – | – |
+| Orukeet (Parakeet v3 fine-tune) | 24.4 | 2.3 | – | – |
+| NVIDIA Canary 1B v2 | 24.5 | 2.2 | – | – |
+| ElevenLabs Scribe v2 (API) | 25.4 | 11.4 | 1.6 | 2.8 |
+| **This project, all of SKN, in pieces** †‡§ | 25.7 | 12.5 | 4.8 | 9.7 |
+| **This project, `timestamps` revision, in pieces** †‡§ | 25.8 | 12.9 | – | – |
+| Finnish-NLP whisper-large-finnish-v3 † | 25.8 | 12.7 | – | – |
+| **This project, published, in 15–25 s pieces** †‡§ | 25.9 | 12.8 | 5.1 | 10.0 |
+| Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
+| **This project, internal, in pieces** †‡§¶ | 26.5 | 13.4 | – | – |
+| Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
+| **This project, `timestamps` revision, long audio in one go** †‡§ | 27.0 | 13.0 | – | – |
+| Gemini 3.1 Pro (API) | 28.5 | 11.4 | – | – |
+| RASMUS Finnish-ASR-Canary-v2 + KenLM †‡ | 28.6 | 9.9 | – | – |
+| Gemini 3.5 Flash (API, asked to write as spoken) | 28.6 | 14.0 | 1.2 | 2.1 |
+| RASMUS Finnish-ASR-Canary-v2, greedy †‡ | 29.7 | 8.8 | – | – |
+| **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§, whole clip in one go | 29.8 | 15.8 | – | – |
+| NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
+| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
+| **This project, round 2 internal: + LA-murre** †‡§¶, whole clip in one go | 60.0 | 44.9 | – | – |
+| **This project, round 2: + punctuated SKN targets (published)** †‡§, whole clip in one go | 60.2 | 44.8 | – | – |
+| Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
+<!-- dental-table:end -->
+
+Meaning points: errors per 100 reference words over all ten clips (critical 10, major 5, minor 1).
+Our models were run on 15–25 s pieces cut at quiet points; fed a whole 180 s clip in one go, the
+published model repeats itself (45 % inserted words), and only the `timestamps` revision with its
+fallback decode copes. HY's transcripts are private, so only the numbers are committed
+([`results/benchmarks/dental10_fi/scores.json`](results/benchmarks/dental10_fi/scores.json),
+[`results/judgements_dental/summary.json`](results/judgements_dental/summary.json)).
 
 ## Fine-tuning pilot: Whisper large-v3 on open Finnish data
 
@@ -777,24 +857,42 @@ Data that could serve as a dialect test set and as fine-tuning data:
 
 What was held out: the published model trained on all of the 38 training municipalities' segments.
 The 2 validation and 10 test municipalities stayed out of training entirely, and the test uses 60
-segments from each test municipality, so the rest of those 12 interviews (roughly 15–20 h) was not
-used at all.
+segments from each test municipality, so the rest of those 12 interviews (4 601 segments, 19.5 h) was
+not used at all.
 
-Next steps:
+What was tried next (15 Oct 2026):
 
-1. **All of SKN.** Train once more on all 50 municipalities and test on what that model has not
-   heard: LA-murre (blind judges), FLEURS and VoxPopuli. The SKN test can no longer be used then.
-   The internal model's gain from 56 more hours (21.1 → 19.7 %) suggests a small gain.
-2. **LA-murre for the published model.** Permission to publish a model trained on LA-murre's
+1. **All of SKN.** The same recipe on all 50 municipalities (19 643 segments, about 81 h; validation
+   on FLEURS and VoxPopuli only), tested on what it had not heard. On LA-murre the blind judge
+   (Claude Opus 5.5, all six models of the fourth round together, 583 segments) gives it 13.1 points
+   against the published model's 14.2: fewer points in 177 segments and more in 114 (sign test
+   p = 0.0003). FLEURS stays level (7.5 against 7.6 %), VoxPopuli gets worse (11.9 against 10.8 %),
+   and on the ten dental webinars the judges see no difference (4.8 / 9.6 against 5.1 / 10.0 points).
+   The rule set before the run allowed FLEURS and VoxPopuli at most 0.5 points worse, so it did not
+   replace the published model; it is on the model's
+   [`all-skn` branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/tree/all-skn)
+   ([card](release/ALL_SKN_CARD.md)) for audio that is mostly dialect.
+2. **How well Opus rewrites dialect.** The prompt that turned LA-murre's dialect transcripts into
+   standard Finnish for the internal model, run on SKN's dialect transcripts of the 600 test segments
+   and scored against SKN's human standard-Finnish text: 14.2 % WER, so the internal model's training
+   text is close to, not the same as, a person's normalisation.
+3. **The API services on the dialect test.** gpt-4o-transcribe (through GAIK's Azure) leaves out 46 %
+   of the dialect test's words (62.5 % WER) and gets the most meaning-error points on LA-murre (34.2);
+   ElevenLabs Scribe v2 gets 44.9 % on SKN. Every service and model ran on FLEURS and VoxPopuli as
+   well ([table](#public-test-sets-skn-and-la-murre-dialects-fleurs-and-voxpopuli)).
+
+Still open:
+
+1. **LA-murre for the published model.** Permission to publish a model trained on LA-murre's
    standard-Finnish rewrites has been asked from the rightholders (University of Turku and Kotus,
-   via FIN-CLARIN). Before that, measure how well Opus rewrites dialect: run the same prompt on SKN's
-   dialect transcripts and score it against SKN's human standard-Finnish text.
-3. **A larger dialect corpus** under a licence that allows sharing a model, since more dialect
-   speech helps; Lahjoita puhetta is CLARIN RES (an application, no commercial use).
-4. **Names and terms.** Spontaneous standard Finnish with brand names and terms, the kind of speech
-   the webinar clip has, where every dialect fine-tune here is weaker than base Whisper.
-5. **The other API services on the dialect test.** OpenAI's gpt-4o-transcribe is available through
-   GAIK's Azure; ElevenLabs Scribe was not run.
+   via FIN-CLARIN).
+2. **Today's speech.** Both dialect corpora are 1960s–70s interviews. Lahjoita puhetta (Donate
+   Speech, about 3 200 h of everyday Finnish from all regions) would test present-day speech; it is
+   CLARIN RES and needs a research plan and the project's public privacy notice.
+3. **Names and terms.** Spontaneous standard Finnish with brand names and terms, the kind of speech
+   the webinar clips have, where every dialect fine-tune here is weaker than base Whisper.
+4. **Checked dental references.** HY's transcripts of the ten dental clips leave fillers out and were
+   not checked by a listener; a reviewed version would make their word error rates meaningful.
 
 ## What's in this folder
 
@@ -803,7 +901,7 @@ Next steps:
 | [`scripts/`](scripts/) | Runners, scorer, judges, table and chart builders (see [Run it again](#run-it-again)). [`provenance.py`](scripts/provenance.py) writes each run's `_run_metadata*.json`; [`asr_scoring.py`](scripts/asr_scoring.py) is the clip scorer with HY's normalisation; [`get_clip.py`](scripts/get_clip.py) fetches the clip. |
 | [`tests/`](tests/) | Offline tests (`uv run pytest`): no keys, no downloads, no GPU. |
 | [`lumi/`](lumi/) | How the open models were run and trained on LUMI: environment setup, Slurm jobs, and stubs that hide three container libraries NeMo cannot use. |
-| [`release/`](release/) | The Hugging Face cards, uploaded by [`publish_hf.py`](scripts/publish_hf.py): [`MODEL_CARD.md`](release/MODEL_CARD.md) (the main model), [`TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md) (its `timestamps` revision) and [`DATASET_CARD.md`](release/DATASET_CARD.md). |
+| [`release/`](release/) | The Hugging Face cards, uploaded by [`publish_hf.py`](scripts/publish_hf.py): [`MODEL_CARD.md`](release/MODEL_CARD.md) (the main model), [`TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md) (its `timestamps` revision), [`ALL_SKN_CARD.md`](release/ALL_SKN_CARD.md) (its `all-skn` revision) and [`DATASET_CARD.md`](release/DATASET_CARD.md). |
 | [`docs/`](docs/) | [`DIALECT-EXAMPLES.md`](docs/DIALECT-EXAMPLES.md) (20 SKN test segments side by side and WER per municipality), [`story/`](docs/story/) (the walk-through pages, one self-contained HTML file per language, built from `story/src/`) and [`img/`](docs/img/) (the dialect chart from `dialect_chart.py`, the front page's figures from [`readme_figures.py`](scripts/readme_figures.py), the banner, an AI illustration made with GPT Image 2.5, and the sources' logos in `logos/`, their owners' trademarks, from [svgl](https://svgl.app/)). The story pages are also served at [gaik-project.github.io/finnish-asr](https://gaik-project.github.io/finnish-asr/). |
 | [`results/transcriptions/`](results/transcriptions/) | One JSON per model and run on the clip: transcript, settings, library versions, timing. [`qad1/`](results/transcriptions/qad1/) holds GAIK's earlier QAD-1 runs (OpenAI, Gemini, the gaik transcriber, the Haaga-Helia WhisperX server, Whisper on CSC Roihu). |
 | [`results/judgements/`](results/judgements/) | Per judge and model: every meaning error quoted from the reference and the transcript, the name checks, reference doubts, scores. |
@@ -934,6 +1032,21 @@ uv run python scripts/judge_dialect.py --round r2 --arms hf_whisper-large-v3,ft_
 uv run python scripts/judge_dialect.py --round r2 --arms <the same> --provider aitta --judge-model openai/gpt-oss-120b
 uv run python scripts/judge_agreement.py --round r2
 uv run python scripts/judge_dialect.py --round r3 --arms hf_whisper-large-v3,ft_whisper-large-v3-fi-skn-punct-best,ft_whisper-large-v3-fi-skn-punct-ts
+
+# the API services on every test set (FLEURS, VoxPopuli and LA-murre WAVs: bash $L fetch-audio <bench>)
+for b in skn_fi fleurs_fi voxpopuli_fi lamurre_fi; do uv run --extra api-asr python scripts/run_api_benchmark.py   --bench $b --arm azure_gpt-4o-transcribe --arm elevenlabs_scribe-v2 --arm google_chirp-3; done
+
+# all of SKN: every segment of the 12 held-out municipalities joins the training data
+bash $L prepare skn-heldout && bash $L fetch-labels
+uv run python scripts/prepare_targets.py punct results/labels/skn_heldout.jsonl && bash $L push-labels
+bash $L run train hf --name whisper-large-v3-fi-skn-all --data skn-all+open --skn-text punct --epochs 3 --lora-r 64
+for b in fleurs_fi voxpopuli_fi lamurre_fi; do bash $L run bench hf --bench $b --arm ft_whisper-large-v3-fi-skn-all; done
+uv run python scripts/judge_dialect.py --round r4 --arms hf_whisper-large-v3,ft_whisper-large-v3-fi-skn-punct-best,ft_whisper-large-v3-fi-skn-all,ft_whisper-large-v3-fi-skn-lamurre-best,azure_gpt-4o-transcribe,vertex_gemini-3.5-flash-std
+uv run python scripts/judge_dialect.py --round r4 --arms <the same> --provider aitta --judge-model openai/gpt-oss-120b   # Gemma 4 and Qwen3.6: --per-locality 20
+
+# the ten dental-webinar clips (HY's private references in data/dental10/, gitignored)
+bash $L push-dental && bash $L run clip hf --bench dental10_fi
+uv run --extra judges python scripts/judge_dental.py   # blind judges; only summary.json is committed
 ```
 
 Each step skips what it has already done; `--force` redoes it (`bash $L run clip hf --force`).
