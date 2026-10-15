@@ -52,6 +52,10 @@ ALLOWED_AUDIO = {  # SKN segments, CC BY 4.0: the story's two and the listening 
     "docs/listen/SKN45a_Heinola_0097.mp3",
     "docs/listen/SKN50a_Eurajoki_0203.mp3",
     "docs/listen/SKN25a_Alastaro_0156.mp3",
+    # VoxPopuli test segments (CC0, Meta): the listening page's parliament examples
+    "docs/listen/vox_0424.mp3",
+    "docs/listen/vox_0364.mp3",
+    "docs/listen/vox_0125.mp3",
 }
 
 
