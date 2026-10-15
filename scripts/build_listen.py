@@ -50,6 +50,8 @@ DIALECT_ARMS = [  # arm, label, kind
     ("vertex_gemini-3.5-flash", "Gemini 3.5 Flash (Google), asked to write as spoken", "api"),
     ("vertex_gemini-3.5-flash-std", "Gemini 3.5 Flash, asked for standard Finnish", "api"),
     ("google_chirp-3", "Google Chirp 3", "api"),
+    ("azure_gpt-4o-transcribe", "OpenAI gpt-4o-transcribe", "api"),
+    ("elevenlabs_scribe-v2", "ElevenLabs Scribe v2", "api"),
     ("ft_whisper-large-v3-fi-skn-punct-best", "Our model", "ours"),
 ]
 
