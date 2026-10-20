@@ -8,6 +8,9 @@ results/benchmarks/dental10_fi/*.jsonl
 results/judgements_dialect/**/*.jsonl
 results/judgements_dialect/**/.meta*/
 results/labels/lamurre_*.jsonl
+# Finnish Parliament corpus texts (CLARIN PUB +BY +PRIV): per-segment lists and LLM targets stay local;
+# only their *.stats.json are committed
+results/labels/parl_*.jsonl
 # the listening page embeds the clip as base64 (and its private build also LA-murre text)
 results/compare.html
 results/_compare_run_metadata.json

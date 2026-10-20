@@ -3,8 +3,10 @@
 # with ssh and tar. First: export LUMI_USER=<CSC user name> LUMI_PROJECT=project_<number>
 #
 #   lumi/lumi.sh push                  copy scripts/, lumi/ and the 16 kHz clip to scratch
-#   lumi/lumi.sh push-labels           copy the SKN training targets, sentence times and long-form windows
-#   lumi/lumi.sh fetch-labels          copy prepare_skn.py's segment lists back into results/labels/ (gitignored)
+#   lumi/lumi.sh push-labels           copy the SKN training targets, sentence times and long-form windows, and
+#                                      the parliament targets (results/labels/parl_*.targets.jsonl, gitignored)
+#   lumi/lumi.sh fetch-labels          copy prepare_skn.py's and prepare_parliament.py's segment lists back into
+#                                      results/labels/ (gitignored)
 #   lumi/lumi.sh push-dental           copy the ten dental-webinar clips (data/dental10/*.16k.npy + .txt, gitignored)
 #   lumi/lumi.sh fetch-audio <bench>   copy a test set's WAVs (fleurs_fi, voxpopuli_fi, lamurre_fi) into data/<bench>/
 #                                      (gitignored), for run_api_benchmark.py
@@ -25,6 +27,9 @@
 #   lumi/lumi.sh prepare lamurre          the LA-murre dialect test, 10 WAVs read by HTTP range (login node)
 #   lumi/lumi.sh download lamurre         all LA-murre audio, 69 GB, CC BY-ND (background; a DONE file when ready)
 #   lumi/lumi.sh prepare lamurre-train    cut LA-murre training segments (CPU job, prepare_lamurre.py --train)
+#   lumi/lumi.sh download parl            Aalto Finnish Parliament ASR corpus, 2015-2020 part 1 and the dev/test
+#                                         package, 57 GB, CLARIN PUB +ND (background; a DONE file when ready)
+#   lumi/lumi.sh prepare parl [args]      cut its seeded training subsample (CPU job, prepare_parliament.py [--hours N])
 #   lumi/lumi.sh run train hf [args]      LoRA fine-tune of Whisper (finetune_whisper.py, 16 h limit)
 #   lumi/lumi.sh run timestamps hf --arm A  timestamps and long-form decoding on SKN (eval_timestamps.py, 3 h)
 #                                      (--fallback: add the temperature-fallback long-form decode)
@@ -67,6 +72,9 @@ case $cmd in
     for split in train validation heldout; do
       if [ -f results/labels/skn_$split.targets.jsonl ]; then copy_to results/labels/skn_$split.targets.jsonl data/skn_fi/$split.targets.jsonl; fi
     done
+    for split in train validation; do
+      if [ -f results/labels/parl_$split.targets.jsonl ]; then copy_to results/labels/parl_$split.targets.jsonl data/parl_fi/$split.targets.jsonl; fi
+    done
     copy_to results/labels/skn_parts.jsonl data/skn_fi/parts.jsonl
     copy_to results/labels/skn_longform.jsonl data/skn_longform.jsonl ;;
   push-dental)
@@ -84,6 +92,11 @@ case $cmd in
       ssh "$H" "test -f $R/data/skn_fi/$split.jsonl" || continue
       ssh "$H" "cat $R/data/skn_fi/$split.jsonl" > results/labels/skn_$split.jsonl
       echo "  $R/data/skn_fi/$split.jsonl -> results/labels/skn_$split.jsonl"
+    done
+    for split in train validation; do
+      ssh "$H" "test -f $R/data/parl_fi/$split.jsonl" || continue
+      ssh "$H" "cat $R/data/parl_fi/$split.jsonl" > results/labels/parl_$split.jsonl
+      echo "  $R/data/parl_fi/$split.jsonl -> results/labels/parl_$split.jsonl"
     done ;;
   setup)
     ssh "$H" "cd $R && LUMI_PROJECT=$LP bash lumi/setup.sh $* 2>&1 | grep -E ' ok |rror' || true" ;;
@@ -100,6 +113,10 @@ case $cmd in
       lamurre) ssh -f "$H" "mkdir -p $R/data/lamurre_raw && cd $R/data/lamurre_raw && nohup sh -c 'for p in hame-kai \
                kare-karp kess-pohe pohki-sate satl-som uusi-varp eaf; do f=la-murre_wav_\$p.zip; [ \$p = eaf ] && f=la-murre_eaf.zip; \
                wget -q -c https://www.kielipankki.fi/download/la-murre/audio/\$f; done; echo done > DONE' > download.log 2>&1 < /dev/null &" ;;
+      parl)  ssh -f "$H" "mkdir -p $R/data/parl_raw && cd $R/data/parl_raw && nohup sh -c 'for f in devtest.zip \
+               fi-parliament-asr-2015-2020-part1.zip; do \
+               wget -q -c https://www.kielipankki.fi/download/fi-parliament-asr/fi-parliament-asr-v2/\$f; done; \
+               echo done > DONE' > download.log 2>&1 < /dev/null &" ;;
       skn)   ssh "$H" "mkdir -p $R/data/skn_raw && cd $R/data/skn_raw && for p in 01-10 11-20 21-30 31-40 41-50; do \
                wget -q -c https://www.kielipankki.fi/download/SKN/skn_\$p.zip; done; ls -la" ;;
     esac ;;
@@ -125,6 +142,7 @@ case $cmd in
       skn-heldout) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_skn.py --heldout' lumi/prep.sbatch" ;;
       lamurre) in_container "python scripts/prepare_lamurre.py" ;;
       lamurre-train) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_lamurre.py --train' lumi/prep.sbatch" ;;
+      parl) shift; ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_parliament.py $*' lumi/prep.sbatch" ;;
     esac ;;
   fetch-model)
     name=${1:?model name}
@@ -148,5 +166,5 @@ case $cmd in
       echo "removed this repository's weights from $S/hf-cache"
     fi
     ssh "$H" "rm -rf $R; echo removed $R" ;;
-  *) sed -n '2,27p' "$0" ;;
+  *) sed -n '2,32p' "$0" ;;
 esac

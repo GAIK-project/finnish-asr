@@ -11,6 +11,11 @@ Training data, both freely licensed and already on the Hub:
                                   target = its dialect transcript rewritten in standard Finnish by
                                   an LLM (prepare_targets.py normalise). This trains the model of
                                   the `la-murre` revision; its texts are never published.
+    Parliament (--data ...+parl)  Finnish Parliament plenary speech 2015-2020 (Aalto Finnish Parliament ASR
+                                  Corpus, Kielipankki, audio CLARIN PUB +BY +PRIV +ND +OTHER), a seeded
+                                  subsample cut by prepare_parliament.py; target = the corpus text with
+                                  punctuation and capitals added by an LLM (prepare_targets.py punct).
+                                  Standard Finnish, to keep the dialect training from costing VoxPopuli.
 With --timestamps P a share P of the SKN items is trained with Whisper's timestamp tokens instead
 of <|notimestamps|>: "<|0.00|> text<|1.84|><|1.84|> text<|5.60|>", one pair per sentence, the times
 from SKN's annotation (prepare_timestamps.py -> results/labels/skn_parts.jsonl, which
@@ -20,6 +25,7 @@ place in long audio. Which items get timestamps is drawn again every epoch; for 
 fixed (every other segment by a hash of its id). FLEURS and VoxPopuli have no times and stay
 <|notimestamps|>.
 
+--data names the sources joined by "+", in any order: open, skn or skn-all, lamurre, parl.
 --data skn-all+open adds the rest of SKN (prepare_skn.py --heldout: every segment of the 12 test and
 validation municipalities, with heldout.targets.jsonl for --skn-text punct) to the training data, so the
 model hears all 50 municipalities. Its validation loss then comes from FLEURS and VoxPopuli only, and
@@ -47,7 +53,7 @@ results/labels/ (`lumi.sh push-labels` copies them there; prepare_targets.py mad
 
     python finetune_whisper.py --download                  # login node: the training data
     python finetune_whisper.py --name whisper-large-v3-fi-pilot [--base openai/whisper-large-v3]
-        [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N] [--data open|skn|skn+open|skn-all+open|skn+open+lamurre]
+        [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N] [--data open|skn+open|skn-all+open|skn+open+lamurre+parl|...]
         [--skn-text plain|punct] [--timestamps 0.5]
 
 Output: $FIASR_MODELS/<name>/ (merged model, processor, adapter/, train_log.json). `lumi.sh fetch-model
@@ -181,6 +187,24 @@ def lamurre(split: str) -> list[dict]:
     return [{"source": "lamurre", "path": str(d / r["id"]), "text": r["target"]} for r in map(json.loads, rows)]
 
 
+def parl(split: str) -> list[dict]:
+    """Parliament segments from prepare_parliament.py with the LLM-punctuated text (prepare_targets.py punct)."""
+    rows = (DATA / "parl_fi" / f"{split}.targets.jsonl").read_text(encoding="utf-8").splitlines()
+    d = DATA / "parl_fi" / split
+    return [{"source": "parl", "path": str(d / f"{r['id']}.wav"), "text": r["target"]} for r in map(json.loads, rows)]
+
+
+SOURCES = {"open", "skn", "skn-all", "lamurre", "parl"}
+
+
+def data_sources(data: str) -> set[str]:
+    """'skn+open+lamurre+parl' -> its sources; skn and skn-all exclude each other."""
+    parts = set(data.split("+"))
+    if not parts <= SOURCES or {"skn", "skn-all"} <= parts:
+        raise argparse.ArgumentTypeError(f"--data {data}: sources are {', '.join(sorted(SOURCES))}, joined by +")
+    return parts
+
+
 def read_audio(item: dict):
     import soundfile as sf
 
@@ -196,9 +220,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--download", action="store_true")
     parser.add_argument("--name", default="whisper-large-v3-fi-pilot")
-    parser.add_argument(
-        "--data", choices=["open", "skn", "skn+open", "skn-all+open", "skn+open+lamurre"], default="open"
-    )
+    parser.add_argument("--data", default="open", help="Sources joined by +: open, skn or skn-all, lamurre, parl.")
     parser.add_argument("--skn-text", choices=["plain", "punct"], default="plain")
     parser.add_argument("--base", default="openai/whisper-large-v3")
     parser.add_argument("--epochs", type=int, default=2)
@@ -210,6 +232,7 @@ def main() -> int:
     parser.add_argument("--timestamps", type=float, default=0.0, help="Share of SKN items trained with timestamps.")
     parser.add_argument("--env", help="Ignored: lumi/job.sbatch passes it to every runner.")
     args = parser.parse_args()
+    sources = data_sources(args.data)
     if args.download:
         download()
         return 0
@@ -270,21 +293,26 @@ def main() -> int:
         return feats, labels[:, 1:]  # drop <|startoftranscript|>: the model prepends it when it shifts the labels
 
     train_items, val_items = [], []
-    if args.data.startswith("skn-all"):  # all 50 municipalities; the SKN validation speakers are in training
+    if "skn-all" in sources:  # all 50 municipalities; the SKN validation speakers are in training
         train_items += skn("train", args.skn_text) + skn("heldout", args.skn_text)
-    elif "skn" in args.data:
+    elif "skn" in sources:
         train_items += skn("train", args.skn_text)
         val_items += skn("validation", args.skn_text)
-    if "lamurre" in args.data:
+    if "lamurre" in sources:
         train_items += lamurre("train")
         val_items += lamurre("validation")
-    if "open" in args.data:
+    if "parl" in sources:
+        train_items += parl("train")
+        val_items += parl("validation")
+    if "open" in sources:
         train_items += fleurs("train") + voxpopuli("train")
         val_items += fleurs("dev") + voxpopuli("validation")
     random.shuffle(train_items)
     if args.limit:
         train_items, val_items = train_items[: args.limit], val_items[: max(16, args.limit // 10)]
-    counts = {s: sum(1 for it in train_items if it["source"] == s) for s in ("skn", "lamurre", "fleurs", "voxpopuli")}
+    counts = {
+        s: sum(1 for it in train_items if it["source"] == s) for s in ("skn", "lamurre", "parl", "fleurs", "voxpopuli")
+    }
     if args.timestamps:
         usable = sum(1 for it in train_items if timestamped(it["text"], it.get("parts")))
         counts["skn_with_times"] = usable
