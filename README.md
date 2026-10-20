@@ -113,7 +113,7 @@ Two scores: word error rate counts every word that differs, the blind judge only
 
 ## 6. How it compares
 
-<img src="docs/img/dialect-ranking.svg" alt="Dialect test word error rate: ours 21.1 %; the best other model, Gemini 3.5 Flash asked for standard Finnish, 34.7 %; base Whisper 40.4 %" width="100%">
+<img src="docs/img/dialect-ranking.svg" alt="Dialect test word error rate: our la-murre version 19.7 %, our published model 21.1 %; the best other model, Gemini 3.5 Flash asked for standard Finnish, 34.7 %; base Whisper 40.4 %" width="100%">
 
 Across the open test sets, our model leads on dialect speech and parliament speech; on read
 sentences gpt-4o-transcribe and Gemini are better:

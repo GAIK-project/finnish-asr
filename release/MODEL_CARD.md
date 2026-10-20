@@ -73,7 +73,7 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 | 📖 Read sentences (FLEURS Finnish), WER % | 7.4 | 7.6 | **3.3** (ElevenLabs Scribe v2) |
 | 🏛️ Parliament speech (VoxPopuli Finnish), WER % | 12.7 | 10.8 | **9.1** (ElevenLabs Scribe v2) |
 
-![Dialect test word error rate of every model: this model 21.1 %, Gemini 3.5 Flash 34.7 %, Whisper large-v3 40.4 %, ElevenLabs 44.9 %, gpt-4o-transcribe 62.5 %](dialect-ranking.svg)
+![Dialect test word error rate of every model: the la-murre revision 19.7 %, this model 21.1 %, Gemini 3.5 Flash 34.7 %, Whisper large-v3 40.4 %, ElevenLabs 44.9 %, gpt-4o-transcribe 62.5 %](dialect-ranking.svg)
 
 **Use it for dialect speech**, the way people talk outside the big cities and older speakers above all:
 it makes about half the errors of Whisper large-v3 and fewer than every paid service tested (Gemini

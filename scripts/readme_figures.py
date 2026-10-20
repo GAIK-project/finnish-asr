@@ -213,9 +213,10 @@ def data_sources() -> str:
     return svg(W, H, "Sources: Whisper large-v3 by OpenAI, SKN, FLEURS by Google, VoxPopuli by Meta, LA-murre", body)
 
 
+LEADERBOARD_OURS = {"ft_whisper-large-v3-fi-skn-punct-best"}  # the front page compares the main model only
 DIALECT_SHORT = {  # arm -> (label, group); arms missing from scores.json are left out
     "ft_whisper-large-v3-fi-skn-punct-best": ("Ours (published)", "ours"),
-    "ft_whisper-large-v3-fi-skn-punct-ts": ("Ours, timestamps version", "ours"),
+    "ft_whisper-large-v3-fi-skn-lamurre-best": ("Ours, la-murre version", "ours"),
     "vertex_gemini-3.5-flash": ("Gemini 3.5 Flash, asked to write as spoken", "API"),
     "vertex_gemini-3.5-flash-std": ("Gemini 3.5 Flash, asked for standard Finnish", "API"),
     "google_chirp-3": ("Google Chirp 3", "API"),
@@ -779,7 +780,7 @@ def leaderboard() -> str:
         path = PROJECT_ROOT / "results" / "benchmarks" / bench / "scores.json"
         return {a["arm_id"]: a for a in json.loads(path.read_text(encoding="utf-8"))["arms"]}
     skn = {a: r["WER"] for a, r in arms("skn_fi").items()}
-    left = sorted((skn[a], lab, grp, a) for a, (lab, grp) in DIALECT_SHORT.items() if a in skn and a != "ft_whisper-large-v3-fi-skn-punct-ts")
+    left = sorted((skn[a], lab, grp, a) for a, (lab, grp) in DIALECT_SHORT.items() if a in skn and (grp != "ours" or a in LEADERBOARD_OURS))
     fl, vp = arms("fleurs_fi"), arms("voxpopuli_fi")
     std = []
     for a, (lab, grp) in DIALECT_SHORT.items():  # pooled: all errors over all reference words of both sets
