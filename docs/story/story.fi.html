@@ -228,7 +228,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
         <tr><td><b>SKN</b> (Kotus / Kielipankki)</td><td>murrehaastattelut 50 kunnasta</td><td>koulutus 38 kuntaa, validointi 2, testi 10</td><td>CC BY 4.0</td></tr>
         <tr><td><b>FLEURS</b> (Google)</td><td>luettuja Wikipedia-lauseita</td><td>koulutus 2 704, testi 918</td><td>CC BY 4.0</td></tr>
         <tr><td><b>VoxPopuli</b> (Meta)</td><td>Euroopan parlamentin puheita</td><td>koulutus 7 504, testi 478</td><td>CC0</td></tr>
-        <tr><td><b>LA-murre</b> (Turun yliopisto, Kotus / Kielipankki)</td><td>toinen murrekorpus, 10 muuta paikkakuntaa</td><td>vain testi (583 pätkää)</td><td>CC BY-ND 4.0</td></tr>
+        <tr><td><b>LA-murre</b> (Turun yliopisto, Kotus / Kielipankki)</td><td>toinen murrekorpus, 10 muuta paikkakuntaa</td><td>testi (583 pätkää); muista paikkakunnista yhden version koulutus</td><td>CC BY-ND 4.0</td></tr>
       </tbody>
     </table>
   </div>
@@ -237,7 +237,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
 
 <section>
   <div class="sec-head"><span class="step">02</span><h2>Missä Claude Opus 5.5:tä käytettiin</h2></div>
-  <p class="col">Opus oli mukana neljässä tehtävässä. Kaksi ensimmäistä koskevat julkaistua mallia, kolmas vain sisäistä vertailumallia ja neljäs webinaarileikkeen arviointia. Lisäksi koulutus- ja LUMI-koodi kirjoitettiin Claude Coden kanssa.</p>
+  <p class="col">Opus oli mukana neljässä tehtävässä. Kaksi ensimmäistä koskevat julkaistua mallia, kolmas vain LA-murteella opetettua versiota ja neljäs webinaarileikkeen arviointia. Lisäksi koulutus- ja LUMI-koodi kirjoitettiin Claude Coden kanssa.</p>
   <div class="roles">
     <article class="role">
       <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 21h8M15 5l4 4m2.174-2.188a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg> Välimerkit koulutustekstiin</h3>
@@ -250,9 +250,9 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
       <p class="meta">583 pätkää · noin 11 USD per kierros · <code>judge_dialect.py</code></p>
     </article>
     <article class="role internal">
-      <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg> Murre yleiskielelle (vain sisäinen malli)</h3>
-      <p>Lisäkokeessa Opus kirjoitti LA-murteen koulutuspätkien murreasuiset tekstit yleiskielelle, sana sanalta. Siitä koulutettu malli on paras molemmissa murretesteissä, mutta LA-murteen lisenssi kieltää muokatun version jakamisen, joten mallia ei julkaistu.</p>
-      <p class="meta">15 529 pätkää · noin 49 USD · ei julkaistu</p>
+      <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg> Murre yleiskielelle (vain la-murre-versio)</h3>
+      <p>Lisäkokeessa Opus kirjoitti LA-murteen koulutuspätkien murreasuiset tekstit yleiskielelle, sana sanalta. Siitä koulutettu malli on paras molemmissa murretesteissä. LA-murteen lisenssi kieltää muokatun version jakamisen, joten malli pidettiin ensin sisäisenä. Lokakuussa 2026 Kielipankki arvioi, ettei mallin painoissa todennäköisesti ole korpuksen tekijänoikeudella suojattuja osia, joten malli julkaistiin <code>la-murre</code>-versiona. Yleiskielelle kirjoitettuja tekstejä ei julkaista.</p>
+      <p class="meta">15 529 pätkää · noin 49 USD · malli julkaistu 20.10.2026, tekstit eivät</p>
     </article>
     <article class="role">
       <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12l2 2l4-4"/></g></svg> Webinaarileikkeen tuomarit</h3>
@@ -333,7 +333,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
         <tr><td>Whisper large-v3</td><td class="n">25,9</td><td class="n">74</td><td class="n">600</td><td class="n">821</td><td class="n">50</td></tr>
         <tr><td>Oma malli, kierros 1 (ei välimerkkejä)</td><td class="n">13,8</td><td class="n">7</td><td class="n">342</td><td class="n">649</td><td class="n">116</td></tr>
         <tr class="ours"><td><b>Oma malli, julkaistu</b></td><td class="n"><b>13,6</b></td><td class="n">8</td><td class="n">340</td><td class="n">612</td><td class="n">121</td></tr>
-        <tr><td>Sisäinen malli (+ LA-murre-koulutus, ei julkaistu)</td><td class="n">11,4</td><td class="n">12</td><td class="n">266</td><td class="n">562</td><td class="n">143</td></tr>
+        <tr><td>la-murre-versio (+ LA-murre-koulutus)</td><td class="n">11,4</td><td class="n">12</td><td class="n">266</td><td class="n">562</td><td class="n">143</td></tr>
       </tbody>
     </table>
   </div>
@@ -371,7 +371,7 @@ Judge each transcript on its own; the labels carry no information.</pre>
   </div>
   <div class="tbl">
     <table>
-      <thead><tr><th>Tuomari</th><th class="n">Pätkiä</th><th class="n">Whisper large-v3</th><th class="n">Kierros 1</th><th class="n">Julkaistu</th><th class="n">Sisäinen</th><th class="n">Sama valinta kuin Opuksella</th></tr></thead>
+      <thead><tr><th>Tuomari</th><th class="n">Pätkiä</th><th class="n">Whisper large-v3</th><th class="n">Kierros 1</th><th class="n">Julkaistu</th><th class="n">+ LA-murre</th><th class="n">Sama valinta kuin Opuksella</th></tr></thead>
       <tbody>
         <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">25,9</td><td class="n">13,8</td><td class="n">13,6</td><td class="n">11,4</td><td class="n">–</td></tr>
         <tr><td>gpt-oss-120b</td><td class="n">583</td><td class="n">20,5</td><td class="n">13,4</td><td class="n">13,2</td><td class="n">12,9</td><td class="n">81 %</td></tr>
@@ -380,13 +380,13 @@ Judge each transcript on its own; the labels carry no information.</pre>
       </tbody>
     </table>
   </div>
-  <p class="note col">Pisteet / 100 sanaa. "Sama valinta" laskee pätkän malliparit, joissa molemmat tuomarit näkevät eron, ja kuinka usein ne pitävät samaa mallia parempana. Kaikki neljä tuomaria asettavat mallit samaan järjestykseen: sisäinen malli ensin, julkaistu malli ja kierros 1 suunnilleen tasoissa, Whisper large-v3 selvästi viimeisenä. Jokaisella tuomarilla on oma asteikkonsa, joten malleja verrataan saman tuomarin sisällä, ei lukuja tuomarien välillä.</p>
+  <p class="note col">Pisteet / 100 sanaa. "Sama valinta" laskee pätkän malliparit, joissa molemmat tuomarit näkevät eron, ja kuinka usein ne pitävät samaa mallia parempana. Kaikki neljä tuomaria asettavat mallit samaan järjestykseen: LA-murteella opetettu malli ensin, julkaistu malli ja kierros 1 suunnilleen tasoissa, Whisper large-v3 selvästi viimeisenä. Jokaisella tuomarilla on oma asteikkonsa, joten malleja verrataan saman tuomarin sisällä, ei lukuja tuomarien välillä.</p>
   <div class="col stack">
     <p><b>Neljäs kierros 15.10.2026</b> toi mukaan kaksi maksullista palvelua, koko SKN:llä opetetun mallin ja uuden tuomarin: OpenAI:n <b>GPT-6.1-sol</b> GAIKin Azuren kautta. Jokaisen pätkän kuusi litterointia arvioitiin yhdessä. Kaikki kolme tuomaria asettavat maksulliset palvelut murrepuheessa tavallisen Whisperin taakse ja meidän mallit selvästi edelle.</p>
   </div>
   <div class="tbl">
     <table>
-      <thead><tr><th>Tuomari</th><th class="n">Pätkiä</th><th class="n">gpt-4o-transcribe</th><th class="n">Gemini 3.5 Flash</th><th class="n">Whisper large-v3</th><th class="n">Julkaistu</th><th class="n">Koko SKN</th><th class="n">Sisäinen</th><th class="n">Sama valinta kuin Opuksella</th></tr></thead>
+      <thead><tr><th>Tuomari</th><th class="n">Pätkiä</th><th class="n">gpt-4o-transcribe</th><th class="n">Gemini 3.5 Flash</th><th class="n">Whisper large-v3</th><th class="n">Julkaistu</th><th class="n">Koko SKN</th><th class="n">+ LA-murre</th><th class="n">Sama valinta kuin Opuksella</th></tr></thead>
       <tbody>
         <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">34,2</td><td class="n">27,2</td><td class="n">25,0</td><td class="n">14,2</td><td class="n">13,1</td><td class="n">11,6</td><td class="n">–</td></tr>
         <tr><td>GPT-6.1-sol (Azure)</td><td class="n">583</td><td class="n">35,6</td><td class="n">30,3</td><td class="n">26,3</td><td class="n">16,3</td><td class="n">15,5</td><td class="n">14,9</td><td class="n">92 %</td></tr>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Training rounds: pilot, round 1 with dialect interviews, round 2 published, an internal version and a timestamps version">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" width="1000" height="640" font-family="system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" role="img" aria-label="Training rounds: pilot, round 1 with dialect interviews, round 2 published, a version with LA-murre and a timestamps version">
 <rect width="1000" height="640" rx="12" fill="#ffffff"/>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#59636e"/></marker></defs>
 <text x="24.0" y="38.0" font-size="19" font-weight="700" fill="#1f2328" text-anchor="start">How the model got better, round by round</text>
@@ -51,16 +51,15 @@
 <text x="788.0" y="307.0" font-size="12.5" font-weight="700" fill="#1f2328" text-anchor="start">Published as v1.0</text>
 <rect x="148.0" y="400" width="340" height="214" rx="10" fill="#e9eef6" stroke="#1d3f6e" stroke-width="1.5"/>
 <path d="M148.0 434 V410 a10 10 0 0 1 10 -10 H478.0 a10 10 0 0 1 10 10 V434 Z" fill="#1d3f6e"/>
-<text x="162.0" y="423.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">Internal version</text>
+<text x="162.0" y="423.0" font-size="14" font-weight="700" fill="#ffffff" text-anchor="start">LA-murre version</text>
 <text x="162.0" y="460.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">+ 56 h more dialect interviews (LA-murre);</text>
 <text x="162.0" y="480.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">Opus rewrote their dialect spelling</text>
 <text x="162.0" y="500.0" font-size="14" font-weight="400" fill="#1f2328" text-anchor="start">into standard Finnish</text>
 <g transform="translate(162.0 512.0) scale(0.667)" fill="none" stroke="#59636e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2m0-20v2m5 16v2m0-20v2M2 12h2m-2 5h2M2 7h2m16 5h2m-2 5h2M20 7h2M7 20v2M7 2v2"/><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="8" height="8" x="8" y="8" rx="1"/></g>
 <text x="184.0" y="525.0" font-size="13" font-weight="400" fill="#59636e" text-anchor="start">LUMI, 4 h 57 min</text>
 <text x="162.0" y="570.0" font-size="30" font-weight="700" fill="#1d3f6e" text-anchor="start">19.7 %</text>
-<text x="276.0" y="554.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">the best, but kept internal:</text>
-<text x="276.0" y="572.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">LA-murre&#x27;s licence (CC BY-ND)</text>
-<text x="276.0" y="590.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">forbids sharing changed texts</text>
+<text x="276.0" y="554.0" font-size="13" font-weight="700" fill="#1f2328" text-anchor="start">the best on dialects:</text>
+<text x="276.0" y="572.0" font-size="12.5" font-weight="400" fill="#59636e" text-anchor="start">published as the la-murre branch</text>
 <path d="M884.0 327 V362.0 H318.0 V395" fill="none" stroke="#59636e" stroke-width="2" marker-end="url(#arrow)"/>
 <rect x="512.0" y="400" width="340" height="214" rx="10" fill="#f6eee4" stroke="#8a5a2b" stroke-width="1.5"/>
 <path d="M512.0 434 V410 a10 10 0 0 1 10 -10 H842.0 a10 10 0 0 1 10 10 V434 Z" fill="#8a5a2b"/>

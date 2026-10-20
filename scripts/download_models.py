@@ -6,11 +6,10 @@ The names are the directory names run_open_models.py and run_benchmark.py turn i
 
     whisper-large-v3-fi-skn-punct-best    GAIK-project/whisper-large-v3-fi-dialects, main (tag v1.0)
     whisper-large-v3-fi-skn-punct-ts      the same repository, revision timestamps
-    whisper-large-v3-fi-skn-lamurre-best  GAIK-project/whisper-large-v3-fi-dialects-internal (private: HF_TOKEN
-                                          with read access to the GAIK-project organisation)
+    whisper-large-v3-fi-skn-lamurre-best  the same repository, revision la-murre
 
-Without names it fetches the two public ones. Weights only (config, tokenizer, safetensors). The internal
-repository keeps only the LoRA adapter (adapter/); it is merged into openai/whisper-large-v3 here, as
+Without names it fetches the first two. Weights only (config, tokenizer, safetensors). A repository
+that keeps only a LoRA adapter (adapter/) is merged into openai/whisper-large-v3 here, as
 finetune_whisper.py did when it saved the model.
 """
 
@@ -24,7 +23,7 @@ MODELS = Path(os.environ.get("FIASR_MODELS", Path(__file__).resolve().parents[1]
 REPOS = {
     "whisper-large-v3-fi-skn-punct-best": ("GAIK-project/whisper-large-v3-fi-dialects", "main"),
     "whisper-large-v3-fi-skn-punct-ts": ("GAIK-project/whisper-large-v3-fi-dialects", "timestamps"),
-    "whisper-large-v3-fi-skn-lamurre-best": ("GAIK-project/whisper-large-v3-fi-dialects-internal", "main"),
+    "whisper-large-v3-fi-skn-lamurre-best": ("GAIK-project/whisper-large-v3-fi-dialects", "la-murre"),
 }
 
 

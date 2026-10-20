@@ -18,7 +18,7 @@ Rounds: the default round judges base Whisper, round 1 and Finnish-NLP. --round 
 judges another set of up to six arms in one call per segment; each round has its own cache and
 summary, so rounds are compared through the arms they share. The committed rounds: the default
 (summary.json: Whisper large-v3, round 1, Finnish-NLP), r2 (summary-r2*.json: Whisper large-v3,
-round 1, the published model, the internal model; also judged by open models on Aitta) and r3
+round 1, the published model, the LA-murre model; also judged by open models on Aitta) and r3
 (summary-r3.json: Whisper large-v3, the published model, the model trained with timestamp tokens).
 
 Cache: results/judgements_dialect/lamurre_fi/<judge>[-<round>].jsonl, one line per segment;

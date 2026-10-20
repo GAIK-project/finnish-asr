@@ -9,8 +9,8 @@ Training data, both freely licensed and already on the Hub:
                                   capitals added by an LLM (prepare_targets.py punct)
     LA-murre (--data ...+lamurre) dialect interviews, CC BY-ND 4.0, cut by prepare_lamurre.py --train;
                                   target = its dialect transcript rewritten in standard Finnish by
-                                  an LLM (prepare_targets.py normalise). This trains the internal
-                                  model, which is never published (no-derivatives licence).
+                                  an LLM (prepare_targets.py normalise). This trains the model of
+                                  the `la-murre` revision; its texts are never published.
 With --timestamps P a share P of the SKN items is trained with Whisper's timestamp tokens instead
 of <|notimestamps|>: "<|0.00|> text<|1.84|><|1.84|> text<|5.60|>", one pair per sentence, the times
 from SKN's annotation (prepare_timestamps.py -> results/labels/skn_parts.jsonl, which

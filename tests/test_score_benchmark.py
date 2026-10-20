@@ -21,7 +21,7 @@ def test_lamurre_has_numbers_only_and_falls_back_to_its_scores_json() -> None:
         pytest.skip("local LA-murre files present (gitignored); the fallback is not used")
     committed = json.loads((d / "scores.json").read_text(encoding="utf-8"))["arms"]
     assert sb.score("lamurre_fi", write=False) == committed
-    assert len(committed) == 14 and all(r["utterances"] == 583 for r in committed)
+    assert len(committed) == 18 and all(r["utterances"] == 583 for r in committed)
     labels = {r["arm_id"]: r["label"] for r in committed}
     assert all(labels[a] == sb.LABELS.get(a, a) for a in labels)  # as the scorer would write them
     for row in committed:  # numbers and identifiers, no text fields

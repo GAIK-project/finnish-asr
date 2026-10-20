@@ -38,7 +38,10 @@ ROWS = {
         "This project, round 2 (published), chunked decoding",
         "open",
     ),
-    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": ("This project, round 2 internal (+ LA-murre), chunked", "open"),
+    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": (
+        "This project, round 2 + LA-murre (`la-murre` revision), chunked",
+        "open",
+    ),
     "openai_whisper-1": ("OpenAI whisper-1", "API"),
     "openai_gpt-4o-mini-transcribe": ("OpenAI gpt-4o-mini-transcribe", "API"),
     "openai_gpt-transcribe": ("OpenAI gpt-transcribe", "API"),

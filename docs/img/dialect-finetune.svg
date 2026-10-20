@@ -4,7 +4,7 @@
 <text x="278" y="148" font-size="13" font-weight="400" fill="#1f2328" text-anchor="end">Whisper large-v3</text>
 <text x="278" y="182" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">Ours, round 1</text>
 <text x="278" y="216" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">Ours, round 2 (published)</text>
-<text x="278" y="250" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">Ours, round 2 + LA-murre (internal)</text>
+<text x="278" y="250" font-size="13" font-weight="600" fill="#1f2328" text-anchor="end">Ours, round 2 + LA-murre</text>
 <text x="290" y="46" font-size="15" font-weight="600" fill="#1f2328">SKN dialect test: word error rate %</text>
 <text x="290" y="66" font-size="12" fill="#59636e">600 segments, 10 held-out municipalities</text>
 <line x1="290.0" y1="84" x2="290.0" y2="262" stroke="#d8dee4"/>
@@ -50,5 +50,5 @@
 <text x="777.2" y="216" font-size="12" fill="#1f2328">13.6</text>
 <rect x="640" y="234" width="110.4" height="22" rx="3" fill="#2f6fb3"/>
 <text x="756.4" y="250" font-size="12" fill="#1f2328">11.4</text>
-<text x="20" y="312" font-size="11" fill="#59636e">Lower is better. Blue: this project's LoRA fine-tunes of Whisper large-v3. The internal model was trained on other LA-murre localities; Finnish-NLP was not in this judge round.</text>
+<text x="20" y="312" font-size="11" fill="#59636e">Lower is better. Blue: this project's LoRA fine-tunes of Whisper large-v3. The LA-murre model was trained on other LA-murre localities; Finnish-NLP was not in this judge round.</text>
 </svg>

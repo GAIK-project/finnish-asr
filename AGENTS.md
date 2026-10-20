@@ -11,8 +11,10 @@ is public, so the publication rules below come first.
   `results/judgements_dialect/**/*.jsonl` and `results/labels/lamurre_*.jsonl` (all gitignored).
   Numbers made from them (`scores.json`, `summary*.json`, `agreement-*.json`, `*.stats.json`,
   `_run_metadata*.json`) are fine.
-- **The internal LA-murre model** or its adapter (`results/finetune/*/adapter/` is gitignored). It may
-  be mentioned as existing in a private Hugging Face repository, never linked or published.
+- **Model weights and adapters** (`results/finetune/*/adapter/` and `models/` are gitignored). The
+  model trained on LA-murre is public as the `la-murre` revision of the Hugging Face model (Kielipankki
+  found in October 2026 that the weights hold no protected part of the corpus); its training texts
+  are LA-murre text and stay out, as do the private repository's `training-texts/`.
 - **HY material beyond what gaik-toolkit already publishes.** The Ajokortti clip and its references
   are fetched from gaik-toolkit with `scripts/get_clip.py` into `data/` (gitignored); do not copy the
   mp3, and do not add HY's own tool transcripts (`hy25_*`, `hy26_*`) or judge records that quote them.

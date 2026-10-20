@@ -35,7 +35,7 @@ FORBIDDEN_PATHS = [
     "results/judgements/*/hy2[56]_*.json",  # quote HY's non-public tool transcripts
     "results/transcriptions/hy2[56]_*",
     "results/transcriptions/*/hy2[56]_*",
-    "results/finetune/*/adapter/*",  # weights, the internal LA-murre model among them
+    "results/finetune/*/adapter/*",  # LoRA adapters: weights are published on Hugging Face only
     "results/compare.html",  # embeds the clip
     "results/gpu_run/*.tar.gz",  # LUMI job logs
     "data/*",

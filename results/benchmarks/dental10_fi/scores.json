@@ -199,7 +199,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best-chunks",
-      "label": "**This project, internal, in pieces** \u2020\u2021\u00a7\u00b6",
+      "label": "**This project, `la-murre` revision, in pieces** \u2020\u2021\u00a7\u00b6",
       "utterances": 10,
       "WER": 26.4539,
       "CER": 13.5287,
@@ -349,7 +349,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 internal: + LA-murre** \u2020\u2021\u00a7\u00b6",
+      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
       "utterances": 10,
       "WER": 60.0103,
       "CER": 40.7901,

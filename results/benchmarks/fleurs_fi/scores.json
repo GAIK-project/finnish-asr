@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-15T17:21:44+00:00",
+  "generated_utc": "2026-10-20T07:40:08+00:00",
   "benchmark": "google/fleurs fi_fi test",
   "arms": [
     {
@@ -199,7 +199,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 internal: + LA-murre** \u2020\u2021\u00a7\u00b6",
+      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
       "utterances": 918,
       "WER": 7.8071,
       "CER": 1.7684,

@@ -95,7 +95,7 @@ webinar, against the reference a listener checked at its 42 disputed spans, the 
 in one go and 14.5 % in pieces (main model 14.0 % in pieces). The judge's points here come from a third
 judging round with these three models; the main model's card quotes the second round (base Whisper 25.9,
 main model 13.6, 583 segments), which judged four models together (base Whisper, round 1, the main model and
-an internal model), so compare points only within one round.
+the model trained on LA-murre, now the `la-murre` revision), so compare points only within one round.
 
 The variant did not replace the main model. The rule set before the run allowed SKN to get at most
 about 0.5 points worse and FLEURS and VoxPopuli no worse; VoxPopuli got 0.4 points worse, and the

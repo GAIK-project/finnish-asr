@@ -18,7 +18,7 @@ results/transcriptions/**/hy2[56]_*.json
 # ---------------------------------------------------------------------------
 # Weights, raw data, logs, keys
 # ---------------------------------------------------------------------------
-# LoRA adapters (the internal LA-murre model among them); the public model is on Hugging Face
+# LoRA adapters; the merged models are on Hugging Face
 results/finetune/*/adapter/
 *.safetensors
 # regenerable intermediates: prepare_skn.py output and LLM batch caches

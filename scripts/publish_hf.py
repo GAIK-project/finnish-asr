@@ -8,6 +8,7 @@ internet and the files), in the hf environment:
     python scripts/publish_hf.py model      # weights, processor, card -> GAIK-project/whisper-large-v3-fi-dialects
     python scripts/publish_hf.py model --revision timestamps   # the timestamp variant -> its "timestamps" branch
     python scripts/publish_hf.py model --revision all-skn      # trained on all 50 SKN municipalities -> "all-skn"
+    python scripts/publish_hf.py model --revision la-murre     # + 56 h of LA-murre interviews -> "la-murre"
     python scripts/publish_hf.py dataset    # SKN segments, parquet with audio -> GAIK-project/skn-finnish-dialects-asr
     python scripts/publish_hf.py check      # the model, downloaded back from the Hub, on a few SKN test segments
     uv run --extra hub python scripts/publish_hf.py cards              # the three cards and the chart (anywhere)
@@ -16,11 +17,11 @@ internet and the files), in the hf environment:
 Repositories are created PRIVATE; making them public is a separate, manual decision. The cards come
 from release/: MODEL_CARD.md is the README of the model's main branch, TIMESTAMPS_CARD.md the README of
 its "timestamps" branch (the model trained with timestamp tokens, finetune_whisper.py --timestamps 0.5),
-ALL_SKN_CARD.md of its "all-skn" branch (finetune_whisper.py --data skn-all+open), and DATASET_CARD.md
-the dataset's. "model --revision timestamps" first tags main as v1.0 (the model
-published on 13 Oct 2026), then creates the branch and uploads the variant there. The internal
-LA-murre model is backed up to a private repository by GAIK's internal copy of this script; nothing
-here uploads LA-murre material.
+ALL_SKN_CARD.md of its "all-skn" branch (finetune_whisper.py --data skn-all+open), LAMURRE_CARD.md of
+its "la-murre" branch (finetune_whisper.py --data skn+open+lamurre), and DATASET_CARD.md the dataset's.
+"model --revision timestamps" first tags main as v1.0 (the model published on 13 Oct 2026), then
+creates the branch and uploads the variant there. The "la-murre" branch holds merged weights only:
+the LA-murre texts it was trained on (LLM rewrites of a CC BY-ND corpus) are never uploaded here.
 """
 
 from __future__ import annotations
@@ -47,6 +48,7 @@ REVISIONS = {
     None: (MODEL_DIR, "MODEL_CARD.md"),
     "timestamps": (MODELS / "whisper-large-v3-fi-skn-punct-ts", "TIMESTAMPS_CARD.md"),
     "all-skn": (MODELS / "whisper-large-v3-fi-skn-all", "ALL_SKN_CARD.md"),
+    "la-murre": (MODELS / "whisper-large-v3-fi-skn-lamurre-best", "LAMURRE_CARD.md"),
 }
 MAIN_TAG = "v1.0"
 SHARD_ROWS = 1500
@@ -80,7 +82,7 @@ def publish_model(revision: str | None = None) -> None:
 
 
 def publish_cards() -> None:
-    """The charts and MODEL_CARD.md to the model's main branch, TIMESTAMPS_CARD.md to its timestamps branch,
+    """The charts and MODEL_CARD.md to the model's main branch, each variant's card to its branch,
     DATASET_CARD.md to the dataset."""
     from huggingface_hub import HfApi
 

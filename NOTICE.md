@@ -5,7 +5,7 @@
 | Code (`scripts/`, `tests/`, `lumi/`) | MIT, [`LICENSE`](LICENSE), copyright Haaga-Helia University of Applied Sciences (GAIK project) |
 | Results, figures and documentation created by the GAIK project | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); credit "GAIK project, Haaga-Helia University of Applied Sciences" |
 | Data from the corpora below, wherever it appears in this repository | the licence of its source, as listed below |
-| Model weights of GAIK-project/whisper-large-v3-fi-dialects (main and `timestamps`) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), as openai/whisper-large-v3 |
+| Model weights of GAIK-project/whisper-large-v3-fi-dialects (main and the `timestamps`, `all-skn` and `la-murre` revisions) | [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), as openai/whisper-large-v3 |
 | The Ajokortti clip | not in this repository and not covered by its licences (see below) |
 
 When you reuse data from this repository, credit the source as given here.
@@ -41,10 +41,13 @@ Speech Corpus for Representation Learning, Semi-Supervised Learning and Interpre
 **Lauseopin arkiston murrekorpus (LA-murre)**, University of Turku and Kotus, via Kielipankki,
 [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935),
 [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/). Used as the test set of every model
-here, and to train one internal model (recordings from other localities than the test) that is not
-published; no published model was trained on it. **No LA-murre text is in this repository**, because
-the references used were modified (two annotation marks removed) and the licence does not allow
-sharing modified copies; only numbers made from them are (`results/benchmarks/lamurre_fi/scores.json`,
+here, and to train one model on recordings from other localities than the test, published as the
+`la-murre` revision of GAIK-project/whisper-large-v3-fi-dialects: in October 2026 Kielipankki
+(FIN-CLARIN), which distributes LA-murre, assessed that the weights most likely contain no
+copyright-protected part of the corpus, so publishing them needs no separate permission. **No
+LA-murre text is in this repository**, because the references used were modified (two annotation
+marks removed), the training targets are LLM rewrites in standard Finnish, and the licence does not
+allow sharing modified copies; only numbers made from them are (`results/benchmarks/lamurre_fi/scores.json`,
 `*.meta.json`, `results/judgements_dialect/lamurre_fi/*.json`, `results/labels/lamurre_*.stats.json`).
 The scripts that process LA-murre write their outputs to gitignored paths.
 
@@ -92,7 +95,8 @@ implements the normalisation of the University of Helsinki team's `error_analysi
 ## Models
 
 The published model [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
-(tag `v1.0`) and its `timestamps` revision are Apache 2.0, as their base model openai/whisper-large-v3.
+(tag `v1.0`) and its `timestamps`, `all-skn` and `la-murre` revisions are Apache 2.0, as their base
+model openai/whisper-large-v3.
 The other models evaluated here keep their own licences; this repository holds only their transcripts.
 
 ## Computing

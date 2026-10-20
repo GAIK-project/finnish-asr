@@ -193,7 +193,7 @@ def data_sources() -> str:
         ("database", "SKN", ["Dialect interviews, 1960s–70s", "Kotus, Kielipankki · CC BY 4.0"], "training + test", OURS),
         ("logo:google", "FLEURS", ["Read sentences", "Google · CC BY 4.0"], "training + test", OURS),
         ("logo:meta", "VoxPopuli", ["Parliament speech", "Meta · CC0"], "training + test", OURS),
-        ("map-pin", "LA-murre", ["Dialect interviews, 132 places", "Univ. of Turku · CC BY-ND"], "test + internal", INK),
+        ("map-pin", "LA-murre", ["Dialect interviews, 132 places", "Univ. of Turku · CC BY-ND"], "test + variant", INK),
     ]
     CW, gap, y = 180, 9, 60
     for i, (ic, name, lines, role, color) in enumerate(cards):
@@ -338,7 +338,7 @@ SHORT = {
     "hf_whisper-large-v3-chunks": "Whisper large-v3, in pieces",
     "ft_whisper-large-v3-fi-skn-chunks": "Ours, round 1, in pieces",
     "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, published, in pieces",
-    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": "Ours, internal (+ LA-murre), in pieces",
+    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": "Ours, + LA-murre, in pieces",
     "openai_whisper-1": "OpenAI whisper-1",
     "openai_gpt-4o-mini-transcribe": "OpenAI gpt-4o-mini-transcribe",
     "openai_gpt-transcribe": "OpenAI gpt-transcribe",
@@ -490,8 +490,8 @@ def journey() -> str:
     BW, by, BH = 340, 400, 214
     bx = [W / 2 - BW - 12, W / 2 + 12]
     branches = [
-        ("Internal version", DEEP, "#e9eef6", ["+ 56 h more dialect interviews (LA-murre);", "Opus rewrote their dialect spelling", "into standard Finnish"],
-         "4 h 57 min", "19.7 %", "the best, but kept internal:", "LA-murre's licence (CC BY-ND) forbids sharing changed texts"),
+        ("LA-murre version", DEEP, "#e9eef6", ["+ 56 h more dialect interviews (LA-murre);", "Opus rewrote their dialect spelling", "into standard Finnish"],
+         "4 h 57 min", "19.7 %", "the best on dialects:", "published as the la-murre branch"),
         ("Timestamps version", LLM, LLM_SOFT, ["+ Whisper's timestamp tokens on half", "of the SKN training segments"],
          "3 h 6 min", "21.4 %", "and sentence times that work:", "published as the timestamps branch"),
     ]
@@ -513,7 +513,7 @@ def journey() -> str:
             f'stroke-width="2" marker-end="url(#arrow)"/>'
         )
     body.append(text(24, H - 14, "Same base model and method in every round; the version to keep was picked by validation loss, never by test scores.", 13, 400, MUTED))
-    return svg(W, H, "Training rounds: pilot, round 1 with dialect interviews, round 2 published, an internal version and a timestamps version", body)
+    return svg(W, H, "Training rounds: pilot, round 1 with dialect interviews, round 2 published, a version with LA-murre and a timestamps version", body)
 
 
 DIALECT_JUDGES = [  # the judges of agreement-r4.json that are drawn, in this order
@@ -529,7 +529,7 @@ JUDGED = [  # the fourth round: six transcripts of each LA-murre segment judged 
     ("hf_whisper-large-v3", "Whisper large-v3", BASE),
     ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, published", OURS),
     ("ft_whisper-large-v3-fi-skn-all", "Ours, all of SKN", R1_SOFT),
-    ("ft_whisper-large-v3-fi-skn-lamurre-best", "Ours, internal", DEEP),
+    ("ft_whisper-large-v3-fi-skn-lamurre-best", "Ours, + LA-murre", DEEP),
 ]
 
 
@@ -628,7 +628,7 @@ def webinar() -> str:
     by_pts = sorted(rows)
     by_wer = sorted(rows, key=lambda r: r[1])
     keep = {r[2] for r in by_pts[:7]} | {r[2] for r in by_wer[:4]} | {"ft_whisper-large-v3-fi-skn-punct-best-chunks"}
-    keep -= {"ft_whisper-large-v3-fi-skn-lamurre-best-chunks", "ft_whisper-large-v3-fi-pilot"}  # internal / pilot: in the full table
+    keep -= {"ft_whisper-large-v3-fi-skn-lamurre-best-chunks", "ft_whisper-large-v3-fi-pilot"}  # LA-murre / pilot: in the full table
     shown = [r for r in by_pts if r[2] in keep]
     def tied_rank(i: int) -> dict[str, int]:  # equal values at one decimal share a rank
         return {r[2]: 1 + sum(round(o[i], 1) < round(r[i], 1) for o in rows) for r in rows}

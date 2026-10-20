@@ -228,7 +228,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
         <tr><td><b>SKN</b> (Kotus / Kielipankki)</td><td>dialect interviews from 50 municipalities</td><td>training 38 municipalities, validation 2, test 10</td><td>CC BY 4.0</td></tr>
         <tr><td><b>FLEURS</b> (Google)</td><td>Wikipedia sentences read aloud</td><td>training 2 704, test 918</td><td>CC BY 4.0</td></tr>
         <tr><td><b>VoxPopuli</b> (Meta)</td><td>European Parliament speeches</td><td>training 7 504, test 478</td><td>CC0</td></tr>
-        <tr><td><b>LA-murre</b> (University of Turku, Kotus / Kielipankki)</td><td>a second dialect corpus, 10 other localities</td><td>test only (583 segments)</td><td>CC BY-ND 4.0</td></tr>
+        <tr><td><b>LA-murre</b> (University of Turku, Kotus / Kielipankki)</td><td>a second dialect corpus, 10 other localities</td><td>test (583 segments); the other localities train one variant</td><td>CC BY-ND 4.0</td></tr>
       </tbody>
     </table>
   </div>
@@ -237,7 +237,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
 
 <section>
   <div class="sec-head"><span class="step">02</span><h2>Where Claude Opus 5.5 was used</h2></div>
-  <p class="col">Opus had four jobs. The first two concern the published model, the third only an internal comparison model, and the fourth the scoring of a webinar clip. On top of that, the training and LUMI code was written with Claude Code.</p>
+  <p class="col">Opus had four jobs. The first two concern the published model, the third only the variant trained on LA-murre, and the fourth the scoring of a webinar clip. On top of that, the training and LUMI code was written with Claude Code.</p>
   <div class="roles">
     <article class="role">
       <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 21h8M15 5l4 4m2.174-2.188a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg> Punctuation for the training text</h3>
@@ -250,9 +250,9 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
       <p class="meta">583 segments · about USD 11 per round · <code>judge_dialect.py</code></p>
     </article>
     <article class="role internal">
-      <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg> Dialect to standard Finnish (internal model only)</h3>
-      <p>In an extra experiment Opus rewrote the dialect-spelling texts of LA-murre's training recordings in standard Finnish, word for word. The model trained on them is the best on both dialect tests, but LA-murre's licence forbids sharing a derived version, so it was not published.</p>
-      <p class="meta">15 529 segments · about USD 49 · not published</p>
+      <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/></g></svg> Dialect to standard Finnish (la-murre variant only)</h3>
+      <p>In an extra experiment Opus rewrote the dialect-spelling texts of LA-murre's training recordings in standard Finnish, word for word. The model trained on them is the best on both dialect tests. LA-murre's licence forbids sharing a derived version, so the model was first kept internal. In October 2026 Kielipankki assessed that its weights most likely hold no copyright-protected part of the corpus, so it was published as the <code>la-murre</code> variant. The rewritten texts are not published.</p>
+      <p class="meta">15 529 segments · about USD 49 · model published 20 Oct 2026, texts not</p>
     </article>
     <article class="role">
       <h3><svg class="ico" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12l2 2l4-4"/></g></svg> Judges for the webinar clip</h3>
@@ -334,7 +334,7 @@ ul.plain { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
         <tr><td>Whisper large-v3</td><td class="n">25.9</td><td class="n">74</td><td class="n">600</td><td class="n">821</td><td class="n">50</td></tr>
         <tr><td>Our model, round 1 (no punctuation)</td><td class="n">13.8</td><td class="n">7</td><td class="n">342</td><td class="n">649</td><td class="n">116</td></tr>
         <tr class="ours"><td><b>Our model, published</b></td><td class="n"><b>13.6</b></td><td class="n">8</td><td class="n">340</td><td class="n">612</td><td class="n">121</td></tr>
-        <tr><td>Internal model (+ LA-murre training, not published)</td><td class="n">11.4</td><td class="n">12</td><td class="n">266</td><td class="n">562</td><td class="n">143</td></tr>
+        <tr><td>la-murre variant (+ LA-murre training)</td><td class="n">11.4</td><td class="n">12</td><td class="n">266</td><td class="n">562</td><td class="n">143</td></tr>
       </tbody>
     </table>
   </div>
@@ -372,7 +372,7 @@ Judge each transcript on its own; the labels carry no information.</pre>
   </div>
   <div class="tbl">
     <table>
-      <thead><tr><th>Judge</th><th class="n">Segments</th><th class="n">Whisper large-v3</th><th class="n">Round 1</th><th class="n">Published</th><th class="n">Internal</th><th class="n">Same preference as Opus</th></tr></thead>
+      <thead><tr><th>Judge</th><th class="n">Segments</th><th class="n">Whisper large-v3</th><th class="n">Round 1</th><th class="n">Published</th><th class="n">+ LA-murre</th><th class="n">Same preference as Opus</th></tr></thead>
       <tbody>
         <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">25.9</td><td class="n">13.8</td><td class="n">13.6</td><td class="n">11.4</td><td class="n">–</td></tr>
         <tr><td>gpt-oss-120b</td><td class="n">583</td><td class="n">20.5</td><td class="n">13.4</td><td class="n">13.2</td><td class="n">12.9</td><td class="n">81 %</td></tr>
@@ -381,13 +381,13 @@ Judge each transcript on its own; the labels carry no information.</pre>
       </tbody>
     </table>
   </div>
-  <p class="note col">Points per 100 words. "Same preference" counts the pairs of models in a segment where both judges see a difference, and how often they prefer the same one. All four judges give the same order: the internal model first, the published model and round 1 about level, Whisper large-v3 far behind. Each judge has its own scale, so compare models within one judge, not numbers across judges.</p>
+  <p class="note col">Points per 100 words. "Same preference" counts the pairs of models in a segment where both judges see a difference, and how often they prefer the same one. All four judges give the same order: the model trained on LA-murre first, the published model and round 1 about level, Whisper large-v3 far behind. Each judge has its own scale, so compare models within one judge, not numbers across judges.</p>
   <div class="col stack">
     <p><b>A fourth round, 15 October 2026,</b> added two paid services and a model trained on all of SKN, and a new judge: OpenAI's <b>GPT-6.1-sol</b> through GAIK's Azure. Six transcripts of each segment were judged together. All three judges put the paid services behind plain Whisper on dialect speech, and our models far ahead.</p>
   </div>
   <div class="tbl">
     <table>
-      <thead><tr><th>Judge</th><th class="n">Segments</th><th class="n">gpt-4o-transcribe</th><th class="n">Gemini 3.5 Flash</th><th class="n">Whisper large-v3</th><th class="n">Published</th><th class="n">All of SKN</th><th class="n">Internal</th><th class="n">Same preference as Opus</th></tr></thead>
+      <thead><tr><th>Judge</th><th class="n">Segments</th><th class="n">gpt-4o-transcribe</th><th class="n">Gemini 3.5 Flash</th><th class="n">Whisper large-v3</th><th class="n">Published</th><th class="n">All of SKN</th><th class="n">+ LA-murre</th><th class="n">Same preference as Opus</th></tr></thead>
       <tbody>
         <tr><td>Claude Opus 5.5</td><td class="n">583</td><td class="n">34.2</td><td class="n">27.2</td><td class="n">25.0</td><td class="n">14.2</td><td class="n">13.1</td><td class="n">11.6</td><td class="n">–</td></tr>
         <tr><td>GPT-6.1-sol (Azure)</td><td class="n">583</td><td class="n">35.6</td><td class="n">30.3</td><td class="n">26.3</td><td class="n">16.3</td><td class="n">15.5</td><td class="n">14.9</td><td class="n">92 %</td></tr>

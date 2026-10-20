@@ -9,8 +9,8 @@ Draws docs/img/dialect-finetune.svg, two panels of horizontal bars, lower is bet
 - right: meaning-error points per 100 words on the LA-murre test (10 localities in a corpus the
   SKN models never saw), from the blind judge's round 2, results/judgements_dialect/lamurre_fi/
   summary-r2.json. Its arms were judged together in one call per segment, so they share a scale.
-  The internal model was trained on LA-murre recordings from other localities; the 10 test ones
-  are held out of all training.
+  The LA-murre model (the la-murre revision) was trained on LA-murre recordings from other
+  localities; the 10 test ones are held out of all training.
 
 Static SVG with text as text, no matplotlib and no keys.
 """
@@ -34,7 +34,7 @@ ARMS = {
     "hf_whisper-large-v3": ("Whisper large-v3", False),
     "ft_whisper-large-v3-fi-skn": ("Ours, round 1", True),
     "ft_whisper-large-v3-fi-skn-punct-best": ("Ours, round 2 (published)", True),
-    "ft_whisper-large-v3-fi-skn-lamurre-best": ("Ours, round 2 + LA-murre (internal)", True),
+    "ft_whisper-large-v3-fi-skn-lamurre-best": ("Ours, round 2 + LA-murre", True),
 }
 W, ROW, TOP, LABEL_W, PANEL_W, GAP = 1000, 34, 92, 270, 290, 60
 INK, MUTED, BASE, OURS, GRID = "#1f2328", "#59636e", "#9aa4ae", "#2f6fb3", "#d8dee4"
@@ -101,7 +101,7 @@ def main() -> int:
     )
     svg.append(
         f'<text x="20" y="{height - 14}" font-size="11" fill="{MUTED}">Lower is better. Blue: this project\'s '
-        "LoRA fine-tunes of Whisper large-v3. The internal model was trained on other LA-murre localities; "
+        "LoRA fine-tunes of Whisper large-v3. The LA-murre model was trained on other LA-murre localities; "
         "Finnish-NLP was not in this judge round.</text>"
     )
     svg.append("</svg>")

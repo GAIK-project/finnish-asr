@@ -49,8 +49,10 @@ trained on **all 50 SKN municipalities** (81 h of dialect speech) instead of 38 
 dialect and writes standard Finnish with punctuation.
 
 The main branch (tag `v1.0`) stays the recommended model. This variant makes fewer meaning errors on
-dialect speech it never heard, and slightly more word errors on parliament speech. Use it when your
-audio is mostly dialect.
+dialect speech it never heard, and slightly more word errors on parliament speech. For audio that is
+mostly dialect, the [`la-murre` revision](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/la-murre/README.md)
+(published 20 Oct 2026, trained with 56 h more dialect interviews) makes fewer still: 11.6 points on
+LA-murre in the same judging round, against this variant's 13.1.
 
 Trained at Haaga-Helia University of Applied Sciences in the [GAIK project](https://gaik.ai/)
 (Generative AI-enhanced Knowledge Management in Business), a research project led by Haaga-Helia

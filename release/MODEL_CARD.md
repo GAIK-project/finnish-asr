@@ -100,9 +100,15 @@ every model and result: [GAIK-project/finnish-asr](https://github.com/GAIK-proje
   [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/timestamps/README.md).
 - **`all-skn`: the same recipe trained on all 50 SKN municipalities** (81 h of dialect speech
   instead of 62). Fewer meaning errors on LA-murre (13.1 against this model's 14.2 in the same judging
-  round), FLEURS level (7.5 %), VoxPopuli worse (11.9 %). For audio that is mostly dialect: load it
-  with `revision="all-skn"`; its card is on
-  [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/all-skn/README.md).
+  round), FLEURS level (7.5 %), VoxPopuli worse (11.9 %). Load it with `revision="all-skn"`; its
+  card is on [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/all-skn/README.md).
+- **`la-murre`: the same recipe with 56 h more dialect interviews** from the Finnish Dialect Syntax
+  Archive (LA-murre, 124 localities), their dialect spelling rewritten in standard Finnish by an LLM.
+  The most accurate on dialects: SKN 19.7 % WER against this model's 21.1 %, and the fewest meaning
+  errors on LA-murre's held-out localities (11.6 against 14.2 and `all-skn`'s 13.1 in the same judging
+  round; it knows the corpus's other recordings). Slightly worse on FLEURS (7.8 %) and VoxPopuli
+  (11.4 %). For audio that is mostly dialect: load it with `revision="la-murre"`; its card is on
+  [that branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/la-murre/README.md).
 
 ## Use it
 
@@ -197,10 +203,10 @@ of 402 apart.
 
 ## How it was trained
 
-![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, round 1 22.2, this model 21.1, internal model with LA-murre 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, this model 13.6, internal model with LA-murre 11.4.](dialect-finetune.svg)
+![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, round 1 22.2, this model 21.1, the la-murre revision 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, this model 13.6, the la-murre revision 11.4.](dialect-finetune.svg)
 
-"Ours, round 2 (published)" in the chart is this model. The model with LA-murre was trained on
-no-derivatives data and is not shared.
+"Ours, round 2 (published)" in the chart is this model; "Ours, round 2 + LA-murre" is the
+`la-murre` revision.
 
 1. 🎙️ **Dialect speech.** Interviews from [Suomen kielen näytteitä](https://www.kielipankki.fi/corpora/skn/)
    (SKN) were cut into 2–25 s segments and split **by municipality**: 38 for training (15 042
@@ -237,7 +243,7 @@ no-derivatives data and is not shared.
 One training run and one seed. The main judge is one model, Claude Opus 5.5. Three open models on
 CSC's Aitta service, given the same blind task, agree: gpt-oss-120b on all 583 segments prefers the
 same model as Claude in 81 % of the pairs where both see a difference, and Gemma 4 31B and Qwen3.6 27B,
-on a sample, in 92–93 %. All four judges rank the internal LA-murre model first, this model and
+on a sample, in 92–93 %. All four judges rank the `la-murre` revision first, this model and
 round 1 about level, and plain Whisper large-v3 clearly last; their point scales differ, so compare
 models within one judge. Code, method, all results and a comparison with 20 other set-ups:
 [GAIK-project/finnish-asr](https://github.com/GAIK-project/finnish-asr); summaries in gaik-toolkit:

@@ -24,7 +24,7 @@ that was said. At most 60 segments per locality, sampled with seed 0.
 second recording from a test locality, and recordings from the SKN test municipalities, so both
 dialect tests stay unseen. Two recordings are set aside for validation. The dialect text of these
 segments is rewritten in standard Finnish by prepare_targets.py before training. LA-murre is
-CC BY-ND: a model trained on it is for internal comparison, not for publishing.
+CC BY-ND: the model trained on it is published (the `la-murre` revision), these texts are not.
 
     python prepare_lamurre.py --train [--workers 12]
 

@@ -19,7 +19,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 internal: + LA-murre** \u2020\u2021\u00a7\u00b6",
+      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
       "utterances": 583,
       "WER": 57.4071,
       "CER": 16.9326,

@@ -10,7 +10,7 @@ the outputs are TRAINING and VALIDATION targets only, never ground truth for sco
   normalise  LA-murre has only a dialect transcript. The LLM rewrites it in standard Finnish
              word forms with punctuation, word for word, without rephrasing. An answer whose
              word count is off by more than 30 % is thrown away and the segment is dropped from
-             training. Only the internal (unpublished) model was trained on these targets.
+             training. Only the `la-murre` revision was trained on these targets.
 
 Input: a JSONL of segments (prepare_skn.py: field "ref"; prepare_lamurre.py --train: field "ref").
 Output: the same rows with "target" added, in results/labels/<name>.targets.jsonl, plus
@@ -19,7 +19,7 @@ The SKN outputs (CC BY 4.0) are committed; every lamurre_* output except the .st
 gitignored, because LA-murre (CC BY-ND 4.0) may not be shared in modified form.
 
 Prompt versions: the punct prompt is the one that made results/labels/skn_*.targets.jsonl
-(prompt_sha256 3f5919ad...). The normalise prompt that made the internal model's LA-murre targets
+(prompt_sha256 3f5919ad...). The normalise prompt that made the `la-murre` revision's targets
 (prompt_sha256 88232dbd...) gave four example word pairs from the LA-murre corpus; this public copy
 gives example pairs from SKN instead (segment SKN45a_Heinola_0097, CC BY 4.0), so its hash differs.
 

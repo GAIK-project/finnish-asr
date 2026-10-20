@@ -54,7 +54,7 @@ You give it Finnish speech, dialect or not. It writes standard Finnish, with pun
 
 ## 2. Where the data comes from
 
-<img src="docs/img/data-sources.svg" alt="Whisper large-v3 by OpenAI as the starting model; SKN, FLEURS by Google and VoxPopuli by Meta for training and testing; LA-murre for testing and for the internal version's training" width="100%">
+<img src="docs/img/data-sources.svg" alt="Whisper large-v3 by OpenAI as the starting model; SKN, FLEURS by Google and VoxPopuli by Meta for training and testing; LA-murre for testing and for the training of one variant" width="100%">
 
 - **Whisper large-v3**, OpenAI: the model we started from. [openai/whisper-large-v3](https://huggingface.co/openai/whisper-large-v3), Apache 2.0.
 - **SKN, Suomen kielen näytteitä**: dialect interviews from 50 municipalities, recorded in the
@@ -63,7 +63,7 @@ You give it Finnish speech, dialect or not. It writes standard Finnish, with pun
 - **FLEURS**, Google: Wikipedia sentences read aloud. [google/fleurs](https://huggingface.co/datasets/google/fleurs), CC BY 4.0.
 - **VoxPopuli**, Meta: European Parliament speeches. [facebook/voxpopuli](https://huggingface.co/datasets/facebook/voxpopuli), CC0.
 - **LA-murre**: dialect interviews from 132 places. Its test set (10 places not in SKN) tests every
-  model; only the internal version (below) also trained on the other places. University of Turku and
+  model; only the `la-murre` version (below) also trained on the other places. University of Turku and
   Kotus, via [Kielipankki](http://urn.fi/urn:nbn:fi:lb-2020112935), CC BY-ND 4.0.
 
 ## 3. How we made it
@@ -75,21 +75,27 @@ in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-ag
 
 **Round by round:**
 
-<img src="docs/img/journey.svg" alt="Training rounds: start 40.4 %, pilot on read speech, round 1 with dialect interviews 22.2 %, round 2 published 21.1 %, an internal version 19.7 % and a timestamps version 21.4 %" width="100%">
+<img src="docs/img/journey.svg" alt="Training rounds: start 40.4 %, pilot on read speech, round 1 with dialect interviews 22.2 %, round 2 published 21.1 %, a version with LA-murre 19.7 % and a timestamps version 21.4 %" width="100%">
 
-**Why is the best version not published?**
+**Why is the best dialect version not the main model?**
 
-| | Published (`v1.0`) | Internal version |
+| | Main model (`v1.0`) | `la-murre` version |
 |---|---|---|
 | Training data | SKN + FLEURS + VoxPopuli, all open licences | the same + 56 h of LA-murre interviews |
 | What the language model did | added punctuation | also rewrote LA-murre's dialect spelling in standard Finnish |
 | Dialect test, words wrong | 21.1 % | **19.7 %** |
-| Can it be shared? | ✅ yes, Apache 2.0 | ❌ no: LA-murre's licence (CC BY-ND) does not allow sharing changed texts, so the model trained on them stays internal |
+| Read and parliament speech (FLEURS / VoxPopuli), words wrong | **7.6 % / 10.8 %** | 7.8 % / 11.4 % |
+| Where | the default | `revision="la-murre"`, published 20 Oct 2026 |
+
+LA-murre's licence (CC BY-ND) does not allow sharing changed texts, so this version was first kept
+private. In October 2026 Kielipankki, which distributes LA-murre, assessed that the model's weights
+most likely hold no copyright-protected part of the corpus, so it is now published; the rewritten
+LA-murre texts it learned from are not.
 
 ## 4. What the language model did
 
 The audio and the words are people's work. For the published model a language model, Claude Opus
-5.5, helped in two places (for the internal version it also rewrote LA-murre's dialect spelling).
+5.5, helped in two places (for the `la-murre` version it also rewrote LA-murre's dialect spelling).
 First, it added punctuation to the training text and nothing else:
 
 <img src="docs/img/punctuation.svg" alt="Before: a transcript without punctuation. After: the same words with a question mark, a capital and a full stop" width="100%">
@@ -148,7 +154,7 @@ to finish and are left out.
 - 🧱 **It kept what it knew.** Read and parliament speech stayed in the training mix, so they did not
   get worse (FLEURS 7.4 → 7.6 %, VoxPopuli 12.7 → 10.8 %).
 - ✍️ **It writes sentences.** With punctuation added to the training text, its output reads like text.
-- ➕ **More dialect speech helps further.** The internal version with 56 more hours
+- ➕ **More dialect speech helps further.** The `la-murre` version with 56 more hours
   ([counts](results/labels/lamurre_train.hours.stats.json)) gets 19.7 %.
 - 🏷️ **What got worse: rare names.** The interviews have no brand names or dental terms, and the
   fine-tuned model spells them worse than base Whisper does; for those, use a general model.
@@ -167,7 +173,9 @@ print(asr({"raw": audio, "sampling_rate": sr}, generate_kwargs={"language": "fi"
 ```
 
 For longer audio, the [model card](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
-has code that cuts it into pieces at quiet moments.
+has code that cuts it into pieces at quiet moments. For audio that is mostly dialect, add
+`revision="la-murre"` to the pipeline: 19.7 % of words wrong on the dialect test, a little weaker on
+read and parliament speech ([its card](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/la-murre/README.md)).
 
 ---
 
@@ -231,14 +239,16 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   added punctuation to the training text (round 1 wrote almost none), and a second run added
   56 h of LA-murre interviews rewritten in standard Finnish. The published model keeps
   round 1's dialect accuracy (SKN 21.1 % WER, judge 13.6 against base Whisper's 25.9) and
-  writes sentences. The internal one with LA-murre is the best on both dialect tests
-  (19.7 %, 11.4 points), but LA-murre's no-derivatives licence keeps it private. On the webinar
+  writes sentences. The one with LA-murre is the best on both dialect tests (19.7 %, 11.4
+  points); first kept private under LA-murre's no-derivatives licence, it has been the `la-murre`
+  branch since 20 Oct 2026, after Kielipankki assessed that its weights most likely hold no
+  protected part of the corpus. On the webinar
   clip all of them spell rare names and dental terms worse than base Whisper
   ([Our dialect model](#our-dialect-model)).
 - ⚖️ **Three open judges agree.** Given the same blind task on CSC's Aitta service, gpt-oss-120b
   (all 583 LA-murre segments) puts the four models in Claude's order and prefers the same model as
   Claude in 81 % of the pairs; Gemma 4 31B and Qwen3.6 27B, on a sample, in 92–93 %. Every judge
-  ranks the internal model first, the published model and round 1 about level, and base Whisper
+  ranks the LA-murre model first, the published model and round 1 about level, and base Whisper
   clearly last ([Second opinions](#second-opinions-open-model-judges-on-csc-aitta)).
 - ⏱️ **Timestamps: a second variant.** The published model's own timestamps are unusable (1 % of
   SKN sentence starts get one within 1 s; base Whisper 61 %), so decode it in pieces. The same recipe
@@ -256,7 +266,8 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   A model trained on all of SKN is the `all-skn` branch ([next steps](#dialect-data-and-next-steps)).
 - 🤗 **Published 13 Oct 2026:** the model
   [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
-  (Apache 2.0, tag `v1.0`; variants on its `timestamps` and `all-skn` branches) and its SKN segments
+  (Apache 2.0, tag `v1.0`; variants on its `timestamps`, `all-skn` and, since 20 Oct 2026,
+  `la-murre` branches) and its SKN segments
   [GAIK-project/skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
   (CC BY 4.0). This repository holds the method, the code and the results behind them.
 
@@ -268,7 +279,7 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
 | Whisper large-v3, chunked decoding | open | 15.7 | 6.7 | 1.7 | 5.5 | 14 / 14 of 14 |
 | Whisper large-v3 | open | 14.7 | 6.0 | 2.7 | 5.2 | 14 / 13 of 14 |
 | ElevenLabs Scribe v2 | API | 18.2 (17.2–18.4) | 4.9 | 1.2 | 7.0 | 14 / 12 of 14 |
-| This project, round 2 internal (+ LA-murre), chunked | open | 15.9 | 4.7 | 3.0 | 6.2 | 14 / 12 of 14 |
+| This project, round 2 + LA-murre (`la-murre` revision), chunked | open | 15.9 | 4.7 | 3.0 | 6.2 | 14 / 12 of 14 |
 | Whisper large-v3 turbo | open | 18.4 | 7.7 | 1.5 | 8.5 | 14 / 13 of 14 |
 | This project's pilot: Whisper large-v3 + LoRA on FLEURS and VoxPopuli | open | 17.9 | 8.3 | 2.2 | 8.2 | 14 / 13 of 14 |
 | OpenAI gpt-transcribe | API | 18.4 (18.4–19.1) | 8.5 | 4.2 | 8.5 | 12 / 12 of 14 |
@@ -341,9 +352,9 @@ The clip above is one recording. Four open Finnish test sets:
   split of the [published dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr).
 - **LA-murre dialects**: 583 segments (2.3 h) from 10 localities that are not in SKN,
   cut from the Finnish Dialect Syntax Archive (University of Turku / Kotus, Kielipankki,
-  CC BY-ND 4.0) by [`prepare_lamurre.py`](scripts/prepare_lamurre.py). No published model was
-  trained on any of LA-murre; only the internal model was, on recordings from other localities,
-  never these 10. Its reference is a **dialect** transcript, so WER here charges a model for writing standard
+  CC BY-ND 4.0) by [`prepare_lamurre.py`](scripts/prepare_lamurre.py). Only the `la-murre`
+  revision was trained on LA-murre, on recordings from other localities, never these 10. Its
+  reference is a **dialect** transcript, so WER here charges a model for writing standard
   Finnish: every model lands at 52–73 %. Read this column with the
   [meaning judge](#a-second-corpus-la-murre), not on its own. Only the numbers are published
   ([`results/benchmarks/lamurre_fi/scores.json`](results/benchmarks/lamurre_fi/scores.json)): the
@@ -365,7 +376,7 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | Orukeet (Parakeet v3 fine-tune) | – | – | 11.6 | 15.9 | 2.8 | 0.04 |
 | NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | 3.1 | 0.18 |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | 6.2 | 1.50 |
-| **This project, round 2 internal: + LA-murre** †‡§¶ | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
+| **This project, round 2 + LA-murre (`la-murre` revision)** †‡§¶ | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
 | **This project, round 2: + punctuated SKN targets (published)** †‡§ | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
 | **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§ | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
 | **This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** †‡§ | 22.2 | 57.9 | 7.8 | 10.6 | 1.9 | 0.96 |
@@ -435,7 +446,7 @@ model, built for dialects, is last of the six judged.
 | Finnish-NLP whisper-large-finnish-v3 † | 25.8 | 12.7 | – | – |
 | **This project, published, in 15–25 s pieces** †‡§ | 25.9 | 12.8 | 5.1 | 10.0 |
 | Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
-| **This project, internal, in pieces** †‡§¶ | 26.5 | 13.4 | – | – |
+| **This project, `la-murre` revision, in pieces** †‡§¶ | 26.5 | 13.4 | – | – |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
 | **This project, `timestamps` revision, long audio in one go** †‡§ | 27.0 | 13.0 | – | – |
 | Gemini 3.1 Pro (API) | 28.5 | 11.4 | – | – |
@@ -445,7 +456,7 @@ model, built for dialects, is last of the six judged.
 | **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§, whole clip in one go | 29.8 | 15.8 | – | – |
 | NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
-| **This project, round 2 internal: + LA-murre** †‡§¶, whole clip in one go | 60.0 | 44.9 | – | – |
+| **This project, round 2 + LA-murre (`la-murre` revision)** †‡§¶, whole clip in one go | 60.0 | 44.9 | – | – |
 | **This project, round 2: + punctuated SKN targets (published)** †‡§, whole clip in one go | 60.2 | 44.8 | – | – |
 | Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
 <!-- dental-table:end -->
@@ -619,7 +630,7 @@ flowchart LR
   CUTL --> N["Opus 5.5 rewrites dialect<br/>in standard Finnish"]
   OPEN["FLEURS + VoxPopuli<br/>train"] --> FT
   P --> FT["LoRA r64 on Whisper large-v3<br/>LUMI MI250X, 3 epochs,<br/>keep the best epoch"]
-  N -.internal model only.-> FT
+  N -.la-murre revision only.-> FT
   FT --> T["Tests: SKN, LA-murre,<br/>FLEURS, VoxPopuli, clip"]
   T --> J["Blind Opus 5.5 judge<br/>on LA-murre meaning"]
 ```
@@ -637,14 +648,15 @@ never touches a test set. The targets are in
 second recording from one of them and the five localities that are also SKN test
 municipalities, give 15 532 segments (56 h). Their transcripts are in dialect spelling, so
 Opus rewrote each one in standard Finnish, word for word; 15 529 kept a word count within 30 %
-of the source. LA-murre is CC BY-ND, so the model trained on them is an internal comparison only
-and its rewritten texts are not published.
+of the source. LA-murre is CC BY-ND, so the rewritten texts are not published; the model trained on
+them is, as the `la-murre` revision, after Kielipankki assessed in October 2026 that its weights most
+likely hold no copyright-protected part of the corpus.
 
 **3. Training.** LoRA rank 64 on the attention query and value projections (2 % of the
 weights), learning rate 1e-4, batch 8, on one MI250X. A four-epoch run showed overfitting:
 validation loss was lowest after epoch 2 and rose after it (0.206, 0.208, 0.215), so the
 final runs train three epochs and merge the epoch with the lowest validation loss, which
-was epoch 2 in both. Published model: 25 250 segments, 3 h 8 min. Internal model:
+was epoch 2 in both. Published model: 25 250 segments, 3 h 8 min. LA-murre model:
 40 779 segments, 4 h 57 min (training with per-epoch validation, from the `train_log.json` files).
 
 | Model | Training data | SKN WER | LA-murre judge pts | FLEURS | VoxPopuli | Clip WER (chunked) | Clip Claude / Gemini pts |
@@ -652,7 +664,7 @@ was epoch 2 in both. Published model: 25 250 segments, 3 h 8 min. Internal model
 | Whisper large-v3 | none | 40.4 | 25.9 | 7.4 | 12.7 | 15.7 | 1.7 / 5.5 |
 | Round 1 (r32, 2 epochs) | SKN + open | 22.2 | 13.8 | 7.8 | 10.6 | 14.9 | 3.7 / 9.7 |
 | **Round 2, published** | SKN with punctuation + open | 21.1 | 13.6 | **7.6** | 10.8 | **13.9** | 6.7 / 10.9 |
-| Round 2, internal | + LA-murre rewritten | **19.7** | **11.4** | 7.8 | 11.4 | 15.9 | 3.0 / 6.2 |
+| Round 2 + LA-murre (`la-murre` revision) | + LA-murre rewritten | **19.7** | **11.4** | 7.8 | 11.4 | 15.9 | 3.0 / 6.2 |
 
 WER in %, lower is better. LA-murre judge: meaning-error points per 100 reference words,
 Claude Opus 5.5, all four models judged together on each of the 583 segments in shuffled,
@@ -668,13 +680,13 @@ better on SKN and worse on VoxPopuli.
   like base Whisper and is level with round 1 on dialects: SKN 21.1 against 22.2 % WER, and
   on LA-murre the judge cannot separate them (13.6 against 13.8 points; fewer points in 168
   segments, more in 138, sign test p = 0.10).
-- **More dialect speech helps, and it carries over.** The internal model is best on both
+- **More dialect speech helps, and it carries over.** The LA-murre model is best on both
   dialect tests: on LA-murre it has fewer points than round 1 in 234 segments and more in
   121 (p < 0.001), and fewer points than round 1 in all 10 localities; it is the lowest of the
   four models in 9 of them (the published model is lower in Muolaa, 12.1 against 13.1). Part of
-  that is being trained on the same corpus as the test, though not on its localities. The published
-  model cannot use this data under LA-murre's licence; a larger CC BY dialect corpus would be the way
-  to get the same gain in a model that can be shared.
+  that is being trained on the same corpus as the test, though not on its localities. It is
+  published as the `la-murre` revision; its training texts stay unpublished under LA-murre's
+  licence, so a larger CC BY dialect corpus would be the way to share the data behind such a gain.
 - **Names and terms on the webinar get worse with dialect training.** Every dialect model
   gets more meaning-error points on the clip than base Whisper. The published model has the
   lowest WER on the clip but gets 11 and 10 of 14 names right against 14 and 14 for base
@@ -695,17 +707,19 @@ better on SKN and worse on VoxPopuli.
 **Cost.** Opus 5.5 for the training text, about 100 USD (punctuation 52, LA-murre rewriting
 49); the blind judging of rounds 1 and 2 about 25 USD (round 3, for the timestamp variant below, used
 about as many tokens as each of them); about 40 GCD-hours of LUMI GPU time for every job in both
-rounds (about 20 billed GPU-hours). The published model (tag `v1.0`), its timestamp variant (branch
-`timestamps`) and its SKN segments are on Hugging Face
+rounds (about 20 billed GPU-hours). The published model (tag `v1.0`), its variants (branches
+`timestamps`, `all-skn` and `la-murre`) and its SKN segments are on Hugging Face
 ([model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects),
 [dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)); their cards are
-in [`release/`](release/) and [`publish_hf.py`](scripts/publish_hf.py) uploads them. The internal
-LA-murre model is not published: it is kept in the private Hugging Face repository
-GAIK-project/whisper-large-v3-fi-dialects-internal for use inside the project, and its rewritten
-LA-murre training texts are not published either.
+in [`release/`](release/) and [`publish_hf.py`](scripts/publish_hf.py) uploads them. The LA-murre
+model was first kept private; on 20 Oct 2026 its weights were published as the `la-murre` branch
+([card](release/LAMURRE_CARD.md)), after Kielipankki (FIN-CLARIN), which distributes LA-murre,
+assessed that the weights most likely hold no copyright-protected part of the corpus. Its rewritten
+LA-murre training texts are not published.
 
 **Attribution.** SKN as above. LA-murre: Lauseopin arkiston murrekorpus, University of Turku
-and Kotus, via Kielipankki, CC BY-ND 4.0, used for testing and for the internal model only.
+and Kotus, via Kielipankki, CC BY-ND 4.0, used for testing and for the `la-murre` revision's
+training.
 
 ## Timestamps and long-form audio
 
@@ -827,7 +841,7 @@ schema, labels and order as Claude ([`judge_dialect.py --provider aitta`](script
 compared by [`judge_agreement.py`](scripts/judge_agreement.py) in
 [`agreement-r2.json`](results/judgements_dialect/lamurre_fi/agreement-r2.json)):
 
-| Judge | Segments | Whisper large-v3 | Round 1 | Published | Internal | Published vs base (fewer / more points) | Same preference as Claude |
+| Judge | Segments | Whisper large-v3 | Round 1 | Published | + LA-murre | Published vs base (fewer / more points) | Same preference as Claude |
 |---|--:|--:|--:|--:|--:|--:|--:|
 | Claude Opus 5.5 (reference) | 583 | 25.9 | 13.8 | 13.6 | 11.4 | 398 / 89 | – |
 | gpt-oss-120b (Aitta) | 583 | 20.5 | 13.4 | 13.2 | 12.9 | 275 / 105 | 80.7 % of 1 535 pairs |
@@ -836,7 +850,7 @@ compared by [`judge_agreement.py`](scripts/judge_agreement.py) in
 
 Points are meaning-error points per 100 reference words. "Same preference" counts the pairs of
 models in a segment where both judges see a difference, and how often they prefer the same one.
-All four judges rank the models the same way: the internal model best, the published model and round
+All four judges rank the models the same way: the LA-murre model best, the published model and round
 1 about level, base Whisper far behind; gpt-oss-120b also finds the published model clearly better
 than base Whisper (sign test p < 0.001) and separates the three fine-tunes less than Claude does.
 Gemma 4 31B and Qwen3.6 27B were run on a sample, not on all 583 segments: both judged the same seeded
@@ -858,7 +872,7 @@ Data that could serve as a dialect test set and as fine-tuning data:
 |---|---|---|
 | Lahjoita puhetta (Donate Speech) | About 3 600 h of spontaneous Finnish from over 20 000 speakers across Finland, part of it transcribed, with dialect metadata | Kielipankki; licence agreement, a fee for commercial use |
 | Suomen kielen näytteitä (SKN) | Dialect recordings from 50 localities, with both dialect and normalised transcripts | Kielipankki, CC BY 4.0: **used here** for the dialect test and fine-tune |
-| Lauseopin arkiston murrekorpus (LA-murre) | 142 dialect samples from 132 localities, dialect transcripts only | Kielipankki, CC BY-ND 4.0: **used here** as the second dialect test and for the internal model |
+| Lauseopin arkiston murrekorpus (LA-murre) | 142 dialect samples from 132 localities, dialect transcripts only | Kielipankki, CC BY-ND 4.0: **used here** as the second dialect test and for the `la-murre` revision |
 | Common Voice, FLEURS, VoxPopuli (Finnish) | Read or formal speech, the sets the RASMUS model card reports | Open |
 
 What was held out: the published model trained on all of the 38 training municipalities' segments.
@@ -879,19 +893,24 @@ What was tried next (15 Oct 2026):
    [`all-skn` branch](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/tree/all-skn)
    ([card](release/ALL_SKN_CARD.md)) for audio that is mostly dialect.
 2. **How well Opus rewrites dialect.** The prompt that turned LA-murre's dialect transcripts into
-   standard Finnish for the internal model, run on SKN's dialect transcripts of the 600 test segments
-   and scored against SKN's human standard-Finnish text: 14.2 % WER, so the internal model's training
+   standard Finnish for the LA-murre model, run on SKN's dialect transcripts of the 600 test segments
+   and scored against SKN's human standard-Finnish text: 14.2 % WER, so the LA-murre model's training
    text is close to, not the same as, a person's normalisation.
 3. **The API services on the dialect test.** gpt-4o-transcribe (through GAIK's Azure) leaves out 46 %
    of the dialect test's words (62.5 % WER) and gets the most meaning-error points on LA-murre (34.2);
    ElevenLabs Scribe v2 gets 44.9 % on SKN. Every service and model ran on FLEURS and VoxPopuli as
    well ([table](#public-test-sets-skn-and-la-murre-dialects-fleurs-and-voxpopuli)).
 
+Settled on 20 Oct 2026: **a published model trained on LA-murre.** Asked whether a model trained on
+LA-murre's standard-Finnish rewrites may be published, FIN-CLARIN (Kielipankki) assessed that its
+weights most likely contain no copyright-protected part of the corpus, so no separate permission is
+needed. The LA-murre model is now the `la-murre` revision ([card](release/LAMURRE_CARD.md)).
+
 Still open:
 
-1. **LA-murre for the published model.** Permission to publish a model trained on LA-murre's
-   standard-Finnish rewrites has been asked from the rightholders (University of Turku and Kotus,
-   via FIN-CLARIN).
+1. **The rewritten LA-murre texts.** They stay out of this repository and off Hugging Face;
+   Kielipankki, which may distribute modified LA-murre material, has offered to take them in as a
+   new version of the corpus.
 2. **Today's speech.** Both dialect corpora are 1960s–70s interviews. Lahjoita puhetta (Donate
    Speech, about 3 200 h of everyday Finnish from all regions) would test present-day speech; it is
    CLARIN RES and needs a research plan and the project's public privacy notice.
@@ -1095,7 +1114,7 @@ write token and is for maintainers.
 - **The timestamp results rest on SKN's own sentence times and ten 4-minute windows**, and the
   timestamp variant, like every fine-tune here, was trained once with one seed.
 - **The training texts are partly LLM-written.** Punctuation (SKN) and standard spellings
-  (LA-murre, internal model) come from Opus 5.5 with a word-level check, not from a person. The tests
+  (LA-murre, `la-murre` revision) come from Opus 5.5 with a word-level check, not from a person. The tests
   are not touched: their references are the corpora's human transcripts.
 - **Older provenance points to a private repository.** Result files made before this repository
   existed record `gaik_evals_commit` and paths in GAIK's private evaluation repository, where the work
@@ -1126,9 +1145,9 @@ write token and is for maintainers.
   - **Lauseopin arkiston murrekorpus (LA-murre)**, University of Turku and Kotus, via Kielipankki,
     [urn:nbn:fi:lb-2020112935](http://urn.fi/urn:nbn:fi:lb-2020112935),
     [CC BY-ND 4.0](https://creativecommons.org/licenses/by-nd/4.0/): the test set for every model
-    here; only the internal model, which is not published, was also trained on it (other
-    localities). No LA-murre text is in this repository, only numbers made from it.
-- **Model weights**: the published model and its `timestamps` revision are
+    here; only the `la-murre` revision was also trained on it (other localities). No LA-murre
+    text is in this repository, only numbers made from it.
+- **Model weights**: the published model and its `timestamps`, `all-skn` and `la-murre` revisions are
   [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0), as the base model
   openai/whisper-large-v3; the published dataset is CC BY 4.0.
 - **The Ajokortti clip** is an excerpt of a public QAdental webinar; QAdental (Suomen

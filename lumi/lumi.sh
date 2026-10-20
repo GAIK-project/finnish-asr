@@ -11,7 +11,7 @@
 #   lumi/lumi.sh setup [hf|qwen|nemo]  build the Python environments (login node, ~15 min, once)
 #   lumi/lumi.sh download [clip|bench] fetch weights (and for bench the FLEURS test set) on the login node
 #   lumi/lumi.sh download models [name...]  this project's published fine-tunes from Hugging Face into models/;
-#                                      the private internal model needs HF_TOKEN in the local environment
+#                                      HF_TOKEN from the local environment, if set, is passed on
 #                                      (sent over ssh's stdin, never written to disk)
 #   lumi/lumi.sh run clip  <env> [args]   the 180 s Ajokortti clip        (run_open_models.py, 45 min limit);
 #                                         add --bench dental10_fi for the ten dental clips (3 h limit)
