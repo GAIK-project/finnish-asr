@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-20T08:14:40+00:00",
+  "generated_at_utc": "2026-10-20T08:44:18+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "1a6aa5dda66a739a5e275205b6a078f532c5392b",
+  "repo_commit": "f368c56b03501d1d26bf30348d7b55413f380e83",
   "repo_dirty": true,
   "app_under_test": "Finnish ASR public benchmarks: google/fleurs fi_fi test",
   "runner_path": "scripts/score_benchmark.py",
   "dataset_path": "results/benchmarks/fleurs_fi",
-  "dataset_git_object": "29a7a85ea67c05439357694de677250264761767",
+  "dataset_git_object": "01faa64758c9977f9a727692a8d1c8c75d46279d",
   "model_or_deployment": [
     "scribe_v2",
     "gpt-4o-transcribe",

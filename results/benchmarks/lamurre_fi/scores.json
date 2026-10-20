@@ -94,7 +94,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**Ours: published model (main, v1.0)**",
+      "label": "**Ours: main model (v1.0)**",
       "utterances": 583,
       "WER": 58.105,
       "CER": 17.4428,

@@ -54,7 +54,7 @@ HIDDEN = {"ft_whisper-large-v3-fi-skn-r64e4", "ft_whisper-large-v3-fi-skn-punct"
 LABELS = {
     "ft_whisper-large-v3-fi-pilot": "**Ours: pilot, FLEURS + VoxPopuli only**",
     "ft_whisper-large-v3-fi-skn": "**Ours: round 1**",
-    "ft_whisper-large-v3-fi-skn-punct-best": "**Ours: published model (main, v1.0)**",
+    "ft_whisper-large-v3-fi-skn-punct-best": "**Ours: main model (v1.0)**",
     "ft_whisper-large-v3-fi-skn-punct-ts": "**Ours: timestamps version**",
     "ft_whisper-large-v3-fi-skn-lamurre-best": "**Ours: la-murre version**",
     "hf_whisper-large-v3": "Whisper large-v3",
@@ -72,7 +72,7 @@ LABELS = {
     "azure_gpt-4o-transcribe": "OpenAI gpt-4o-transcribe (API, via Azure)",
     "azure_whisper": "OpenAI Whisper (API, via Azure)",
     "hf_whisper-large-v3-chunks": "Whisper large-v3, in 15–25 s pieces",
-    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "**Ours: published model, in 15–25 s pieces**",
+    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "**Ours: main model, in 15–25 s pieces**",
     "ft_whisper-large-v3-fi-skn-punct-ts-chunks": "**Ours: timestamps version, in pieces**",
     "ft_whisper-large-v3-fi-skn-punct-ts-fallback": "**Ours: timestamps version, long audio in one go**",
     "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": "**Ours: la-murre version, in pieces**",

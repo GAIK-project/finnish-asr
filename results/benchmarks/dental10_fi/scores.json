@@ -169,7 +169,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best-chunks",
-      "label": "**Ours: published model, in 15\u201325 s pieces**",
+      "label": "**Ours: main model, in 15\u201325 s pieces**",
       "utterances": 10,
       "WER": 25.8621,
       "CER": 13.0731,
@@ -364,7 +364,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**Ours: published model (main, v1.0)**",
+      "label": "**Ours: main model (v1.0)**",
       "utterances": 10,
       "WER": 60.1647,
       "CER": 43.3049,

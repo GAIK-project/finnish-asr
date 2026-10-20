@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-20T08:14:40+00:00",
+  "generated_at_utc": "2026-10-20T08:44:18+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "1a6aa5dda66a739a5e275205b6a078f532c5392b",
+  "repo_commit": "f368c56b03501d1d26bf30348d7b55413f380e83",
   "repo_dirty": true,
   "app_under_test": "Finnish ASR public benchmarks: SKN dialect test, 10 held-out municipalities",
   "runner_path": "scripts/score_benchmark.py",
   "dataset_path": "results/benchmarks/skn_fi",
-  "dataset_git_object": "1ca8ccb8fce3ffa0f0ba9807fa99eed4b5093840",
+  "dataset_git_object": "c049c508064f5a51ef512f8c296ee8438703b74f",
   "model_or_deployment": [
     "whisper-large-v3-fi-skn-lamurre",
     "whisper-large-v3-fi-skn-lamurre-best",

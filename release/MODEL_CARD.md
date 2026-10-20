@@ -205,7 +205,7 @@ of 402 apart.
 
 ![Two panels, lower is better. SKN dialect test WER: Finnish-NLP 56.6, Whisper large-v3 40.4, round 1 22.2, this model 21.1, the la-murre revision 19.7. LA-murre meaning-error points per 100 words, blind judge: Whisper large-v3 25.9, round 1 13.8, this model 13.6, the la-murre revision 11.4.](dialect-finetune.svg)
 
-"Ours, round 2 (published)" in the chart is this model; "Ours, round 2 + LA-murre" is the
+"Ours, round 2 (main model)" in the chart is this model; "Ours, round 2 + LA-murre" is the
 `la-murre` revision.
 
 1. 🎙️ **Dialect speech.** Interviews from [Suomen kielen näytteitä](https://www.kielipankki.fi/corpora/skn/)

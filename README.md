@@ -286,7 +286,7 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
 | This project, round 1: Whisper large-v3 + LoRA on SKN dialects, FLEURS and VoxPopuli | open | 17.9 | 5.6 | 4.5 | 9.4 | 13 / 12 of 14 |
 | OpenAI gpt-4o-mini-transcribe | API | 13.9 (13.9–14.7) | 4.4 | 3.2 | 11.4 | 13 / 10 of 14 |
 | Orukeet (Parakeet v3 fine-tune) | open | 26.4 | 10.2 | 6.2 | 10.7 | 13 / 11 of 14 |
-| This project, round 2 (published), chunked decoding | open | 13.9 | 5.2 | 6.7 | 10.9 | 11 / 10 of 14 |
+| This project, main model, chunked decoding | open | 13.9 | 5.2 | 6.7 | 10.9 | 11 / 10 of 14 |
 | RASMUS Finnish-ASR-Canary-v2, greedy | open | 23.9 | 8.1 | 6.5 | 13.7 | 11 / 8 of 14 |
 | RASMUS Finnish-ASR-Canary-v2 + KenLM | open | 22.1 | 8.5 | 8.5 | 15.4 | 11 / 7 of 14 |
 | Gemini 3.1 Pro | API | 22.4 (15.4–22.4) | 9.3 | 7.0 | 18.4 | 12 / 10 of 14 |
@@ -322,7 +322,7 @@ Against it ([`results/scores.reviewed.json`](results/scores.reviewed.json), `sco
 | OpenAI gpt-4o-mini-transcribe | 13.9 | **13.2** |
 | Whisper large-v3 | 14.7 | 13.7 |
 | Gemini 3.5 Flash | 14.2 | 13.7 |
-| Our model, round 2 (published), chunked | 13.9 | 14.0 |
+| Our main model, chunked | 13.9 | 14.0 |
 | ElevenLabs Scribe v2 | 18.2 | 14.2 |
 | WhisperX + Finnish-NLP whisper-large-finnish-v3 (Haaga-Helia WhisperX server) | 11.9 | 15.7 |
 | Finnish-NLP whisper-large-finnish-v3 (plain transformers) | 13.2 | 15.7 |
@@ -372,7 +372,7 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | 3.1 | 0.18 |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | 6.2 | 1.50 |
 | **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
-| **Ours: published model (main, v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
+| **Ours: main model (v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
 | **Ours: timestamps version** | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
 | **Ours: round 1** | 22.2 | 57.9 | 7.8 | 10.6 | 1.9 | 0.96 |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | 61.8 | – | – | – | – |
@@ -440,7 +440,7 @@ model, built for dialects, is last of the six judged.
 | **Ours: all-skn version, in pieces** | 25.7 | 12.5 | 4.8 | 9.7 |
 | **Ours: timestamps version, in pieces** | 25.8 | 12.9 | – | – |
 | Finnish-NLP whisper-large-finnish-v3 | 25.8 | 12.7 | – | – |
-| **Ours: published model, in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
+| **Ours: main model, in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
 | Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
 | **Ours: la-murre version, in pieces** | 26.5 | 13.4 | – | – |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
@@ -453,7 +453,7 @@ model, built for dialects, is last of the six judged.
 | NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
 | **Ours: la-murre version**, whole clip in one go | 60.0 | 44.9 | – | – |
-| **Ours: published model (main, v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
+| **Ours: main model (v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
 | Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
 <!-- dental-table:end -->
 

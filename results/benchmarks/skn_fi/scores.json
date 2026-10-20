@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T08:14:40+00:00",
+  "generated_utc": "2026-10-20T08:44:18+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -49,7 +49,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**Ours: published model (main, v1.0)**",
+      "label": "**Ours: main model (v1.0)**",
       "utterances": 600,
       "WER": 21.0753,
       "CER": 8.6327,
