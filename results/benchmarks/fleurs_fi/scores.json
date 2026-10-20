@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T07:40:08+00:00",
+  "generated_utc": "2026-10-20T08:14:40+00:00",
   "benchmark": "google/fleurs fi_fi test",
   "arms": [
     {
@@ -64,7 +64,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-pilot",
-      "label": "**This project's pilot: Whisper large-v3 + LoRA** \u2020\u2021",
+      "label": "**Ours: pilot, FLEURS + VoxPopuli only**",
       "utterances": 918,
       "WER": 7.0986,
       "CER": 1.5565,
@@ -79,7 +79,7 @@
     },
     {
       "arm_id": "hf_whisper-large-finnish-v3",
-      "label": "Finnish-NLP whisper-large-finnish-v3 \u2020",
+      "label": "Finnish-NLP whisper-large-finnish-v3",
       "utterances": 918,
       "WER": 7.1055,
       "CER": 1.687,
@@ -109,7 +109,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
-      "label": "**This project, round 2 + timestamp tokens (`timestamps` revision)** \u2020\u2021\u00a7",
+      "label": "**Ours: timestamps version**",
       "utterances": 918,
       "WER": 7.4357,
       "CER": 1.6652,
@@ -124,7 +124,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-all",
-      "label": "**This project, trained on all of SKN (its test included, so no SKN score)** \u2020\u2021\u00a7",
+      "label": "**Ours: all-skn version**",
       "utterances": 918,
       "WER": 7.5457,
       "CER": 1.7321,
@@ -139,7 +139,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
-      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM",
       "utterances": 918,
       "WER": 7.5733,
       "CER": 2.4765,
@@ -154,7 +154,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**This project, round 2: + punctuated SKN targets (published)** \u2020\u2021\u00a7",
+      "label": "**Ours: published model (main, v1.0)**",
       "utterances": 918,
       "WER": 7.6145,
       "CER": 1.6515,
@@ -184,7 +184,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn",
-      "label": "**This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** \u2020\u2021\u00a7",
+      "label": "**Ours: round 1**",
       "utterances": 918,
       "WER": 7.7521,
       "CER": 1.8932,
@@ -199,7 +199,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
+      "label": "**Ours: la-murre version**",
       "utterances": 918,
       "WER": 7.8071,
       "CER": 1.7684,
@@ -259,7 +259,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2",
-      "label": "RASMUS Finnish-ASR-Canary-v2, greedy \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2, greedy",
       "utterances": 918,
       "WER": 8.4056,
       "CER": 2.3782,

@@ -77,20 +77,17 @@ in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-ag
 
 <img src="docs/img/journey.svg" alt="Training rounds: start 40.4 %, pilot on read speech, round 1 with dialect interviews 22.2 %, round 2 published 21.1 %, a version with LA-murre 19.7 % and a timestamps version 21.4 %" width="100%">
 
-**Why is the best dialect version not the main model?**
+**Which version?**
 
 | | Main model (`v1.0`) | `la-murre` version |
 |---|---|---|
-| Training data | SKN + FLEURS + VoxPopuli, all open licences | the same + 56 h of LA-murre interviews |
-| What the language model did | added punctuation | also rewrote LA-murre's dialect spelling in standard Finnish |
+| Training data | SKN + FLEURS + VoxPopuli | the same + 56 h of LA-murre interviews |
 | Dialect test, words wrong | 21.1 % | **19.7 %** |
-| Read and parliament speech (FLEURS / VoxPopuli), words wrong | **7.6 % / 10.8 %** | 7.8 % / 11.4 % |
-| Where | the default | `revision="la-murre"`, published 20 Oct 2026 |
+| Read / parliament speech, words wrong | **7.6 % / 10.8 %** | 7.8 % / 11.4 % |
 
-LA-murre's licence (CC BY-ND) does not allow sharing changed texts, so this version was first kept
-private. In October 2026 Kielipankki, which distributes LA-murre, assessed that the model's weights
-most likely hold no copyright-protected part of the corpus, so it is now published; the rewritten
-LA-murre texts it learned from are not.
+The main model stays the default; for audio that is mostly dialect, use `la-murre`. It was kept
+private at first because of LA-murre's licence (CC BY-ND) and published on 20 Oct 2026 after
+Kielipankki's assessment ([below](#dialect-data-and-next-steps)).
 
 ## 4. What the language model did
 
@@ -240,9 +237,7 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   56 h of LA-murre interviews rewritten in standard Finnish. The published model keeps
   round 1's dialect accuracy (SKN 21.1 % WER, judge 13.6 against base Whisper's 25.9) and
   writes sentences. The one with LA-murre is the best on both dialect tests (19.7 %, 11.4
-  points); first kept private under LA-murre's no-derivatives licence, it has been the `la-murre`
-  branch since 20 Oct 2026, after Kielipankki assessed that its weights most likely hold no
-  protected part of the corpus. On the webinar
+  points) and is published as the `la-murre` branch. On the webinar
   clip all of them spell rare names and dental terms worse than base Whisper
   ([Our dialect model](#our-dialect-model)).
 - ⚖️ **Three open judges agree.** Given the same blind task on CSC's Aitta service, gpt-oss-120b
@@ -279,7 +274,7 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
 | Whisper large-v3, chunked decoding | open | 15.7 | 6.7 | 1.7 | 5.5 | 14 / 14 of 14 |
 | Whisper large-v3 | open | 14.7 | 6.0 | 2.7 | 5.2 | 14 / 13 of 14 |
 | ElevenLabs Scribe v2 | API | 18.2 (17.2–18.4) | 4.9 | 1.2 | 7.0 | 14 / 12 of 14 |
-| This project, round 2 + LA-murre (`la-murre` revision), chunked | open | 15.9 | 4.7 | 3.0 | 6.2 | 14 / 12 of 14 |
+| This project, la-murre version, chunked decoding | open | 15.9 | 4.7 | 3.0 | 6.2 | 14 / 12 of 14 |
 | Whisper large-v3 turbo | open | 18.4 | 7.7 | 1.5 | 8.5 | 14 / 13 of 14 |
 | This project's pilot: Whisper large-v3 + LoRA on FLEURS and VoxPopuli | open | 17.9 | 8.3 | 2.2 | 8.2 | 14 / 13 of 14 |
 | OpenAI gpt-transcribe | API | 18.4 (18.4–19.1) | 8.5 | 4.2 | 8.5 | 12 / 12 of 14 |
@@ -371,15 +366,15 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 <!-- benchmark-table:start -->
 | Model | SKN dialects WER % | LA-murre dialects WER % | FLEURS WER % | VoxPopuli WER % | FLEURS CER % | s / clip |
 |---|--:|--:|--:|--:|--:|--:|
-| **This project's pilot: Whisper large-v3 + LoRA** †‡ | – | – | 7.1 | 10.8 | 1.6 | 0.95 |
-| **This project, trained on all of SKN (its test included, so no SKN score)** †‡§ | – | 57.8 | 7.5 | 11.9 | 1.7 | 0.96 |
+| **Ours: pilot, FLEURS + VoxPopuli only** | – | – | 7.1 | 10.8 | 1.6 | 0.95 |
+| **Ours: all-skn version** | – | 57.8 | 7.5 | 11.9 | 1.7 | 0.96 |
 | Orukeet (Parakeet v3 fine-tune) | – | – | 11.6 | 15.9 | 2.8 | 0.04 |
 | NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | 3.1 | 0.18 |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | 6.2 | 1.50 |
-| **This project, round 2 + LA-murre (`la-murre` revision)** †‡§¶ | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
-| **This project, round 2: + punctuated SKN targets (published)** †‡§ | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
-| **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§ | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
-| **This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** †‡§ | 22.2 | 57.9 | 7.8 | 10.6 | 1.9 | 0.96 |
+| **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
+| **Ours: published model (main, v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
+| **Ours: timestamps version** | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
+| **Ours: round 1** | 22.2 | 57.9 | 7.8 | 10.6 | 1.9 | 0.96 |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | 61.8 | – | – | – | – |
 | Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 1.7 | 0.98 |
 | Gemini 3.5 Flash (API, asked to write as spoken) | 40.8 | 60.2 | 5.1 | 11.5 | 1.9 | 2.24 |
@@ -387,18 +382,19 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | 2.2 | 0.19 |
 | ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | 1.7 | 3.09 |
 | NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | 2.1 | 0.30 |
-| RASMUS Finnish-ASR-Canary-v2 + KenLM †‡ | 47.6 | 62.7 | 7.6 | 7.7 | 2.5 | 0.71 |
-| RASMUS Finnish-ASR-Canary-v2, greedy †‡ | 50.1 | 58.7 | 8.4 | 6.8 | 2.4 | 0.10 |
-| Finnish-NLP whisper-large-finnish-v3 † | 56.6 | 51.6 | 7.1 | 6.6 | 1.7 | 0.89 |
+| RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | 2.5 | 0.71 |
+| RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | 2.4 | 0.10 |
+| Finnish-NLP whisper-large-finnish-v3 | 56.6 | 51.6 | 7.1 | 6.6 | 1.7 | 0.89 |
 | OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | 1.4 | 0.88 |
 | Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | 5.8 | 0.34 |
 <!-- benchmark-table:end -->
 
 Corpus WER and CER after lower-casing and removing punctuation. Seconds per utterance
-are FLEURS GPU time in batches of 16 on one AMD MI250X, model loading excluded. † trained
-on FLEURS training data, ‡ on VoxPopuli training data, § on SKN training data from
-other municipalities, ¶ on LA-murre training data from other localities (model cards, or this
-project), so those numbers are on familiar material. A dash: not run on that set. The API services
+are FLEURS GPU time in batches of 16 on one AMD MI250X, model loading excluded. Bold rows are ours,
+trained on FLEURS, VoxPopuli and SKN's 38 training municipalities; all-skn on all 50 (so no SKN
+score), la-murre also on LA-murre localities other than its test, the pilot on FLEURS and VoxPopuli
+only. Finnish-NLP's Whisper was trained on FLEURS, RASMUS's Canary on FLEURS and VoxPopuli (their
+model cards). Those numbers are on familiar material. A dash: not run on that set. The API services
 ([`run_api_benchmark.py`](scripts/run_api_benchmark.py)) ran with the clip runs' models and settings,
 one request per segment; OpenAI's gpt-4o-transcribe through GAIK's Azure. Seconds per clip for them
 are request wall time, which varies with the service's load. "As spoken" is the clip's
@@ -441,23 +437,23 @@ model, built for dialects, is last of the six judged.
 | Orukeet (Parakeet v3 fine-tune) | 24.4 | 2.3 | – | – |
 | NVIDIA Canary 1B v2 | 24.5 | 2.2 | – | – |
 | ElevenLabs Scribe v2 (API) | 25.4 | 11.4 | 1.6 | 2.8 |
-| **This project, all of SKN, in pieces** †‡§ | 25.7 | 12.5 | 4.8 | 9.7 |
-| **This project, `timestamps` revision, in pieces** †‡§ | 25.8 | 12.9 | – | – |
-| Finnish-NLP whisper-large-finnish-v3 † | 25.8 | 12.7 | – | – |
-| **This project, published, in 15–25 s pieces** †‡§ | 25.9 | 12.8 | 5.1 | 10.0 |
+| **Ours: all-skn version, in pieces** | 25.7 | 12.5 | 4.8 | 9.7 |
+| **Ours: timestamps version, in pieces** | 25.8 | 12.9 | – | – |
+| Finnish-NLP whisper-large-finnish-v3 | 25.8 | 12.7 | – | – |
+| **Ours: published model, in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
 | Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
-| **This project, `la-murre` revision, in pieces** †‡§¶ | 26.5 | 13.4 | – | – |
+| **Ours: la-murre version, in pieces** | 26.5 | 13.4 | – | – |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
-| **This project, `timestamps` revision, long audio in one go** †‡§ | 27.0 | 13.0 | – | – |
+| **Ours: timestamps version, long audio in one go** | 27.0 | 13.0 | – | – |
 | Gemini 3.1 Pro (API) | 28.5 | 11.4 | – | – |
-| RASMUS Finnish-ASR-Canary-v2 + KenLM †‡ | 28.6 | 9.9 | – | – |
+| RASMUS Finnish-ASR-Canary-v2 + KenLM | 28.6 | 9.9 | – | – |
 | Gemini 3.5 Flash (API, asked to write as spoken) | 28.6 | 14.0 | 1.2 | 2.1 |
-| RASMUS Finnish-ASR-Canary-v2, greedy †‡ | 29.7 | 8.8 | – | – |
-| **This project, round 2 + timestamp tokens (`timestamps` revision)** †‡§, whole clip in one go | 29.8 | 15.8 | – | – |
+| RASMUS Finnish-ASR-Canary-v2, greedy | 29.7 | 8.8 | – | – |
+| **Ours: timestamps version**, whole clip in one go | 29.8 | 15.8 | – | – |
 | NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
-| **This project, round 2 + LA-murre (`la-murre` revision)** †‡§¶, whole clip in one go | 60.0 | 44.9 | – | – |
-| **This project, round 2: + punctuated SKN targets (published)** †‡§, whole clip in one go | 60.2 | 44.8 | – | – |
+| **Ours: la-murre version**, whole clip in one go | 60.0 | 44.9 | – | – |
+| **Ours: published model (main, v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
 | Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
 <!-- dental-table:end -->
 
@@ -648,9 +644,8 @@ never touches a test set. The targets are in
 second recording from one of them and the five localities that are also SKN test
 municipalities, give 15 532 segments (56 h). Their transcripts are in dialect spelling, so
 Opus rewrote each one in standard Finnish, word for word; 15 529 kept a word count within 30 %
-of the source. LA-murre is CC BY-ND, so the rewritten texts are not published; the model trained on
-them is, as the `la-murre` revision, after Kielipankki assessed in October 2026 that its weights most
-likely hold no copyright-protected part of the corpus.
+of the source. LA-murre is CC BY-ND, so the rewritten texts are not published; the model is, as the
+`la-murre` revision.
 
 **3. Training.** LoRA rank 64 on the attention query and value projections (2 % of the
 weights), learning rate 1e-4, batch 8, on one MI250X. A four-epoch run showed overfitting:
@@ -711,10 +706,7 @@ rounds (about 20 billed GPU-hours). The published model (tag `v1.0`), its varian
 `timestamps`, `all-skn` and `la-murre`) and its SKN segments are on Hugging Face
 ([model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects),
 [dataset](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)); their cards are
-in [`release/`](release/) and [`publish_hf.py`](scripts/publish_hf.py) uploads them. The LA-murre
-model was first kept private; on 20 Oct 2026 its weights were published as the `la-murre` branch
-([card](release/LAMURRE_CARD.md)), after Kielipankki (FIN-CLARIN), which distributes LA-murre,
-assessed that the weights most likely hold no copyright-protected part of the corpus. Its rewritten
+in [`release/`](release/) and [`publish_hf.py`](scripts/publish_hf.py) uploads them. The rewritten
 LA-murre training texts are not published.
 
 **Attribution.** SKN as above. LA-murre: Lauseopin arkiston murrekorpus, University of Turku

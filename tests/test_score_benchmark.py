@@ -37,9 +37,9 @@ def test_readme_benchmark_table_matches_the_scores() -> None:
     skn = {r["arm_id"]: r for r in sb.score_rows("skn_fi")}
     assert f"| Whisper large-v3 | {skn['hf_whisper-large-v3']['WER']:.1f} |" in table
     published = skn["ft_whisper-large-v3-fi-skn-punct-best"]["WER"]
-    assert f"(published)** †‡§ | {published:.1f} |" in table
+    assert f"| **Ours: published model (main, v1.0)** | {published:.1f} |" in table
     variant = skn["ft_whisper-large-v3-fi-skn-punct-ts"]["WER"]
-    assert f"(`timestamps` revision)** †‡§ | {variant:.1f} |" in table
+    assert f"| **Ours: timestamps version** | {variant:.1f} |" in table
 
 
 def test_timestamp_variant_numbers_in_the_docs() -> None:

@@ -124,7 +124,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-all-chunks",
-      "label": "**This project, all of SKN, in pieces** \u2020\u2021\u00a7",
+      "label": "**Ours: all-skn version, in pieces**",
       "utterances": 10,
       "WER": 25.7334,
       "CER": 12.8071,
@@ -139,7 +139,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts-chunks",
-      "label": "**This project, `timestamps` revision, in pieces** \u2020\u2021\u00a7",
+      "label": "**Ours: timestamps version, in pieces**",
       "utterances": 10,
       "WER": 25.7849,
       "CER": 12.8617,
@@ -154,7 +154,7 @@
     },
     {
       "arm_id": "hf_whisper-large-finnish-v3",
-      "label": "Finnish-NLP whisper-large-finnish-v3 \u2020",
+      "label": "Finnish-NLP whisper-large-finnish-v3",
       "utterances": 10,
       "WER": 25.8106,
       "CER": 14.3086,
@@ -169,7 +169,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best-chunks",
-      "label": "**This project, published, in 15\u201325 s pieces** \u2020\u2021\u00a7",
+      "label": "**Ours: published model, in 15\u201325 s pieces**",
       "utterances": 10,
       "WER": 25.8621,
       "CER": 13.0731,
@@ -199,7 +199,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best-chunks",
-      "label": "**This project, `la-murre` revision, in pieces** \u2020\u2021\u00a7\u00b6",
+      "label": "**Ours: la-murre version, in pieces**",
       "utterances": 10,
       "WER": 26.4539,
       "CER": 13.5287,
@@ -229,7 +229,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts-fallback",
-      "label": "**This project, `timestamps` revision, long audio in one go** \u2020\u2021\u00a7",
+      "label": "**Ours: timestamps version, long audio in one go**",
       "utterances": 10,
       "WER": 27.0201,
       "CER": 13.2408,
@@ -259,7 +259,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
-      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM",
       "utterances": 10,
       "WER": 28.5641,
       "CER": 14.0863,
@@ -289,7 +289,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2",
-      "label": "RASMUS Finnish-ASR-Canary-v2, greedy \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2, greedy",
       "utterances": 10,
       "WER": 29.6963,
       "CER": 13.7984,
@@ -304,7 +304,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
-      "label": "**This project, round 2 + timestamp tokens (`timestamps` revision)** \u2020\u2021\u00a7",
+      "label": "**Ours: timestamps version**",
       "utterances": 10,
       "WER": 29.7735,
       "CER": 15.7118,
@@ -349,7 +349,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
+      "label": "**Ours: la-murre version**",
       "utterances": 10,
       "WER": 60.0103,
       "CER": 40.7901,
@@ -364,7 +364,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**This project, round 2: + punctuated SKN targets (published)** \u2020\u2021\u00a7",
+      "label": "**Ours: published model (main, v1.0)**",
       "utterances": 10,
       "WER": 60.1647,
       "CER": 43.3049,

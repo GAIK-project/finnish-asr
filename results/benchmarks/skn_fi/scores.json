@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T07:40:08+00:00",
+  "generated_utc": "2026-10-20T08:14:40+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
+      "label": "**Ours: la-murre version**",
       "utterances": 600,
       "WER": 19.7197,
       "CER": 8.027,
@@ -49,7 +49,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**This project, round 2: + punctuated SKN targets (published)** \u2020\u2021\u00a7",
+      "label": "**Ours: published model (main, v1.0)**",
       "utterances": 600,
       "WER": 21.0753,
       "CER": 8.6327,
@@ -79,7 +79,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
-      "label": "**This project, round 2 + timestamp tokens (`timestamps` revision)** \u2020\u2021\u00a7",
+      "label": "**Ours: timestamps version**",
       "utterances": 600,
       "WER": 21.4003,
       "CER": 8.6957,
@@ -94,7 +94,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn",
-      "label": "**This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** \u2020\u2021\u00a7",
+      "label": "**Ours: round 1**",
       "utterances": 600,
       "WER": 22.238,
       "CER": 8.9941,
@@ -214,7 +214,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
-      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM",
       "utterances": 600,
       "WER": 47.5985,
       "CER": 20.8547,
@@ -229,7 +229,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2",
-      "label": "RASMUS Finnish-ASR-Canary-v2, greedy \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2, greedy",
       "utterances": 600,
       "WER": 50.132,
       "CER": 20.1334,
@@ -244,7 +244,7 @@
     },
     {
       "arm_id": "hf_whisper-large-finnish-v3",
-      "label": "Finnish-NLP whisper-large-finnish-v3 \u2020",
+      "label": "Finnish-NLP whisper-large-finnish-v3",
       "utterances": 600,
       "WER": 56.6308,
       "CER": 20.8547,

@@ -4,7 +4,7 @@
   "arms": [
     {
       "arm_id": "hf_whisper-large-finnish-v3",
-      "label": "Finnish-NLP whisper-large-finnish-v3 \u2020",
+      "label": "Finnish-NLP whisper-large-finnish-v3",
       "utterances": 583,
       "WER": 51.5915,
       "CER": 14.8564,
@@ -19,7 +19,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
-      "label": "**This project, round 2 + LA-murre (`la-murre` revision)** \u2020\u2021\u00a7\u00b6",
+      "label": "**Ours: la-murre version**",
       "utterances": 583,
       "WER": 57.4071,
       "CER": 16.9326,
@@ -49,7 +49,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-all",
-      "label": "**This project, trained on all of SKN (its test included, so no SKN score)** \u2020\u2021\u00a7",
+      "label": "**Ours: all-skn version**",
       "utterances": 583,
       "WER": 57.7929,
       "CER": 17.3027,
@@ -64,7 +64,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn",
-      "label": "**This project, round 1: Whisper large-v3 + LoRA incl. SKN dialects** \u2020\u2021\u00a7",
+      "label": "**Ours: round 1**",
       "utterances": 583,
       "WER": 57.9461,
       "CER": 17.0158,
@@ -94,7 +94,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**This project, round 2: + punctuated SKN targets (published)** \u2020\u2021\u00a7",
+      "label": "**Ours: published model (main, v1.0)**",
       "utterances": 583,
       "WER": 58.105,
       "CER": 17.4428,
@@ -109,7 +109,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
-      "label": "**This project, round 2 + timestamp tokens (`timestamps` revision)** \u2020\u2021\u00a7",
+      "label": "**Ours: timestamps version**",
       "utterances": 583,
       "WER": 58.1333,
       "CER": 17.4281,
@@ -139,7 +139,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2",
-      "label": "RASMUS Finnish-ASR-Canary-v2, greedy \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2, greedy",
       "utterances": 583,
       "WER": 58.678,
       "CER": 19.0391,
@@ -214,7 +214,7 @@
     },
     {
       "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
-      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM \u2020\u2021",
+      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM",
       "utterances": 583,
       "WER": 62.7177,
       "CER": 21.4786,

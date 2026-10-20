@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-20T07:40:08+00:00",
+  "generated_at_utc": "2026-10-20T08:14:40+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "ef02025cc4f8cea52c7831fc248ddfe160a0dbd4",
+  "repo_commit": "1a6aa5dda66a739a5e275205b6a078f532c5392b",
   "repo_dirty": true,
   "app_under_test": "Finnish ASR public benchmarks: facebook/voxpopuli fi test",
   "runner_path": "scripts/score_benchmark.py",
   "dataset_path": "results/benchmarks/voxpopuli_fi",
-  "dataset_git_object": "d8a683fd61fb513054e1a8f367f0297fbf194e09",
+  "dataset_git_object": "73a8f100f6c3bc7694bb2665b2bf69e335192a05",
   "model_or_deployment": [
     "Finnish-NLP/whisper-large-finnish-v3",
     "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",

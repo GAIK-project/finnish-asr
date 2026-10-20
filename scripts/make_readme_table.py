@@ -39,7 +39,7 @@ ROWS = {
         "open",
     ),
     "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": (
-        "This project, round 2 + LA-murre (`la-murre` revision), chunked",
+        "This project, la-murre version, chunked decoding",
         "open",
     ),
     "openai_whisper-1": ("OpenAI whisper-1", "API"),
