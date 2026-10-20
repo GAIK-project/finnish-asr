@@ -33,6 +33,7 @@ FORBIDDEN_PATHS = [
     "results/judgements_dialect/*/*.jsonl",
     "results/labels/lamurre_*.jsonl",  # LA-murre texts and their LLM rewrites
     "results/labels/parl_*.jsonl",  # Parliament corpus texts (PUB +PRIV): only their statistics are published
+    "results/labels/finka_*.jsonl",  # Border Karelia texts (personal data): only their statistics are published
     "results/judgements/*/hy2[56]_*.json",  # quote HY's non-public tool transcripts
     "results/transcriptions/hy2[56]_*",
     "results/transcriptions/*/hy2[56]_*",

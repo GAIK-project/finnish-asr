@@ -54,10 +54,11 @@ test numbers. Publishing anything to Hugging Face needs the maintainer's go-ahea
   for Kotus's tape archive (SKNA) in the 1960s–70s. None of the parishes is an SKN or LA-murre test
   locality. Transcript: coarse dialect spelling with marks (´ palatalisation, ŋ, `*`, parentheses).
   Download: one zip of 25.4 GB.
-- Planned script `prepare_finka.py`, after `prepare_lamurre.py`: utterances joined while the gap is
+- [`prepare_finka.py`](../scripts/prepare_finka.py), after `prepare_lamurre.py`: utterances joined while the gap is
   under 1.5 s and the segment stays ≤ 25 s, dropped when another speaker overlaps; marks cleaned;
-  44.1 → 16 kHz. Targets: dialect rewritten in standard Finnish by an LLM (`prepare_targets.py
-  normalise`), as for LA-murre.
+  44.1 → 16 kHz. Validation: every recording of two informants (Ilomantsi 13, Suistamo 06), never
+  trained on. Targets: dialect rewritten in standard Finnish by an LLM (`prepare_targets.py
+  normalise`), as for LA-murre. The marks follow the corpus's `Litterointimerkit.pdf`.
 
 ### Other corpora checked (20 Oct 2026)
 
@@ -77,18 +78,29 @@ test numbers. Publishing anything to Hugging Face needs the maintainer's go-ahea
 
 Kielipankki's own terms say nothing about trained models; for ND, ACA and RES material only the rights
 holder or Kielipankki can settle publication. Still open: Kielipankki resources available only through
-LAT (research in progress).
+LAT. Candidates to ask about for a later round: *Itäsuomalaisten kielellinen variaatio* (`kiveli-src`,
+114 h of North Savo and North Karelia interviews, 76 of 89 transcribed, licence not stated), the
+Ingrian dialect corpus (`ingrian-dialects`, about 100 h with ELAN transcripts, licence not set), the
+Oulu tape archive (`ona`, over 7 000 h, RES, not yet released) and Tver Karelian 1957–71 (`tver-1980`,
+28 h, CC BY, but Karelian rather than Finnish).
 
 ## LLM work and its budget (at most 60 USD in this round)
 
 | Step | Size | Estimate |
 |---|---|---|
-| Model choice for targets: GPT-6.1-sol (Azure, about 2 / 10 USD per M tokens) against Claude Opus 5.5 (4 / 20), normalise prompt on 200 SKN test segments scored against SKN's human standard-Finnish text | 2 × 200 segments | 1–2 USD |
+| Model choice for targets: GPT-6.1-sol (Azure, about 2 / 10 USD per M tokens) against Claude Opus 5.5 (4 / 20), normalise prompt on 200 SKN test segments scored against SKN's human standard-Finnish text | 2 × 200 segments | **done: 0.84 USD** |
 | Parliament punctuation | 60 h, about 370 000 words | 17 USD with GPT-6.1-sol (34 with Opus) |
 | Border Karelia normalisation | about 60 h after filtering | 20–25 USD with GPT-6.1-sol |
 | Blind LA-murre judge, round 5 (Claude Opus 5.5, as round 4) | 583 segments × 4–5 models | 8–10 USD |
 
-Spent so far: 0 USD.
+**Model choice (decided 20 Oct 2026): GPT-6.1-sol.** The normalise prompt on 200 SKN test segments (20 per
+test municipality, seed 0, the prompt's own example segment left out), dialect text in, scored with the
+benchmark normalisation against SKN's human standard-Finnish text: GPT-6.1-sol **12.1 % WER** (0.19 USD),
+Claude Opus 5.5 14.2 % (0.63 USD; the same figure as the earlier check on all 600). The dialect text as
+it is: 68.3 %. One segment of 200 failed the word-count check for each model. `prepare_targets.py
+--provider azure` writes the parliament and Border Karelia targets; `--max-usd` caps each run.
+
+Spent so far: 0.86 USD (the comparison and a 20-segment trial).
 
 ## Runs (LUMI, one MI250X GCD each, LoRA r64, 3 epochs, lr 1e-4, batch 8, best epoch by validation loss)
 
@@ -107,10 +119,10 @@ Last updated 20 Oct 2026.
 - [x] Licences read; corpus survey (table above).
 - [x] `prepare_parliament.py`, `finetune_whisper.py --data ...+parl`, `lumi.sh download parl` /
       `prepare parl`.
-- [ ] VoxPopuli speaker list filled into `prepare_parliament.py` (`VOXPOPULI_SPEAKERS`).
+- [x] VoxPopuli speaker list in `prepare_parliament.py` (48 names, 38 of them speakers in the corpus).
+- [x] `prepare_finka.py`, `finetune_whisper.py --data ...+finka`, `lumi.sh download finka` / `prepare finka`.
+- [x] Model choice for the targets: GPT-6.1-sol; `prepare_targets.py --provider azure --max-usd`.
 - [ ] LUMI login for this round (LUMI_USER / LUMI_PROJECT) — waiting for the maintainer.
-- [ ] `prepare_finka.py`, `finetune_whisper.py --data ...+finka`, `lumi.sh download finka` / `prepare finka`.
-- [ ] Model choice for the targets (GPT-6.1-sol or Opus 5.5).
 - [ ] Downloads, cutting, targets, training, tests, judge, report.
 
 Resume on another machine: `git switch dev`, read this file, then the commands in order:
@@ -121,11 +133,17 @@ L=lumi/lumi.sh
 bash $L push                      # scripts and this round's changes to scratch
 bash $L download parl             # background; $R/data/parl_raw/DONE when ready
 bash $L prepare parl              # CPU job: 60 h sample -> $FIASR_DATA/parl_fi
-bash $L fetch-labels              # -> results/labels/parl_{train,validation}.jsonl (gitignored)
-uv run --extra judges python scripts/prepare_targets.py punct results/labels/parl_train.jsonl
-uv run --extra judges python scripts/prepare_targets.py punct results/labels/parl_validation.jsonl
+bash $L download finka            # background; $R/data/finka_raw/DONE when ready
+bash $L prepare finka             # CPU job -> $FIASR_DATA/finka_fi
+bash $L fetch-labels              # -> results/labels/{parl,finka}_{train,validation}.jsonl (gitignored)
+T="uv run --extra judges python scripts/prepare_targets.py"
+$T punct results/labels/parl_train.jsonl --provider azure --max-usd 22
+$T punct results/labels/parl_validation.jsonl --provider azure --max-usd 1
+$T normalise results/labels/finka_train.jsonl --provider azure --max-usd 25
+$T normalise results/labels/finka_validation.jsonl --provider azure --max-usd 1
 bash $L push-labels
 bash $L run train hf --name whisper-large-v3-fi-r5-parl --data skn+open+lamurre+parl --skn-text punct --epochs 3 --lora-r 64
+bash $L run train hf --name whisper-large-v3-fi-r5-finka --data skn+open+lamurre+parl+finka --skn-text punct --epochs 3 --lora-r 64
 ```
 
 Jobs keep running on LUMI when the local machine disconnects; `bash $L status` shows them.
