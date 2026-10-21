@@ -1,0 +1,20 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-parl@gloss-tags",
+  "model": "whisper-large-v3-fi-parl",
+  "recipe": "whisper generate() with a prompt",
+  "region_prompt": null,
+  "glossary_prompt": "tags",
+  "benchmark": "Finnish parliament held-out segments with LLM-tagged names, brands, acronyms and terms",
+  "utterances": 1525,
+  "batch_size": 16,
+  "load_s": 84.8,
+  "transcribe_s": 2722.4,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005031",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "23039248"
+}

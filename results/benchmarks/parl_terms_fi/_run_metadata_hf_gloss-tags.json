@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-21T13:30:30+00:00",
+  "generated_at_utc": "2026-10-21T17:30:04+00:00",
   "repo": "GAIK-project/finnish-asr",
   "repo_commit": null,
   "repo_dirty": false,
@@ -9,7 +9,8 @@
   "dataset_path": null,
   "dataset_git_object": null,
   "model_or_deployment": [
-    "whisper-large-v3-fi-parl"
+    "openai/whisper-large-v3",
+    "whisper-large-v3-fi-skn-lamurre-best"
   ],
   "cli_args": [
     "--env",
@@ -17,21 +18,24 @@
     "--bench",
     "parl_terms_fi",
     "--arm",
-    "ft_whisper-large-v3-fi-parl",
+    "ft_whisper-large-v3-fi-skn-lamurre-best",
+    "--arm",
+    "hf_whisper-large-v3",
     "--glossary",
-    "tags"
+    "tags",
+    "--force"
   ],
   "env": {},
   "extra": {
     "bench": "parl_terms_fi",
     "env": "hf",
     "utterances": 1525,
-    "host": "nid005031",
+    "host": "nid005059",
     "versions": {
       "python": "3.12.11",
       "torch": "2.7.1+rocm6.2.4",
       "transformers": "5.19.0"
     },
-    "slurm_job_id": "23018368"
+    "slurm_job_id": "23039250"
   }
 }
