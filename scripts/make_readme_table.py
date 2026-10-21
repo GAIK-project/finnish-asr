@@ -35,7 +35,7 @@ ROWS = {
     "hf_whisper-large-v3-chunks": ("Whisper large-v3, chunked decoding", "open"),
     "ft_whisper-large-v3-fi-skn-chunks": ("This project, round 1, chunked decoding", "open"),
     "ft_whisper-large-v3-fi-skn-punct-best-chunks": (
-        "This project, main model, chunked decoding",
+        "This project, first model (`v1.0`), chunked decoding",
         "open",
     ),
     "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": (

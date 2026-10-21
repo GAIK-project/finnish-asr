@@ -107,7 +107,8 @@ First, it added punctuation to the training text and nothing else:
 
 <img src="docs/img/punctuation.svg" alt="Before: a transcript without punctuation. After: the same words with a question mark, a capital and a full stop" width="100%">
 
-Second, it judged the test transcripts blind. A real example from the webinar:
+Second, it judged the test transcripts blind. A real example from the Ajokortti clip, three minutes of a
+dental-education webinar ([what the clip is](#full-details)):
 
 <img src="docs/img/judge-example.svg" alt="A brand-name sentence from the webinar: Gemini 3.5 Flash gets all four brands right; our model writes Nobelbayer for Nobel Biocare, a major error" width="100%">
 
@@ -130,12 +131,15 @@ sentences gpt-4o-transcribe and Gemini are better:
 
 <img src="docs/img/across-sets.svg" alt="Word error rate of Whisper large-v3, our model, gpt-4o-transcribe and Gemini 3.5 Flash on SKN dialects, FLEURS and VoxPopuli" width="100%">
 
-On ten dental webinars (30 minutes), [the judges agree](#ten-dental-webinars-standard-spoken-finnish):
-Gemini 3.5 Flash and ElevenLabs make the fewest meaning errors.
+Standard spoken Finnish with many names was measured on one three-minute webinar clip, **Ajokortti**,
+the only non-dialect recording here whose reference a person has checked by ear. On it Gemini 3.5 Flash
+makes the fewest meaning errors and plain Whisper large-v3 is the best open model; the best set-ups are
+within about one point of WER of each other ([the clip, 26 set-ups](#tldr)). Nine more webinar clips were
+run too, but their references leave out fillers and were never checked, so read those numbers only as a
+rough hint ([ten dental webinars](#ten-dental-webinars-references-not-checked)).
 
 So: use our model for dialect speech, and Gemini 3.5 Flash or plain Whisper large-v3 for standard
-business Finnish with many names. 🔊 [Hear the differences](https://gaik-project.github.io/finnish-asr/listen.html) ·
-the single webinar clip and all 26 set-ups on it are in the [full details](#tldr).
+business Finnish with many names. 🔊 [Hear the differences](https://gaik-project.github.io/finnish-asr/listen.html)
 
 ## 7. Do other AI judges agree?
 
@@ -209,6 +213,12 @@ measures the open models on four public test sets, two of them dialect corpora, 
 Whisper large-v3 for Finnish dialects: that model and its training data are published on Hugging
 Face.
 
+**Two kinds of test material are used below.** Dialect speech is measured on held-out parts of two dialect
+corpora, SKN and LA-murre, whose references are the corpora's human transcripts. Standard spoken Finnish with
+names is measured on one webinar clip, Ajokortti, whose reference a person has checked at every disputed
+place; ten webinar clips (Ajokortti and nine more) have references nobody has checked, so they are reported
+apart and only as a hint.
+
 The clip is **Ajokortti**: a 180 s excerpt of a public QAdental dental-education webinar (QAdental,
 Suomen Kotilääkäripalvelu Oy, is a GAIK project partner), two speakers, standard spoken Finnish with
 many names and brand names. It and the University of Helsinki (HY) team's reference transcript are
@@ -221,6 +231,9 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
 [Our dialect model](#our-dialect-model)).
 
 ## TL;DR
+
+The first five points are about the Ajokortti clip (three minutes of a dental-education webinar, two
+speakers, standard spoken Finnish with many names).
 
 - 🏆 **Fewest meaning errors: Gemini 3.5 Flash**, first for both judges. Next come
   Google Chirp 3, ElevenLabs Scribe v2 and, as the best open models, plain **Whisper
@@ -277,7 +290,8 @@ transcripts come from **QAD-1**, GAIK's earlier re-run of HY's evaluation of thi
   ElevenLabs is best (3.3 % and 9.1 %), on dialects every service is at 35–63 %. A fourth judging
   round (Claude, GPT-6.1-sol, gpt-oss-120b) puts Gemini and gpt-4o-transcribe behind base Whisper on
   LA-murre ([Do other AI judges agree?](#7-do-other-ai-judges-agree)), and on ten dental webinars
-  judged on meaning Gemini 3.5 Flash is first ([Ten dental webinars](#ten-dental-webinars-standard-spoken-finnish)).
+  judged on meaning Gemini 3.5 Flash is first, a hint only, since their references were never checked
+  ([Ten dental webinars](#ten-dental-webinars-references-not-checked)).
   A model trained on all of SKN is the `all-skn` branch ([next steps](#dialect-data-and-next-steps)).
 - 🤗 **Published 13 Oct 2026:** the model
   [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
@@ -330,7 +344,8 @@ Haaga-Helia WhisperX server, `hf_`, `nemo_` and `qwen_` open models on a GPU, `f
 
 ## Reviewed reference
 
-The clip's reference is HY's transcript, which looked like a corrected WhisperX draft. On 14 Oct
+This section is about the Ajokortti clip only. The table above scores every set-up against the reference
+the University of Helsinki (HY) wrote for the clip, which looked like a corrected WhisperX draft. On 14 Oct
 2026 Akseli Leskinen listened to the 42 spans where most of seven systems hear something else and
 corrected 14 of them: mostly spoken forms HY had written in standard Finnish, two missing words and a
 brand name. The reviewed text is published next to the original in gaik-toolkit
@@ -352,9 +367,9 @@ points: the review confirms that HY's text favoured WhisperX output. HY's own 20
 the same shift (10.4 → 14.0 %; that transcript is not part of this repository). The leading set now sits within about one point (13.2–14.2 %), which a 408-word
 reference cannot separate. Only the 42 disputed spans were checked, so read every WER here with the rest of the
 reference still unverified. The tables above and the judges' scores are against HY's text and were
-not re-run.
+not re-run, and only these seven set-ups were scored against the reviewed text.
 
-¹ The clip was not run with the current main model (`parl`).
+¹ The clip has not been run with the current main model (`parl`) or the `glossary` version yet.
 
 ## Public test sets: SKN and LA-murre dialects, FLEURS and VoxPopuli
 
@@ -429,7 +444,11 @@ VoxPopuli references keep digits and abbreviations as the parliament wrote them,
 model some WER. The RASMUS model card reports 8.39 % (greedy) and 7.75 % (KenLM) on FLEURS; this run
 gives 8.4 % and 7.6 %.
 
-## Ten dental webinars: standard spoken Finnish
+## Ten dental webinars (references not checked)
+
+> **Read this section as a hint only.** HY's references for these ten clips leave out fillers ("niinku",
+> "tota") and were never checked against the audio; only the Ajokortti clip's reference has been
+> (above). Both the word error rates and the judges' points below are against these unchecked texts.
 
 The Ajokortti clip is one of ten. The other nine come from the same QAdental webinar material: ten
 180 s clips (30 minutes of speech), each with the University of Helsinki's Finnish
@@ -1102,6 +1121,9 @@ write token and is for maintainers.
 - **One 180-second clip.** It separates usable from unusable models and shows where WER
   misleads. It cannot rank models that are close, and it says nothing about dialects,
   noise or phone audio.
+- **The ten dental webinars' references are unchecked.** They leave out fillers and a spot check found
+  wrong and missing words; their numbers are a hint, not a ranking
+  ([Ten dental webinars](#ten-dental-webinars-references-not-checked)).
 - **The judges are AI models and they are noisy**; read clip differences under about 2 points as
   ties ([How far the LLM judges can be trusted](#how-far-the-llm-judges-can-be-trusted)).
 - **The reference is reviewed only at its 42 disputed spans.** On 14 Oct 2026 a listener checked
