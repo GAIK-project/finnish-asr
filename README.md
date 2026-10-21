@@ -136,18 +136,28 @@ the single webinar clip and all 26 set-ups on it are in the [full details](#tldr
 
 ## 7. Do other AI judges agree?
 
-The fourth judging round put six transcripts of every segment of the second dialect corpus side by
-side: base Whisper, two API services and our three models. Claude Opus 5.5 and OpenAI's GPT-6.1-sol
-(through GAIK's Azure) judged all 583 segments, gpt-oss-120b on CSC's Aitta a seeded sample of 200.
-Each judge is stricter or milder, but all three put our models far ahead, and Gemini 3.5 Flash and
-gpt-4o-transcribe behind base Whisper:
+The fifth judging round (21 Oct 2026) put six transcripts of every segment of the second dialect corpus side by
+side: base Whisper, two API services and our three published models. Claude Opus 5.5 and OpenAI's GPT-6.1-sol
+(through GAIK's Azure) judged all 583 segments, gpt-oss-120b on CSC's Aitta a seeded sample of 200. Each judge is
+stricter or milder, but all three rank the six the same way: our main model first, then the `la-murre` version and
+the first model, and Gemini 3.5 Flash and gpt-4o-transcribe behind base Whisper:
 
-<img src="docs/img/judges.svg" alt="Three blind judges on LA-murre: gpt-4o-transcribe, Gemini 3.5 Flash and base Whisper far behind our three fine-tuned models" width="100%">
+<img src="docs/img/judges.svg" alt="Three blind judges on LA-murre: our main model first with every judge; gpt-4o-transcribe, Gemini 3.5 Flash and base Whisper far behind our fine-tuned models" width="100%">
 
-GPT-6.1-sol prefers the same transcript as Claude in 92 % of pairs, gpt-oss-120b in 86 %. The second
-round's open judges (Gemma 4 31B, Qwen3.6 27B) agreed with Claude in 92–93 % of pairs
-([below](#second-opinions-open-model-judges-on-csc-aitta)); in this round they were too slow on Aitta
-to finish and are left out.
+| Meaning-error points per 100 words | Claude Opus 5.5 | GPT-6.1-sol | gpt-oss-120b (200) |
+|---|--:|--:|--:|
+| Ours, main model | **11.7** | **14.7** | **10.1** |
+| Ours, `la-murre` | 12.1 | 14.9 | 10.5 |
+| Ours, first model (`v1.0`) | 14.0 | 16.4 | 10.9 |
+| Whisper large-v3 | 24.4 | 26.1 | 16.6 |
+| Gemini 3.5 Flash (asked for standard Finnish) | 27.1 | 29.9 | 18.2 |
+| OpenAI gpt-4o-transcribe | 34.0 | 36.2 | 23.1 |
+
+GPT-6.1-sol prefers the same transcript as Claude in 93 % of pairs, gpt-oss-120b in 88 %
+([`agreement-r5.json`](results/judgements_dialect/lamurre_fi/agreement-r5.json)). The main model's lead over the
+`la-murre` version is small with every judge (0.2–0.4 points); read it as a tie on this corpus. The fourth round,
+with the `all-skn` version, and the second round's open judges (Gemma 4 31B, Qwen3.6 27B, 92–93 % agreement) are
+[below](#second-opinions-open-model-judges-on-csc-aitta).
 
 ## 8. Why it got better
 
@@ -929,7 +939,7 @@ Still open:
 | [`tests/`](tests/) | Offline tests (`uv run pytest`): no keys, no downloads, no GPU. |
 | [`lumi/`](lumi/) | How the open models were run and trained on LUMI: environment setup, Slurm jobs, and stubs that hide three container libraries NeMo cannot use. |
 | [`release/`](release/) | The Hugging Face cards, uploaded by [`publish_hf.py`](scripts/publish_hf.py): [`MODEL_CARD.md`](release/MODEL_CARD.md) (the main model), [`TIMESTAMPS_CARD.md`](release/TIMESTAMPS_CARD.md) (its `timestamps` revision), [`ALL_SKN_CARD.md`](release/ALL_SKN_CARD.md) (its `all-skn` revision) and [`DATASET_CARD.md`](release/DATASET_CARD.md). |
-| [`docs/`](docs/) | [`DIALECT-EXAMPLES.md`](docs/DIALECT-EXAMPLES.md) (20 SKN test segments side by side and WER per municipality), [`story/`](docs/story/) (the walk-through pages, one self-contained HTML file per language, built from `story/src/`) and [`img/`](docs/img/) (the dialect chart from `dialect_chart.py`, the front page's figures from [`readme_figures.py`](scripts/readme_figures.py), the banner, an AI illustration made with GPT Image 2.5, and the sources' logos in `logos/`, their owners' trademarks, from [svgl](https://svgl.app/)). [`video/`](docs/video/) holds the front page's 21-second video: shots made with Runway Gen-4.5 and music with ElevenLabs Music (both through Replicate), no people, no voice. The story pages are also served at [gaik-project.github.io/finnish-asr](https://gaik-project.github.io/finnish-asr/). |
+| [`docs/`](docs/) | [`DIALECT-EXAMPLES.md`](docs/DIALECT-EXAMPLES.md) (20 SKN test segments side by side and WER per municipality), [`story/`](docs/story/) (the walk-through pages, one self-contained HTML file per language, built from `story/src/`) and [`img/`](docs/img/) (the dialect chart from `dialect_chart.py`, the front page's figures from [`readme_figures.py`](scripts/readme_figures.py), the banner, an AI illustration made with GPT Image 2.5, and the sources' logos in `logos/`, their owners' trademarks, from [svgl](https://svgl.app/)). [`video/`](docs/video/) holds the front page's 25-second video (21 Oct 2026; built as HTML with HyperFrames): two shots made with Runway Gen-4.5 through Replicate, the earlier video's ElevenLabs Music track, no people, no voice. The story pages are also served at [gaik-project.github.io/finnish-asr](https://gaik-project.github.io/finnish-asr/). |
 | [`results/transcriptions/`](results/transcriptions/) | One JSON per model and run on the clip: transcript, settings, library versions, timing. [`qad1/`](results/transcriptions/qad1/) holds GAIK's earlier QAD-1 runs (OpenAI, Gemini, the gaik transcriber, the Haaga-Helia WhisperX server, Whisper on CSC Roihu). |
 | [`results/judgements/`](results/judgements/) | Per judge and model: every meaning error quoted from the reference and the transcript, the name checks, reference doubts, scores. |
 | [`results/scores.json`](results/scores.json), [`scores.reviewed.json`](results/scores.reviewed.json) | WER, CER and error counts for every clip transcript, against HY's and the reviewed reference. |

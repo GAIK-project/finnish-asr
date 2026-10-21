@@ -525,19 +525,19 @@ DIALECT_JUDGES = [  # the judges of agreement-r4.json that are drawn, in this or
     ("aitta-gemma-4-31b-it", "Gemma 4 31B", "google", "on CSC Aitta"),
     ("aitta-qwen3-6-27b", "Qwen3.6 27B", "qwen", "on CSC Aitta"),
 ]
-JUDGED = [  # the fourth round: six transcripts of each LA-murre segment judged together
+JUDGED = [  # the fifth round: six transcripts of each LA-murre segment judged together
     ("azure_gpt-4o-transcribe", "gpt-4o-transcribe", "#6b7280"),
     ("vertex_gemini-3.5-flash-std", "Gemini 3.5 Flash", LLM),
     ("hf_whisper-large-v3", "Whisper large-v3", BASE),
-    ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, first model (v1.0)", OURS),
-    ("ft_whisper-large-v3-fi-skn-all", "Ours, all of SKN", R1_SOFT),
+    ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, first model (v1.0)", R1_SOFT),
     ("ft_whisper-large-v3-fi-skn-lamurre-best", "Ours, + LA-murre", DEEP),
+    ("ft_whisper-large-v3-fi-parl", "Ours, main model", OURS),
 ]
 
 
 def judges() -> str:
-    """Four blind judges on LA-murre, from results/judgements_dialect/lamurre_fi/agreement-r4.json."""
-    path = PROJECT_ROOT / "results" / "judgements_dialect" / "lamurre_fi" / "agreement-r4.json"
+    """Three blind judges on LA-murre, from results/judgements_dialect/lamurre_fi/agreement-r5.json."""
+    path = PROJECT_ROOT / "results" / "judgements_dialect" / "lamurre_fi" / "agreement-r5.json"
     data = json.loads(path.read_text(encoding="utf-8"))["judges"]
     W, H = 1000, 452
     body = [text(24, 38, "Dialect speech, several judges: our models make far fewer meaning errors", 19, 700)]

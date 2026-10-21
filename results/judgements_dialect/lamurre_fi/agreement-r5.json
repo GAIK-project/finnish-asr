@@ -1,0 +1,105 @@
+{
+  "generated_utc": "2026-10-21T18:09:05+00:00",
+  "round": "r5",
+  "reference_judge": "claude-opus-5-5",
+  "judges": {
+    "aitta-gpt-oss-120b": {
+      "segments": 200,
+      "points_per_100w": {
+        "ft_whisper-large-v3-fi-skn-lamurre-best": 10.5,
+        "vertex_gemini-3.5-flash-std": 18.2,
+        "ft_whisper-large-v3-fi-skn-punct-best": 10.91,
+        "ft_whisper-large-v3-fi-parl": 10.13,
+        "azure_gpt-4o-transcribe": 23.14,
+        "hf_whisper-large-v3": 16.65
+      },
+      "order_best_first": [
+        "ft_whisper-large-v3-fi-parl",
+        "ft_whisper-large-v3-fi-skn-lamurre-best",
+        "ft_whisper-large-v3-fi-skn-punct-best",
+        "hf_whisper-large-v3",
+        "vertex_gemini-3.5-flash-std",
+        "azure_gpt-4o-transcribe"
+      ],
+      "published_vs_base": {
+        "fewer_points": 87,
+        "more_points": 29,
+        "sign_test_p": 6.471530404742242e-08
+      },
+      "against_reference": {
+        "segments_both_judged": 200,
+        "pairwise_same_preference": 0.879,
+        "pairs_compared": 1531,
+        "spearman_per_arm": {
+          "ft_whisper-large-v3-fi-skn-lamurre-best": 0.488,
+          "vertex_gemini-3.5-flash-std": 0.557,
+          "ft_whisper-large-v3-fi-skn-punct-best": 0.49,
+          "ft_whisper-large-v3-fi-parl": 0.522,
+          "azure_gpt-4o-transcribe": 0.507,
+          "hf_whisper-large-v3": 0.53
+        }
+      }
+    },
+    "azure-gpt-6-1-sol": {
+      "segments": 583,
+      "points_per_100w": {
+        "ft_whisper-large-v3-fi-skn-lamurre-best": 14.9,
+        "vertex_gemini-3.5-flash-std": 29.87,
+        "ft_whisper-large-v3-fi-skn-punct-best": 16.36,
+        "ft_whisper-large-v3-fi-parl": 14.7,
+        "azure_gpt-4o-transcribe": 36.16,
+        "hf_whisper-large-v3": 26.05
+      },
+      "order_best_first": [
+        "ft_whisper-large-v3-fi-parl",
+        "ft_whisper-large-v3-fi-skn-lamurre-best",
+        "ft_whisper-large-v3-fi-skn-punct-best",
+        "hf_whisper-large-v3",
+        "vertex_gemini-3.5-flash-std",
+        "azure_gpt-4o-transcribe"
+      ],
+      "published_vs_base": {
+        "fewer_points": 348,
+        "more_points": 111,
+        "sign_test_p": 1.5959632458667747e-29
+      },
+      "against_reference": {
+        "segments_both_judged": 583,
+        "pairwise_same_preference": 0.93,
+        "pairs_compared": 5978,
+        "spearman_per_arm": {
+          "ft_whisper-large-v3-fi-skn-lamurre-best": 0.838,
+          "vertex_gemini-3.5-flash-std": 0.887,
+          "ft_whisper-large-v3-fi-skn-punct-best": 0.835,
+          "ft_whisper-large-v3-fi-parl": 0.858,
+          "azure_gpt-4o-transcribe": 0.819,
+          "hf_whisper-large-v3": 0.865
+        }
+      }
+    },
+    "claude-opus-5-5": {
+      "segments": 583,
+      "points_per_100w": {
+        "ft_whisper-large-v3-fi-skn-lamurre-best": 12.07,
+        "vertex_gemini-3.5-flash-std": 27.1,
+        "ft_whisper-large-v3-fi-skn-punct-best": 14.03,
+        "ft_whisper-large-v3-fi-parl": 11.73,
+        "azure_gpt-4o-transcribe": 34.01,
+        "hf_whisper-large-v3": 24.43
+      },
+      "order_best_first": [
+        "ft_whisper-large-v3-fi-parl",
+        "ft_whisper-large-v3-fi-skn-lamurre-best",
+        "ft_whisper-large-v3-fi-skn-punct-best",
+        "hf_whisper-large-v3",
+        "vertex_gemini-3.5-flash-std",
+        "azure_gpt-4o-transcribe"
+      ],
+      "published_vs_base": {
+        "fewer_points": 380,
+        "more_points": 93,
+        "sign_test_p": 3.320599944610638e-42
+      }
+    }
+  }
+}
