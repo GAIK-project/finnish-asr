@@ -54,6 +54,10 @@ model-index:
 
 # Whisper large-v3, fine-tuned for Finnish dialects
 
+> **This is the first published model (tag `v1.0`, 13 Oct 2026).** Since 21 Oct 2026 the main branch holds a newer
+> model trained with Finnish parliament speech as well (SKN 19.4 % against this model's 21.1 %); see the
+> [main card](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects). Load this one with `revision="v1.0"`.
+
 Speech-to-text for **Finnish dialect speech**: it hears dialect and writes standard Finnish with
 punctuation. A LoRA fine-tune of [openai/whisper-large-v3](https://huggingface.co/openai/whisper-large-v3),
 trained at Haaga-Helia University of Applied Sciences in the [GAIK project](https://gaik.ai/)
@@ -89,7 +93,7 @@ every model and result: [GAIK-project/finnish-asr](https://github.com/GAIK-proje
 
 ## Variants
 
-- **`main`, tag `v1.0`: this model**, the one to use by default. `revision="v1.0"` pins it.
+- **tag `v1.0`: this model**, the main model until 21 Oct 2026. `revision="v1.0"` pins it.
 - **`timestamps`: the same recipe trained with Whisper's timestamp tokens** on half of the SKN
   segments. It writes usable sentence times (58 % of SKN sentence starts within 1 s; this model 1 %)
   and transcribes long audio in one go with OpenAI's temperature fallback (18.1 % WER on ten 4-minute
