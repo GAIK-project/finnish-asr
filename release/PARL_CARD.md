@@ -108,6 +108,8 @@ Cut long audio into 15–25 s pieces at quiet points; the
 - **`la-murre`**: `v1.0` + 56 h of LA-murre: 19.7 / 7.8 / 11.4 %.
 - **`timestamps`**: `v1.0`'s recipe with Whisper's timestamp tokens, for sentence times and long audio in one go.
 - **`all-skn`**: `v1.0`'s recipe on all 50 SKN municipalities.
+- **`glossary`**: this model's recipe trained to take a word list (`Sanasto: …`) as a prompt; with the list it writes
+  93 % of names and terms right (this model 75 %).
 
 ## How it was trained
 

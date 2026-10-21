@@ -51,6 +51,7 @@ REVISIONS = {
     "all-skn": (MODELS / "whisper-large-v3-fi-skn-all", "ALL_SKN_CARD.md"),
     "la-murre": (MODELS / "whisper-large-v3-fi-skn-lamurre-best", "LAMURRE_CARD.md"),
     "parl": (MODELS / "whisper-large-v3-fi-parl", "PARL_CARD.md"),
+    "glossary": (MODELS / "whisper-large-v3-fi-parl-gloss", "GLOSSARY_CARD.md"),
 }
 MAIN_TAG = "v1.0"
 SHARD_ROWS = 1500

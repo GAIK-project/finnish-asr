@@ -90,7 +90,10 @@ in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-ag
 | Read / parliament speech, words wrong | 7.6 % / 11.1 % | 7.6 % / **10.8 %** | 7.8 % / 11.4 % |
 | Parliament with names and terms, words wrong ¹ | **12.4 %** | 13.7 % | 13.7 % |
 
-Use the main model by default. ¹ The main model was trained on other speakers and sessions of the same parliament
+Use the main model by default. For speech full of names and terms you know in advance, the
+[`glossary` version](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects/blob/glossary/README.md)
+takes a word list as a prompt: on parliament speech it writes 93 % of the listed acronyms, English words and person
+names right (76 % without the list) at 11.6 % WER (12.2 %). ¹ The main model was trained on other speakers and sessions of the same parliament
 corpus. How it was made, the experiments around it (a region prompt, doubled standard Finnish, a glossary prompt)
 and why: [`results/finetune/region-plan.md`](results/finetune/region-plan.md). The `la-murre` version was kept private
 at first because of LA-murre's licence (CC BY-ND) and published on 20 Oct 2026 after Kielipankki's assessment
