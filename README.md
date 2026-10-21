@@ -136,7 +136,7 @@ the only non-dialect recording here whose reference a person has checked by ear.
 makes the fewest meaning errors and plain Whisper large-v3 is the best open model; the best set-ups are
 within about one point of WER of each other ([the clip, 26 set-ups](#the-ajokortti-clip)). Nine more webinar clips were
 run too, but their references leave out fillers and were never checked, so read those numbers only as a
-rough hint ([ten dental webinars](#ten-dental-webinars-references-not-checked)).
+rough hint ([ten dental webinars](docs/REPORT.md#ten-dental-webinars-references-not-checked)).
 
 So: use our model for dialect speech, and Gemini 3.5 Flash or plain Whisper large-v3 for standard
 business Finnish with many names. 🔊 [Hear the differences](https://gaik-project.github.io/finnish-asr/listen.html)
@@ -331,7 +331,7 @@ two ways: word error rate and two blind LLM judges that count only errors that c
   WhisperX draft, which favours Whisper-family output on WER.
 - 👂 **A listener's review of the reference confirms it.** After the 42 spans most systems
   disputed were checked by ear (14 corrected), the WhisperX lead disappears and the leading set
-  sits within about one point, 13.2–14.2 % WER ([Reviewed reference](#reviewed-reference)).
+  sits within about one point, 13.2–14.2 % WER ([Reviewed reference](docs/REPORT.md#reviewed-reference)).
 - 🖥️ **Local and good enough: Whisper large-v3 or large-v3 turbo.** Every other open
   model is clearly behind on this clip: Orukeet, RASMUS Finnish Canary, Canary 1B v2,
   Parakeet v3 and wav2vec2 at 22–32 % WER.
@@ -380,92 +380,12 @@ normalisation ([`asr_scoring.py`](scripts/asr_scoring.py)); a range is over thre
 `vertex_`, `elevenlabs_`, `google_` APIs; `hh_` the Haaga-Helia WhisperX server; `hf_`, `nemo_`, `qwen_` open
 models; `ft_` our fine-tunes).
 
-### Reviewed reference
-
-This section is about the Ajokortti clip only. The table above scores every set-up against the reference
-the University of Helsinki (HY) wrote for the clip, which looked like a corrected WhisperX draft. On 14 Oct
-2026 Akseli Leskinen listened to the 42 spans where most of seven systems hear something else and
-corrected 14 of them: mostly spoken forms HY had written in standard Finnish, two missing words and a
-brand name. The reviewed text is published next to the original in gaik-toolkit
-([`reference.reviewed.txt`](https://raw.githubusercontent.com/GAIK-project/gaik-toolkit/main/evaluation_layer/eval_methods/transcription_eval/data/reference.reviewed.txt)).
-Against it ([`results/scores.reviewed.json`](results/scores.reviewed.json), `score_asr.py --reviewed`):
-
-| Model | WER %, HY's reference | WER %, reviewed |
-|---|--:|--:|
-| OpenAI gpt-4o-mini-transcribe | 13.9 | **13.2** |
-| Whisper large-v3 | 14.7 | 13.7 |
-| Gemini 3.5 Flash | 14.2 | 13.7 |
-| Our first model (`v1.0`), chunked ¹ | 13.9 | 14.0 |
-| ElevenLabs Scribe v2 | 18.2 | 14.2 |
-| WhisperX + Finnish-NLP whisper-large-finnish-v3 (Haaga-Helia WhisperX server) | 11.9 | 15.7 |
-| Finnish-NLP whisper-large-finnish-v3 (plain transformers) | 13.2 | 15.7 |
-
-The WhisperX-based arms lose their lead and ElevenLabs, which writes what is said, gains four
-points: the review confirms that HY's text favoured WhisperX output. HY's own 2025 WhisperX file shows
-the same shift (10.4 → 14.0 %; that transcript is not part of this repository). The leading set now sits within about
-one point (13.2–14.2 %), which a 408-word reference cannot separate. Only the 42 disputed spans were checked, so read every WER here with the rest of the
-reference still unverified. The tables above and the judges' scores are against HY's text and were
-not re-run, and only these seven set-ups were scored against the reviewed text.
-
-¹ The clip has not been run with the current main model (`parl`) or the `glossary` version yet.
-
-## Ten dental webinars (references not checked)
-
-> **Read this section as a hint only.** HY's references for these ten clips leave out fillers ("niinku",
-> "tota") and were never checked against the audio; only the Ajokortti clip's reference has been
-> (above). Both the word error rates and the judges' points below are against these unchecked texts.
-
-The Ajokortti clip is one of ten. The other nine come from the same QAdental webinar material: ten
-180 s clips (30 minutes of speech), each with the University of Helsinki's Finnish
-transcript (QAD-1 set A in HY's study). The files were checked against HY's originals: the same audio
-and the same text byte for byte.
-
-<img src="docs/img/dental-webinars.svg" alt="Ten dental-webinar clips: Gemini 3.5 Flash makes the fewest meaning errors, Whisper large-v3 has the lowest word error rate; our model is last of six on meaning" width="100%">
-
-Because HY's texts leave fillers out, models that write what is said (ElevenLabs, Chirp, Gemini, our models) get
-11–14 % inserted words and models that leave fillers out (Whisper, gpt-4o-transcribe) about 2 %. The blind judges
-([`judge_dental.py`](scripts/judge_dental.py)) ignore fillers; on their measure Gemini 3.5 Flash and ElevenLabs are
-best and our dialect models among the last.
-
-<!-- dental-table:start -->
-| Model | WER % | Inserted words % | Meaning points, Claude Opus 5.5 | Meaning points, Gemini 3.1 Pro |
-|---|--:|--:|--:|--:|
-| Whisper large-v3 | 15.7 | 2.7 | 3.6 | 6.4 |
-| Whisper large-v3, in 15–25 s pieces | 17.4 | 2.2 | – | – |
-| OpenAI gpt-4o-transcribe (API, via Azure) | 19.1 | 2.4 | 5.3 | 9.1 |
-| Whisper large-v3 turbo | 19.2 | 2.2 | – | – |
-| OpenAI Whisper (API, via Azure) | 22.1 | 2.6 | – | – |
-| **Ours: main model, in 15–25 s pieces** | 22.9 | 9.2 | – | – |
-| Orukeet (Parakeet v3 fine-tune) | 24.4 | 2.3 | – | – |
-| NVIDIA Canary 1B v2 | 24.5 | 2.2 | – | – |
-| ElevenLabs Scribe v2 (API) | 25.4 | 11.4 | 1.6 | 2.8 |
-| **Ours: all-skn version, in pieces** | 25.7 | 12.5 | 4.8 | 9.7 |
-| **Ours: timestamps version, in pieces** | 25.8 | 12.9 | – | – |
-| Finnish-NLP whisper-large-finnish-v3 | 25.8 | 12.7 | – | – |
-| **Ours: first model (v1.0), in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
-| Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
-| **Ours: la-murre version, in pieces** | 26.5 | 13.4 | – | – |
-| Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
-| **Ours: timestamps version, long audio in one go** | 27.0 | 13.0 | – | – |
-| Gemini 3.1 Pro (API) | 28.5 | 11.4 | – | – |
-| RASMUS Finnish-ASR-Canary-v2 + KenLM | 28.6 | 9.9 | – | – |
-| Gemini 3.5 Flash (API, asked to write as spoken) | 28.6 | 14.0 | 1.2 | 2.1 |
-| RASMUS Finnish-ASR-Canary-v2, greedy | 29.7 | 8.8 | – | – |
-| **Ours: timestamps version**, whole clip in one go | 29.8 | 15.8 | – | – |
-| NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
-| **Ours: main model (parl)**, whole clip in one go | 36.3 | 20.5 | – | – |
-| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
-| **Ours: la-murre version**, whole clip in one go | 60.0 | 44.9 | – | – |
-| **Ours: first model (v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
-| Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
-<!-- dental-table:end -->
-
-Meaning points: errors per 100 reference words over all ten clips (critical 10, major 5, minor 1).
-Our models were run on 15–25 s pieces cut at quiet points; fed a whole 180 s clip in one go, the
-published model repeats itself (45 % inserted words), and only the `timestamps` revision with its
-fallback decode copes. HY's transcripts are private, so only the numbers are committed
-([`results/benchmarks/dental10_fi/scores.json`](results/benchmarks/dental10_fi/scores.json),
-[`results/judgements_dental/summary.json`](results/judgements_dental/summary.json)).
+**The reference was checked where it mattered.** HY's reference looked like a corrected WhisperX draft; on 14 Oct
+2026 Akseli Leskinen listened to the 42 spans where most systems hear something else and corrected 14 of them.
+Against the checked text the WhisperX lead disappears and the best set-ups sit within about one point of each
+other, 13.2–14.2 % WER, which one 408-word clip cannot separate
+([table and details](docs/REPORT.md#reviewed-reference)). The clip has not been run with the current main model
+or the `glossary` version yet.
 
 ## Timestamps and long-form audio
 
@@ -711,12 +631,12 @@ write token and is for maintainers.
   noise or phone audio.
 - **The ten dental webinars' references are unchecked.** They leave out fillers and a spot check found
   wrong and missing words; their numbers are a hint, not a ranking
-  ([Ten dental webinars](#ten-dental-webinars-references-not-checked)).
+  ([Ten dental webinars](docs/REPORT.md#ten-dental-webinars-references-not-checked)).
 - **The judges are AI models and they are noisy**; read clip differences under about 2 points as
   ties ([How far the LLM judges can be trusted](docs/REPORT.md#how-far-the-llm-judges-can-be-trusted)).
 - **The reference is reviewed only at its 42 disputed spans.** On 14 Oct 2026 a listener checked
   them and corrected 14 (gaik-toolkit's `reference.reviewed.txt`; see
-  [Reviewed reference](#reviewed-reference)); the rest is HY's unverified text. The judges flag
+  [Reviewed reference](docs/REPORT.md#reviewed-reference)); the rest is HY's unverified text. The judges flag
   0–3 reference doubts per transcript.
 - **Each open model ran once**, with greedy or default decoding. The Finnish-NLP
   wav2vec2 model ran without its KenLM language model (it would not build in the

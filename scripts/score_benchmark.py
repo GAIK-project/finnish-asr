@@ -15,7 +15,8 @@ run_benchmark.py --bench lamurre_fi to rescore it. The same holds for the ten de
 repository, so only the numbers are committed.
 
 Also writes one table with the public test sets between the benchmark-table markers in README.md, the
-dental clips' table (with the blind judges of judge_dental.py) between the dental-table markers, and a
+dental clips' table (with the blind judges of judge_dental.py) between the dental-table markers in
+docs/REPORT.md, and a
 secret-free _score_run_metadata.json beside each rescored scores.json (built before anything is
 written, so its repo_dirty says whether the inputs were committed).
 
@@ -54,7 +55,9 @@ DENTAL_START, DENTAL_END = "<!-- dental-table:start -->", "<!-- dental-table:end
 HIDDEN = {"ft_whisper-large-v3-fi-skn-r64e4", "ft_whisper-large-v3-fi-skn-punct", "ft_whisper-large-v3-fi-skn-lamurre"}
 # round 5 and 6 experiments (results/finetune/region-plan.md and the README's training section compare them), and
 # prompted decodes ("@region-...", "@gloss-..."), which use generate() and are not comparable with the pipeline rows
-HIDDEN |= {f"ft_whisper-large-v3-fi-{n}" for n in ("lamurre-s1", "region", "lamurre-open2", "region-open2", "parl-gloss")}
+HIDDEN |= {
+    f"ft_whisper-large-v3-fi-{n}" for n in ("lamurre-s1", "region", "lamurre-open2", "region-open2", "parl-gloss")
+}
 
 # Bold: this project's models; the README note under the table says what each was trained on
 LABELS = {
@@ -203,7 +206,10 @@ def main() -> int:
     fl, vp, sk, la = scores["fleurs_fi"], scores["voxpopuli_fi"], scores["skn_fi"], scores["lamurre_fi"]
     pa = scores["parl_fi"]
     de = scores["dental10_fi"]
-    arms = sorted({a for a in set(fl) | set(vp) | set(sk) if "@" not in a} - HIDDEN, key=lambda a: (sk.get(a, fl.get(a, {})).get("WER", 999), a))
+    arms = sorted(
+        {a for a in set(fl) | set(vp) | set(sk) if "@" not in a} - HIDDEN,
+        key=lambda a: (sk.get(a, fl.get(a, {})).get("WER", 999), a),
+    )
 
     def cell(table: dict, arm: str, key: str) -> str:
         return f"{table[arm][key]:.1f}" if arm in table else "–"
@@ -221,13 +227,13 @@ def main() -> int:
         )
     block = "\n".join(lines)
     dental = dental_table(de)
-    readme = PROJECT_ROOT / "README.md"
-    text = readme.read_text(encoding="utf-8")
-    for start, end, body in ((START, END, block), (DENTAL_START, DENTAL_END, dental)):
-        if start in text:
-            a, b = text.index(start) + len(start), text.index(end)
-            text = text[:a] + "\n" + body + "\n" + text[b:]
-    readme.write_text(text, encoding="utf-8", newline="\n")
+    for doc in (PROJECT_ROOT / "README.md", PROJECT_ROOT / "docs" / "REPORT.md"):
+        text = doc.read_text(encoding="utf-8")
+        for start, end, body in ((START, END, block), (DENTAL_START, DENTAL_END, dental)):
+            if start in text:
+                a, b = text.index(start) + len(start), text.index(end)
+                text = text[:a] + "\n" + body + "\n" + text[b:]
+        doc.write_text(text, encoding="utf-8", newline="\n")
     print(block + "\n\n" + dental)
     counts = {b: sorted({r["utterances"] for r in t.values()}) for b, t in scores.items()}
     print(f"\nutterances per arm: {counts}")

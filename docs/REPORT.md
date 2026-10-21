@@ -14,6 +14,8 @@ that section's date, and later versions are in the README's [model table](../REA
 - [Second opinions: open-model judges on CSC Aitta](#second-opinions-open-model-judges-on-csc-aitta)
 - [Dialect data and next steps, 15–20 Oct 2026](#dialect-data-and-next-steps-1520-oct-2026)
 - [The clip summary of 13–15 Oct 2026](#the-clip-summary-of-1315-oct-2026)
+- [Reviewed reference of the Ajokortti clip](#reviewed-reference)
+- [Ten dental webinars (references not checked)](#ten-dental-webinars-references-not-checked)
 
 ## Fine-tuning pilot: Whisper large-v3 on open Finnish data
 
@@ -478,7 +480,7 @@ speakers, standard spoken Finnish with many names).
   WhisperX draft, which favours Whisper-family output on WER.
 - 👂 **A listener's review of the reference confirms it.** After the 42 spans most systems
   disputed were checked by ear (14 corrected), the WhisperX lead disappears and the leading set
-  sits within about one point, 13.2–14.2 % WER ([Reviewed reference](../README.md#reviewed-reference)).
+  sits within about one point, 13.2–14.2 % WER ([Reviewed reference](#reviewed-reference)).
 - 🖥️ **Local and good enough: Whisper large-v3 or large-v3 turbo.** Every other open
   model is clearly behind on this clip: Orukeet, RASMUS Finnish Canary, Canary 1B v2,
   Parakeet v3 and wav2vec2 at 22–32 % WER.
@@ -523,7 +525,7 @@ speakers, standard spoken Finnish with many names).
   round (Claude, GPT-6.1-sol, gpt-oss-120b) puts Gemini and gpt-4o-transcribe behind base Whisper on
   LA-murre ([Do other AI judges agree?](../README.md#7-do-other-ai-judges-agree)), and on ten dental webinars
   judged on meaning Gemini 3.5 Flash is first, a hint only, since their references were never checked
-  ([Ten dental webinars](../README.md#ten-dental-webinars-references-not-checked)).
+  ([Ten dental webinars](#ten-dental-webinars-references-not-checked)).
   A model trained on all of SKN is the `all-skn` branch ([next steps](../README.md#dialect-data-and-next-steps)).
 - 🤗 **Published 13 Oct 2026:** the model
   [GAIK-project/whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects)
@@ -531,3 +533,90 @@ speakers, standard spoken Finnish with many names).
   `la-murre` branches) and its SKN segments
   [GAIK-project/skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr)
   (CC BY 4.0). This repository holds the method, the code and the results behind them.
+
+## Reviewed reference
+
+This section is about the Ajokortti clip only. The README's [clip table](../README.md#the-ajokortti-clip) scores every set-up against the reference
+the University of Helsinki (HY) wrote for the clip, which looked like a corrected WhisperX draft. On 14 Oct
+2026 Akseli Leskinen listened to the 42 spans where most of seven systems hear something else and
+corrected 14 of them: mostly spoken forms HY had written in standard Finnish, two missing words and a
+brand name. The reviewed text is published next to the original in gaik-toolkit
+([`reference.reviewed.txt`](https://raw.githubusercontent.com/GAIK-project/gaik-toolkit/main/evaluation_layer/eval_methods/transcription_eval/data/reference.reviewed.txt)).
+Against it ([`results/scores.reviewed.json`](../results/scores.reviewed.json), `score_asr.py --reviewed`):
+
+| Model | WER %, HY's reference | WER %, reviewed |
+|---|--:|--:|
+| OpenAI gpt-4o-mini-transcribe | 13.9 | **13.2** |
+| Whisper large-v3 | 14.7 | 13.7 |
+| Gemini 3.5 Flash | 14.2 | 13.7 |
+| Our first model (`v1.0`), chunked ¹ | 13.9 | 14.0 |
+| ElevenLabs Scribe v2 | 18.2 | 14.2 |
+| WhisperX + Finnish-NLP whisper-large-finnish-v3 (Haaga-Helia WhisperX server) | 11.9 | 15.7 |
+| Finnish-NLP whisper-large-finnish-v3 (plain transformers) | 13.2 | 15.7 |
+
+The WhisperX-based arms lose their lead and ElevenLabs, which writes what is said, gains four
+points: the review confirms that HY's text favoured WhisperX output. HY's own 2025 WhisperX file shows
+the same shift (10.4 → 14.0 %; that transcript is not part of this repository). The leading set now sits within about
+one point (13.2–14.2 %), which a 408-word reference cannot separate. Only the 42 disputed spans were checked, so read every WER here with the rest of the
+reference still unverified. The clip table and the judges' scores are against HY's text and were
+not re-run, and only these seven set-ups were scored against the reviewed text.
+
+¹ The clip has not been run with the current main model (`parl`) or the `glossary` version yet.
+
+## Ten dental webinars (references not checked)
+
+> **Read this section as a hint only.** HY's references for these ten clips leave out fillers ("niinku",
+> "tota") and were never checked against the audio; only the Ajokortti clip's reference has been
+> ([above](#reviewed-reference)). Both the word error rates and the judges' points below are against these unchecked texts.
+
+The Ajokortti clip is one of ten. The other nine come from the same QAdental webinar material: ten
+180 s clips (30 minutes of speech), each with the University of Helsinki's Finnish
+transcript (QAD-1 set A in HY's study). The files were checked against HY's originals: the same audio
+and the same text byte for byte.
+
+<img src="img/dental-webinars.svg" alt="Ten dental-webinar clips: Gemini 3.5 Flash makes the fewest meaning errors, Whisper large-v3 has the lowest word error rate; our model is last of six on meaning" width="100%">
+
+Because HY's texts leave fillers out, models that write what is said (ElevenLabs, Chirp, Gemini, our models) get
+11–14 % inserted words and models that leave fillers out (Whisper, gpt-4o-transcribe) about 2 %. The blind judges
+([`judge_dental.py`](../scripts/judge_dental.py)) ignore fillers; on their measure Gemini 3.5 Flash and ElevenLabs are
+best and our dialect models among the last.
+
+<!-- dental-table:start -->
+| Model | WER % | Inserted words % | Meaning points, Claude Opus 5.5 | Meaning points, Gemini 3.1 Pro |
+|---|--:|--:|--:|--:|
+| Whisper large-v3 | 15.7 | 2.7 | 3.6 | 6.4 |
+| Whisper large-v3, in 15–25 s pieces | 17.4 | 2.2 | – | – |
+| OpenAI gpt-4o-transcribe (API, via Azure) | 19.1 | 2.4 | 5.3 | 9.1 |
+| Whisper large-v3 turbo | 19.2 | 2.2 | – | – |
+| OpenAI Whisper (API, via Azure) | 22.1 | 2.6 | – | – |
+| **Ours: main model, in 15–25 s pieces** | 22.9 | 9.2 | – | – |
+| Orukeet (Parakeet v3 fine-tune) | 24.4 | 2.3 | – | – |
+| NVIDIA Canary 1B v2 | 24.5 | 2.2 | – | – |
+| ElevenLabs Scribe v2 (API) | 25.4 | 11.4 | 1.6 | 2.8 |
+| **Ours: all-skn version, in pieces** | 25.7 | 12.5 | 4.8 | 9.7 |
+| **Ours: timestamps version, in pieces** | 25.8 | 12.9 | – | – |
+| Finnish-NLP whisper-large-finnish-v3 | 25.8 | 12.7 | – | – |
+| **Ours: first model (v1.0), in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
+| Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
+| **Ours: la-murre version, in pieces** | 26.5 | 13.4 | – | – |
+| Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
+| **Ours: timestamps version, long audio in one go** | 27.0 | 13.0 | – | – |
+| Gemini 3.1 Pro (API) | 28.5 | 11.4 | – | – |
+| RASMUS Finnish-ASR-Canary-v2 + KenLM | 28.6 | 9.9 | – | – |
+| Gemini 3.5 Flash (API, asked to write as spoken) | 28.6 | 14.0 | 1.2 | 2.1 |
+| RASMUS Finnish-ASR-Canary-v2, greedy | 29.7 | 8.8 | – | – |
+| **Ours: timestamps version**, whole clip in one go | 29.8 | 15.8 | – | – |
+| NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
+| **Ours: main model (parl)**, whole clip in one go | 36.3 | 20.5 | – | – |
+| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
+| **Ours: la-murre version**, whole clip in one go | 60.0 | 44.9 | – | – |
+| **Ours: first model (v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
+| Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
+<!-- dental-table:end -->
+
+Meaning points: errors per 100 reference words over all ten clips (critical 10, major 5, minor 1).
+Our models were run on 15–25 s pieces cut at quiet points; fed a whole 180 s clip in one go, the
+published model repeats itself (45 % inserted words), and only the `timestamps` revision with its
+fallback decode copes. HY's transcripts are private, so only the numbers are committed
+([`results/benchmarks/dental10_fi/scores.json`](../results/benchmarks/dental10_fi/scores.json),
+[`results/judgements_dental/summary.json`](../results/judgements_dental/summary.json)).
