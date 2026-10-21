@@ -1,27 +1,29 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-20T12:40:45+00:00",
+  "generated_at_utc": "2026-10-21T19:05:04+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "273a9c7f5fd94a8623fcb804d98125194b2aa92f",
+  "repo_commit": "8d96e848e4a0d47ba7a93e0e6222cafb0b4ede23",
   "repo_dirty": true,
   "app_under_test": "Finnish ASR dialect fine-tune: LLM-written training targets",
   "runner_path": "scripts/prepare_targets.py",
-  "dataset_path": "results/labels/lamurre_rest.jsonl",
+  "dataset_path": "results/labels/lamurre_review2.jsonl",
   "dataset_git_object": null,
   "model_or_deployment": [
     "claude-opus-5-5"
   ],
   "cli_args": [
-    "normalise",
-    "results/labels/lamurre_rest.jsonl"
+    "review",
+    "results/labels/lamurre_review2.jsonl",
+    "--workers",
+    "8"
   ],
   "env": {
     "ANTHROPIC_FOUNDRY_API_KEY": "set",
     "ANTHROPIC_FOUNDRY_RESOURCE": "set"
   },
   "extra": {
-    "mode": "normalise",
-    "prompt_sha256": "d918400c9a50f8f1628670d6dcfd7101848261d93b58ba8faf16871235b07f50",
+    "mode": "review",
+    "prompt_sha256": "c13d1c887c7d18a7563ff3868687e21ccc8039dd9d94162091e7e9c14c419286",
     "provider": "foundry"
   }
 }

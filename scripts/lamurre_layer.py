@@ -38,11 +38,52 @@ from prepare_lamurre import BASE, RECORDINGS, TRAIN_EXCLUDE, VALIDATION, segment
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "lamurre_layer"
+DEFAULT_BY = "claude-opus-5-5"
 TARGETS = [
     ROOT / "data" / "lamurre_fi" / "train.targets.jsonl",
     ROOT / "data" / "lamurre_fi" / "validation.targets.jsonl",
     *sorted((ROOT / "results" / "labels").glob("lamurre_*.targets.jsonl")),
 ]
+
+
+README = """# LA-murre: a standard-Finnish layer
+
+For Kielipankki (FIN-CLARIN), from the GAIK project (Haaga-Helia University of Applied Sciences),
+https://github.com/GAIK-project/finnish-asr. Derived from Lauseopin arkiston murrekorpus (LA-murre),
+University of Turku and Kotus, CC BY-ND 4.0, urn:nbn:fi:lb-2020112935; not distributed by GAIK.
+
+## What it is
+
+For each recording one TSV: the interviewee's speech cut into segments (annotations joined while the gap
+is under 1.5 s and the segment stays under 25 s; segments that overlap the interviewer or hold an
+unclear-speech mark are left out), with each segment's time in the recording, the corpus's dialect
+transcript and a rendering of it in standard Finnish word forms with punctuation.
+
+| Column | Meaning |
+|---|---|
+| segment | <recording>_<n>, n the segment's index |
+| start_s, end_s | seconds from the start of the recording's WAV and EAF |
+| dialect_transcript | the corpus's transcript, as published |
+| standard_finnish | the standard-Finnish rendering |
+| written_by | the model that wrote it; ", reviewed" when a second pass corrected it |
+
+## How it was made
+
+The standard-Finnish text was written by an LLM (Claude Opus 5.5) from the dialect transcript alone,
+without the audio, word for word: each dialect word in its standard form, in the same order, repetitions
+and fillers kept, numbers as words, a word without a standard counterpart kept as it is. Answers whose word
+count was off by more than 30 % were thrown away.
+The first 15 703 segments (training and validation) were checked by a second model
+(OpenAI Codex), which flagged 35 rows that were corrected. The remaining segments went through a second
+LLM pass that corrected only omissions, additions and changes of meaning; it changed {reviewed} of them.
+A person has not checked the text. It is machine-made and must not be used as ground truth for scoring.
+The training segments were the training text of the `la-murre` and later revisions of
+https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects.
+
+{segments} segments in {recordings} recordings; {done} ({hours} h) have standard-Finnish text, the rest
+could not be rendered within the rules. Counts per role in the GAIK models (train, validation, test, held
+out) and per dialect region are in stats.json.
+"""
 
 
 def role(rec: str) -> str:
@@ -118,6 +159,17 @@ def package() -> int:
         "by_role": dict(Counter(r["role"] for r in done)),
         "by_region": dict(Counter(regions.get(r["recording"], "?") for r in done)),
     }
+    (pkg / "README.md").write_text(
+        README.format(
+            reviewed=stats["written_by"].get(f"{DEFAULT_BY}, reviewed", 0),
+            segments=len(rows),
+            recordings=len(by_rec),
+            done=len(done),
+            hours=stats["hours_with_standard_text"],
+        ),
+        encoding="utf-8",
+        newline="\n",
+    )
     (pkg / "stats.json").write_text(
         json.dumps(stats, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n"
     )
