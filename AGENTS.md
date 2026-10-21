@@ -14,7 +14,7 @@ is public, so the publication rules below come first.
 - **Model weights and adapters** (`results/finetune/*/adapter/` and `models/` are gitignored). The
   model trained on LA-murre is public as the `la-murre` revision of the Hugging Face model (Kielipankki
   found in October 2026 that the weights hold no protected part of the corpus); its training texts
-  are LA-murre text and stay out, as do the private repository's `training-texts/`.
+  are LA-murre text and stay out (copies only on LUMI and in `data/`; the private HF repository that held them was deleted on 21 Oct 2026).
 - **HY material beyond what gaik-toolkit already publishes.** The Ajokortti clip and its references
   are fetched from gaik-toolkit with `scripts/get_clip.py` into `data/` (gitignored); do not copy the
   mp3, and do not add HY's own tool transcripts (`hy25_*`, `hy26_*`) or judge records that quote them.

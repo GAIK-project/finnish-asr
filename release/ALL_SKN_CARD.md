@@ -71,7 +71,6 @@ with the University of Helsinki and Tampere University, co-funded by the Europea
 | LA-murre dialect interviews, 10 localities in no model's training: meaning-error points per 100 words (blind LLM judge, 583 segments) | 25.0 | 14.2 | **13.1** |
 | FLEURS Finnish, read sentences, WER % | 7.4 | 7.6 | 7.5 |
 | VoxPopuli Finnish, parliament speech, WER % | 12.7 | **10.8** | 11.9 |
-| Ten 180 s dental webinars in 15–25 s pieces: meaning-error points per 100 words (Claude / Gemini judge) | 3.6 / 6.4 | 5.1 / 10.0 | 4.8 / 9.6 |
 
 The SKN test cannot score this variant: its 10 municipalities are in its training data. On LA-murre
 the judge (Claude Opus 5.5) saw six transcripts of each segment together, unlabelled and shuffled; this

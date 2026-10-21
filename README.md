@@ -89,7 +89,6 @@ in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-ag
 | LA-murre, meaning-error points (judge round 5) | **11.7** | 14.0 | 12.1 |
 | Read / parliament speech, words wrong | 7.6 % / 11.1 % | 7.6 % / **10.8 %** | 7.8 % / 11.4 % |
 | Parliament with names and terms, words wrong ¹ | **12.4 %** | 13.7 % | 13.7 % |
-| Ten dental webinars in pieces, words wrong | **22.9 %** | 25.9 % | 26.5 % |
 
 Use the main model by default. ¹ The main model was trained on other speakers and sessions of the same parliament
 corpus. How it was made, the experiments around it (a region prompt, doubled standard Finnish, a glossary prompt)

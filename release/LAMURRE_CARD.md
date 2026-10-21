@@ -132,8 +132,6 @@ The main model's recipe, with more dialect speech:
   VoxPopuli.
 - **Rare names and technical terms** in standard-Finnish audio, like the main model: for standard
   Finnish full of brand names, plain Whisper large-v3 or a commercial service is the safer choice.
-  On the ten dental webinars the main model's card reports, in pieces, it gets 26.5 % WER against
-  the main model's 25.9 % (not judged on meaning).
 - Both dialect corpora are 1960s–70s interviews with elderly speakers; today's regional speech was
   not tested. One training run and one seed.
 

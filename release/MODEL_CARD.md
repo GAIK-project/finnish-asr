@@ -48,8 +48,7 @@ fine-tune of [openai/whisper-large-v3](https://huggingface.co/openai/whisper-lar
 sentences and 72 hours of Finnish parliament speech, so it also writes names, acronyms and terms more often right.
 
 This is the main model since 21 Oct 2026: on the SKN dialect test 19.4 % of words wrong (the first published model,
-tag `v1.0`, 21.1 %; Whisper large-v3 40.4 %), level on read speech, and better on names and terms and on the ten
-dental webinars. The model published on 13 Oct 2026 stays available as `revision="v1.0"`.
+tag `v1.0`, 21.1 %; Whisper large-v3 40.4 %), level on read speech, and better on names and terms. The model published on 13 Oct 2026 stays available as `revision="v1.0"`.
 
 Trained at Haaga-Helia University of Applied Sciences in the [GAIK project](https://gaik.ai/)
 (Generative AI-enhanced Knowledge Management in Business), a research project led by Haaga-Helia
@@ -77,10 +76,9 @@ WER % after lower-casing and removing punctuation; the same decoding (transforme
 | Parliament, speakers held out of training (Aalto corpus 2016-test, 962) ¹ | 9.3 | 11.4 | 9.2 | **8.5** |
 | Parliament segments with names, acronyms or terms (1 525) ¹ | 14.5 | 13.7 | 13.7 | **12.4** |
 | Of those, acronyms, English words and person names written exactly | 66 % | 72 % | 71 % | **75 %** |
-| Ten 180 s dental webinars in 15–25 s pieces (HY's references, not reviewed) | **17.4** | 25.9 | 26.5 | 22.9 |
 
 ¹ This model was trained on other speakers and sessions of the same corpus, so these two tests are in its domain.
-On the webinars, standard Finnish full of terms, base Whisper is still the safer choice. Paired over segments against `la-murre`: names-and-terms set −1.35 points (95 % interval −2.04 to −0.80), SKN −0.35
+Paired over segments against `la-murre`: names-and-terms set −1.35 points (95 % interval −2.04 to −0.80), SKN −0.35
 (−0.73 to +0.04); FLEURS and LA-murre level. VoxPopuli moves by more than a point between two seeds of the same
 recipe, so it cannot separate these models. The names and terms were tagged by an LLM (Claude Opus 5.5) and the
 tags checked on a sample; the headline counts the three classes that check found reliable.
@@ -129,7 +127,6 @@ Cut long audio into 15–25 s pieces at quiet points; the
 ## Where it is weaker
 
 - VoxPopuli: 0.3 points more word errors than `v1.0` (within the run-to-run noise of that set).
-- Standard Finnish full of names and terms: base Whisper large-v3 makes fewer errors on the dental webinars (17.4 against 22.9 %).
 - Both dialect corpora are 1960s–70s interviews with elderly speakers; the parliament speech is formal. Everyday
   conversation, slang and Finnish-English mixing were not tested. One training run and one seed.
 
