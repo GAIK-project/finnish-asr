@@ -342,18 +342,19 @@ Against it ([`results/scores.reviewed.json`](results/scores.reviewed.json), `sco
 | OpenAI gpt-4o-mini-transcribe | 13.9 | **13.2** |
 | Whisper large-v3 | 14.7 | 13.7 |
 | Gemini 3.5 Flash | 14.2 | 13.7 |
-| Our main model, chunked | 13.9 | 14.0 |
+| Our first model (`v1.0`), chunked ¹ | 13.9 | 14.0 |
 | ElevenLabs Scribe v2 | 18.2 | 14.2 |
 | WhisperX + Finnish-NLP whisper-large-finnish-v3 (Haaga-Helia WhisperX server) | 11.9 | 15.7 |
 | Finnish-NLP whisper-large-finnish-v3 (plain transformers) | 13.2 | 15.7 |
 
 The WhisperX-based arms lose their lead and ElevenLabs, which writes what is said, gains four
 points: the review confirms that HY's text favoured WhisperX output. HY's own 2025 WhisperX file shows
-the same shift (10.4 → 14.0 %, reported in gaik-toolkit; that transcript is not part of this
-repository). The leading set now sits within about one point (13.2–14.2 %), which a 408-word
+the same shift (10.4 → 14.0 %; that transcript is not part of this repository). The leading set now sits within about one point (13.2–14.2 %), which a 408-word
 reference cannot separate. Only the 42 disputed spans were checked, so read every WER here with the rest of the
 reference still unverified. The tables above and the judges' scores are against HY's text and were
 not re-run.
+
+¹ The clip was not run with the current main model (`parl`).
 
 ## Public test sets: SKN and LA-murre dialects, FLEURS and VoxPopuli
 
