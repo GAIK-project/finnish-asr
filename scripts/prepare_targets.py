@@ -11,6 +11,9 @@ the outputs are TRAINING and VALIDATION targets only, never ground truth for sco
              word forms with punctuation, word for word, without rephrasing. An answer whose
              word count is off by more than 30 % is thrown away and the segment is dropped from
              training. Only the `la-murre` revision was trained on these targets.
+  review     A second look at normalise targets that an audit flagged: the LLM sees the dialect
+             line and the draft ("draft" field) and corrects only omissions, additions and changes
+             of meaning, at high effort. The same 30 % word-count rule applies to its answer.
 
 Input: a JSONL of segments (prepare_skn.py: field "ref"; prepare_lamurre.py --train: field "ref").
 Output: the same rows with "target" added, in results/labels/<name>.targets.jsonl, plus
@@ -50,7 +53,7 @@ from provenance import build_run_metadata, load_repo_env, write_run_metadata  # 
 
 load_repo_env(Path(__file__))
 
-MODEL = "claude-opus-5-5"
+DEFAULT_MODEL = MODEL = "claude-opus-5-5"
 ENV = ("ANTHROPIC_FOUNDRY_RESOURCE", "ANTHROPIC_FOUNDRY_API_KEY")
 ENV_API = ("ANTHROPIC_API_KEY",)
 PROVIDER = "foundry"
@@ -76,7 +79,16 @@ Return every line in standard Finnish word forms with sentence punctuation and c
 - Keep a dialect word that has no standard counterpart as it is.
 - Write numbers as words.
 - If a word is unintelligible to you, keep it as written.""",
+    "review": """You check standard-Finnish rewrites of dialect transcripts of spoken Finnish.
+
+Each numbered item has the linguist's DIALECT transcript of one stretch of an interview and a DRAFT
+that should render it word for word in standard Finnish word forms, in the same order, with sentence
+punctuation and capitals, keeping repetitions and fillers, numbers as words, and keeping a dialect word
+that has no standard counterpart as it is. Return the draft corrected only where it breaks this: a word
+left out or added, a changed meaning, tense, person or number, a rephrasing, a note or question mark
+of your own. Otherwise return the draft exactly as it is. Never add comments.""",
 }
+EFFORT = {"review": "high"}  # the other modes run at low
 
 
 class Line(BaseModel):
@@ -115,7 +127,10 @@ def call(mode: str, batch: list[dict]) -> dict:
         client = anthropic.AnthropicFoundry(
             resource=os.environ[ENV[0]], api_key=os.environ[ENV[1]], max_retries=4, timeout=600
         )
-    prompt = "\n".join(f"{i + 1}. {row['ref']}" for i, row in enumerate(batch))
+    if mode == "review":
+        prompt = "\n".join(f"{i + 1}. DIALECT: {row['ref']}\n   DRAFT: {row['draft']}" for i, row in enumerate(batch))
+    else:
+        prompt = "\n".join(f"{i + 1}. {row['ref']}" for i, row in enumerate(batch))
     resp = client.messages.create(
         model=MODEL,
         max_tokens=16000,
@@ -124,7 +139,7 @@ def call(mode: str, batch: list[dict]) -> dict:
             {"role": "user", "content": prompt + f"\n\nReturn exactly {len(batch)} lines, n = 1 to {len(batch)}."}
         ],
         thinking={"type": "adaptive"},
-        output_config={"effort": "low", "format": {"type": "json_schema", "schema": SCHEMA}},
+        output_config={"effort": EFFORT.get(mode, "low"), "format": {"type": "json_schema", "schema": SCHEMA}},
     )
     if resp.stop_reason != "end_turn":
         raise RuntimeError(f"stop_reason={resp.stop_reason}")
@@ -146,9 +161,10 @@ def main() -> int:
     )
     parser.add_argument("--limit", type=int)
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--model", default=DEFAULT_MODEL, help="Claude model id (punct: claude-haiku-5-5 is enough).")
     args = parser.parse_args()
-    global PROVIDER
-    PROVIDER = args.provider
+    global PROVIDER, MODEL
+    PROVIDER, MODEL = args.provider, args.model
     env = ENV_API if PROVIDER == "api" else ENV
 
     src = args.input if args.input.is_absolute() else PROJECT_ROOT / args.input

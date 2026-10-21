@@ -1,0 +1,49 @@
+{
+  "bench": "voxpopuli_fi",
+  "segments": 478,
+  "arms": {
+    "ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER": 11.45,
+      "by_region": {
+        "-": {
+          "segments": 478,
+          "WER": 11.45
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-parl": {
+      "WER": 11.08,
+      "by_region": {
+        "-": {
+          "segments": 478,
+          "WER": 11.08
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-parl-gloss": {
+      "WER": 11.86,
+      "by_region": {
+        "-": {
+          "segments": 478,
+          "WER": 11.86
+        }
+      }
+    }
+  },
+  "pairs": {
+    "ft_whisper-large-v3-fi-parl - ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER_difference": -0.36,
+      "interval_95": [
+        -3.18,
+        2.08
+      ]
+    },
+    "ft_whisper-large-v3-fi-parl-gloss - ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER_difference": 0.41,
+      "interval_95": [
+        -0.7,
+        2.24
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-parl",
+  "model": "whisper-large-v3-fi-parl",
+  "recipe": "whisper",
+  "region_prompt": null,
+  "glossary_prompt": null,
+  "benchmark": "Finnish parliament held-out segments with LLM-tagged names, brands, acronyms and terms",
+  "utterances": 1525,
+  "batch_size": 16,
+  "load_s": 107.1,
+  "transcribe_s": 1873.8,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid007868",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "23018367"
+}

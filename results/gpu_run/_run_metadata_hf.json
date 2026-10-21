@@ -1,17 +1,35 @@
 {
-  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, QAD-1 ground truth)",
-  "dataset": "projects/qadental-transcription-translation/dataset/ajokortti",
-  "runner": "projects/finnish-asr-models/scripts/run_open_models.py",
-  "env": "hf",
-  "arms": [
-    "ft_whisper-large-v3-fi-skn-lamurre-best-chunks"
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-15T15:11:53+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": null,
+  "repo_dirty": false,
+  "app_under_test": "Finnish ASR model comparison (Ajokortti clip, HY reference via gaik-toolkit)",
+  "runner_path": "scripts/run_open_models.py",
+  "dataset_path": "data/ajokortti/Ajokortti.16k.npy",
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "whisper-large-v3-fi-skn-all"
   ],
-  "host": "nid005028",
-  "gpu": "AMD Instinct MI250X",
-  "versions": {
-    "python": "3.12.11",
-    "torch": "2.7.1+rocm6.2.4",
-    "transformers": "5.19.0"
-  },
-  "slurm_job_id": "22789273"
+  "cli_args": [
+    "--env",
+    "hf",
+    "--arm",
+    "ft_whisper-large-v3-fi-skn-all-chunks"
+  ],
+  "env": {},
+  "extra": {
+    "env": "hf",
+    "arms": [
+      "ft_whisper-large-v3-fi-skn-all-chunks"
+    ],
+    "host": "nid007864",
+    "gpu": "AMD Instinct MI250X",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0"
+    },
+    "slurm_job_id": "22877199"
+  }
 }

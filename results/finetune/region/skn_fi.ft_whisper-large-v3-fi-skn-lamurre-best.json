@@ -1,0 +1,97 @@
+{
+  "bench": "skn_fi",
+  "segments": 600,
+  "arms": {
+    "ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER": 19.72,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 18.98
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 31.47
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 21.27
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 14.17
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 18.61
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-parl": {
+      "WER": 19.37,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 18.5
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 32.08
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 21.0
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 13.9
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 17.34
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-parl-gloss": {
+      "WER": 19.49,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 18.59
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 32.55
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 21.02
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 14.1
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 17.21
+        }
+      }
+    }
+  },
+  "pairs": {
+    "ft_whisper-large-v3-fi-parl - ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER_difference": -0.35,
+      "interval_95": [
+        -0.73,
+        0.04
+      ]
+    },
+    "ft_whisper-large-v3-fi-parl-gloss - ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER_difference": -0.23,
+      "interval_95": [
+        -0.63,
+        0.16
+      ]
+    }
+  }
+}

@@ -4,6 +4,10 @@
 # with them, judge records and LLM rewrites are produced locally by the public scripts and stay local.
 # ---------------------------------------------------------------------------
 results/benchmarks/lamurre_fi/*.jsonl
+results/benchmarks/parl_fi/*.jsonl
+results/benchmarks/parl_terms_fi/*.jsonl
+# private lane probes (system1-bench fi-asr-loop): not for this public repo
+results/benchmarks/tts_probe/
 results/benchmarks/dental10_fi/*.jsonl
 results/judgements_dialect/**/*.jsonl
 results/judgements_dialect/**/.meta*/

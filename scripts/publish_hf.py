@@ -9,6 +9,7 @@ internet and the files), in the hf environment:
     python scripts/publish_hf.py model --revision timestamps   # the timestamp variant -> its "timestamps" branch
     python scripts/publish_hf.py model --revision all-skn      # trained on all 50 SKN municipalities -> "all-skn"
     python scripts/publish_hf.py model --revision la-murre     # + 56 h of LA-murre interviews -> "la-murre"
+    python scripts/publish_hf.py model --revision parl         # + 72 h of parliament speech -> "parl"
     python scripts/publish_hf.py dataset    # SKN segments, parquet with audio -> GAIK-project/skn-finnish-dialects-asr
     python scripts/publish_hf.py check      # the model, downloaded back from the Hub, on a few SKN test segments
     uv run --extra hub python scripts/publish_hf.py cards              # the three cards and the chart (anywhere)
@@ -42,13 +43,14 @@ RELEASE = Path(__file__).resolve().parents[1] / "release"
 ORG = "GAIK-project"
 MODEL_REPO = f"{ORG}/whisper-large-v3-fi-dialects"
 DATASET_REPO = f"{ORG}/skn-finnish-dialects-asr"
-MODEL_DIR = MODELS / "whisper-large-v3-fi-skn-punct-best"
+MODEL_DIR = MODELS / "whisper-large-v3-fi-parl"  # main since 21 Oct 2026; v1.0 is whisper-large-v3-fi-skn-punct-best
 # revision -> (model directory, card); None is the main branch
 REVISIONS = {
     None: (MODEL_DIR, "MODEL_CARD.md"),
     "timestamps": (MODELS / "whisper-large-v3-fi-skn-punct-ts", "TIMESTAMPS_CARD.md"),
     "all-skn": (MODELS / "whisper-large-v3-fi-skn-all", "ALL_SKN_CARD.md"),
     "la-murre": (MODELS / "whisper-large-v3-fi-skn-lamurre-best", "LAMURRE_CARD.md"),
+    "parl": (MODELS / "whisper-large-v3-fi-parl", "PARL_CARD.md"),
 }
 MAIN_TAG = "v1.0"
 SHARD_ROWS = 1500

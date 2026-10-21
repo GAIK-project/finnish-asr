@@ -1,0 +1,49 @@
+{
+  "bench": "fleurs_fi",
+  "segments": 918,
+  "arms": {
+    "ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER": 7.81,
+      "by_region": {
+        "-": {
+          "segments": 918,
+          "WER": 7.81
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-parl": {
+      "WER": 7.62,
+      "by_region": {
+        "-": {
+          "segments": 918,
+          "WER": 7.62
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-parl-gloss": {
+      "WER": 7.7,
+      "by_region": {
+        "-": {
+          "segments": 918,
+          "WER": 7.7
+        }
+      }
+    }
+  },
+  "pairs": {
+    "ft_whisper-large-v3-fi-parl - ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER_difference": -0.19,
+      "interval_95": [
+        -0.49,
+        0.12
+      ]
+    },
+    "ft_whisper-large-v3-fi-parl-gloss - ft_whisper-large-v3-fi-skn-lamurre-best": {
+      "WER_difference": -0.11,
+      "interval_95": [
+        -0.46,
+        0.2
+      ]
+    }
+  }
+}

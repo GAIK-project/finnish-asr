@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T08:44:18+00:00",
+  "generated_utc": "2026-10-21T16:45:57+00:00",
   "benchmark": "google/fleurs fi_fi test",
   "arms": [
     {
@@ -154,7 +154,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**Ours: main model (v1.0)**",
+      "label": "**Ours: first model (v1.0)**",
       "utterances": 918,
       "WER": 7.6145,
       "CER": 1.6515,
@@ -165,6 +165,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 0.98,
       "model": "whisper-large-v3-fi-skn-punct-best",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-parl",
+      "label": "**Ours: main model (parl)**",
+      "utterances": 918,
+      "WER": 7.6214,
+      "CER": 1.7974,
+      "SUB": 5.9706,
+      "DEL": 0.9217,
+      "INS": 0.7291,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.985,
+      "model": "whisper-large-v3-fi-parl",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -183,6 +198,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-parl-gloss",
+      "label": "ft_whisper-large-v3-fi-parl-gloss",
+      "utterances": 918,
+      "WER": 7.6971,
+      "CER": 1.7764,
+      "SUB": 6.0256,
+      "DEL": 0.8942,
+      "INS": 0.7773,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.995,
+      "model": "whisper-large-v3-fi-parl-gloss",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-skn",
       "label": "**Ours: round 1**",
       "utterances": 918,
@@ -195,6 +225,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 0.961,
       "model": "whisper-large-v3-fi-skn",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-region",
+      "label": "ft_whisper-large-v3-fi-region",
+      "utterances": 918,
+      "WER": 7.7796,
+      "CER": 1.7659,
+      "SUB": 6.2182,
+      "DEL": 0.7154,
+      "INS": 0.8461,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.955,
+      "model": "whisper-large-v3-fi-region",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -213,6 +258,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-lamurre-s1",
+      "label": "ft_whisper-large-v3-fi-lamurre-s1",
+      "utterances": 918,
+      "WER": 7.8553,
+      "CER": 1.8376,
+      "SUB": 6.2663,
+      "DEL": 0.8048,
+      "INS": 0.7842,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.949,
+      "model": "whisper-large-v3-fi-lamurre-s1",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-skn-r64e4",
       "label": "ft_whisper-large-v3-fi-skn-r64e4",
       "utterances": 918,
@@ -228,6 +288,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-lamurre-open2",
+      "label": "ft_whisper-large-v3-fi-lamurre-open2",
+      "utterances": 918,
+      "WER": 7.9172,
+      "CER": 1.8481,
+      "SUB": 6.1976,
+      "DEL": 0.8736,
+      "INS": 0.8461,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.007,
+      "model": "whisper-large-v3-fi-lamurre-open2",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre",
       "label": "ft_whisper-large-v3-fi-skn-lamurre",
       "utterances": 918,
@@ -240,6 +315,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 0.984,
       "model": "whisper-large-v3-fi-skn-lamurre",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-region-open2",
+      "label": "ft_whisper-large-v3-fi-region-open2",
+      "utterances": 918,
+      "WER": 8.3987,
+      "CER": 1.7651,
+      "SUB": 6.6515,
+      "DEL": 0.9492,
+      "INS": 0.7979,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.96,
+      "model": "whisper-large-v3-fi-region-open2",
       "gpu": "AMD Instinct MI250X"
     },
     {

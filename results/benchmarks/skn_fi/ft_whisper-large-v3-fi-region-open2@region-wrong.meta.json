@@ -1,0 +1,20 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-region-open2@region-wrong",
+  "model": "whisper-large-v3-fi-region-open2",
+  "recipe": "whisper generate() with a prompt",
+  "region_prompt": "wrong",
+  "glossary_prompt": null,
+  "benchmark": "SKN dialect test: 10 held-out municipalities, normalised text (prepare_skn.py)",
+  "utterances": 600,
+  "batch_size": 16,
+  "load_s": 52.3,
+  "transcribe_s": 216.9,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005064",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22994500"
+}

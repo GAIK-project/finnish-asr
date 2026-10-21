@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-21T16:45:56+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": "273a9c7f5fd94a8623fcb804d98125194b2aa92f",
+  "repo_dirty": true,
+  "app_under_test": "Finnish ASR public benchmarks: Finnish parliament 2016-test/unseen, 962 segments",
+  "runner_path": "scripts/score_benchmark.py",
+  "dataset_path": "results/benchmarks/parl_fi",
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "whisper-large-v3-fi-parl-gloss",
+    "whisper-large-v3-fi-parl",
+    "whisper-large-v3-fi-lamurre-s1",
+    "whisper-large-v3-fi-skn-lamurre-best",
+    "whisper-large-v3-fi-lamurre-open2",
+    "openai/whisper-large-v3",
+    "whisper-large-v3-fi-region",
+    "whisper-large-v3-fi-region-open2",
+    "whisper-large-v3-fi-skn-all",
+    "whisper-large-v3-fi-skn-punct-best"
+  ],
+  "cli_args": [],
+  "env": {},
+  "extra": {
+    "arms": [
+      "ft_whisper-large-v3-fi-parl-gloss",
+      "ft_whisper-large-v3-fi-parl",
+      "ft_whisper-large-v3-fi-lamurre-s1",
+      "ft_whisper-large-v3-fi-skn-lamurre-best",
+      "ft_whisper-large-v3-fi-lamurre-open2",
+      "hf_whisper-large-v3",
+      "ft_whisper-large-v3-fi-region",
+      "ft_whisper-large-v3-fi-region-open2",
+      "ft_whisper-large-v3-fi-skn-all",
+      "ft_whisper-large-v3-fi-skn-punct-best"
+    ],
+    "utterances": [
+      962
+    ]
+  }
+}

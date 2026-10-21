@@ -20,6 +20,12 @@ place in long audio. Which items get timestamps is drawn again every epoch; for 
 fixed (every other segment by a hash of its id). FLEURS and VoxPopuli have no times and stay
 <|notimestamps|>.
 
+--region-prompt P gives a share P of the SKN and LA-murre items their dialect region as Whisper's
+previous-text prompt, `<|startofprev|> Murre: savolaismurteet.` (dialect_regions.py), drawn again every
+epoch; validation prompts a fixed half. The prompt's tokens are context only: no loss on them. The rest,
+and all of FLEURS and VoxPopuli, train without one, so the model still works when the region is not
+known. --open-repeat N puts FLEURS and VoxPopuli N times into each epoch, to hold standard Finnish.
+
 --data skn-all+open adds the rest of SKN (prepare_skn.py --heldout: every segment of the 12 test and
 validation municipalities, with heldout.targets.jsonl for --skn-text punct) to the training data, so the
 model hears all 50 municipalities. Its validation loss then comes from FLEURS and VoxPopuli only, and
@@ -48,7 +54,7 @@ results/labels/ (`lumi.sh push-labels` copies them there; prepare_targets.py mad
     python finetune_whisper.py --download                  # login node: the training data
     python finetune_whisper.py --name whisper-large-v3-fi-pilot [--base openai/whisper-large-v3]
         [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N] [--data open|skn|skn+open|skn-all+open|skn+open+lamurre]
-        [--skn-text plain|punct] [--timestamps 0.5]
+        [--skn-text plain|punct] [--timestamps 0.5] [--region-prompt 0.5] [--open-repeat 2]
 
 Output: $FIASR_MODELS/<name>/ (merged model, processor, adapter/, train_log.json). `lumi.sh fetch-model
 <name>` copies train_log.json into results/finetune/<name>/ (the adapter only with --adapter, gitignored).
@@ -71,6 +77,9 @@ import zlib
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from dialect_regions import lamurre_regions, prompt_text, region_of  # noqa: E402
+from glossary import glossary_text, rare_vocab, train_glossary  # noqa: E402
 
 SR = 16000
 MAX_SECONDS = 30.0
@@ -178,7 +187,22 @@ def lamurre(split: str) -> list[dict]:
     """LA-murre segments whose dialect text an LLM rewrote in standard Finnish (prepare_targets.py normalise)."""
     rows = (DATA / "lamurre_fi" / f"{split}.targets.jsonl").read_text(encoding="utf-8").splitlines()
     d = DATA / "lamurre_fi" / split
-    return [{"source": "lamurre", "path": str(d / r["id"]), "text": r["target"]} for r in map(json.loads, rows)]
+    return [
+        {"source": "lamurre", "id": r["id"], "path": str(d / r["id"]), "text": r["target"]}
+        for r in map(json.loads, rows)
+    ]
+
+
+def parl() -> list[dict]:
+    """Parliament training segments (prepare_parl.py train) with punctuated targets when they exist
+    (prepare_targets.py punct: train.targets.jsonl), else the corpus's lower-case text."""
+    d = DATA / os.environ.get("FIASR_PARL_DIR", "parl_train")
+    name, field = ("train.targets.jsonl", "target") if (d / "train.targets.jsonl").exists() else ("train.jsonl", "ref")
+    rows = (d / name).read_text(encoding="utf-8").splitlines()
+    return [
+        {"source": "parl", "id": r["id"], "path": str(d / "train" / r["id"]), "text": r[field]}
+        for r in map(json.loads, rows)
+    ]
 
 
 def read_audio(item: dict):
@@ -197,7 +221,9 @@ def main() -> int:
     parser.add_argument("--download", action="store_true")
     parser.add_argument("--name", default="whisper-large-v3-fi-pilot")
     parser.add_argument(
-        "--data", choices=["open", "skn", "skn+open", "skn-all+open", "skn+open+lamurre"], default="open"
+        "--data",
+        choices=["open", "skn", "skn+open", "skn-all+open", "skn+open+lamurre", "skn+open+lamurre+parl"],
+        default="open",
     )
     parser.add_argument("--skn-text", choices=["plain", "punct"], default="plain")
     parser.add_argument("--base", default="openai/whisper-large-v3")
@@ -208,6 +234,9 @@ def main() -> int:
     parser.add_argument("--limit", type=int, help="Only N training items (smoke test).")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--timestamps", type=float, default=0.0, help="Share of SKN items trained with timestamps.")
+    parser.add_argument("--region-prompt", type=float, default=0.0, help="Share of dialect items given their region.")
+    parser.add_argument("--open-repeat", type=int, default=1, help="FLEURS and VoxPopuli this many times per epoch.")
+    parser.add_argument("--glossary-prompt", type=float, default=0.0, help="Share of items given a glossary prompt.")
     parser.add_argument("--env", help="Ignored: lumi/job.sbatch passes it to every runner.")
     args = parser.parse_args()
     if args.download:
@@ -235,6 +264,9 @@ def main() -> int:
     )
     if tok.convert_tokens_to_ids("<|0.00|>") != tok.convert_tokens_to_ids("<|notimestamps|>") + 1:
         raise RuntimeError("unexpected timestamp token ids")
+    lamurre_map = lamurre_regions()
+    if args.region_prompt and "lamurre" in args.data and not lamurre_map:
+        raise RuntimeError("no LA-murre regions: run `lumi.sh prepare lamurre-regions` first")
 
     class Speech(Dataset):
         def __init__(self, items: list[dict], train: bool = True):
@@ -247,6 +279,30 @@ def main() -> int:
                 return zlib.crc32(it["id"].encode()) % 2 == 0
             return random.Random(f"{it['id']}-{torch.initial_seed()}").random() < args.timestamps
 
+        def prompt(self, it: dict) -> list[int]:
+            """The prompt's ids (<|startofprev|> first): region and/or glossary, or [] for none."""
+            key = it.get("id") or it.get("path") or str(hash(it["text"]))
+            parts = []
+            region = region_of(key, lamurre_map) if args.region_prompt else None
+            if region is not None:
+                if not self.train:  # a fixed half of the validation segments
+                    on = zlib.crc32(f"r{key}".encode()) % 2 == 0
+                else:
+                    on = random.Random(f"r-{key}-{torch.initial_seed()}").random() < args.region_prompt
+                if on:
+                    parts.append(prompt_text(region))
+            if args.glossary_prompt:
+                if not self.train:
+                    on = zlib.crc32(f"g{key}".encode()) % 2 == 0
+                else:
+                    on = random.Random(f"g-{key}-{torch.initial_seed()}").random() < args.glossary_prompt
+                if on:
+                    rng = random.Random(f"gl-{key}-{torch.initial_seed() if self.train else 0}")
+                    parts.append(glossary_text(train_glossary(it["text"], rare, rare_pool, rng)))
+            if not parts:
+                return []
+            return list(tok.get_prompt_ids(" ".join(parts)))[:120]
+
         def __len__(self) -> int:
             return len(self.items)
 
@@ -254,20 +310,27 @@ def main() -> int:
             it = self.items[i]
             audio = read_audio(it)[: int(MAX_SECONDS * SR)]
             feats = fe(audio, sampling_rate=SR, return_tensors="pt").input_features[0]
+            ids = tok(it["text"]).input_ids
             if self.with_timestamps(it):
                 stamped = timestamped(it["text"], it["parts"])
                 if stamped:
                     ids = [sot, fi, transcribe] + tok(stamped, add_special_tokens=False).input_ids + [eot]
-                    return feats, ids[:448]
-            return feats, tok(it["text"]).input_ids[:448]
+            context = self.prompt(it)
+            return feats, (context + ids)[:448], len(context)
 
     def collate(batch):
+        """Decoder inputs are the sequence without its last token, labels the sequence without its first
+        (<|startofprev|> or <|startoftranscript|>). No loss on a prompt or on the <|startoftranscript|>
+        after it: the model is told the region, it does not learn to say it."""
         feats = torch.stack([b[0] for b in batch])
-        width = max(len(b[1]) for b in batch)
+        width = max(len(b[1]) for b in batch) - 1
+        inputs = torch.full((len(batch), width), eot, dtype=torch.long)
         labels = torch.full((len(batch), width), -100, dtype=torch.long)
-        for i, (_, ids) in enumerate(batch):
-            labels[i, : len(ids)] = torch.tensor(ids)
-        return feats, labels[:, 1:]  # drop <|startoftranscript|>: the model prepends it when it shifts the labels
+        for i, (_, ids, n_context) in enumerate(batch):
+            inputs[i, : len(ids) - 1] = torch.tensor(ids[:-1])
+            labels[i, : len(ids) - 1] = torch.tensor(ids[1:])
+            labels[i, :n_context] = -100
+        return feats, inputs, labels
 
     train_items, val_items = [], []
     if args.data.startswith("skn-all"):  # all 50 municipalities; the SKN validation speakers are in training
@@ -279,12 +342,18 @@ def main() -> int:
         train_items += lamurre("train")
         val_items += lamurre("validation")
     if "open" in args.data:
-        train_items += fleurs("train") + voxpopuli("train")
+        train_items += (fleurs("train") + voxpopuli("train")) * args.open_repeat
         val_items += fleurs("dev") + voxpopuli("validation")
+    if "parl" in args.data:
+        train_items += parl()
     random.shuffle(train_items)
+    rare = rare_vocab([it["text"] for it in train_items]) if args.glossary_prompt else set()
+    rare_pool = sorted(rare)
     if args.limit:
         train_items, val_items = train_items[: args.limit], val_items[: max(16, args.limit // 10)]
-    counts = {s: sum(1 for it in train_items if it["source"] == s) for s in ("skn", "lamurre", "fleurs", "voxpopuli")}
+    counts = {
+        s: sum(1 for it in train_items if it["source"] == s) for s in ("skn", "lamurre", "fleurs", "voxpopuli", "parl")
+    }
     if args.timestamps:
         usable = sum(1 for it in train_items if timestamped(it["text"], it.get("parts")))
         counts["skn_with_times"] = usable
@@ -316,9 +385,9 @@ def main() -> int:
         model.eval()
         losses, n = 0.0, 0
         with torch.no_grad():
-            for feats, labels in val_loader:
+            for feats, inputs, labels in val_loader:
                 with torch.autocast(**amp):
-                    out = model(input_features=feats.to(dev), labels=labels.to(dev))
+                    out = model(input_features=feats.to(dev), decoder_input_ids=inputs.to(dev), labels=labels.to(dev))
                 losses += out.loss.item() * len(feats)
                 n += len(feats)
         model.train()
@@ -334,9 +403,9 @@ def main() -> int:
     model.train()
     for epoch in range(1, args.epochs + 1):
         running, seen = 0.0, 0
-        for feats, labels in loader:
+        for feats, inputs, labels in loader:
             with torch.autocast(**amp):
-                loss = model(input_features=feats.to(dev), labels=labels.to(dev)).loss
+                loss = model(input_features=feats.to(dev), decoder_input_ids=inputs.to(dev), labels=labels.to(dev)).loss
             if not math.isfinite(loss.item()):
                 raise RuntimeError(f"loss is {loss.item()} at step {step}")
             loss.backward()

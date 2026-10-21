@@ -213,10 +213,10 @@ def data_sources() -> str:
     return svg(W, H, "Sources: Whisper large-v3 by OpenAI, SKN, FLEURS by Google, VoxPopuli by Meta, LA-murre", body)
 
 
-LEADERBOARD_OURS = {"ft_whisper-large-v3-fi-skn-punct-best"}  # the front page compares the main model only
+LEADERBOARD_OURS = {"ft_whisper-large-v3-fi-parl"}  # the front page compares the main model only
 DIALECT_SHORT = {  # arm -> (label, group); arms missing from scores.json are left out
-    "ft_whisper-large-v3-fi-skn-punct-best": ("Ours, main model", "ours"),
-    "ft_whisper-large-v3-fi-skn-lamurre-best": ("Ours, la-murre version", "ours"),
+    "ft_whisper-large-v3-fi-parl": ("Ours, main model", "ours"),
+    "ft_whisper-large-v3-fi-skn-punct-best": ("Ours, first model (v1.0)", "ours"),
     "vertex_gemini-3.5-flash": ("Gemini 3.5 Flash, asked to write as spoken", "API"),
     "vertex_gemini-3.5-flash-std": ("Gemini 3.5 Flash, asked for standard Finnish", "API"),
     "google_chirp-3": ("Google Chirp 3", "API"),
@@ -338,7 +338,8 @@ SHORT = {
     "ft_whisper-large-v3-fi-skn": "Ours, round 1",
     "hf_whisper-large-v3-chunks": "Whisper large-v3, in pieces",
     "ft_whisper-large-v3-fi-skn-chunks": "Ours, round 1, in pieces",
-    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, main model, in pieces",
+    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, first model (v1.0), in pieces",
+    "ft_whisper-large-v3-fi-parl-chunks": "Ours, main model, in pieces",
     "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": "Ours, + LA-murre, in pieces",
     "openai_whisper-1": "OpenAI whisper-1",
     "openai_gpt-4o-mini-transcribe": "OpenAI gpt-4o-mini-transcribe",
@@ -367,7 +368,7 @@ def clip_ranking() -> str:
         rows.append((pts, SHORT[arm_id], group, scores[arm_id]["metrics"]["WER"], arm_id))
     rows.sort(key=lambda r: r[0])
     ranked = list(enumerate(rows, 1))
-    ours = "ft_whisper-large-v3-fi-skn-punct-best-chunks"
+    ours = "ft_whisper-large-v3-fi-parl-chunks"
     shown = ranked[:10] + [None] + [r for r in ranked[10:] if r[1][4] == ours]
     W, ROW, TOP, LX, BX, BW = 1000, 28, 108, 360, 372, 470
     vmax = 10.0
@@ -528,7 +529,7 @@ JUDGED = [  # the fourth round: six transcripts of each LA-murre segment judged 
     ("azure_gpt-4o-transcribe", "gpt-4o-transcribe", "#6b7280"),
     ("vertex_gemini-3.5-flash-std", "Gemini 3.5 Flash", LLM),
     ("hf_whisper-large-v3", "Whisper large-v3", BASE),
-    ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, main model", OURS),
+    ("ft_whisper-large-v3-fi-skn-punct-best", "Ours, first model (v1.0)", OURS),
     ("ft_whisper-large-v3-fi-skn-all", "Ours, all of SKN", R1_SOFT),
     ("ft_whisper-large-v3-fi-skn-lamurre-best", "Ours, + LA-murre", DEEP),
 ]
@@ -615,7 +616,7 @@ def label_with_logo(arm_id: str, label: str, x: float, y: float, bold: bool, uid
     return out
 
 
-WEBINAR_LABELS = {**SHORT, "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, main model (in pieces)",
+WEBINAR_LABELS = {**SHORT, "ft_whisper-large-v3-fi-parl-chunks": "Ours, main model (in pieces)", "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, first model (in pieces)",
                   "hh_whisperx_fi": "WhisperX + Finnish-NLP model", "hf_whisper-large-finnish-v3": "Finnish-NLP whisper-large-finnish-v3"}
 
 
@@ -628,7 +629,7 @@ def webinar() -> str:
         rows.append((pts, scores[arm_id]["metrics"]["WER"], arm_id))
     by_pts = sorted(rows)
     by_wer = sorted(rows, key=lambda r: r[1])
-    keep = {r[2] for r in by_pts[:7]} | {r[2] for r in by_wer[:4]} | {"ft_whisper-large-v3-fi-skn-punct-best-chunks"}
+    keep = {r[2] for r in by_pts[:7]} | {r[2] for r in by_wer[:4]} | {"ft_whisper-large-v3-fi-parl-chunks"}
     keep -= {"ft_whisper-large-v3-fi-skn-lamurre-best-chunks", "ft_whisper-large-v3-fi-pilot"}  # LA-murre / pilot: in the full table
     shown = [r for r in by_pts if r[2] in keep]
     def tied_rank(i: int) -> dict[str, int]:  # equal values at one decimal share a rank
@@ -789,12 +790,12 @@ def leaderboard() -> str:
             std.append((err / (fl[a]["ref_words"] + vp[a]["ref_words"]), lab, grp, a))
     std.sort()
     N = 6
-    ours_rank = next(i for i, r in enumerate(std) if r[3] == "ft_whisper-large-v3-fi-skn-punct-best")
+    ours_rank = next(i for i, r in enumerate(std) if r[3] == "ft_whisper-large-v3-fi-parl")
     right = std[:N] if ours_rank < N else std[: N - 2] + [None, std[ours_rank]]
     orank_right = None if ours_rank < N else ours_rank
     W, PW, ROW, TOP = 1000, 466, 34, 118
     short = {"nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Canary v2 + KenLM", "nemo_rasmus-canary-fi-v2": "RASMUS Canary v2",
-             "ft_whisper-large-v3-fi-skn-punct-best-chunks": "Ours, main model", "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash, std Finnish", "vertex_gemini-3.5-flash": "Gemini 3.5 Flash, as spoken",
+             "ft_whisper-large-v3-fi-parl-chunks": "Ours, main model", "vertex_gemini-3.5-flash-std": "Gemini 3.5 Flash, std Finnish", "vertex_gemini-3.5-flash": "Gemini 3.5 Flash, as spoken",
              "hf_whisper-large-v3-chunks": "Whisper large-v3, in pieces"}
     colors = {"API": API, "open": OPEN, "ours": OURS}
     body = [text(24, 36, "Results at a glance", 19, 700)]
@@ -843,7 +844,7 @@ def bench_wer(bench: str) -> dict[str, float]:
 
 
 DENTAL_LABELS = {  # arm -> (label, group); arms missing from dental10_fi/scores.json are left out
-    "ft_whisper-large-v3-fi-skn-punct-best-chunks": ("Ours, main model (in pieces)", "ours"),
+    "ft_whisper-large-v3-fi-skn-punct-best-chunks": ("Ours, first model (in pieces)", "ours"),
     "ft_whisper-large-v3-fi-skn-all-chunks": ("Ours, all of SKN (in pieces)", "ours"),
     "ft_whisper-large-v3-fi-skn-punct-ts-fallback": ("Ours, timestamps version (in one go)", "ours"),
     "azure_gpt-4o-transcribe": ("OpenAI gpt-4o-transcribe", "API"),
@@ -902,7 +903,7 @@ def dental_webinars() -> str:
 
 ACROSS = [  # arm per dataset, label, colour, logo
     ({"*": "hf_whisper-large-v3"}, "Whisper large-v3 (OpenAI, open)", BASE, "openai"),
-    ({"*": "ft_whisper-large-v3-fi-skn-punct-best"}, "Ours, main model", OURS, ""),
+    ({"*": "ft_whisper-large-v3-fi-parl"}, "Ours, main model", OURS, ""),
     ({"*": "azure_gpt-4o-transcribe"}, "OpenAI gpt-4o-transcribe (API)", "#6b7280", "openai"),
     ({"*": "vertex_gemini-3.5-flash", "skn_fi": "vertex_gemini-3.5-flash-std", "lamurre_fi": "vertex_gemini-3.5-flash-std"},
      "Gemini 3.5 Flash (API)", LLM, "gemini"),
@@ -965,7 +966,7 @@ def all_sets() -> str:
     w = {b: wer(b) for b, *_ in sets}
     labels = {a: lab for a, (lab, _) in DIALECT_SHORT.items()}
     labels.update({"hf_wav2vec2-xlsr-1b-finnish-lm-v2": "Finnish-NLP wav2vec2 XLS-R 1B", "hf_parakeet-tdt-0.6b-v3": "NVIDIA Parakeet TDT 0.6B v3",
-                   "hf_orukeet": "Orukeet (Parakeet v3 fine-tune)", "ft_whisper-large-v3-fi-skn-punct-best": "Ours, main model"})
+                   "hf_orukeet": "Orukeet (Parakeet v3 fine-tune)", "ft_whisper-large-v3-fi-parl": "Ours, main model"})
     group = {a: g for a, (_, g) in DIALECT_SHORT.items()}
     rows = [a for a in labels if all(a in w[b] for b, *_ in sets) and a != "ft_whisper-large-v3-fi-skn-punct-ts"]
     rows.sort(key=lambda a: w["skn_fi"][a])

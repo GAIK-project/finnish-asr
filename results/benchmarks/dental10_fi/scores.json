@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-15T17:21:44+00:00",
+  "generated_utc": "2026-10-21T16:45:57+00:00",
   "benchmark": "Ten 180 s dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
   "arms": [
     {
@@ -76,6 +76,21 @@
       "seconds_per_utterance": 40.853,
       "model": "whisper",
       "gpu": null
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-parl-chunks",
+      "label": "**Ours: main model, in 15\u201325 s pieces**",
+      "utterances": 10,
+      "WER": 22.877,
+      "CER": 11.2399,
+      "SUB": 11.297,
+      "DEL": 2.3932,
+      "INS": 9.1868,
+      "ref_words": 3886,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 39.564,
+      "model": "whisper-large-v3-fi-parl",
+      "gpu": "AMD Instinct MI250X"
     },
     {
       "arm_id": "hf_orukeet",
@@ -169,7 +184,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best-chunks",
-      "label": "**Ours: main model, in 15\u201325 s pieces**",
+      "label": "**Ours: first model (v1.0), in 15\u201325 s pieces**",
       "utterances": 10,
       "WER": 25.8621,
       "CER": 13.0731,
@@ -333,6 +348,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-parl",
+      "label": "**Ours: main model (parl)**",
+      "utterances": 10,
+      "WER": 36.2841,
+      "CER": 22.5672,
+      "SUB": 12.841,
+      "DEL": 2.9336,
+      "INS": 20.5095,
+      "ref_words": 3886,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 49.772,
+      "model": "whisper-large-v3-fi-parl",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
       "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
       "utterances": 10,
@@ -364,7 +394,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**Ours: main model (v1.0)**",
+      "label": "**Ours: first model (v1.0)**",
       "utterances": 10,
       "WER": 60.1647,
       "CER": 43.3049,

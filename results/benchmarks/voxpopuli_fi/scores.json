@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T08:44:18+00:00",
+  "generated_utc": "2026-10-21T16:45:57+00:00",
   "benchmark": "facebook/voxpopuli fi test",
   "arms": [
     {
@@ -109,7 +109,7 @@
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
-      "label": "**Ours: main model (v1.0)**",
+      "label": "**Ours: first model (v1.0)**",
       "utterances": 478,
       "WER": 10.8332,
       "CER": 5.5296,
@@ -120,6 +120,51 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.414,
       "model": "whisper-large-v3-fi-skn-punct-best",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-region-open2",
+      "label": "ft_whisper-large-v3-fi-region-open2",
+      "utterances": 478,
+      "WER": 10.9338,
+      "CER": 5.0383,
+      "SUB": 6.133,
+      "DEL": 2.325,
+      "INS": 2.4758,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.335,
+      "model": "whisper-large-v3-fi-region-open2",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-parl",
+      "label": "**Ours: main model (parl)**",
+      "utterances": 478,
+      "WER": 11.0846,
+      "CER": 5.4355,
+      "SUB": 6.0324,
+      "DEL": 2.2999,
+      "INS": 2.7523,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.369,
+      "model": "whisper-large-v3-fi-parl",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-lamurre-open2",
+      "label": "ft_whisper-large-v3-fi-lamurre-open2",
+      "utterances": 478,
+      "WER": 11.1726,
+      "CER": 5.3502,
+      "SUB": 6.1204,
+      "DEL": 2.4381,
+      "INS": 2.6141,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.341,
+      "model": "whisper-large-v3-fi-lamurre-open2",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -213,6 +258,21 @@
       "gpu": null
     },
     {
+      "arm_id": "ft_whisper-large-v3-fi-parl-gloss",
+      "label": "ft_whisper-large-v3-fi-parl-gloss",
+      "utterances": 478,
+      "WER": 11.8638,
+      "CER": 5.9239,
+      "SUB": 6.0073,
+      "DEL": 2.2873,
+      "INS": 3.5692,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.393,
+      "model": "whisper-large-v3-fi-parl-gloss",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-skn-all",
       "label": "**Ours: all-skn version**",
       "utterances": 478,
@@ -225,6 +285,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.445,
       "model": "whisper-large-v3-fi-skn-all",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-region",
+      "label": "ft_whisper-large-v3-fi-region",
+      "utterances": 478,
+      "WER": 12.0774,
+      "CER": 5.9151,
+      "SUB": 6.2084,
+      "DEL": 2.325,
+      "INS": 3.544,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.38,
+      "model": "whisper-large-v3-fi-region",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -270,6 +345,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.261,
       "model": "openai/whisper-large-v3",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-lamurre-s1",
+      "label": "ft_whisper-large-v3-fi-lamurre-s1",
+      "utterances": 478,
+      "WER": 13.2462,
+      "CER": 7.2522,
+      "SUB": 6.4095,
+      "DEL": 2.413,
+      "INS": 4.4238,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.448,
+      "model": "whisper-large-v3-fi-lamurre-s1",
       "gpu": "AMD Instinct MI250X"
     },
     {

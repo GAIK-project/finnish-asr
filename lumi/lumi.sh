@@ -25,6 +25,7 @@
 #   lumi/lumi.sh prepare lamurre          the LA-murre dialect test, 10 WAVs read by HTTP range (login node)
 #   lumi/lumi.sh download lamurre         all LA-murre audio, 69 GB, CC BY-ND (background; a DONE file when ready)
 #   lumi/lumi.sh prepare lamurre-train    cut LA-murre training segments (CPU job, prepare_lamurre.py --train)
+#   lumi/lumi.sh prepare lamurre-regions  LA-murre's dialect region per recording, for --region-prompt (login node)
 #   lumi/lumi.sh run train hf [args]      LoRA fine-tune of Whisper (finetune_whisper.py, 16 h limit)
 #   lumi/lumi.sh run timestamps hf --arm A  timestamps and long-form decoding on SKN (eval_timestamps.py, 3 h)
 #                                      (--fallback: add the temperature-fallback long-form decode)
@@ -125,6 +126,7 @@ case $cmd in
       skn-heldout) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_skn.py --heldout' lumi/prep.sbatch" ;;
       lamurre) in_container "python scripts/prepare_lamurre.py" ;;
       lamurre-train) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_lamurre.py --train' lumi/prep.sbatch" ;;
+      lamurre-regions) in_container "python scripts/dialect_regions.py" ;;   # LA-murre's region per recording (VRT)
     esac ;;
   fetch-model)
     name=${1:?model name}

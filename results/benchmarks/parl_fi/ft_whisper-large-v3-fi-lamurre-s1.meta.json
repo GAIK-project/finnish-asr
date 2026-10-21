@@ -1,0 +1,20 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-lamurre-s1",
+  "model": "whisper-large-v3-fi-lamurre-s1",
+  "recipe": "whisper",
+  "region_prompt": null,
+  "glossary_prompt": null,
+  "benchmark": "Finnish parliament 2016-test/unseen, 962 segments (prepare_parl.py)",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 60.0,
+  "transcribe_s": 1223.7,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid007854",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "23003622"
+}

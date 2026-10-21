@@ -1,0 +1,20 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-region@region-wrong",
+  "model": "whisper-large-v3-fi-region",
+  "recipe": "whisper generate() with a prompt",
+  "region_prompt": "wrong",
+  "glossary_prompt": null,
+  "benchmark": "LA-murre dialect test: 10 localities outside SKN, dialect text (prepare_lamurre.py)",
+  "utterances": 583,
+  "batch_size": 16,
+  "load_s": 54.3,
+  "transcribe_s": 204.1,
+  "gpu": "AMD Instinct MI250X",
+  "host": "nid005123",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "slurm_job_id": "22994487"
+}

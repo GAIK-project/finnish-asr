@@ -1,0 +1,97 @@
+{
+  "bench": "lamurre_fi",
+  "segments": 583,
+  "arms": {
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-none": {
+      "WER": 57.77,
+      "by_region": {
+        "HÄM": {
+          "segments": 120,
+          "WER": 53.34
+        },
+        "KAA": {
+          "segments": 43,
+          "WER": 72.52
+        },
+        "LOU": {
+          "segments": 60,
+          "WER": 84.93
+        },
+        "POH": {
+          "segments": 180,
+          "WER": 53.86
+        },
+        "SAV": {
+          "segments": 180,
+          "WER": 54.45
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-correct": {
+      "WER": 57.61,
+      "by_region": {
+        "HÄM": {
+          "segments": 120,
+          "WER": 53.31
+        },
+        "KAA": {
+          "segments": 43,
+          "WER": 72.3
+        },
+        "LOU": {
+          "segments": 60,
+          "WER": 84.36
+        },
+        "POH": {
+          "segments": 180,
+          "WER": 53.59
+        },
+        "SAV": {
+          "segments": 180,
+          "WER": 54.37
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-wrong": {
+      "WER": 57.67,
+      "by_region": {
+        "HÄM": {
+          "segments": 120,
+          "WER": 53.29
+        },
+        "KAA": {
+          "segments": 43,
+          "WER": 72.63
+        },
+        "LOU": {
+          "segments": 60,
+          "WER": 84.55
+        },
+        "POH": {
+          "segments": 180,
+          "WER": 53.61
+        },
+        "SAV": {
+          "segments": 180,
+          "WER": 54.43
+        }
+      }
+    }
+  },
+  "pairs": {
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-correct - ft_whisper-large-v3-fi-skn-lamurre-best@region-none": {
+      "WER_difference": -0.16,
+      "interval_95": [
+        -0.45,
+        0.08
+      ]
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-wrong - ft_whisper-large-v3-fi-skn-lamurre-best@region-none": {
+      "WER_difference": -0.1,
+      "interval_95": [
+        -0.38,
+        0.15
+      ]
+    }
+  }
+}

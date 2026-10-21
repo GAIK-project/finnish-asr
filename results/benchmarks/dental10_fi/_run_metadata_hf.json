@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-15T15:17:37+00:00",
+  "generated_at_utc": "2026-10-21T16:43:04+00:00",
   "repo": "GAIK-project/finnish-asr",
   "repo_commit": null,
   "repo_dirty": false,
@@ -9,7 +9,8 @@
   "dataset_path": null,
   "dataset_git_object": null,
   "model_or_deployment": [
-    "whisper-large-v3-fi-skn-all"
+    "whisper-large-v3-fi-parl",
+    "whisper-large-v3-fi-parl"
   ],
   "cli_args": [
     "--env",
@@ -17,20 +18,23 @@
     "--bench",
     "dental10_fi",
     "--arm",
-    "ft_whisper-large-v3-fi-skn-all-chunks"
+    "ft_whisper-large-v3-fi-parl-chunks",
+    "--arm",
+    "ft_whisper-large-v3-fi-parl"
   ],
   "env": {},
   "extra": {
     "env": "hf",
     "arms": [
-      "ft_whisper-large-v3-fi-skn-all-chunks"
+      "ft_whisper-large-v3-fi-parl",
+      "ft_whisper-large-v3-fi-parl-chunks"
     ],
-    "host": "nid007861",
+    "host": "nid005031",
     "versions": {
       "python": "3.12.11",
       "torch": "2.7.1+rocm6.2.4",
       "transformers": "5.19.0"
     },
-    "slurm_job_id": "22877198"
+    "slurm_job_id": "23041053"
   }
 }

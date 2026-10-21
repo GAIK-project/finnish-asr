@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-20T18:44:30+00:00",
+  "repo": "GAIK-project/finnish-asr",
+  "repo_commit": null,
+  "repo_dirty": false,
+  "app_under_test": "Finnish ASR public benchmarks: SKN dialect test: 10 held-out municipalities, normalised text (prepare_skn.py)",
+  "runner_path": "scripts/run_benchmark.py",
+  "dataset_path": null,
+  "dataset_git_object": null,
+  "model_or_deployment": [
+    "whisper-large-v3-fi-region-open2"
+  ],
+  "cli_args": [
+    "--env",
+    "hf",
+    "--bench",
+    "skn_fi",
+    "--arm",
+    "ft_whisper-large-v3-fi-region-open2",
+    "--region",
+    "correct"
+  ],
+  "env": {},
+  "extra": {
+    "bench": "skn_fi",
+    "env": "hf",
+    "utterances": 600,
+    "host": "nid005055",
+    "versions": {
+      "python": "3.12.11",
+      "torch": "2.7.1+rocm6.2.4",
+      "transformers": "5.19.0"
+    },
+    "slurm_job_id": "22994499"
+  }
+}

@@ -22,6 +22,14 @@ goes, so a job that hits its time limit resumes where it stopped.
     python run_benchmark.py --env hf --limit 50     # a quick sample
     python run_benchmark.py --env hf --bench voxpopuli_fi
 
+--region none|correct|wrong decodes a Whisper arm with the segment's dialect region as its previous-text
+prompt (dialect_regions.py; for models trained with finetune_whisper.py --region-prompt): correct gives
+the true region, wrong a far one (the control), none no prompt. All three call generate() directly, not
+the pipeline, so they differ in the prompt only; the output is <arm_id>@region-<mode>.jsonl. Segments
+without a region (FLEURS, VoxPopuli) get no prompt.
+
+    python run_benchmark.py --env hf --bench skn_fi --arm ft_<name> --region correct
+
 Output: results/benchmarks/<bench>/<arm_id>.jsonl (id, ref, hyp, seconds), <arm_id>.meta.json and
 _run_metadata_<env>.json. Score locally with score_benchmark.py. The lamurre_fi *.jsonl files hold
 LA-murre's texts (CC BY-ND 4.0) and are gitignored: only its scores.json and *.meta.json are published.
@@ -34,6 +42,7 @@ import csv
 import json
 import os
 import platform
+import random
 import sys
 import tarfile
 import time
@@ -41,7 +50,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from dialect_regions import WRONG, lamurre_regions, prompt_text, region_of  # noqa: E402
 from fi_common import RESULTS_DIR  # noqa: E402
+from glossary import eval_glossary, glossary_text  # noqa: E402
 from provenance import build_run_metadata, write_run_metadata  # noqa: E402  (standard library only)
 from run_open_models import RASMUS, _device, _hf_file, lib_versions  # noqa: E402
 
@@ -51,6 +62,9 @@ BENCHES = {
     "voxpopuli_fi": "facebook/voxpopuli fi test",
     "skn_fi": "SKN dialect test: 10 held-out municipalities, normalised text (prepare_skn.py)",
     "lamurre_fi": "LA-murre dialect test: 10 localities outside SKN, dialect text (prepare_lamurre.py)",
+    "parl_fi": "Finnish parliament 2016-test/unseen, 962 segments (prepare_parl.py)",
+    "tts_probe": "Chatterbox Finnish round trip: 40 FLEURS dev sentences in four cloned voices (dev only)",
+    "parl_terms_fi": "Finnish parliament held-out segments with LLM-tagged names, brands, acronyms and terms",
 }
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = Path(os.environ.get("FIASR_DATA", ROOT / "data"))
@@ -124,7 +138,10 @@ def load_items(bench: str) -> list[dict]:
         for line in (d / "test.jsonl").read_text(encoding="utf-8").splitlines():
             row = json.loads(line)
             if row["ref"].strip():
-                items.append({"id": row["id"], "ref": row["ref"], "path": str(d / "test" / row["id"])})
+                item = {"id": row["id"], "ref": row["ref"], "path": str(d / "test" / row["id"])}
+                if "terms" in row:  # parl_terms_fi: the tagged words, for --glossary tags
+                    item["terms"] = [t["word"] for t in row["terms"]]
+                items.append(item)
     return items
 
 
@@ -197,6 +214,36 @@ def make_transcriber(arm_id: str):
     return run
 
 
+def make_prompted_transcriber(arm_id: str):
+    """A Whisper arm decoded with generate() directly; fn(paths, prompt or None) -> texts."""
+    import torch
+    from transformers import WhisperForConditionalGeneration, WhisperProcessor
+
+    dev = _device()
+    path = ARMS[arm_id][1]
+    proc = WhisperProcessor.from_pretrained(path)
+    dtype = torch.float16 if dev == "cuda" else torch.float32
+    model = WhisperForConditionalGeneration.from_pretrained(path, dtype=dtype).to(dev).eval()
+    sot = proc.tokenizer.convert_tokens_to_ids("<|startoftranscript|>")
+
+    def run(paths: list[str], prompt: str | None) -> list[str]:
+        audio = [read_audio(p) for p in paths]
+        feats = proc.feature_extractor(audio, sampling_rate=SR, return_tensors="pt").input_features
+        kw = {"language": "fi", "task": "transcribe", "max_new_tokens": 400}
+        if prompt:
+            ids = proc.tokenizer.get_prompt_ids(prompt)
+            kw["prompt_ids"] = torch.tensor(ids, device=dev)
+            kw["max_new_tokens"] = 444 - len(ids)  # Whisper's decoder holds 448 positions in all
+        with torch.no_grad():
+            seqs = model.generate(feats.to(dev, dtype), **kw).tolist()
+        # whether generate() returns the prompt differs between versions: keep what follows <|startoftranscript|>
+        return [
+            proc.tokenizer.decode(q[q.index(sot) :] if sot in q else q, skip_special_tokens=True).strip() for q in seqs
+        ]
+
+    return run
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--env", choices=["hf", "qwen", "nemo"])
@@ -205,6 +252,8 @@ def main() -> int:
     parser.add_argument("--limit", type=int, help="Only the first N utterances.")
     parser.add_argument("--force", action="store_true", help="Start an arm's output file again.")
     parser.add_argument("--list", action="store_true")
+    parser.add_argument("--region", choices=["none", "correct", "wrong"], help="Whisper arms: the region prompt.")
+    parser.add_argument("--glossary", choices=["none", "tags"], help="Whisper arms: a glossary prompt (glossary.py).")
     parser.add_argument("--download", action="store_true", help="Fetch the test set and missing weights, then exit.")
     args = parser.parse_args()
 
@@ -232,8 +281,35 @@ def main() -> int:
     versions = lib_versions()
     print(f"device={_device()} {versions} utterances={len(items)}", flush=True)
     failures = 0
+    lamurre = lamurre_regions()
+    if args.region and args.bench == "lamurre_fi" and not lamurre:
+        print("no LA-murre regions: run `lumi.sh prepare lamurre-regions` first", flush=True)
+        return 1
+
+    pool = sorted({w for it in items for w in it.get("terms", [])})
+
+    def prompt_of(item: dict) -> str | None:
+        parts = []
+        region = region_of(item["id"], lamurre) if args.region in {"correct", "wrong"} else None
+        if region is not None:
+            parts.append(prompt_text(WRONG[region] if args.region == "wrong" else region))
+        if args.glossary == "tags" and item.get("terms"):
+            rng = random.Random(f"gloss-{item['id']}")
+            parts.append(glossary_text(eval_glossary(item["terms"], pool, rng)))
+        return " ".join(parts) or None
+
+    prompted = bool(args.region or args.glossary)
+
     for arm_id in selected:
-        out = out_dir / f"{arm_id}.jsonl"
+        if prompted and ARMS[arm_id][2] != "whisper":
+            print(f"[skip] {arm_id}: --region and --glossary need a Whisper arm")
+            continue
+        out_id = (
+            arm_id
+            + (f"@region-{args.region}" if args.region else "")
+            + (f"@gloss-{args.glossary}" if args.glossary else "")
+        )
+        out = out_dir / f"{out_id}.jsonl"
         if args.force and out.exists():
             out.unlink()
         done = (
@@ -241,19 +317,23 @@ def main() -> int:
         )
         todo = [it for it in items if it["id"] not in done]
         if not todo:
-            print(f"[skip] {arm_id}: all {len(items)} done")
+            print(f"[skip] {out_id}: all {len(items)} done")
             continue
-        print(f"[run ] {arm_id}: {len(todo)} to do ...", flush=True)
+        print(f"[run ] {out_id}: {len(todo)} to do ...", flush=True)
         try:
             t0 = time.perf_counter()
-            run = make_transcriber(arm_id)
+            run = make_prompted_transcriber(arm_id) if prompted else make_transcriber(arm_id)
             load_s = time.perf_counter() - t0
             t1 = time.perf_counter()
+            groups: dict[str | None, list[dict]] = {}
+            for it in todo:  # with a prompt, one batch holds one prompt
+                groups.setdefault(prompt_of(it) if prompted else None, []).append(it)
+            batches = [g[i : i + BATCH] for g in groups.values() for i in range(0, len(g), BATCH)]
             with open(out, "a", encoding="utf-8", newline="\n") as f:
-                for i in range(0, len(todo), BATCH):
-                    chunk = todo[i : i + BATCH]
+                for chunk in batches:
                     tb = time.perf_counter()
-                    hyps = run([it["path"] for it in chunk])
+                    paths = [it["path"] for it in chunk]
+                    hyps = run(paths, prompt_of(chunk[0])) if prompted else run(paths)
                     per = round((time.perf_counter() - tb) / len(chunk), 3)
                     for it, hyp in zip(chunk, hyps, strict=True):
                         row = {"id": it["id"], "ref": it["ref"], "hyp": hyp, "seconds": per}
@@ -262,9 +342,11 @@ def main() -> int:
             import torch
 
             meta = {
-                "arm_id": arm_id,
+                "arm_id": out_id,
                 "model": Path(ARMS[arm_id][1]).name if arm_id.startswith("ft_") else ARMS[arm_id][1],
-                "recipe": ARMS[arm_id][2],
+                "recipe": "whisper generate() with a prompt" if prompted else ARMS[arm_id][2],
+                "region_prompt": args.region,
+                "glossary_prompt": args.glossary,
                 "benchmark": BENCHES[args.bench],
                 "utterances": len(items),
                 "batch_size": BATCH,
@@ -275,13 +357,13 @@ def main() -> int:
                 "versions": versions,
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
             }
-            (out_dir / f"{arm_id}.meta.json").write_text(
+            (out_dir / f"{out_id}.meta.json").write_text(
                 json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n"
             )
-            print(f"[ ok ] {arm_id}: {meta['transcribe_s']} s for {len(todo)} utterances", flush=True)
+            print(f"[ ok ] {out_id}: {meta['transcribe_s']} s for {len(todo)} utterances", flush=True)
         except Exception as exc:  # noqa: BLE001 - one model failing must not stop the others
             failures += 1
-            print(f"[FAIL] {arm_id}: {type(exc).__name__}: {str(exc)[:500]}", flush=True)
+            print(f"[FAIL] {out_id}: {type(exc).__name__}: {str(exc)[:500]}", flush=True)
     write_run_metadata(
         out_dir,
         build_run_metadata(
@@ -298,7 +380,11 @@ def main() -> int:
                 "slurm_job_id": os.environ.get("SLURM_JOB_ID"),
             },
         ),
-        name=f"_run_metadata_{args.env or 'all'}.json",
+        # one file per prompt mode, so parallel jobs on one bench do not write the same file
+        name=f"_run_metadata_{args.env or 'all'}"
+        + (f"_region-{args.region}" if args.region else "")
+        + (f"_gloss-{args.glossary}" if args.glossary else "")
+        + ".json",
     )
     return 1 if failures else 0
 

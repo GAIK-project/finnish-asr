@@ -1,0 +1,161 @@
+{
+  "bench": "skn_fi",
+  "segments": 600,
+  "arms": {
+    "ft_whisper-large-v3-fi-region@region-none": {
+      "WER": 20.94,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 19.97
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 33.68
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 22.38
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 15.2
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 20.59
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-region@region-correct": {
+      "WER": 20.92,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 19.81
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 33.62
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 22.59
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 15.37
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 20.14
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-region@region-wrong": {
+      "WER": 20.91,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 19.84
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 33.52
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 22.54
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 15.35
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 20.14
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-none": {
+      "WER": 20.68,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 20.03
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 32.65
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 22.15
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 14.87
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 19.69
+        }
+      }
+    },
+    "ft_whisper-large-v3-fi-lamurre-s1@region-none": {
+      "WER": 20.64,
+      "by_region": {
+        "HÄM": {
+          "segments": 240,
+          "WER": 19.84
+        },
+        "KAA": {
+          "segments": 60,
+          "WER": 33.26
+        },
+        "LOU": {
+          "segments": 120,
+          "WER": 22.13
+        },
+        "LVÄ": {
+          "segments": 120,
+          "WER": 14.8
+        },
+        "SAV": {
+          "segments": 60,
+          "WER": 19.69
+        }
+      }
+    }
+  },
+  "pairs": {
+    "ft_whisper-large-v3-fi-region@region-correct - ft_whisper-large-v3-fi-region@region-none": {
+      "WER_difference": -0.02,
+      "interval_95": [
+        -0.18,
+        0.14
+      ]
+    },
+    "ft_whisper-large-v3-fi-region@region-wrong - ft_whisper-large-v3-fi-region@region-none": {
+      "WER_difference": -0.04,
+      "interval_95": [
+        -0.2,
+        0.12
+      ]
+    },
+    "ft_whisper-large-v3-fi-skn-lamurre-best@region-none - ft_whisper-large-v3-fi-region@region-none": {
+      "WER_difference": -0.26,
+      "interval_95": [
+        -0.51,
+        -0.01
+      ]
+    },
+    "ft_whisper-large-v3-fi-lamurre-s1@region-none - ft_whisper-large-v3-fi-region@region-none": {
+      "WER_difference": -0.3,
+      "interval_95": [
+        -0.71,
+        0.07
+      ]
+    }
+  }
+}

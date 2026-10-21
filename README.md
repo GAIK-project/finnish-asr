@@ -5,9 +5,11 @@
 # Finnish dialect speech-to-text
 
 **We taught OpenAI's Whisper to understand Finnish dialects.** On dialect speech it gets about half as
-many words wrong as before (40 % → 21 %), far fewer than any other model we tried, Gemini 3.5 Flash
-included. Read and parliament speech stay about as good as before; on standard Finnish full of brand
-names it gets more of the names wrong. The model and its training data are free to use.
+many words wrong as before (40 % → 19 %), far fewer than any other model we tried, Gemini 3.5 Flash
+included. Read and parliament speech stay about as good as before. The model and its SKN training data are free
+to use. **New on 21 Oct 2026:** the main model is now trained on 72 h of Finnish parliament speech as well, which
+lowered the dialect errors from 21.1 to 19.4 % and helps with names, acronyms and terms; the first model stays
+available as `v1.0`.
 
 🤗 [Model](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects) ·
 🗂️ [Training data](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr) ·
@@ -21,9 +23,9 @@ names it gets more of the names wrong. The model and its training data are free 
 Made by Akseli Leskinen ([laguagu](https://github.com/laguagu)), Haaga-Helia University of Applied
 Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Union (ERDF).
 
-<img src="docs/img/leaderboard.svg" alt="Results at a glance: on dialect speech our model is first with 21.1 % of words wrong; on standard Finnish (FLEURS and VoxPopuli) ElevenLabs Scribe v2 is first with 5.4 % and our model is 8th with 8.8 %" width="100%">
+<img src="docs/img/leaderboard.svg" alt="Results at a glance: on dialect speech our model is first with 19.4 % of words wrong; on standard Finnish (FLEURS and VoxPopuli) ElevenLabs Scribe v2 is first with 5.4 % and our model is 8th with 8.8 %" width="100%">
 
-- 🗣️ **Dialect speech: our model, by far.** 21.1 % of words wrong. The next best is Gemini 3.5 Flash,
+- 🗣️ **Dialect speech: our model, by far.** 19.4 % of words wrong. The next best is Gemini 3.5 Flash,
   34.7 % when asked for standard Finnish (40.8 % when asked to write as spoken); base Whisper large-v3
   gets 40.4 % and Google Chirp 3 41.3 % (35.0 % without one segment where it repeated “se on” 1 262
   times).
@@ -34,15 +36,16 @@ Sciences, in the [GAIK project](https://gaik.ai/), co-funded by the European Uni
   meaning errors in our models' dialect transcripts than in base Whisper's.
 - 🔌 **The big API services do not fix dialects.** On the second dialect corpus a blind judge gives
   Gemini 3.5 Flash 27.2 and OpenAI's gpt-4o-transcribe 34.2 meaning-error points per 100 words, more
-  than base Whisper (25.0); our model gets 14.2. On read and parliament speech the API services lead
+  than base Whisper (24.4); our model gets 11.7 (round 5 of the judge, below). On read and parliament speech the API services lead
   ([four kinds of speech](#6-how-it-compares)).
 
 | Our model against the model it started from | Whisper large-v3 | Our model |
 |---|--:|--:|
-| 🗣️ Dialect speech: words wrong | 40.4 % | **21.1 %** |
-| ⚖️ Another dialect corpus: meaning-error points per 100 words | 25.9 | **13.6** |
+| 🗣️ Dialect speech: words wrong | 40.4 % | **19.4 %** |
+| ⚖️ Another dialect corpus: meaning-error points per 100 words | 24.4 | **11.7** |
 | 📖 Read Finnish (FLEURS): words wrong | 7.4 % | 7.6 % |
-| 🏛️ Parliament speech (VoxPopuli): words wrong | 12.7 % | **10.8 %** |
+| 🏛️ Parliament speech (VoxPopuli): words wrong | 12.7 % | **11.1 %** |
+| 🏷️ Parliament speech with names, acronyms and terms: words wrong | 14.5 % | **12.4 %** |
 
 ## 1. What it does
 
@@ -79,15 +82,20 @@ in Kajaani. Every script is in [`scripts/`](scripts/); [Run it again](#run-it-ag
 
 **Which version?**
 
-| | Main model (`v1.0`) | `la-murre` version |
-|---|---|---|
-| Training data | SKN + FLEURS + VoxPopuli | the same + 56 h of LA-murre interviews |
-| Dialect test, words wrong | 21.1 % | **19.7 %** |
-| Read / parliament speech, words wrong | **7.6 % / 10.8 %** | 7.8 % / 11.4 % |
+| | Main model (since 21 Oct 2026) | `v1.0` (first model) | `la-murre` version |
+|---|---|---|---|
+| Training data | SKN + FLEURS + VoxPopuli + 56 h LA-murre + 72 h parliament | SKN + FLEURS + VoxPopuli | `v1.0`'s + 56 h LA-murre |
+| Dialect test, words wrong | **19.4 %** | 21.1 % | 19.7 % |
+| LA-murre, meaning-error points (judge round 5) | **11.7** | 14.0 | 12.1 |
+| Read / parliament speech, words wrong | 7.6 % / 11.1 % | 7.6 % / **10.8 %** | 7.8 % / 11.4 % |
+| Parliament with names and terms, words wrong ¹ | **12.4 %** | 13.7 % | 13.7 % |
+| Ten dental webinars in pieces, words wrong | **22.9 %** | 25.9 % | 26.5 % |
 
-The main model stays the default; for audio that is mostly dialect, use `la-murre`. It was kept
-private at first because of LA-murre's licence (CC BY-ND) and published on 20 Oct 2026 after
-Kielipankki's assessment ([below](#dialect-data-and-next-steps)).
+Use the main model by default. ¹ The main model was trained on other speakers and sessions of the same parliament
+corpus. How it was made, the experiments around it (a region prompt, doubled standard Finnish, a glossary prompt)
+and why: [`results/finetune/region-plan.md`](results/finetune/region-plan.md). The `la-murre` version was kept private
+at first because of LA-murre's licence (CC BY-ND) and published on 20 Oct 2026 after Kielipankki's assessment
+([below](#dialect-data-and-next-steps)).
 
 ## 4. What the language model did
 
@@ -364,29 +372,30 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 <img src="docs/img/all-sets.svg" alt="Word error rate of every model on SKN dialects, FLEURS and VoxPopuli: ours best on dialects, ElevenLabs best on FLEURS, Finnish-NLP best on VoxPopuli" width="100%">
 
 <!-- benchmark-table:start -->
-| Model | SKN dialects WER % | LA-murre dialects WER % | FLEURS WER % | VoxPopuli WER % | FLEURS CER % | s / clip |
-|---|--:|--:|--:|--:|--:|--:|
-| **Ours: pilot, FLEURS + VoxPopuli only** | – | – | 7.1 | 10.8 | 1.6 | 0.95 |
-| **Ours: all-skn version** | – | 57.8 | 7.5 | 11.9 | 1.7 | 0.96 |
-| Orukeet (Parakeet v3 fine-tune) | – | – | 11.6 | 15.9 | 2.8 | 0.04 |
-| NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | 3.1 | 0.18 |
-| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | 6.2 | 1.50 |
-| **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 1.8 | 0.96 |
-| **Ours: main model (v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 1.7 | 0.98 |
-| **Ours: timestamps version** | 21.4 | 58.1 | 7.4 | 11.2 | 1.7 | 0.98 |
-| **Ours: round 1** | 22.2 | 57.9 | 7.8 | 10.6 | 1.9 | 0.96 |
-| Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | 61.8 | – | – | – | – |
-| Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 1.7 | 0.98 |
-| Gemini 3.5 Flash (API, asked to write as spoken) | 40.8 | 60.2 | 5.1 | 11.5 | 1.9 | 2.24 |
-| Google Chirp 3 (API) | 41.3 | – | 4.8 | 11.6 | 1.6 | 1.82 |
-| Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | 2.2 | 0.19 |
-| ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | 1.7 | 3.09 |
-| NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | 2.1 | 0.30 |
-| RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | 2.5 | 0.71 |
-| RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | 2.4 | 0.10 |
-| Finnish-NLP whisper-large-finnish-v3 | 56.6 | 51.6 | 7.1 | 6.6 | 1.7 | 0.89 |
-| OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | 1.4 | 0.88 |
-| Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | 5.8 | 0.34 |
+| Model | SKN dialects WER % | LA-murre dialects WER % | FLEURS WER % | VoxPopuli WER % | Parliament WER % | FLEURS CER % | s / clip |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| **Ours: pilot, FLEURS + VoxPopuli only** | – | – | 7.1 | 10.8 | – | 1.6 | 0.95 |
+| **Ours: all-skn version** | – | 57.8 | 7.5 | 11.9 | 10.6 | 1.7 | 0.96 |
+| Orukeet (Parakeet v3 fine-tune) | – | – | 11.6 | 15.9 | – | 2.8 | 0.04 |
+| NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | – | 3.1 | 0.18 |
+| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | – | 6.2 | 1.50 |
+| **Ours: main model (parl)** | 19.4 | 57.4 | 7.6 | 11.1 | 8.5 | 1.8 | 0.98 |
+| **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 9.2 | 1.8 | 0.96 |
+| **Ours: first model (v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 11.4 | 1.7 | 0.98 |
+| **Ours: timestamps version** | 21.4 | 58.1 | 7.4 | 11.2 | – | 1.7 | 0.98 |
+| **Ours: round 1** | 22.2 | 57.9 | 7.8 | 10.6 | – | 1.9 | 0.96 |
+| Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | 61.8 | – | – | – | – | – |
+| Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 9.3 | 1.7 | 0.98 |
+| Gemini 3.5 Flash (API, asked to write as spoken) | 40.8 | 60.2 | 5.1 | 11.5 | – | 1.9 | 2.24 |
+| Google Chirp 3 (API) | 41.3 | – | 4.8 | 11.6 | – | 1.6 | 1.82 |
+| Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | – | 2.2 | 0.19 |
+| ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | – | 1.7 | 3.09 |
+| NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | – | 2.1 | 0.30 |
+| RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | – | 2.5 | 0.71 |
+| RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | – | 2.4 | 0.10 |
+| Finnish-NLP whisper-large-finnish-v3 | 56.6 | 51.6 | 7.1 | 6.6 | – | 1.7 | 0.89 |
+| OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | – | 1.4 | 0.88 |
+| Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | – | 5.8 | 0.34 |
 <!-- benchmark-table:end -->
 
 Corpus WER and CER after lower-casing and removing punctuation. Seconds per utterance
@@ -434,13 +443,14 @@ model, built for dialects, is last of the six judged.
 | OpenAI gpt-4o-transcribe (API, via Azure) | 19.1 | 2.4 | 5.3 | 9.1 |
 | Whisper large-v3 turbo | 19.2 | 2.2 | – | – |
 | OpenAI Whisper (API, via Azure) | 22.1 | 2.6 | – | – |
+| **Ours: main model, in 15–25 s pieces** | 22.9 | 9.2 | – | – |
 | Orukeet (Parakeet v3 fine-tune) | 24.4 | 2.3 | – | – |
 | NVIDIA Canary 1B v2 | 24.5 | 2.2 | – | – |
 | ElevenLabs Scribe v2 (API) | 25.4 | 11.4 | 1.6 | 2.8 |
 | **Ours: all-skn version, in pieces** | 25.7 | 12.5 | 4.8 | 9.7 |
 | **Ours: timestamps version, in pieces** | 25.8 | 12.9 | – | – |
 | Finnish-NLP whisper-large-finnish-v3 | 25.8 | 12.7 | – | – |
-| **Ours: main model, in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
+| **Ours: first model (v1.0), in 15–25 s pieces** | 25.9 | 12.8 | 5.1 | 10.0 |
 | Google Chirp 3 (API) | 25.9 | 11.3 | 2.3 | 3.7 |
 | **Ours: la-murre version, in pieces** | 26.5 | 13.4 | – | – |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 26.5 | 13.7 | – | – |
@@ -451,9 +461,10 @@ model, built for dialects, is last of the six judged.
 | RASMUS Finnish-ASR-Canary-v2, greedy | 29.7 | 8.8 | – | – |
 | **Ours: timestamps version**, whole clip in one go | 29.8 | 15.8 | – | – |
 | NVIDIA Parakeet TDT 0.6B v3 | 32.3 | 1.8 | – | – |
+| **Ours: main model (parl)**, whole clip in one go | 36.3 | 20.5 | – | – |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 42.1 | 5.9 | – | – |
 | **Ours: la-murre version**, whole clip in one go | 60.0 | 44.9 | – | – |
-| **Ours: main model (v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
+| **Ours: first model (v1.0)**, whole clip in one go | 60.2 | 44.8 | – | – |
 | Qwen3-ASR 1.7B | 93.7 | 35.4 | – | – |
 <!-- dental-table:end -->
 

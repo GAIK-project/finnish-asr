@@ -43,18 +43,26 @@ BENCHES = {
     "skn_fi": "SKN dialect test, 10 held-out municipalities",
     "dental10_fi": "Ten 180 s dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
     "lamurre_fi": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
+    "parl_fi": "Finnish parliament 2016-test/unseen, 962 segments",
+    "tts_probe": "Chatterbox Finnish round trip (dev only)",
+    "parl_terms_fi": "Finnish parliament held-out segments with tagged names, brands, acronyms and terms",
 }
 START, END = "<!-- benchmark-table:start -->", "<!-- benchmark-table:end -->"
 DENTAL_START, DENTAL_END = "<!-- dental-table:start -->", "<!-- dental-table:end -->"
 # training-run variants kept in scores.json but not in the README table (the README's training section
 # compares them): 4-epoch runs, whose last epoch overfit, and the longer run on round 1's data
 HIDDEN = {"ft_whisper-large-v3-fi-skn-r64e4", "ft_whisper-large-v3-fi-skn-punct", "ft_whisper-large-v3-fi-skn-lamurre"}
+# round 5 and 6 experiments (results/finetune/region-plan.md and the README's training section compare them), and
+# prompted decodes ("@region-...", "@gloss-..."), which use generate() and are not comparable with the pipeline rows
+HIDDEN |= {f"ft_whisper-large-v3-fi-{n}" for n in ("lamurre-s1", "region", "lamurre-open2", "region-open2", "parl-gloss")}
 
 # Bold: this project's models; the README note under the table says what each was trained on
 LABELS = {
     "ft_whisper-large-v3-fi-pilot": "**Ours: pilot, FLEURS + VoxPopuli only**",
     "ft_whisper-large-v3-fi-skn": "**Ours: round 1**",
-    "ft_whisper-large-v3-fi-skn-punct-best": "**Ours: main model (v1.0)**",
+    "ft_whisper-large-v3-fi-parl": "**Ours: main model (parl)**",
+    "ft_whisper-large-v3-fi-parl-chunks": "**Ours: main model, in 15–25 s pieces**",
+    "ft_whisper-large-v3-fi-skn-punct-best": "**Ours: first model (v1.0)**",
     "ft_whisper-large-v3-fi-skn-punct-ts": "**Ours: timestamps version**",
     "ft_whisper-large-v3-fi-skn-lamurre-best": "**Ours: la-murre version**",
     "hf_whisper-large-v3": "Whisper large-v3",
@@ -72,7 +80,7 @@ LABELS = {
     "azure_gpt-4o-transcribe": "OpenAI gpt-4o-transcribe (API, via Azure)",
     "azure_whisper": "OpenAI Whisper (API, via Azure)",
     "hf_whisper-large-v3-chunks": "Whisper large-v3, in 15–25 s pieces",
-    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "**Ours: main model, in 15–25 s pieces**",
+    "ft_whisper-large-v3-fi-skn-punct-best-chunks": "**Ours: first model (v1.0), in 15–25 s pieces**",
     "ft_whisper-large-v3-fi-skn-punct-ts-chunks": "**Ours: timestamps version, in pieces**",
     "ft_whisper-large-v3-fi-skn-punct-ts-fallback": "**Ours: timestamps version, long audio in one go**",
     "ft_whisper-large-v3-fi-skn-lamurre-best-chunks": "**Ours: la-murre version, in pieces**",
@@ -193,22 +201,23 @@ def main() -> int:
         write_scores(b, fresh[b], meta)
     scores = {b: {r["arm_id"]: r for r in (fresh[b] or score(b, write=False))} for b in BENCHES}
     fl, vp, sk, la = scores["fleurs_fi"], scores["voxpopuli_fi"], scores["skn_fi"], scores["lamurre_fi"]
+    pa = scores["parl_fi"]
     de = scores["dental10_fi"]
-    arms = sorted((set(fl) | set(vp) | set(sk)) - HIDDEN, key=lambda a: (sk.get(a, fl.get(a, {})).get("WER", 999), a))
+    arms = sorted({a for a in set(fl) | set(vp) | set(sk) if "@" not in a} - HIDDEN, key=lambda a: (sk.get(a, fl.get(a, {})).get("WER", 999), a))
 
     def cell(table: dict, arm: str, key: str) -> str:
         return f"{table[arm][key]:.1f}" if arm in table else "–"
 
     lines = [
         "| Model | SKN dialects WER % | LA-murre dialects WER % | FLEURS WER % | VoxPopuli WER % "
-        "| FLEURS CER % | s / clip |",
-        "|---|--:|--:|--:|--:|--:|--:|",
+        "| Parliament WER % | FLEURS CER % | s / clip |",
+        "|---|--:|--:|--:|--:|--:|--:|--:|",
     ]
     for a in arms:
         speed = f"{fl[a]['seconds_per_utterance']:.2f}" if a in fl else "–"
         lines.append(
             f"| {LABELS.get(a, a)} | {cell(sk, a, 'WER')} | {cell(la, a, 'WER')} | {cell(fl, a, 'WER')} | "
-            f"{cell(vp, a, 'WER')} | {cell(fl, a, 'CER')} | {speed} |"
+            f"{cell(vp, a, 'WER')} | {cell(pa, a, 'WER')} | {cell(fl, a, 'CER')} | {speed} |"
         )
     block = "\n".join(lines)
     dental = dental_table(de)
