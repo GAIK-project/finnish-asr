@@ -177,11 +177,11 @@ def test_round_3_summary_is_numbers_only_and_matches_the_docs() -> None:
 
 
 def test_readme_aitta_rows_match_the_committed_agreement_file() -> None:
-    """The README quotes agreement-r2.json; rerunning judge_agreement.py must come with a README update."""
+    """docs/REPORT.md quotes agreement-r2.json; rerunning judge_agreement.py must come with an update there."""
     data = json.loads(
         (FI.RESULTS_DIR / "judgements_dialect" / "lamurre_fi" / "agreement-r2.json").read_text(encoding="utf-8")
     )
-    readme = (FI.REPO_ROOT / "README.md").read_text(encoding="utf-8")
+    readme = (FI.REPO_ROOT / "docs" / "REPORT.md").read_text(encoding="utf-8")
     arms = [ja.BASE, "ft_whisper-large-v3-fi-skn", ja.PUBLISHED, "ft_whisper-large-v3-fi-skn-lamurre-best"]
     for judge, name in (
         ("aitta-gpt-oss-120b", "gpt-oss-120b (Aitta)"),
