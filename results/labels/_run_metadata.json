@@ -1,23 +1,23 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-22T09:55:53+00:00",
+  "generated_at_utc": "2026-10-22T10:40:59+00:00",
   "repo": "GAIK-project/finnish-asr",
-  "repo_commit": "e539987aef0f8009f83664ff6f5fe8f5c15ae6d1",
+  "repo_commit": "69d2951428c022a7fad3a5e48cfc072d9af26b98",
   "repo_dirty": true,
   "app_under_test": "Finnish ASR dialect fine-tune: LLM-written training targets",
   "runner_path": "scripts/prepare_targets.py",
-  "dataset_path": "results/labels/finka_validation.jsonl",
+  "dataset_path": "results/labels/finka_train.jsonl",
   "dataset_git_object": null,
   "model_or_deployment": [
     "gpt-6.1-sol"
   ],
   "cli_args": [
     "normalise",
-    "results/labels/finka_validation.jsonl",
+    "results/labels/finka_train.jsonl",
     "--provider",
     "azure",
     "--max-usd",
-    "1"
+    "25"
   ],
   "env": {
     "AZURE_API_KEY": "set",

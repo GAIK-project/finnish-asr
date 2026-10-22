@@ -71,7 +71,7 @@ loss is not comparable with `parl`'s: the finka validation segments are added to
 | Item | Estimate | Spent |
 |---|---|---|
 | LLM, round total | at most 60 USD | 0.86 before this branch (round-5 model choice) |
-| finka targets (train, `--max-usd 25`; validation, `--max-usd 1`) | about 12–16 USD with GPT-6.1-sol (0.14 USD for the 4 674 validation words) | 0.14 (validation); train running |
+| finka targets (train, `--max-usd 25`; validation, `--max-usd 1`) | about 12–16 USD with GPT-6.1-sol (0.14 USD for the 4 674 validation words) | **13.71**: train 13.57 (1 028 calls, 20 540 of 20 548 accepted, 0 failed), validation 0.14 (200 of 200) |
 | Judge round `r6` (3 arms × 583 segments, Opus 5.5) | about 4–5 USD (round 5: 10.7 USD for 6 arms) | – |
 | LUMI training, one GCD on `small-g` | `parl` took 6 h 36 min for 78 519 items; with about 20 000 more, 8–9 h: **4–4.5 GPU-hours** (0.5 per GCD-hour; the 16 h limit caps it at 8) | – |
 | LUMI benchmarks, four sets | about 1 GPU-hour | – |
@@ -80,21 +80,23 @@ GAIK's LUMI allocation: 346 of 5 000 GPU-hours used on 22 Oct 2026.
 
 ## Status / how to resume
 
-Last updated 22 Oct 2026 (checkpoint during the target run).
+Last updated 22 Oct 2026, after the training job was submitted.
 
 - [x] Branch from `main`; Border Karelia pieces ported from `dev` (`prepare_finka.py` with a reader for both Praat
       formats, `--data skn+open+lamurre+parl+finka`, `lumi.sh download|prepare finka`, finka labels in
       `fetch-labels` / `push-labels`, `prepare_targets.py --provider azure --max-usd`); `uv run pytest` passes.
-- [x] `lumi.sh push`; `download finka` (25.4 GB, done); `prepare finka` (CPU job, 4 min, done);
-      `fetch-labels` (results/labels/finka_{train,validation}.jsonl, gitignored).
-- [x] Validation targets: 200 of 200 accepted, 0.14 USD.
-- [ ] Train targets: running locally when this checkpoint was written (about 1 028 calls, about 12–16 USD
-      projected, cap 25). Finished calls are cached in `results/labels/finka_train.targets.cache.jsonl`
-      (gitignored, on the machine that ran it); rerunning the same command continues from the cache.
-- [ ] `push-labels`, training, benchmarks, judge, outcome.
+- [x] `lumi.sh push`; `download finka` (25.4 GB); `prepare finka` (CPU job, 4 min); `fetch-labels`.
+- [x] Targets with GPT-6.1-sol: train 20 540 of 20 548 accepted (8 dropped by the 30 % word-count rule), 13.57 USD;
+      validation 200 of 200, 0.14 USD. `push-labels` done (`$FIASR_DATA/finka_fi/*.targets.jsonl` on LUMI).
+- [x] **Training submitted** (job name `fiasr`, `small-g`, one GCD, 16 h limit): `whisper-large-v3-fi-r6-finka`,
+      train 99 059 items (SKN 15 042, LA-murre 15 529, FLEURS 2 704, VoxPopuli 7 504, parliament 37 740,
+      Border Karelia 20 540), validation 1 676. Expected about 8–9 h (`parl`: 6 h 36 min for 78 519), about
+      4–4.5 GPU-hours.
+- [x] **Benchmarks queued** behind it (`--dependency=afterok`, job name `fiasr`, 3 h limit each): SKN, FLEURS,
+      VoxPopuli, LA-murre with `--arm ft_whisper-large-v3-fi-r6-finka`; about 1 GPU-hour.
+- [ ] Fetch and score; apply the rule; judge round `r6` (only if the three WER conditions pass, at most 10 USD).
 
-LLM spend this round so far: 0.86 (round 5) + 0.14 (finka validation) + the train run in progress
-(8.8 USD at 700 of 1 028 calls).
+LLM spend this round: 0.86 (round 5 model choice) + 13.71 (finka targets) = **14.57 USD** of 60.
 
 Resume (Git Bash, from the repo root, either machine):
 
@@ -102,18 +104,16 @@ Resume (Git Bash, from the repo root, either machine):
 git fetch && git switch round5-finka
 set -a; . ~/.agents/env/haaga-helia/gaik/lumi.env; set +a     # LUMI_USER, LUMI_PROJECT
 L=lumi/lumi.sh
-bash $L fetch-labels        # only on a machine without results/labels/finka_*.jsonl
-T="uv run --extra judges python scripts/prepare_targets.py"
-$T normalise results/labels/finka_validation.jsonl --provider azure --max-usd 1   # cached: no new calls
-$T normalise results/labels/finka_train.jsonl --provider azure --max-usd 25       # on another machine it starts over
-bash $L push-labels         # -> $FIASR_DATA/finka_fi/{train,validation}.targets.jsonl
-FIASR_PARL_DIR=parl_train_recovery_20261020_2350 bash $L run train hf --name whisper-large-v3-fi-r6-finka \
-  --data skn+open+lamurre+parl+finka --skn-text punct --epochs 2 --lora-r 64
-bash $L status
-# after training (job name fiasr): the four test sets, then score
-for b in skn_fi fleurs_fi voxpopuli_fi lamurre_fi; do bash $L run bench hf --bench $b --arm ft_whisper-large-v3-fi-r6-finka; done
-bash $L fetch && uv run python scripts/score_benchmark.py
+bash $L status                       # the training job and the four queued benchmark jobs (all named fiasr)
+# when the benchmarks have finished:
+bash $L fetch                        # results/ back (benchmark outputs of LA-murre stay gitignored)
 bash $L fetch-model whisper-large-v3-fi-r6-finka
+uv run python scripts/score_benchmark.py
+# if the training failed, resubmit it (labels are already on LUMI) and the benchmarks after it:
+FIASR_PARL_DIR=parl_train_recovery_20261020_2350 bash $L run train hf --name whisper-large-v3-fi-r6-finka   --data skn+open+lamurre+parl+finka --skn-text punct --epochs 2 --lora-r 64
+for b in skn_fi fleurs_fi voxpopuli_fi lamurre_fi; do bash $L run bench hf --bench $b --arm ft_whisper-large-v3-fi-r6-finka; done
 ```
 
+The per-segment texts (`results/labels/finka_*.jsonl`) are gitignored; on another machine `fetch-labels` brings the
+segment lists back, and the targets are on LUMI already (the local target cache stays on the machine that made it).
 Every job of this repository is named `fiasr`; jobs with other names on the project are not ours.

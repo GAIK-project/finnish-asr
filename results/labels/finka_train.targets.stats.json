@@ -1,0 +1,16 @@
+{
+  "generated_utc": "2026-10-22T10:40:59+00:00",
+  "mode": "normalise",
+  "model": "gpt-6.1-sol",
+  "prompt_sha256": "d918400c9a50f8f1628670d6dcfd7101848261d93b58ba8faf16871235b07f50",
+  "segments": 20548,
+  "llm_target_accepted": 20540,
+  "rows_written": 20540,
+  "failed_calls": 0,
+  "usage": {
+    "input_tokens": 1194248,
+    "output_tokens": 1117893
+  },
+  "usd_estimate": 13.57,
+  "usd_this_run": 13.57
+}
