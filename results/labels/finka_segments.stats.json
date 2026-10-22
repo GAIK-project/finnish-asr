@@ -1,0 +1,29 @@
+{
+  "source": {
+    "recordings": 171,
+    "utterances": 80264,
+    "kept_segments": 20802
+  },
+  "train": {
+    "segments": 20548,
+    "hours": 58.14,
+    "words": 409542,
+    "parishes": {
+      "Ilomantsi": 3688,
+      "Impilahti": 3716,
+      "Korpiselka": 7269,
+      "Salmi": 1673,
+      "Suistamo": 2489,
+      "Suojarvi": 1713
+    }
+  },
+  "validation": {
+    "segments": 200,
+    "hours": 0.63,
+    "words": 4674,
+    "parishes": {
+      "Ilomantsi": 100,
+      "Suistamo": 100
+    }
+  }
+}
