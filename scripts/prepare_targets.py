@@ -26,11 +26,21 @@ Prompt versions: the punct prompt is the one that made results/labels/skn_*.targ
 (prompt_sha256 88232dbd...) gave four example word pairs from the LA-murre corpus; this public copy
 gives example pairs from SKN instead (segment SKN45a_Heinola_0097, CC BY 4.0), so its hash differs.
 
+Model: Claude Opus 5.5 by default (Azure Foundry, or the Anthropic API with --provider api); with
+--provider azure an OpenAI model deployed in GAIK's Azure (--model, default gpt-6.1-sol: about half
+Opus's price). It was picked on 20 Oct 2026 by running the normalise prompt on 200 SKN test segments
+and scoring the result against SKN's human standard-Finnish text: GPT-6.1-sol 12.1 % WER, Opus 14.2 %.
+--max-usd stops sending new calls once the estimated spend of this run reaches the limit (prices in
+PRICES, per million tokens); finished calls are cached and the next run continues from them.
+
 Usage (from the repo root):
     uv run --extra judges python scripts/prepare_targets.py punct results/labels/skn_train.jsonl
     uv run --extra judges python scripts/prepare_targets.py normalise results/labels/lamurre_train.jsonl
+    uv run --extra judges python scripts/prepare_targets.py normalise results/labels/finka_train.jsonl \
+        --provider azure --max-usd 25
     add --limit 100 for a trial. Needs ANTHROPIC_FOUNDRY_RESOURCE and ANTHROPIC_FOUNDRY_API_KEY in the
-    repo-root .env, or ANTHROPIC_API_KEY with --provider api.
+    repo-root .env, ANTHROPIC_API_KEY with --provider api, or AZURE_ENDPOINT and AZURE_API_KEY with
+    --provider azure.
 """
 
 from __future__ import annotations
@@ -56,6 +66,11 @@ load_repo_env(Path(__file__))
 DEFAULT_MODEL = MODEL = "claude-opus-5-5"
 ENV = ("ANTHROPIC_FOUNDRY_RESOURCE", "ANTHROPIC_FOUNDRY_API_KEY")
 ENV_API = ("ANTHROPIC_API_KEY",)
+ENV_AZURE = ("AZURE_ENDPOINT", "AZURE_API_KEY")
+AZURE_MODEL = "gpt-6.1-sol"
+# USD per million input / output tokens (Anthropic's list price for Opus 5.5; Azure Global Standard for
+# gpt-6.1-sol, 20 Oct 2026), for --max-usd and the stats only
+PRICES = {"claude-opus-5-5": (4.0, 20.0), "gpt-6.1-sol": (2.0, 10.0)}
 PROVIDER = "foundry"
 BATCH = 20
 PROMPTS = {
@@ -119,6 +134,42 @@ def accept(mode: str, source: str, target: str) -> bool:
 
 
 def call(mode: str, batch: list[dict]) -> dict:
+    if mode == "review":
+        prompt = "\n".join(f"{i + 1}. DIALECT: {row['ref']}\n   DRAFT: {row['draft']}" for i, row in enumerate(batch))
+    else:
+        prompt = "\n".join(f"{i + 1}. {row['ref']}" for i, row in enumerate(batch))
+    prompt += f"\n\nReturn exactly {len(batch)} lines, n = 1 to {len(batch)}."
+    text, usage = call_azure(mode, prompt) if PROVIDER == "azure" else call_claude(mode, prompt)
+    out = Lines.model_validate_json(text)
+    texts = {line.n: line.text.strip() for line in out.lines}
+    return {
+        "ids": [row["id"] for row in batch],
+        "targets": [texts.get(i + 1, "") for i in range(len(batch))],
+        "usage": usage,
+    }
+
+
+def call_azure(mode: str, prompt: str) -> tuple[str, dict]:
+    """An OpenAI reasoning model in Azure (v1 endpoint; the deployment name is the model), schema enforced."""
+    from openai import OpenAI
+
+    base = os.environ[ENV_AZURE[0]].rstrip("/") + "/openai/v1"
+    client = OpenAI(base_url=base, api_key=os.environ[ENV_AZURE[1]], timeout=600, max_retries=4)
+    resp = client.chat.completions.create(
+        model=MODEL,
+        messages=[{"role": "system", "content": PROMPTS[mode]}, {"role": "user", "content": prompt}],
+        response_format={"type": "json_schema", "json_schema": {"name": "Lines", "schema": SCHEMA, "strict": True}},
+        reasoning_effort=EFFORT.get(mode, "low"),
+        max_completion_tokens=16000,
+    )
+    choice = resp.choices[0]
+    if choice.finish_reason != "stop":
+        raise RuntimeError(f"finish_reason={choice.finish_reason}")
+    u = resp.usage
+    return choice.message.content or "", {"input_tokens": u.prompt_tokens, "output_tokens": u.completion_tokens}
+
+
+def call_claude(mode: str, prompt: str) -> tuple[str, dict]:
     import anthropic
 
     if PROVIDER == "api":
@@ -127,29 +178,23 @@ def call(mode: str, batch: list[dict]) -> dict:
         client = anthropic.AnthropicFoundry(
             resource=os.environ[ENV[0]], api_key=os.environ[ENV[1]], max_retries=4, timeout=600
         )
-    if mode == "review":
-        prompt = "\n".join(f"{i + 1}. DIALECT: {row['ref']}\n   DRAFT: {row['draft']}" for i, row in enumerate(batch))
-    else:
-        prompt = "\n".join(f"{i + 1}. {row['ref']}" for i, row in enumerate(batch))
     resp = client.messages.create(
         model=MODEL,
         max_tokens=16000,
         system=PROMPTS[mode],
-        messages=[
-            {"role": "user", "content": prompt + f"\n\nReturn exactly {len(batch)} lines, n = 1 to {len(batch)}."}
-        ],
+        messages=[{"role": "user", "content": prompt}],
         thinking={"type": "adaptive"},
         output_config={"effort": EFFORT.get(mode, "low"), "format": {"type": "json_schema", "schema": SCHEMA}},
     )
     if resp.stop_reason != "end_turn":
         raise RuntimeError(f"stop_reason={resp.stop_reason}")
-    out = Lines.model_validate_json("".join(b.text for b in resp.content if b.type == "text"))
-    texts = {line.n: line.text.strip() for line in out.lines}
-    return {
-        "ids": [row["id"] for row in batch],
-        "targets": [texts.get(i + 1, "") for i in range(len(batch))],
-        "usage": {"input_tokens": resp.usage.input_tokens, "output_tokens": resp.usage.output_tokens},
-    }
+    text = "".join(b.text for b in resp.content if b.type == "text")
+    return text, {"input_tokens": resp.usage.input_tokens, "output_tokens": resp.usage.output_tokens}
+
+
+def usd(usage: dict) -> float:
+    price_in, price_out = PRICES.get(MODEL, (0.0, 0.0))
+    return (usage["input_tokens"] * price_in + usage["output_tokens"] * price_out) / 1e6
 
 
 def main() -> int:
@@ -157,15 +202,23 @@ def main() -> int:
     parser.add_argument("mode", choices=list(PROMPTS))
     parser.add_argument("input", type=Path, help="JSONL, relative to the repository root or absolute.")
     parser.add_argument(
-        "--provider", choices=["foundry", "api"], default="foundry", help="Claude via Azure Foundry or Anthropic API."
+        "--provider",
+        choices=["foundry", "api", "azure"],
+        default="foundry",
+        help="Claude via Azure Foundry or the Anthropic API, or an OpenAI model in Azure.",
     )
+    parser.add_argument("--max-usd", type=float, help="Stop sending calls once this run's estimated spend reaches it.")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--workers", type=int, default=8)
-    parser.add_argument("--model", default=DEFAULT_MODEL, help="Claude model id (punct: claude-haiku-5-5 is enough).")
+    parser.add_argument(
+        "--model",
+        help=f"Default {DEFAULT_MODEL}, or {AZURE_MODEL} with --provider azure (punct: claude-haiku-5-5 is enough).",
+    )
     args = parser.parse_args()
     global PROVIDER, MODEL
-    PROVIDER, MODEL = args.provider, args.model
-    env = ENV_API if PROVIDER == "api" else ENV
+    PROVIDER = args.provider
+    MODEL = args.model or (AZURE_MODEL if PROVIDER == "azure" else DEFAULT_MODEL)
+    env = {"api": ENV_API, "azure": ENV_AZURE}.get(PROVIDER, ENV)
 
     src = args.input if args.input.is_absolute() else PROJECT_ROOT / args.input
     rows = [json.loads(line) for line in src.read_text(encoding="utf-8").splitlines() if line.strip()]
@@ -178,7 +231,7 @@ def main() -> int:
     if cache_path.exists():
         for line in cache_path.read_text(encoding="utf-8").splitlines():
             rec = json.loads(line)
-            if rec["prompt_sha256"] == prompt_sha:
+            if rec["prompt_sha256"] == prompt_sha and rec.get("model", MODEL) == MODEL:
                 done.update(zip(rec["ids"], rec["targets"], strict=True))
                 usage = {k: usage[k] + rec["usage"][k] for k in usage}
     todo = [r for r in rows if r["id"] not in done]
@@ -186,10 +239,11 @@ def main() -> int:
     if batches and any(not os.environ.get(e) for e in env):
         print(f"[skip] missing {', '.join(e for e in env if not os.environ.get(e))}")
         return 1
-    print(f"{len(rows)} segments, {len(todo)} to do in {len(batches)} calls", flush=True)
-    failures = 0
+    print(f"{len(rows)} segments, {len(todo)} to do in {len(batches)} calls ({MODEL})", flush=True)
+    failures, run_usage, stopped = 0, {"input_tokens": 0, "output_tokens": 0}, False
     with ThreadPoolExecutor(args.workers) as pool, cache_path.open("a", encoding="utf-8", newline="\n") as cache:
-        for n, fut in enumerate(as_completed([pool.submit(call, args.mode, b) for b in batches]), 1):
+        futures = [pool.submit(call, args.mode, b) for b in batches]
+        for n, fut in enumerate(as_completed(futures), 1):
             try:
                 rec = fut.result()
             except Exception as exc:  # noqa: BLE001  (a failed batch is retried on the next run)
@@ -198,10 +252,15 @@ def main() -> int:
                 continue
             done.update(zip(rec["ids"], rec["targets"], strict=True))
             usage = {k: usage[k] + rec["usage"][k] for k in usage}
-            cache.write(json.dumps({**rec, "prompt_sha256": prompt_sha}, ensure_ascii=False) + "\n")
+            run_usage = {k: run_usage[k] + rec["usage"][k] for k in run_usage}
+            cache.write(json.dumps({**rec, "prompt_sha256": prompt_sha, "model": MODEL}, ensure_ascii=False) + "\n")
             cache.flush()
             if n % 50 == 0:
-                print(f"{n}/{len(batches)} calls, tokens {usage}", flush=True)
+                print(f"{n}/{len(batches)} calls, tokens {usage}, this run {usd(run_usage):.2f} USD", flush=True)
+            if args.max_usd and not stopped and usd(run_usage) >= args.max_usd:
+                stopped = True
+                cancelled = sum(f.cancel() for f in futures)
+                print(f"[stop] {usd(run_usage):.2f} USD reached --max-usd; {cancelled} calls not sent", flush=True)
 
     out_rows, accepted = [], 0
     for r in rows:
@@ -225,6 +284,8 @@ def main() -> int:
         "rows_written": len(out_rows),
         "failed_calls": failures,
         "usage": usage,
+        "usd_estimate": round(usd(usage), 2),
+        "usd_this_run": round(usd(run_usage), 2),
     }
     Path(f"{stem}.targets.stats.json").write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8", newline="\n")
     if batches:

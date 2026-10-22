@@ -11,6 +11,10 @@ Training data, both freely licensed and already on the Hub:
                                   target = its dialect transcript rewritten in standard Finnish by
                                   an LLM (prepare_targets.py normalise). This trains the model of
                                   the `la-murre` revision; its texts are never published.
+    Border Karelia (--data ...+finka)  dialect interviews from six Border Karelian parishes, CC BY 4.0
+                                  (Raja-Karjalan korpus, Kotus via Kielipankki), cut by prepare_finka.py;
+                                  target = its dialect transcript rewritten in standard Finnish by an LLM
+                                  (prepare_targets.py normalise), as for LA-murre.
 With --timestamps P a share P of the SKN items is trained with Whisper's timestamp tokens instead
 of <|notimestamps|>: "<|0.00|> text<|1.84|><|1.84|> text<|5.60|>", one pair per sentence, the times
 from SKN's annotation (prepare_timestamps.py -> results/labels/skn_parts.jsonl, which
@@ -53,7 +57,8 @@ results/labels/ (`lumi.sh push-labels` copies them there; prepare_targets.py mad
 
     python finetune_whisper.py --download                  # login node: the training data
     python finetune_whisper.py --name whisper-large-v3-fi-pilot [--base openai/whisper-large-v3]
-        [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N] [--data open|skn|skn+open|skn-all+open|skn+open+lamurre]
+        [--epochs 2] [--lr 1e-4] [--batch 8] [--limit N]
+        [--data open|skn|skn+open|skn-all+open|skn+open+lamurre[+parl[+finka]]]
         [--skn-text plain|punct] [--timestamps 0.5] [--region-prompt 0.5] [--open-repeat 2]
 
 Output: $FIASR_MODELS/<name>/ (merged model, processor, adapter/, train_log.json). `lumi.sh fetch-model
@@ -205,6 +210,28 @@ def parl() -> list[dict]:
     ]
 
 
+def finka(split: str) -> list[dict]:
+    """Border Karelia segments (prepare_finka.py) with the LLM-written standard-Finnish text (prepare_targets.py
+    normalise: <split>.targets.jsonl)."""
+    rows = (DATA / "finka_fi" / f"{split}.targets.jsonl").read_text(encoding="utf-8").splitlines()
+    d = DATA / "finka_fi" / split
+    return [
+        {"source": "finka", "id": r["id"], "path": str(d / f"{r['id']}.wav"), "text": r["target"]}
+        for r in map(json.loads, rows)
+    ]
+
+
+DATA_CHOICES = [
+    "open",
+    "skn",
+    "skn+open",
+    "skn-all+open",
+    "skn+open+lamurre",
+    "skn+open+lamurre+parl",
+    "skn+open+lamurre+parl+finka",
+]
+
+
 def read_audio(item: dict):
     import soundfile as sf
 
@@ -220,11 +247,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--download", action="store_true")
     parser.add_argument("--name", default="whisper-large-v3-fi-pilot")
-    parser.add_argument(
-        "--data",
-        choices=["open", "skn", "skn+open", "skn-all+open", "skn+open+lamurre", "skn+open+lamurre+parl"],
-        default="open",
-    )
+    parser.add_argument("--data", choices=DATA_CHOICES, default="open")
     parser.add_argument("--skn-text", choices=["plain", "punct"], default="plain")
     parser.add_argument("--base", default="openai/whisper-large-v3")
     parser.add_argument("--epochs", type=int, default=2)
@@ -346,13 +369,17 @@ def main() -> int:
         val_items += fleurs("dev") + voxpopuli("validation")
     if "parl" in args.data:
         train_items += parl()
+    if "finka" in args.data:
+        train_items += finka("train")
+        val_items += finka("validation")
     random.shuffle(train_items)
     rare = rare_vocab([it["text"] for it in train_items]) if args.glossary_prompt else set()
     rare_pool = sorted(rare)
     if args.limit:
         train_items, val_items = train_items[: args.limit], val_items[: max(16, args.limit // 10)]
     counts = {
-        s: sum(1 for it in train_items if it["source"] == s) for s in ("skn", "lamurre", "fleurs", "voxpopuli", "parl")
+        s: sum(1 for it in train_items if it["source"] == s)
+        for s in ("skn", "lamurre", "fleurs", "voxpopuli", "parl", "finka")
     }
     if args.timestamps:
         usable = sum(1 for it in train_items if timestamped(it["text"], it.get("parts")))

@@ -3,8 +3,10 @@
 # with ssh and tar. First: export LUMI_USER=<CSC user name> LUMI_PROJECT=project_<number>
 #
 #   lumi/lumi.sh push                  copy scripts/, lumi/ and the 16 kHz clip to scratch
-#   lumi/lumi.sh push-labels           copy the SKN training targets, sentence times and long-form windows
-#   lumi/lumi.sh fetch-labels          copy prepare_skn.py's segment lists back into results/labels/ (gitignored)
+#   lumi/lumi.sh push-labels           copy the SKN training targets, sentence times and long-form windows, and
+#                                      the Border Karelia targets (results/labels/finka_*.targets.jsonl, gitignored)
+#   lumi/lumi.sh fetch-labels          copy the segment lists of prepare_skn.py and prepare_finka.py back into
+#                                      results/labels/ (gitignored)
 #   lumi/lumi.sh push-dental           copy the ten dental-webinar clips (data/dental10/*.16k.npy + .txt, gitignored)
 #   lumi/lumi.sh fetch-audio <bench>   copy a test set's WAVs (fleurs_fi, voxpopuli_fi, lamurre_fi) into data/<bench>/
 #                                      (gitignored), for run_api_benchmark.py
@@ -26,7 +28,10 @@
 #   lumi/lumi.sh download lamurre         all LA-murre audio, 69 GB, CC BY-ND (background; a DONE file when ready)
 #   lumi/lumi.sh prepare lamurre-train    cut LA-murre training segments (CPU job, prepare_lamurre.py --train)
 #   lumi/lumi.sh prepare lamurre-regions  LA-murre's dialect region per recording, for --region-prompt (login node)
-#   lumi/lumi.sh run train hf [args]      LoRA fine-tune of Whisper (finetune_whisper.py, 16 h limit)
+#   lumi/lumi.sh download finka           Border Karelia dialect corpus, 25 GB, CC BY 4.0 (background; a DONE file when ready)
+#   lumi/lumi.sh prepare finka            cut it into training segments (CPU job, prepare_finka.py)
+#   lumi/lumi.sh run train hf [args]      LoRA fine-tune of Whisper (finetune_whisper.py, 16 h limit); a local
+#                                         FIASR_PARL_DIR (the parliament set's directory under data/) is passed on
 #   lumi/lumi.sh run timestamps hf --arm A  timestamps and long-form decoding on SKN (eval_timestamps.py, 3 h)
 #                                      (--fallback: add the temperature-fallback long-form decode)
 #   lumi/lumi.sh fetch-model <name> [--adapter]  copy a fine-tune's train_log.json (and with --adapter its
@@ -68,6 +73,9 @@ case $cmd in
     for split in train validation heldout; do
       if [ -f results/labels/skn_$split.targets.jsonl ]; then copy_to results/labels/skn_$split.targets.jsonl data/skn_fi/$split.targets.jsonl; fi
     done
+    for split in train validation; do
+      if [ -f results/labels/finka_$split.targets.jsonl ]; then copy_to results/labels/finka_$split.targets.jsonl data/finka_fi/$split.targets.jsonl; fi
+    done
     copy_to results/labels/skn_parts.jsonl data/skn_fi/parts.jsonl
     copy_to results/labels/skn_longform.jsonl data/skn_longform.jsonl ;;
   push-dental)
@@ -85,6 +93,11 @@ case $cmd in
       ssh "$H" "test -f $R/data/skn_fi/$split.jsonl" || continue
       ssh "$H" "cat $R/data/skn_fi/$split.jsonl" > results/labels/skn_$split.jsonl
       echo "  $R/data/skn_fi/$split.jsonl -> results/labels/skn_$split.jsonl"
+    done
+    for split in train validation; do
+      ssh "$H" "test -f $R/data/finka_fi/$split.jsonl" || continue
+      ssh "$H" "cat $R/data/finka_fi/$split.jsonl" > results/labels/finka_$split.jsonl
+      echo "  $R/data/finka_fi/$split.jsonl -> results/labels/finka_$split.jsonl"
     done ;;
   setup)
     ssh "$H" "cd $R && LUMI_PROJECT=$LP bash lumi/setup.sh $* 2>&1 | grep -E ' ok |rror' || true" ;;
@@ -101,6 +114,9 @@ case $cmd in
       lamurre) ssh -f "$H" "mkdir -p $R/data/lamurre_raw && cd $R/data/lamurre_raw && nohup sh -c 'for p in hame-kai \
                kare-karp kess-pohe pohki-sate satl-som uusi-varp eaf; do f=la-murre_wav_\$p.zip; [ \$p = eaf ] && f=la-murre_eaf.zip; \
                wget -q -c https://www.kielipankki.fi/download/la-murre/audio/\$f; done; echo done > DONE' > download.log 2>&1 < /dev/null &" ;;
+      finka) ssh -f "$H" "mkdir -p $R/data/finka_raw && cd $R/data/finka_raw && nohup sh -c 'wget -q -c \
+               https://www.kielipankki.fi/download/finka/.zip/Raja-Karjalan_korpus_dl.zip; echo done > DONE' \
+               > download.log 2>&1 < /dev/null &" ;;
       skn)   ssh "$H" "mkdir -p $R/data/skn_raw && cd $R/data/skn_raw && for p in 01-10 11-20 21-30 31-40 41-50; do \
                wget -q -c https://www.kielipankki.fi/download/SKN/skn_\$p.zip; done; ls -la" ;;
     esac ;;
@@ -114,7 +130,7 @@ case $cmd in
       *) echo "clip, bench, train or timestamps"; exit 2 ;;
     esac
     case " $* " in *" --bench "*) [ $what = clip ] && limit=03:00:00 ;; esac   # ten 180 s clips per arm
-    ssh "$H" "cd $R && sbatch --account=$LP --time=$limit --export=ALL,FIASR_SCRIPT=$script,LUMI_PROJECT=$LP lumi/job.sbatch $env $*" ;;
+    ssh "$H" "cd $R && sbatch --account=$LP --time=$limit --export=ALL,FIASR_SCRIPT=$script,LUMI_PROJECT=$LP${FIASR_PARL_DIR:+,FIASR_PARL_DIR=$FIASR_PARL_DIR} lumi/job.sbatch $env $*" ;;
   status)
     ssh "$H" "squeue --me --name=fiasr -o '%.10i %.9T %.10M %.10l'; cd $R && for f in \$(ls -t fiasr-*.out 2>/dev/null | head -3); do echo \"== \$f\"; grep -E '^\[(run|FAIL| ok |skip)' \$f | cut -c1-300 | tail -8; done" ;;
   fetch)
@@ -127,6 +143,7 @@ case $cmd in
       lamurre) in_container "python scripts/prepare_lamurre.py" ;;
       lamurre-train) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP='prepare_lamurre.py --train' lumi/prep.sbatch" ;;
       lamurre-regions) in_container "python scripts/dialect_regions.py" ;;   # LA-murre's region per recording (VRT)
+      finka) ssh "$H" "cd $R && sbatch --account=$LP --export=ALL,LUMI_PROJECT=$LP,FIASR_PREP=prepare_finka.py lumi/prep.sbatch" ;;
     esac ;;
   fetch-model)
     name=${1:?model name}
@@ -150,5 +167,5 @@ case $cmd in
       echo "removed this repository's weights from $S/hf-cache"
     fi
     ssh "$H" "rm -rf $R; echo removed $R" ;;
-  *) sed -n '2,27p' "$0" ;;
+  *) sed -n '2,43p' "$0" ;;
 esac
