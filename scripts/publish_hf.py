@@ -12,7 +12,7 @@ internet and the files), in the hf environment:
     python scripts/publish_hf.py model --revision parl         # + 72 h of parliament speech -> "parl"
     python scripts/publish_hf.py dataset    # SKN segments, parquet with audio -> GAIK-project/skn-finnish-dialects-asr
     python scripts/publish_hf.py check      # the model, downloaded back from the Hub, on a few SKN test segments
-    uv run --extra hub python scripts/publish_hf.py cards              # the three cards and the chart (anywhere)
+    uv run --extra hub python scripts/publish_hf.py cards              # model/revision/dataset cards and charts
     uv run --extra hub python scripts/publish_hf.py dialect <eaf dir>  # fill text_dialect in the parquet shards
 
 Repositories are created PRIVATE; making them public is a separate, manual decision. The cards come

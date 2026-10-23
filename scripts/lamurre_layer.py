@@ -39,6 +39,8 @@ from prepare_lamurre import BASE, RECORDINGS, TRAIN_EXCLUDE, VALIDATION, segment
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "lamurre_layer"
 DEFAULT_BY = "claude-opus-5-5"
+# The VRT metadata omits the recording number for this EAF/audio identifier.
+REGION_ALIASES = {"varp_laptl1": "varp_laptl"}
 TARGETS = [
     ROOT / "data" / "lamurre_fi" / "train.targets.jsonl",
     ROOT / "data" / "lamurre_fi" / "validation.targets.jsonl",
@@ -133,6 +135,11 @@ def collect() -> int:
     return 0
 
 
+def recording_region(recording: str, regions: dict[str, str]) -> str:
+    """Resolve documented VRT/EAF identifier differences; exact metadata wins."""
+    return regions.get(recording, regions.get(REGION_ALIASES.get(recording, ""), "?"))
+
+
 def package() -> int:
     rows = [json.loads(line) for line in (OUT / "segments.jsonl").read_text(encoding="utf-8").splitlines()]
     regions = lamurre_regions()
@@ -157,7 +164,7 @@ def package() -> int:
         "hours_with_standard_text": round(sum(r["end"] - r["start"] for r in done) / 3600, 2),
         "written_by": dict(Counter(r["target_by"] for r in done)),
         "by_role": dict(Counter(r["role"] for r in done)),
-        "by_region": dict(Counter(regions.get(r["recording"], "?") for r in done)),
+        "by_region": dict(Counter(recording_region(r["recording"], regions) for r in done)),
     }
     (pkg / "README.md").write_text(
         README.format(

@@ -287,7 +287,7 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | **Ours: main model (parl)** | 19.4 | 57.4 | 7.6 | 11.1 | 8.5 | 1.8 | 0.98 |
 | **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 9.2 | 1.8 | 0.96 |
 | **Ours: first model (v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 11.4 | 1.7 | 0.98 |
-| **Ours: timestamps version** | 21.4 | 58.1 | 7.4 | 11.2 | – | 1.7 | 0.98 |
+| **Ours: timestamps version** | 21.4 | 58.1 | 7.4 | 11.2 | 8.5 | 1.7 | 0.98 |
 | **Ours: round 1** | 22.2 | 57.9 | 7.8 | 10.6 | – | 1.9 | 0.96 |
 | Gemini 3.5 Flash (API, asked for standard Finnish) | 34.7 | 61.8 | – | – | – | – | – |
 | Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 9.3 | 1.7 | 0.98 |
@@ -302,6 +302,11 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | – | 1.4 | 0.88 |
 | Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | – | 5.8 | 0.34 |
 <!-- benchmark-table:end -->
+
+A dash means no comparable measurement is retained here. `all-skn` has seen every SKN
+municipality, so its SKN cell intentionally stays blank rather than being presented as
+held-out accuracy. The timestamp variant's parliament result (962 segments, WER 8.5%)
+was restored from an already completed and independently checked run; it was not rerun.
 
 Corpus WER after lower-casing and removing punctuation; seconds per clip are FLEURS GPU time on one AMD MI250X
 (API services: request wall time). Bold rows are ours. Parliament: the Aalto corpus's held-out 2016 test speakers

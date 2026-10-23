@@ -1,0 +1,9 @@
+{
+  "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+  "model": "whisper-large-v3-fi-skn-punct-ts",
+  "gpu": "AMD Instinct MI250X",
+  "utterances": 962,
+  "output_sha256": "4d781d422161cb6e6da4f5f1015ac308cf8190aecc8a07daf182965ceacb6e09",
+  "adoption": "Already completed and independently recounted retained output; no rerun",
+  "exact_baseline_reference_ids": true
+}

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T16:45:57+00:00",
+  "generated_utc": "2026-10-23T19:18:55+00:00",
   "benchmark": "Finnish parliament 2016-test/unseen, 962 segments",
   "arms": [
     {
@@ -30,6 +30,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.325,
       "model": "whisper-large-v3-fi-parl",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "ft_whisper-large-v3-fi-skn-punct-ts",
+      "utterances": 962,
+      "WER": 8.4931,
+      "CER": 3.3154,
+      "SUB": 4.7332,
+      "DEL": 2.2768,
+      "INS": 1.4831,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.344,
+      "label": "**Ours: timestamps version**",
+      "model": "whisper-large-v3-fi-skn-punct-ts",
       "gpu": "AMD Instinct MI250X"
     },
     {

@@ -10,6 +10,9 @@ the clip runs' models and settings (gaik-evals run_asr.py, scripts/run_api_asr.p
     fleurs_fi, voxpopuli_fi, lamurre_fi
                   the audio the open models were run on, fetched from LUMI into data/<bench>/ (gitignored);
                   ids and references come from results/benchmarks/<bench>/hf_whisper-large-v3.jsonl
+    parl_fi, parl_terms_fi
+                  Finnish parliament audio under data/<bench>/test/; ids and references use the same
+                  result-file layout. FIASR_DATA overrides the local data root for all local sets.
 
 Arms:
 
@@ -36,7 +39,8 @@ Usage (from the repo root; the keys as for run_api_asr.py in the repo-root .env,
 AZURE_ENDPOINT, AZURE_API_VERSION for the Azure arms):
     uv run --extra api-asr --extra judges --extra hub python scripts/run_api_benchmark.py --list
     uv run --extra api-asr --extra judges --extra hub python scripts/run_api_benchmark.py --bench B --arm ID --limit 20
-    uv run --extra api-asr --extra judges --extra hub python scripts/run_api_benchmark.py --bench B [--arm ID] [--workers 4]
+    uv run --extra api-asr --extra judges --extra hub python scripts/run_api_benchmark.py --bench B
+        [--arm ID] [--workers 4]
 """
 
 from __future__ import annotations
@@ -62,13 +66,15 @@ from provenance import build_run_metadata, load_repo_env, write_run_metadata  # 
 load_repo_env(Path(__file__))
 
 DATASET, REVISION = "GAIK-project/skn-finnish-dialects-asr", "ee98f5e16dcb0986a5514b787bee100962be3bf6"
-DATA = RESULTS_DIR.parent / "data"
+DATA = Path(os.environ.get("FIASR_DATA", RESULTS_DIR.parent / "data"))
 BENCHES = {
     "skn_fi": "SKN dialect test, 10 held-out municipalities, human standard-Finnish reference",
     "dental10_fi": "Ten 180 s Finnish dental-webinar clips (HY QAD-1 set A), HY's Finnish references",
     "fleurs_fi": "FLEURS Finnish test, read Wikipedia sentences",
     "voxpopuli_fi": "VoxPopuli Finnish test, European Parliament speech",
     "lamurre_fi": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
+    "parl_fi": "Finnish parliament 2016-test/unseen",
+    "parl_terms_fi": "Finnish parliament held-out segments with tagged names, brands, acronyms and terms",
 }
 LONG_S = 55.0  # Chirp's synchronous recognize takes at most 60 s
 GEMINI_PROMPT = (  # the clip's prompt, gaik-evals run_asr.py
@@ -87,6 +93,10 @@ _local = threading.local()
 
 def load_items(bench: str, limit: int | None) -> list[dict]:
     """[{"id", "ref", "wav": audio bytes, "mime"}] in the order of the open models' result file."""
+    if bench not in BENCHES:
+        raise ValueError(f"unknown benchmark: {bench}")
+    if limit is not None and limit < 0:
+        raise ValueError("limit must be non-negative")
     if bench == "skn_fi":
         import pyarrow.parquet as pq
         from huggingface_hub import hf_hub_download
@@ -111,9 +121,10 @@ def load_items(bench: str, limit: int | None) -> list[dict]:
         if not ref_file.exists():
             raise SystemExit(f"{ref_file} is needed for the ids and references (LA-murre's stay local)")
         items = []
-        for line in ref_file.read_text(encoding="utf-8").splitlines():
+        audio_root = DATA / bench / "test" if bench in {"parl_fi", "parl_terms_fi"} else DATA / bench
+        for line in ref_file.read_text(encoding="utf-8").splitlines()[:limit]:
             row = json.loads(line)
-            wav = DATA / bench / row["id"]
+            wav = audio_root / row["id"]
             if not wav.exists():
                 raise SystemExit(f"missing {wav}: fetch the {bench} audio from LUMI first")
             items.append({"id": row["id"], "ref": row["ref"], "wav": wav.read_bytes(), "mime": "audio/wav"})
@@ -284,7 +295,8 @@ ARMS = {
     ),
     "google_chirp-3": (
         "chirp_3", "google-speech-v2", VERTEX_ENV, chirp,
-        {"language_codes": ["fi-FI"], "location": "eu", "punctuation": True, "long_items": "15-25 s quiet-point pieces"},
+        {"language_codes": ["fi-FI"], "location": "eu", "punctuation": True,
+         "long_items": "15-25 s quiet-point pieces"},
     ),
 }  # fmt: skip
 

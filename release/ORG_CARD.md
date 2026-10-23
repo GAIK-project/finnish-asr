@@ -16,7 +16,8 @@ University of Helsinki and Tampere University, co-funded by the European Union (
 **Finnish dialect speech-to-text**
 
 - 🤗 [whisper-large-v3-fi-dialects](https://huggingface.co/GAIK-project/whisper-large-v3-fi-dialects): Whisper
-  large-v3 fine-tuned on Finnish dialect interviews. Dialect test word error rate 40.4 % → 21.1 %.
+  large-v3 fine-tuned on Finnish dialect interviews and parliament speech. The current main model's
+  SKN dialect test word error rate is 40.4 % → **19.4 %**; the original `v1.0` remains available at 21.1 %.
 - 🗂️ [skn-finnish-dialects-asr](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr): its
   training and test data, Finnish dialect interviews from 50 municipalities (CC BY 4.0).
 - 🔊 [Listen and compare](https://gaik-project.github.io/finnish-asr/listen.html) · 📖 The story:
