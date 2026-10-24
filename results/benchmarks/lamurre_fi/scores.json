@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T16:45:57+00:00",
+  "generated_utc": "2026-10-24T15:00:42+00:00",
   "benchmark": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
   "arms": [
     {
@@ -483,6 +483,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "CER": 22.3698,
+      "DEL": 12.9475,
+      "INS": 1.5092,
+      "SUB": 49.5149,
+      "WER": 63.9716,
+      "arm_id": "hf_orukeet",
+      "empty_hyps": 8,
+      "ref_words": 17625,
+      "seconds_per_utterance": 0.045,
+      "utterances": 583,
+      "label": "Orukeet (Parakeet v3 fine-tune)",
+      "model": "oruk/orukeet",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "nemo_canary-1b-v2",
       "label": "NVIDIA Canary 1B v2",
       "utterances": 583,
@@ -495,6 +510,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 0.341,
       "model": "nvidia/canary-1b-v2",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "CER": 25.8699,
+      "DEL": 15.478,
+      "INS": 1.8043,
+      "SUB": 49.4184,
+      "WER": 66.7007,
+      "arm_id": "hf_parakeet-tdt-0.6b-v3",
+      "empty_hyps": 6,
+      "ref_words": 17625,
+      "seconds_per_utterance": 0.213,
+      "utterances": 583,
+      "label": "NVIDIA Parakeet TDT 0.6B v3",
+      "model": "nvidia/parakeet-tdt-0.6b-v3",
       "gpu": "AMD Instinct MI250X"
     },
     {

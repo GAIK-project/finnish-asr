@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-23T19:54:37.222714+00:00",
+  "mode": "read-only CPU publication-input validation",
+  "source_audio_splits": {
+    "train": {
+      "rows": 15042,
+      "municipalities": 38,
+      "wav_headers_and_payloads_verified": 15042,
+      "empty_dialect_rows": 43,
+      "text_sources": {
+        "llm-punctuation": 15024,
+        "human": 18
+      },
+      "manifest_sha256": "5b9fa36c415e980c28dba288997e6aa6e4e1321e928d7b42af75ddf77c8833c5",
+      "targets_sha256": "dc89c6ad54188d8e6377d0ce03d7ecaf69780b195071bb2b5ccd0bcc0b08b0f0",
+      "ordered_audio_identity_sha256": "dd1e21b7ebac0a73f4843742d884be18f8c78f76064d2f156fb447f388b331cb",
+      "test_sampling_10x60": true
+    },
+    "validation": {
+      "rows": 200,
+      "municipalities": 2,
+      "wav_headers_and_payloads_verified": 200,
+      "empty_dialect_rows": 0,
+      "text_sources": {
+        "llm-punctuation": 200
+      },
+      "manifest_sha256": "782ea86c4b2a76adcfb8e11bc4a274d908db2cf9d238fbb987126892415ebc98",
+      "targets_sha256": "548ff564c041a3a04c5328fbcc778f9c57afe1834581b21d649caaa65d5728ad",
+      "ordered_audio_identity_sha256": "4fca5fccced0b491d2fdc758efb95fa51d2dcaf4a738b11c5dd67d64b918e1c3",
+      "test_sampling_10x60": true
+    },
+    "test": {
+      "rows": 600,
+      "municipalities": 10,
+      "wav_headers_and_payloads_verified": 600,
+      "empty_dialect_rows": 0,
+      "text_sources": {
+        "human": 600
+      },
+      "manifest_sha256": "e545304076aaa2dd7f636f55db516e45942075ac96605e5f221d6837963f2f0a",
+      "targets_sha256": null,
+      "ordered_audio_identity_sha256": "1af5cf1674d4383149cff21244cdc9b1bcb09f436d989bf0d06bf6da0025e3c2",
+      "test_sampling_10x60": true
+    }
+  },
+  "published_parquet": {
+    "verified": true,
+    "shards": 13,
+    "rows": 15842,
+    "sha256": {
+      "train-00000-of-00011.parquet": "0c998ce9439c69ecfd3eadaf2f6ae18f5b8f5e76208f788d758972d73078c87f",
+      "train-00001-of-00011.parquet": "e1eef9b42c1d37ceebd795a5230657c6c139da13f5abcea1102b615db75ac5e5",
+      "train-00002-of-00011.parquet": "276b0e6ed946ed8bea63e967c9aaa8b6170b68b0c970ddd5c6feff6221b370f1",
+      "train-00003-of-00011.parquet": "29cde7d5f4e37892381cd6279ec2b8708bdce921af7ab0ffab9b7d92330cc006",
+      "train-00004-of-00011.parquet": "a2efa7b6f0d3b9a1cebb4b4ab1adfa56bb5ccfc24511a5f49529172b50a865c1",
+      "train-00005-of-00011.parquet": "83241d39cf0b237c52b057b13f8992f91688b546dbdbc76bbd77931a541b8d21",
+      "train-00006-of-00011.parquet": "02feda26b4d467b597667fa0fe687ba064178f1055079177543364d5f53fa432",
+      "train-00007-of-00011.parquet": "a1603b3e342c98026b0f5a46479bf7bbbe0ef793fa08dcd0b8c540877539c75f",
+      "train-00008-of-00011.parquet": "fd150568535e73dc9e6ef4c1cc1ff560201614ff31b8ea85720594238ef24754",
+      "train-00009-of-00011.parquet": "5f0d48fe6c38a13f03888577bbb9626043127e1be61fdd466dc1e548b17f20ea",
+      "train-00010-of-00011.parquet": "39b29e4227fe1eafcf78e72389d6b700c9c44b87d87367574f8551e81195f085",
+      "validation-00000-of-00001.parquet": "7a2ea33d00168b4b0c3dcbf3fd4f5a0efa51ddbebbad96d30de42806c5c0acbc",
+      "test-00000-of-00001.parquet": "40a051534b62d5a9418be489dd894dd73f7cf8920871ce8488f8b45de8d57935"
+    },
+    "repo_id": "GAIK-project/skn-finnish-dialects-asr",
+    "revision": "3bccbd007f445776a21b183626431d4d6b40bd0f",
+    "public_download_requested": true
+  },
+  "nonzero_issue_counts": {},
+  "validator_sha256": "fde76159f7de8c8fc615f21fd714a433cabbb91d1f019d3b93c854e6332d81c6",
+  "provider_calls": 0,
+  "publication_or_upload": false,
+  "network_scope": "explicit public HF dataset download only",
+  "human_semantic_review": false,
+  "report_sha256": "43fcedd8b4c0a0ac20e387a37208fedaa4e8d6bdac0c8c6d507828ced2d76830"
+}

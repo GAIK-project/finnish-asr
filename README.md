@@ -281,8 +281,6 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 |---|--:|--:|--:|--:|--:|--:|--:|
 | **Ours: pilot, FLEURS + VoxPopuli only** | – | – | 7.1 | 10.8 | – | 1.6 | 0.95 |
 | **Ours: all-skn version** | – | 57.8 | 7.5 | 11.9 | 10.6 | 1.7 | 0.96 |
-| Orukeet (Parakeet v3 fine-tune) | – | – | 11.6 | 15.9 | – | 2.8 | 0.04 |
-| NVIDIA Parakeet TDT 0.6B v3 | – | – | 13.0 | 17.5 | – | 3.1 | 0.18 |
 | Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | – | 6.2 | 1.50 |
 | **Ours: main model (parl)** | 19.4 | 57.4 | 7.6 | 11.1 | 8.5 | 1.8 | 0.98 |
 | **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 9.2 | 1.8 | 0.96 |
@@ -297,7 +295,9 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | – | 1.7 | 3.09 |
 | NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | – | 2.1 | 0.30 |
 | RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | – | 2.5 | 0.71 |
+| Orukeet (Parakeet v3 fine-tune) | 48.5 | 64.0 | 11.6 | 15.9 | 12.7 | 2.8 | 0.04 |
 | RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | – | 2.4 | 0.10 |
+| NVIDIA Parakeet TDT 0.6B v3 | 52.5 | 66.7 | 13.0 | 17.5 | 14.6 | 3.1 | 0.18 |
 | Finnish-NLP whisper-large-finnish-v3 | 56.6 | 51.6 | 7.1 | 6.6 | – | 1.7 | 0.89 |
 | OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | – | 1.4 | 0.88 |
 | Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | – | 5.8 | 0.34 |
@@ -307,6 +307,10 @@ A dash means no comparable measurement is retained here. `all-skn` has seen ever
 municipality, so its SKN cell intentionally stays blank rather than being presented as
 held-out accuracy. The timestamp variant's parliament result (962 segments, WER 8.5%)
 was restored from an already completed and independently checked run; it was not rerun.
+
+Orukeet and Parakeet were also evaluated on the complete SKN (600), LA-murre (583) and
+parliament (962) test manifests. Coverage and references matched exactly, and a separate
+WER/CER recount agreed for all six outputs. Empty transcripts remain errors in the scores.
 
 Corpus WER after lower-casing and removing punctuation; seconds per clip are FLEURS GPU time on one AMD MI250X
 (API services: request wall time). Bold rows are ours. Parliament: the Aalto corpus's held-out 2016 test speakers

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T16:45:57+00:00",
+  "generated_utc": "2026-10-24T15:00:42+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -483,6 +483,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "CER": 22.1193,
+      "DEL": 13.8556,
+      "INS": 1.4978,
+      "SUB": 33.1235,
+      "WER": 48.4768,
+      "arm_id": "hf_orukeet",
+      "empty_hyps": 8,
+      "ref_words": 19696,
+      "seconds_per_utterance": 0.046,
+      "utterances": 600,
+      "label": "Orukeet (Parakeet v3 fine-tune)",
+      "model": "oruk/orukeet",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "nemo_rasmus-canary-fi-v2",
       "label": "RASMUS Finnish-ASR-Canary-v2, greedy",
       "utterances": 600,
@@ -495,6 +510,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 0.146,
       "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "CER": 26.2125,
+      "DEL": 16.6582,
+      "INS": 3.1225,
+      "SUB": 32.7224,
+      "WER": 52.503,
+      "arm_id": "hf_parakeet-tdt-0.6b-v3",
+      "empty_hyps": 6,
+      "ref_words": 19696,
+      "seconds_per_utterance": 0.2,
+      "utterances": 600,
+      "label": "NVIDIA Parakeet TDT 0.6B v3",
+      "model": "nvidia/parakeet-tdt-0.6b-v3",
       "gpu": "AMD Instinct MI250X"
     },
     {

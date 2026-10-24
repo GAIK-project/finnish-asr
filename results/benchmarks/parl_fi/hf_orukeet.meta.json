@@ -1,0 +1,17 @@
+{
+  "arm_id": "hf_orukeet",
+  "model": "oruk/orukeet",
+  "recipe": "pipeline",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 1.9,
+  "transcribe_s": 39.9,
+  "gpu": "AMD Instinct MI250X",
+  "model_revision": "b59c13a733fce5cf193230d0fa317ee7f145a108",
+  "output_sha256": "04cc5b47fdf6837c8a5d2e26d63bc5f1b9240847369caaeb91fa01b862b9b031",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261023-v1",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}

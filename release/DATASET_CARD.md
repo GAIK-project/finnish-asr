@@ -110,6 +110,16 @@ which also holds the method and all results (summary in
   [`results/labels/skn_longform.jsonl`](https://github.com/GAIK-project/finnish-asr/blob/main/results/labels/skn_longform.jsonl). The `timestamps`
   revision of the model was trained with the sentence times of the training segments.
 
+## Publication-input validation
+
+An integrity check of dataset revision
+[`3bccbd0`](https://huggingface.co/datasets/GAIK-project/skn-finnish-dialects-asr/tree/3bccbd007f445776a21b183626431d4d6b40bd0f)
+verified all **15,842 rows and 13 Parquet shards** against the retained publication inputs:
+exact audio bytes and transcript fields, schema, split IDs/municipalities and normalized-text
+separation. No mismatches were found. [Validation counts and hashes](https://github.com/GAIK-project/finnish-asr/blob/main/release/DATASET_VALIDATION.json).
+This checks the published files and their source consistency; it is not a new human or
+audio-based review of the transcripts' meaning.
+
 ## Caveats
 
 - `text_dialect` was empty in every row of the first upload (13 Oct 2026); it was filled on 14 Oct 2026. The audio, the

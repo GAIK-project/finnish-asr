@@ -1,0 +1,17 @@
+{
+  "arm_id": "hf_parakeet-tdt-0.6b-v3",
+  "model": "nvidia/parakeet-tdt-0.6b-v3",
+  "recipe": "pipeline",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 8.7,
+  "transcribe_s": 197.3,
+  "gpu": "AMD Instinct MI250X",
+  "model_revision": "541d1f99c6b0c3cd0b11a95167540bb8edefd82b",
+  "output_sha256": "beb27d3d74819901783aee27ed1ddd4e4e9706f538e75cc5deb9775e0e7da7d5",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261023-v1",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}
