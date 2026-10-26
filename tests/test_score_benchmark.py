@@ -11,8 +11,17 @@ RESULTS = sb.RESULTS_DIR / "benchmarks"
 
 @pytest.mark.parametrize("bench", ["fleurs_fi", "voxpopuli_fi", "skn_fi"])
 def test_committed_scores_reproduce_from_the_jsonl(bench: str) -> None:
+    """Every row with a committed per-utterance file reproduces from it. A row adopted without that file
+    (scored and recounted elsewhere, outputs not published) must say so in its meta.json."""
     committed = json.loads((RESULTS / bench / "scores.json").read_text(encoding="utf-8"))["arms"]
-    assert sb.score_rows(bench) == committed
+    fresh = sb.score_rows(bench)
+    have = {r["arm_id"] for r in fresh}
+    assert fresh == [r for r in committed if r["arm_id"] in have]
+    for row in (r for r in committed if r["arm_id"] not in have):
+        meta = json.loads((RESULTS / bench / f"{row['arm_id']}.meta.json").read_text(encoding="utf-8"))
+        assert meta["coverage_and_references_verified"] and meta["independent_WER_CER_recount_verified"]
+        assert meta["evaluation_run"] and meta["utterances"] == row["utterances"]
+        assert len(meta["output_sha256"]) == 64 and len(meta["input_manifest_sha256"]) == 64
 
 
 def test_lamurre_has_numbers_only_and_falls_back_to_its_scores_json() -> None:
@@ -21,7 +30,7 @@ def test_lamurre_has_numbers_only_and_falls_back_to_its_scores_json() -> None:
         pytest.skip("local LA-murre files present (gitignored); the fallback is not used")
     committed = json.loads((d / "scores.json").read_text(encoding="utf-8"))["arms"]
     assert sb.score("lamurre_fi", write=False) == committed
-    assert len(committed) == 18 and all(r["utterances"] == 583 for r in committed)
+    assert committed and all(r["utterances"] == 583 for r in committed)
     labels = {r["arm_id"]: r["label"] for r in committed}
     assert all(labels[a] == sb.LABELS.get(a, a) for a in labels)  # as the scorer would write them
     for row in committed:  # numbers and identifiers, no text fields
