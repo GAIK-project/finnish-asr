@@ -1,0 +1,24 @@
+{
+  "arm_id": "nemo_canary-1b-v2",
+  "model": "nvidia/canary-1b-v2",
+  "recipe": "canary",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 88.0,
+  "transcribe_s": 277.4,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "model_revision": "d455706339a6b32e1aa40f82c713a482a0c938e2",
+  "output_sha256": "012637d08295a901d8d81bf8e7a6d97aa7e17d036849f04e134176de8d1982d5",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}

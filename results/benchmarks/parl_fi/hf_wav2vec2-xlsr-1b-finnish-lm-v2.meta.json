@@ -1,0 +1,24 @@
+{
+  "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+  "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
+  "recipe": "pipeline",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 9.5,
+  "transcribe_s": 1569.3,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "model_revision": "779ba269387e99f73af3069141972ced8f0194b1",
+  "output_sha256": "45beb20e45fe57af77fa0d72b21b6368c282ad101e469b977d3d916d5c4656b0",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring",
+  "caveat": "may be optimistic: the model card lists 228 h of the Aalto Finnish Parliament ASR corpus in its fine-tuning data; which parts it held out was not checked"
+}

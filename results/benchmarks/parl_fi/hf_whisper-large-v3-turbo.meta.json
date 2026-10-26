@@ -1,0 +1,23 @@
+{
+  "arm_id": "hf_whisper-large-v3-turbo",
+  "model": "openai/whisper-large-v3-turbo",
+  "recipe": "whisper",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 47.4,
+  "transcribe_s": 221.0,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "model_revision": "41f01f3fe87f28c78e2fbf8b568835947dd65ed9",
+  "output_sha256": "05a3432f8aaa6efa165931747b8cd9f5570a84ccd6594b74f7ef8fe837d0748f",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}

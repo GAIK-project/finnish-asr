@@ -1,0 +1,23 @@
+{
+  "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+  "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
+  "recipe": "pipeline",
+  "utterances": 600,
+  "batch_size": 16,
+  "load_s": 28.4,
+  "transcribe_s": 1026.6,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "model_revision": "779ba269387e99f73af3069141972ced8f0194b1",
+  "output_sha256": "2b993677e0a1f2c043beb1496a880b34b8ca9e60b9788c6a9bfb0ba9476119c5",
+  "input_manifest_sha256": "e545304076aaa2dd7f636f55db516e45942075ac96605e5f221d6837963f2f0a",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}

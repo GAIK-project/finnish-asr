@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-24T15:00:42+00:00",
+  "generated_utc": "2026-10-26T10:43:48+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -570,6 +570,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 0.444,
       "model": "Qwen/Qwen3-ASR-1.7B",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+      "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
+      "utterances": 600,
+      "WER": 69.8873,
+      "CER": 32.2883,
+      "SUB": 44.735,
+      "DEL": 24.4872,
+      "INS": 0.6651,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.711,
+      "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
       "gpu": "AMD Instinct MI250X"
     }
   ]

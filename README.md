@@ -281,7 +281,6 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 |---|--:|--:|--:|--:|--:|--:|--:|
 | **Ours: pilot, FLEURS + VoxPopuli only** | – | – | 7.1 | 10.8 | – | 1.6 | 0.95 |
 | **Ours: all-skn version** | – | 57.8 | 7.5 | 11.9 | 10.6 | 1.7 | 0.96 |
-| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | – | – | 16.2 | 9.4 | – | 6.2 | 1.50 |
 | **Ours: main model (parl)** | 19.4 | 57.4 | 7.6 | 11.1 | 8.5 | 1.8 | 0.98 |
 | **Ours: la-murre version** | 19.7 | 57.4 | 7.8 | 11.4 | 9.2 | 1.8 | 0.96 |
 | **Ours: first model (v1.0)** | 21.1 | 58.1 | 7.6 | 10.8 | 11.4 | 1.7 | 0.98 |
@@ -291,16 +290,17 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | Whisper large-v3 | 40.4 | 62.5 | 7.4 | 12.7 | 9.3 | 1.7 | 0.98 |
 | Gemini 3.5 Flash (API, asked to write as spoken) | 40.8 | 60.2 | 5.1 | 11.5 | – | 1.9 | 2.24 |
 | Google Chirp 3 (API) | 41.3 | – | 4.8 | 11.6 | – | 1.6 | 1.82 |
-| Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | – | 2.2 | 0.19 |
+| Whisper large-v3 turbo | 42.5 | 62.7 | 8.4 | 13.5 | 9.7 | 2.2 | 0.19 |
 | ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | – | 1.7 | 3.09 |
-| NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | – | 2.1 | 0.30 |
-| RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | – | 2.5 | 0.71 |
+| NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | 10.2 | 2.1 | 0.30 |
+| RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | 16.5 | 2.5 | 0.71 |
 | Orukeet (Parakeet v3 fine-tune) | 48.5 | 64.0 | 11.6 | 15.9 | 12.7 | 2.8 | 0.04 |
-| RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | – | 2.4 | 0.10 |
+| RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | 11.9 | 2.4 | 0.10 |
 | NVIDIA Parakeet TDT 0.6B v3 | 52.5 | 66.7 | 13.0 | 17.5 | 14.6 | 3.1 | 0.18 |
-| Finnish-NLP whisper-large-finnish-v3 | 56.6 | 51.6 | 7.1 | 6.6 | – | 1.7 | 0.89 |
+| Finnish-NLP whisper-large-finnish-v3 | 56.6 | 51.6 | 7.1 | 6.6 | 9.2 | 1.7 | 0.89 |
 | OpenAI gpt-4o-transcribe (API, via Azure) | 62.5 | 72.6 | 4.0 | 11.4 | – | 1.4 | 0.88 |
-| Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | – | 5.8 | 0.34 |
+| Qwen3-ASR 1.7B | 66.7 | 72.9 | 25.1 | 27.5 | 25.5 | 5.8 | 0.34 |
+| Finnish-NLP wav2vec2 XLS-R 1B (no LM) | 69.9 | 67.3 | 16.2 | 9.4 | 11.3 | 6.2 | 1.50 |
 <!-- benchmark-table:end -->
 
 A dash means no comparable measurement is retained here. `all-skn` has seen every SKN
@@ -311,6 +311,16 @@ was restored from an already completed and independently checked run; it was not
 Orukeet and Parakeet were also evaluated on the complete SKN (600), LA-murre (583) and
 parliament (962) test manifests. Coverage and references matched exactly, and a separate
 WER/CER recount agreed for all six outputs. Empty transcripts remain errors in the scores.
+
+Nine more open-model cells were measured on 25 Oct 2026 with the same runner
+([`run_benchmark.py`](scripts/run_benchmark.py)), each model's decoding settings from its existing rows, and the same
+scorer ([`score_benchmark.py`](scripts/score_benchmark.py)): Finnish-NLP wav2vec2 on SKN, LA-murre and parliament, and
+Whisper large-v3 turbo, Finnish-NLP whisper-large-finnish-v3, Canary 1B v2, both RASMUS decodes and Qwen3-ASR 1.7B on
+parliament. Coverage and references matched the test manifests exactly, and two separate WER/CER recounts agreed for
+all nine outputs. **Finnish-NLP wav2vec2's parliament cell (11.3) may be optimistic:** its model card lists 228 h of
+the Aalto Finnish Parliament ASR corpus in its fine-tuning data, and which parts of the corpus it held out was not
+checked. RASMUS's training-data overlap with the parliament test was not checked either. On parliament RASMUS + KenLM
+(16.5) is worse than greedy decoding (11.9); why was not investigated.
 
 Corpus WER after lower-casing and removing punctuation; seconds per clip are FLEURS GPU time on one AMD MI250X
 (API services: request wall time). Bold rows are ours. Parliament: the Aalto corpus's held-out 2016 test speakers

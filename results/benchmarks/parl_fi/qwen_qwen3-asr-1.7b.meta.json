@@ -1,0 +1,24 @@
+{
+  "arm_id": "qwen_qwen3-asr-1.7b",
+  "model": "Qwen/Qwen3-ASR-1.7B",
+  "recipe": "qwen",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 6.6,
+  "transcribe_s": 373.0,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "4.57.6",
+    "qwen_asr": "?"
+  },
+  "model_revision": "7278e1e70fe206f11671096ffdd38061171dd6e5",
+  "output_sha256": "34f9ffee2ac202c55e0716422fe444a8354dc155267624d3b0014ccf0d4f5477",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}

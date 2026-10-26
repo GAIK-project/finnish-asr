@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-24T15:00:42+00:00",
+  "generated_utc": "2026-10-26T10:43:48+00:00",
   "benchmark": "Finnish parliament 2016-test/unseen, 962 segments",
   "arms": [
     {
@@ -63,6 +63,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "hf_whisper-large-finnish-v3",
+      "label": "Finnish-NLP whisper-large-finnish-v3",
+      "utterances": 962,
+      "WER": 9.2173,
+      "CER": 5.4896,
+      "SUB": 3.731,
+      "DEL": 3.2385,
+      "INS": 2.2478,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.198,
+      "model": "Finnish-NLP/whisper-large-finnish-v3",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-skn-lamurre-best",
       "label": "**Ours: la-murre version**",
       "utterances": 962,
@@ -123,6 +138,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "hf_whisper-large-v3-turbo",
+      "label": "Whisper large-v3 turbo",
+      "utterances": 962,
+      "WER": 9.6924,
+      "CER": 3.585,
+      "SUB": 5.2546,
+      "DEL": 3.4007,
+      "INS": 1.037,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.23,
+      "model": "openai/whisper-large-v3-turbo",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-region-open2",
       "label": "ft_whisper-large-v3-fi-region-open2",
       "utterances": 962,
@@ -135,6 +165,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.355,
       "model": "whisper-large-v3-fi-region-open2",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "nemo_canary-1b-v2",
+      "label": "NVIDIA Canary 1B v2",
+      "utterances": 962,
+      "WER": 10.208,
+      "CER": 3.6593,
+      "SUB": 5.7529,
+      "DEL": 3.5629,
+      "INS": 0.8922,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.288,
+      "model": "nvidia/canary-1b-v2",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -153,6 +198,21 @@
       "gpu": "AMD Instinct MI250X"
     },
     {
+      "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+      "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
+      "utterances": 962,
+      "WER": 11.2914,
+      "CER": 4.0565,
+      "SUB": 5.8629,
+      "DEL": 3.14,
+      "INS": 2.2884,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.631,
+      "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
       "arm_id": "ft_whisper-large-v3-fi-skn-punct-best",
       "label": "**Ours: first model (v1.0)**",
       "utterances": 962,
@@ -165,6 +225,21 @@
       "empty_hyps": 0,
       "seconds_per_utterance": 1.478,
       "model": "whisper-large-v3-fi-skn-punct-best",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "nemo_rasmus-canary-fi-v2",
+      "label": "RASMUS Finnish-ASR-Canary-v2, greedy",
+      "utterances": 962,
+      "WER": 11.946,
+      "CER": 5.6031,
+      "SUB": 5.9093,
+      "DEL": 3.8526,
+      "INS": 2.1841,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.12,
+      "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
       "gpu": "AMD Instinct MI250X"
     },
     {
@@ -195,6 +270,36 @@
       "utterances": 962,
       "label": "NVIDIA Parakeet TDT 0.6B v3",
       "model": "nvidia/parakeet-tdt-0.6b-v3",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "nemo_rasmus-canary-fi-v2-kenlm",
+      "label": "RASMUS Finnish-ASR-Canary-v2 + KenLM",
+      "utterances": 962,
+      "WER": 16.4707,
+      "CER": 11.3176,
+      "SUB": 6.506,
+      "DEL": 4.5304,
+      "INS": 5.4342,
+      "ref_words": 17261,
+      "empty_hyps": 2,
+      "seconds_per_utterance": 1.443,
+      "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "qwen_qwen3-asr-1.7b",
+      "label": "Qwen3-ASR 1.7B",
+      "utterances": 962,
+      "WER": 25.5258,
+      "CER": 6.8976,
+      "SUB": 19.547,
+      "DEL": 3.6498,
+      "INS": 2.3289,
+      "ref_words": 17261,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.388,
+      "model": "Qwen/Qwen3-ASR-1.7B",
       "gpu": "AMD Instinct MI250X"
     }
   ]

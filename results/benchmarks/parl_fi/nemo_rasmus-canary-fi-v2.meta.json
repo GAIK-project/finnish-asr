@@ -1,0 +1,25 @@
+{
+  "arm_id": "nemo_rasmus-canary-fi-v2",
+  "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
+  "recipe": "canary",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 10.4,
+  "transcribe_s": 115.8,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0",
+    "nemo": "3.0.0"
+  },
+  "model_revision": "f33586fce6e40fdec8bf56665340388602bdfc51",
+  "output_sha256": "60c883d15cbac1dd28fc619ab6d876c64a6d25f2293b8563ec3db719811cc5c8",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring",
+  "caveat": "overlap of the model's training data with this test was not checked"
+}

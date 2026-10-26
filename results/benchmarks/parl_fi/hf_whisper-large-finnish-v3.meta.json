@@ -1,0 +1,23 @@
+{
+  "arm_id": "hf_whisper-large-finnish-v3",
+  "model": "Finnish-NLP/whisper-large-finnish-v3",
+  "recipe": "whisper",
+  "utterances": 962,
+  "batch_size": 16,
+  "load_s": 63.8,
+  "transcribe_s": 1152.2,
+  "gpu": "AMD Instinct MI250X",
+  "versions": {
+    "python": "3.12.11",
+    "torch": "2.7.1+rocm6.2.4",
+    "transformers": "5.19.0"
+  },
+  "model_revision": "b23deb0b3855c829ffe04cb1c6709757ff16d49c",
+  "output_sha256": "32aaba7393ab9f752203d0bed96b1788e7967e117c581b1dfb912bce9ee986b0",
+  "input_manifest_sha256": "4aa68c9aff7b87c804ade6613a4e57748a90719c21849aa44969875eca929b3c",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "wer-gaps-20261025-v2",
+  "measured_utc": "2026-10-25",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring"
+}

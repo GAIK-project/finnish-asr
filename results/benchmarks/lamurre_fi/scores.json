@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-24T15:00:42+00:00",
+  "generated_utc": "2026-10-26T10:43:48+00:00",
   "benchmark": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
   "arms": [
     {
@@ -525,6 +525,21 @@
       "utterances": 583,
       "label": "NVIDIA Parakeet TDT 0.6B v3",
       "model": "nvidia/parakeet-tdt-0.6b-v3",
+      "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "hf_wav2vec2-xlsr-1b-finnish-lm-v2",
+      "label": "Finnish-NLP wav2vec2 XLS-R 1B (no LM)",
+      "utterances": 583,
+      "WER": 67.2965,
+      "CER": 24.4205,
+      "SUB": 46.8199,
+      "DEL": 19.5574,
+      "INS": 0.9191,
+      "ref_words": 17625,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 1.709,
+      "model": "Finnish-NLP/wav2vec2-xlsr-1b-finnish-lm-v2",
       "gpu": "AMD Instinct MI250X"
     },
     {
