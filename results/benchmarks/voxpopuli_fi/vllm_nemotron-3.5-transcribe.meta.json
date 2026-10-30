@@ -1,0 +1,39 @@
+{
+  "arm_id": "vllm_nemotron-3.5-transcribe",
+  "model": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+  "recipe": "vllm-chat-transcription",
+  "utterances": 478,
+  "concurrent_requests": 64,
+  "load_s": 370.1,
+  "transcribe_s": 20.516,
+  "gpu": "NVIDIA GH200 120GB",
+  "versions": {
+    "python": "3.12.16",
+    "torch": "2.13.0",
+    "transformers": "5.18.0",
+    "vllm": "0.32.0",
+    "nemo_toolkit": "3.1.0+9ca086ac10",
+    "flashinfer": "0.7.0.post1"
+  },
+  "model_revision": "c17667641642c4265ff2b7037dd101b7d4567634",
+  "model_sha256": "03142dde5176c1d4df21ee829642745a1d670ea4d79e1a4684c64d53195acff2",
+  "output_sha256": "1bc2456ee1a4db937a91f5b4b6d47d937d8b43f35f0e79c6b594f79f6d6b6e52",
+  "input_manifest_sha256": "47e32aa3c7df77619c0441778380f164bdf0611744f4cad7b61077d775a1990a",
+  "coverage_and_references_verified": true,
+  "independent_WER_CER_recount_verified": true,
+  "evaluation_run": "nemotron35-20261030-v2",
+  "measured_utc": "2026-10-30",
+  "normalization": "original model-card lowercase/punctuation/whitespace scoring",
+  "prompt": "Audio transcription. Language: as spoken. Wording: verbatim, including fillers and repetitions. Formatting: punctuation and capitalization. Output: transcript only.",
+  "decoding": {
+    "runtime": "vLLM OpenAI-compatible server, the model card's flags, MTP with two speculative tokens",
+    "temperature": 0,
+    "top_p": 1.0,
+    "max_tokens": 16384,
+    "seed": 0,
+    "enable_thinking": false,
+    "system_message": null,
+    "postprocess": "the card's generation-loop guardrail; speaker, event and style tags removed (none occurred)"
+  },
+  "caveat": "Measured with vLLM on an NVIDIA GH200, not with run_benchmark.py on an AMD MI250X: s/clip is wall time per clip with 64 requests in flight and is not comparable with other rows. The model card lists FLEURS and VoxPopuli among its training sources; whether their test splits were excluded was not checked. The card makes no dialect claim."
+}

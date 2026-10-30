@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T16:45:57+00:00",
+  "generated_utc": "2026-10-30T12:00:00+00:00",
   "benchmark": "facebook/voxpopuli fi test",
   "arms": [
     {
@@ -151,6 +151,21 @@
       "seconds_per_utterance": 1.369,
       "model": "whisper-large-v3-fi-parl",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "vllm_nemotron-3.5-transcribe",
+      "label": "NVIDIA Nemotron 3.5 Transcribe",
+      "utterances": 478,
+      "WER": 11.0846,
+      "CER": 5.5473,
+      "SUB": 6.8367,
+      "DEL": 1.9605,
+      "INS": 2.2873,
+      "ref_words": 7957,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.043,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "gpu": "NVIDIA GH200 120GB"
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-lamurre-open2",

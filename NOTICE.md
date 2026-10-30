@@ -108,3 +108,6 @@ consortium through CSC – IT Center for Science, Finland.
 (Wording: the template for awards granted by LUMI consortium countries on
 [lumi-supercomputer.eu/acknowledgement](https://lumi-supercomputer.eu/acknowledgement/), with the
 granting organisation filled in for access through CSC, Finland's share of LUMI.)
+
+The Nemotron 3.5 Transcribe row was measured on CSC's Roihu supercomputer. We acknowledge CSC – IT Center for Science,
+Finland, for computational resources.

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-26T10:43:48+00:00",
+  "generated_utc": "2026-10-30T12:00:00+00:00",
   "benchmark": "LA-murre dialect test, 10 localities outside SKN, dialect reference",
   "arms": [
     {
@@ -511,6 +511,21 @@
       "seconds_per_utterance": 0.341,
       "model": "nvidia/canary-1b-v2",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "vllm_nemotron-3.5-transcribe",
+      "label": "NVIDIA Nemotron 3.5 Transcribe",
+      "utterances": 583,
+      "WER": 66.434,
+      "CER": 24.2207,
+      "SUB": 52.1305,
+      "DEL": 12.0908,
+      "INS": 2.2128,
+      "ref_words": 17625,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.056,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "gpu": "NVIDIA GH200 120GB"
     },
     {
       "CER": 25.8699,

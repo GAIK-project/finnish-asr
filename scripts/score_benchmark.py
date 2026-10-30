@@ -5,7 +5,8 @@ after the usual model-card normalisation: lower-case, punctuation removed, white
 collapsed. That is what the RASMUS model card and most Finnish model cards use, so the
 numbers are comparable in kind; small differences in normalisation still move them.
 Seconds per utterance are GPU wall time in batches of 16, model loading excluded; for the API
-arms (run_api_benchmark.py) they are request wall time with 4 parallel workers, retries included.
+arms (run_api_benchmark.py) they are request wall time with 4 parallel workers, retries included;
+for Nemotron (vLLM on a GH200) wall time per utterance with 64 requests in flight.
 
 LA-murre's per-utterance files (lamurre_fi/*.jsonl) hold the corpus's texts, which its licence
 (CC BY-ND 4.0) does not let this repository share, so they are not committed: a benchmark without
@@ -76,6 +77,7 @@ LABELS = {
     "hf_orukeet": "Orukeet (Parakeet v3 fine-tune)",
     "qwen_qwen3-asr-1.7b": "Qwen3-ASR 1.7B",
     "nemo_canary-1b-v2": "NVIDIA Canary 1B v2",
+    "vllm_nemotron-3.5-transcribe": "NVIDIA Nemotron 3.5 Transcribe",
     "nemo_rasmus-canary-fi-v2": "RASMUS Finnish-ASR-Canary-v2, greedy",
     "nemo_rasmus-canary-fi-v2-kenlm": "RASMUS Finnish-ASR-Canary-v2 + KenLM",
     "vertex_gemini-3.5-flash": "Gemini 3.5 Flash (API, asked to write as spoken)",

@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-26T10:43:48+00:00",
+  "generated_utc": "2026-10-30T12:00:00+00:00",
   "benchmark": "SKN dialect test, 10 held-out municipalities",
   "arms": [
     {
@@ -481,6 +481,21 @@
       "seconds_per_utterance": 1.113,
       "model": "RASMUS/Finnish-ASR-Canary-v2:models/canary-finnish-v2.nemo",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "vllm_nemotron-3.5-transcribe",
+      "label": "NVIDIA Nemotron 3.5 Transcribe",
+      "utterances": 600,
+      "WER": 47.629,
+      "CER": 21.7951,
+      "SUB": 33.357,
+      "DEL": 12.1598,
+      "INS": 2.1121,
+      "ref_words": 19696,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.073,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "gpu": "NVIDIA GH200 120GB"
     },
     {
       "CER": 22.1193,

@@ -225,6 +225,7 @@ DIALECT_SHORT = {  # arm -> (label, group); arms missing from scores.json are le
     "hf_whisper-large-v3": ("Whisper large-v3", "open"),
     "hf_whisper-large-v3-turbo": ("Whisper large-v3 turbo", "open"),
     "nemo_canary-1b-v2": ("NVIDIA Canary 1B v2", "open"),
+    "vllm_nemotron-3.5-transcribe": ("NVIDIA Nemotron 3.5 Transcribe", "open"),
     "nemo_rasmus-canary-fi-v2-kenlm": ("RASMUS Finnish Canary v2 + KenLM", "open"),
     "nemo_rasmus-canary-fi-v2": ("RASMUS Finnish Canary v2", "open"),
     "hf_whisper-large-finnish-v3": ("Finnish-NLP whisper-large-finnish-v3", "open"),
@@ -583,7 +584,7 @@ MAKER = {  # arm id prefix -> logo file in docs/img/logos (or a Lucide icon); fi
     "azure_": "openai",
     "hf_whisper-large-v3": "openai", "hf_whisper-large-finnish-v3": "hugging-face", "hh_whisperx": "hugging-face",
     "hf_orukeet": "hugging-face", "hf_wav2vec2": "hugging-face", "nemo_rasmus": "hugging-face",
-    "nemo_canary": "nvidia", "hf_parakeet": "nvidia", "qwen_": "qwen", "ft_": "",
+    "nemo_canary": "nvidia", "hf_parakeet": "nvidia", "vllm_nemotron": "nvidia", "qwen_": "qwen", "ft_": "",
 }
 
 
@@ -999,8 +1000,9 @@ def all_sets() -> str:
         body.append(f'<rect x="{lx}" y="{y - 12}" width="14" height="14" rx="3" fill="{color}"/>')
         body.append(text(lx + 20, y, name, 13, 400, INK))
         lx += 34 + 7.2 * len(name)
-    body.append(text(24, y + 24, "Our model and the Finnish-NLP and RASMUS fine-tunes were trained on FLEURS and VoxPopuli training data. Gemini as spoken here; asked for standard Finnish it gets 34.7 % on SKN.", 12, 400, MUTED))
-    return svg(W, y + 38, "Word error rate of every model on SKN dialects, FLEURS and VoxPopuli", body)
+    body.append(text(24, y + 24, "Our model and the Finnish-NLP and RASMUS fine-tunes were trained on FLEURS and VoxPopuli training data; Nemotron's card lists both too.", 12, 400, MUTED))
+    body.append(text(24, y + 42, "Gemini as spoken here; asked for standard Finnish it gets 34.7 % on SKN.", 12, 400, MUTED))
+    return svg(W, y + 56, "Word error rate of every model on SKN dialects, FLEURS and VoxPopuli", body)
 
 
 FIGURES = {

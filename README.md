@@ -294,6 +294,7 @@ spontaneous speech from mostly elderly speakers, recorded in the 1960s–70s.
 | ElevenLabs Scribe v2 (API) | 44.9 | – | 3.3 | 9.1 | – | 1.7 | 3.09 |
 | NVIDIA Canary 1B v2 | 45.6 | 65.6 | 8.7 | 11.4 | 10.2 | 2.1 | 0.30 |
 | RASMUS Finnish-ASR-Canary-v2 + KenLM | 47.6 | 62.7 | 7.6 | 7.7 | 16.5 | 2.5 | 0.71 |
+| NVIDIA Nemotron 3.5 Transcribe | 47.6 | 66.4 | 8.2 | 11.1 | 10.2 | 3.3 | 0.04 |
 | Orukeet (Parakeet v3 fine-tune) | 48.5 | 64.0 | 11.6 | 15.9 | 12.7 | 2.8 | 0.04 |
 | RASMUS Finnish-ASR-Canary-v2, greedy | 50.1 | 58.7 | 8.4 | 6.8 | 11.9 | 2.4 | 0.10 |
 | NVIDIA Parakeet TDT 0.6B v3 | 52.5 | 66.7 | 13.0 | 17.5 | 14.6 | 3.1 | 0.18 |
@@ -321,6 +322,17 @@ all nine outputs. **Finnish-NLP wav2vec2's parliament cell (11.3) may be optimis
 the Aalto Finnish Parliament ASR corpus in its fine-tuning data, and which parts of the corpus it held out was not
 checked. RASMUS's training-data overlap with the parliament test was not checked either. On parliament RASMUS + KenLM
 (16.5) is worse than greedy decoding (11.9); why was not investigated.
+
+Nemotron 3.5 Transcribe (NVIDIA, released 28 Oct 2026, revision `c1766764`) was measured on 30 Oct 2026 on the same test
+manifests with the same scorer, on one NVIDIA GH200 on CSC's Roihu, because the model runs on NVIDIA GPUs only. It used the
+model card's vLLM 0.32 server and transcription settings and the card's own benchmark prompts, the verbatim one on four sets
+and the FLEURS one on FLEURS; no test row was used to choose a prompt. Asked for standard Finnish with the prompt of the
+Gemini row, it reaches 47.2 on SKN. Coverage and references matched exactly, no request failed, and two separate WER/CER
+recounts agreed for all outputs. **Its s / clip (0.04) is not comparable with the other rows:** it is wall time per clip with
+64 requests in flight on a GH200. **Its FLEURS and VoxPopuli cells may be optimistic:** the card lists both among its
+training sources, and whether their test splits were excluded was not checked. The card makes no claim about dialects, and
+its own Finnish FLEURS WER of 6.27 uses another normaliser. Settings are in the row's
+[`meta.json`](results/benchmarks/skn_fi/vllm_nemotron-3.5-transcribe.meta.json).
 
 Corpus WER after lower-casing and removing punctuation; seconds per clip are FLEURS GPU time on one AMD MI250X
 (API services: request wall time). Bold rows are ours. Parliament: the Aalto corpus's held-out 2016 test speakers
@@ -736,3 +748,6 @@ of Helsinki team.
 **LUMI.** We acknowledge CSC – IT Center for Science, Finland for awarding this project access to
 the LUMI supercomputer, owned by the EuroHPC Joint Undertaking, hosted by CSC (Finland) and the LUMI
 consortium through CSC – IT Center for Science, Finland.
+
+**Roihu.** The Nemotron 3.5 Transcribe row was measured on CSC's Roihu supercomputer. We acknowledge CSC – IT Center
+for Science, Finland, for computational resources.

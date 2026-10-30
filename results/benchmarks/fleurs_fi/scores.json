@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-21T16:45:57+00:00",
+  "generated_utc": "2026-10-30T12:00:00+00:00",
   "benchmark": "google/fleurs fi_fi test",
   "arms": [
     {
@@ -316,6 +316,21 @@
       "seconds_per_utterance": 0.984,
       "model": "whisper-large-v3-fi-skn-lamurre",
       "gpu": "AMD Instinct MI250X"
+    },
+    {
+      "arm_id": "vllm_nemotron-3.5-transcribe",
+      "label": "NVIDIA Nemotron 3.5 Transcribe",
+      "utterances": 918,
+      "WER": 8.1511,
+      "CER": 3.3442,
+      "SUB": 6.2388,
+      "DEL": 0.6947,
+      "INS": 1.2175,
+      "ref_words": 14538,
+      "empty_hyps": 0,
+      "seconds_per_utterance": 0.041,
+      "model": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B",
+      "gpu": "NVIDIA GH200 120GB"
     },
     {
       "arm_id": "ft_whisper-large-v3-fi-region-open2",
